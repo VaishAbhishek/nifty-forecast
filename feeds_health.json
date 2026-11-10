@@ -1,0 +1,65 @@
+[
+ {
+  "error": null,
+  "items": 50,
+  "name": "ET Markets",
+  "newest_h": 4.0,
+  "ok": true
+ },
+ {
+  "error": null,
+  "items": 50,
+  "name": "ET Stocks",
+  "newest_h": 22.5,
+  "ok": true
+ },
+ {
+  "error": "stale feed",
+  "items": 15,
+  "name": "Moneycontrol Latest",
+  "newest_h": 22346.2,
+  "ok": false
+ },
+ {
+  "error": "stale feed",
+  "items": 4,
+  "name": "Moneycontrol Markets",
+  "newest_h": 22344.1,
+  "ok": false
+ },
+ {
+  "error": "stale feed",
+  "items": 4,
+  "name": "Moneycontrol Economy",
+  "newest_h": 22343.3,
+  "ok": false
+ },
+ {
+  "error": null,
+  "items": 35,
+  "name": "Mint Markets",
+  "newest_h": 0.8,
+  "ok": true
+ },
+ {
+  "error": null,
+  "items": 35,
+  "name": "Business Standard Markets",
+  "newest_h": 0.6,
+  "ok": true
+ },
+ {
+  "error": null,
+  "items": 100,
+  "name": "Google News: Nifty",
+  "newest_h": 0.1,
+  "ok": true
+ },
+ {
+  "error": null,
+  "items": 6,
+  "name": "Google News: FII DII",
+  "newest_h": 0.7,
+  "ok": true
+ }
+]

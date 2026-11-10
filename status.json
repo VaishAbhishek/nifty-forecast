@@ -1,0 +1,95 @@
+{
+ "selftest": {
+  "checks": [
+   {
+    "detail": "15 candles, last 2026-11-09 close 25044.7",
+    "name": "upstox_nifty_daily",
+    "ok": true,
+    "required": true
+   },
+   {
+    "detail": "15 candles, last 2026-11-09 close 17.42",
+    "name": "upstox_vix_daily",
+    "ok": true,
+    "required": true
+   },
+   {
+    "detail": "0 bars today (normal outside market hours)",
+    "name": "upstox_intraday",
+    "ok": true,
+    "required": true
+   },
+   {
+    "detail": "185 candles, first bar times ['09:15', '09:45']",
+    "name": "upstox_30min_history",
+    "ok": true,
+    "required": false
+   },
+   {
+    "detail": "today is a holiday: True",
+    "name": "upstox_holiday_api",
+    "ok": true,
+    "required": false
+   },
+   {
+    "detail": "{'o': 25076.4, 'h': 25084.05, 'l': 24838.75, 'c': 25044.65, 'last': 25044.65}",
+    "name": "upstox_quote_ohlc",
+    "ok": true,
+    "required": false
+   },
+   {
+    "detail": "RuntimeError: no data for ['spx']. keys={'gift': 'GLOBAL_INDEX|SGX NIFTY', 'brent': 'GLOBAL_INDICATOR|BZUSD', 'usdinr': 'GLOBAL_INDICATOR|USDINR', 'nasdaq': 'GLOBAL_INDEX|IXIX'}. got: gift=GLOBAL_INDEX|SGX NIFTY 25123.00",
+    "name": "brent_usdinr_gift_us",
+    "ok": false,
+    "required": false
+   },
+   {
+    "detail": "{'expiry': '2026-11-17', 'atm_strike': 25050.0, 'straddle': 492.4, 'pcr': 1.13}",
+    "name": "upstox_option_chain",
+    "ok": true,
+    "required": false
+   },
+   {
+    "detail": "6 of 9 feeds fresh; down: Moneycontrol Latest, Moneycontrol Markets, Moneycontrol Economy",
+    "name": "rss_feeds",
+    "ok": true,
+    "required": true
+   },
+   {
+    "detail": "openai/gpt-5-mini scored 2 test headlines: [-1, 1]",
+    "name": "llm",
+    "ok": true,
+    "required": false
+   },
+   {
+    "detail": "fallback works (score -0.50)",
+    "name": "lexicon_fallback",
+    "ok": true,
+    "required": true
+   },
+   {
+    "detail": "writable",
+    "name": "data_dir",
+    "ok": true,
+    "required": true
+   },
+   {
+    "detail": "bot files hidden by the sandbox",
+    "name": "isolation_from_ema_bot",
+    "ok": true,
+    "required": true
+   },
+   {
+    "detail": "test message sent",
+    "name": "telegram_send",
+    "ok": true,
+    "required": true
+   }
+  ],
+  "code": "3dab94bbdf",
+  "ok": true,
+  "python": "3.10.12",
+  "ts": "2026-11-10T15:50:24+05:30",
+  "tz_now": "2026-11-10T15:50:04+05:30"
+ }
+}
