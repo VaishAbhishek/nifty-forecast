@@ -1,0 +1,11 @@
+[Unit]
+Description=Nifty forecast: Morning call (09:16:00 IST, Mon-Fri)
+
+[Timer]
+OnCalendar=Mon..Fri *-*-* 09:16:00 Asia/Kolkata
+AccuracySec=1s
+Persistent=false
+Unit=nifty-forecast@morning.service
+
+[Install]
+WantedBy=timers.target

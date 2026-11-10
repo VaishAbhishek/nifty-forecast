@@ -1,0 +1,11 @@
+[Unit]
+Description=Nifty forecast: 30-minute re-check (09:46:00 IST, Mon-Fri)
+
+[Timer]
+OnCalendar=Mon..Fri *-*-* 09:46:00 Asia/Kolkata
+AccuracySec=1s
+Persistent=false
+Unit=nifty-forecast@recheck.service
+
+[Install]
+WantedBy=timers.target

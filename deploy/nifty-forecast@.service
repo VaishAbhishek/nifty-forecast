@@ -1,0 +1,35 @@
+# Installed by deploy/install.sh. %i is one of: morning, recheck, score, selftest
+[Unit]
+Description=Nifty forecast agent: %i (advisory, read-only, places no orders)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=__USER__
+WorkingDirectory=__HOME__/nifty-forecast
+EnvironmentFile=__HOME__/.nifty_forecast_env
+Environment=NF_DATA_DIR=__HOME__/nifty-forecast-data
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 -m forecast.run %i
+TimeoutStartSec=300
+
+# Stay out of the EMA bot's way: low priority, capped memory
+Nice=10
+CPUWeight=20
+MemoryMax=300M
+
+# Sandbox: the whole system is read-only except this agent's data folder, and the
+# EMA bot's code, its credentials and the SSH keys cannot even be read.
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=__HOME__/nifty-forecast-data
+InaccessiblePaths=-__HOME__/nifty-bot -__HOME__/.nifty_bot_env -__HOME__/.ssh
+ProtectKernelTunables=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+CapabilityBoundingSet=

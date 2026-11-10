@@ -1,0 +1,19 @@
+[Unit]
+Description=Nifty forecast: push logs to GitHub, pull code updates
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=__USER__
+ExecStart=/bin/bash __HOME__/nifty-forecast/deploy/sync.sh
+TimeoutStartSec=180
+Nice=15
+CPUWeight=10
+MemoryMax=200M
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=__HOME__/nifty-forecast __HOME__/nifty-forecast-data
+InaccessiblePaths=-__HOME__/nifty-bot -__HOME__/.nifty_bot_env -__HOME__/.nifty_forecast_env

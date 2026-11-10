@@ -1,0 +1,14 @@
+[Unit]
+Description=Nifty forecast: sync with GitHub (before and after each run)
+
+[Timer]
+OnCalendar=Mon..Fri *-*-* 08:45:00 Asia/Kolkata
+OnCalendar=Mon..Fri *-*-* 09:20:00 Asia/Kolkata
+OnCalendar=Mon..Fri *-*-* 09:50:00 Asia/Kolkata
+OnCalendar=Mon..Fri *-*-* 15:50:00 Asia/Kolkata
+AccuracySec=5s
+Persistent=false
+Unit=nifty-forecast-sync.service
+
+[Install]
+WantedBy=timers.target
