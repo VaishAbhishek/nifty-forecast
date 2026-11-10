@@ -21,7 +21,7 @@ GLOBAL_WANTED = {
     "gift": ["gift nifty", "sgx nifty"],
     "brent": ["bzusd", "brent"],
     "usdinr": ["usdinr", "usd inr", "usd/inr"],
-    "spx": ["s&p 500", "s&p500", "us 500", "spx"],
+    "spx": ["s&p 500", "s&p500", "s&p", "sp500", "sp 500", "us 500", "us500", "gspc", "spx"],
     "nasdaq": ["us tech 100", "nasdaq 100", "nasdaq"],
 }
 GLOBAL_DEFAULTS = {"gift": "GLOBAL_INDEX|SGX NIFTY", "brent": "GLOBAL_INDICATOR|BZUSD"}
@@ -162,7 +162,9 @@ def global_keys():
     cache = DATA_DIR / "cache" / "global_keys.json"
     try:
         if cache.exists() and time.time() - cache.stat().st_mtime < 86400:
-            return json.loads(cache.read_text())
+            cached = json.loads(cache.read_text())
+            if all(k in cached for k in GLOBAL_WANTED):  # refetch while something is still unmatched
+                return cached
     except Exception:
         pass
     found = dict(GLOBAL_DEFAULTS)
@@ -187,6 +189,9 @@ def global_keys():
                 found[name] = hit
         cache.parent.mkdir(parents=True, exist_ok=True)
         cache.write_text(json.dumps(found))
+        # keep the list of available names next to the logs, so a missed match can be fixed remotely
+        listing = [{f: r.get(f) for f in ("instrument_key", "name", "trading_symbol", "short_name") if r.get(f)} for r in rows]
+        (DATA_DIR / "global_instruments.json").write_text(json.dumps({"matched": found, "available": listing}, indent=1))
     except Exception:
         pass  # defaults still let GIFT and Brent work
     return found

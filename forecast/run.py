@@ -320,9 +320,9 @@ def cmd_selftest(args):
     def check(name, fn, required=True):
         try:
             detail = fn()
-            checks.append({"name": name, "ok": True, "required": required, "detail": redact(str(detail))[:220]})
+            checks.append({"name": name, "ok": True, "required": required, "detail": redact(str(detail))[:400]})
         except Exception as e:
-            checks.append({"name": name, "ok": False, "required": required, "detail": redact("%s: %s" % (type(e).__name__, e))[:220]})
+            checks.append({"name": name, "ok": False, "required": required, "detail": redact("%s: %s" % (type(e).__name__, e))[:400]})
 
     frm = (now - timedelta(days=20)).date().isoformat()
 
@@ -347,9 +347,9 @@ def cmd_selftest(args):
         keys = upstox.global_keys()
         snap = upstox.global_snapshot()
         missing = [k for k in upstox.GLOBAL_WANTED if k not in snap]
-        text = "; ".join("%s=%s %.2f (%+.2f%%)" % (k, v["key"], v["last"], v["pct"]) for k, v in snap.items())
+        text = "; ".join("%s %.2f (%+.2f%%)" % (k, v["last"], v["pct"]) for k, v in snap.items())
         if missing:
-            raise RuntimeError("no data for %s. keys=%s. got: %s" % (missing, keys, text))
+            raise RuntimeError("no data for %s (unmatched: %s). got: %s" % (missing, [k for k in missing if k not in keys], text))
         return text
 
     def feeds():

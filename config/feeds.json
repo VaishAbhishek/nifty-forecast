@@ -1,14 +1,37 @@
 {
-  "_note": "RSS sources. Edit here to add, fix or remove a feed; no code change needed.",
+  "_note": "RSS sources. Edit here to add, fix or remove a feed; no code change needed. Moneycontrol's own RSS files stopped updating in 2024, so its headlines come through Google News.",
   "feeds": [
-    {"name": "ET Markets", "url": "https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms"},
-    {"name": "ET Stocks", "url": "https://economictimes.indiatimes.com/markets/stocks/rssfeeds/2146842.cms"},
-    {"name": "Moneycontrol Latest", "url": "https://www.moneycontrol.com/rss/latestnews.xml"},
-    {"name": "Moneycontrol Markets", "url": "https://www.moneycontrol.com/rss/marketreports.xml"},
-    {"name": "Moneycontrol Economy", "url": "https://www.moneycontrol.com/rss/economy.xml"},
-    {"name": "Mint Markets", "url": "https://www.livemint.com/rss/markets"},
-    {"name": "Business Standard Markets", "url": "https://www.business-standard.com/rss/markets-106.rss"},
-    {"name": "Google News: Nifty", "url": "https://news.google.com/rss/search?q=Nifty+OR+Sensex+when:1d&hl=en-IN&gl=IN&ceid=IN:en"},
-    {"name": "Google News: FII DII", "url": "https://news.google.com/rss/search?q=FII+DII+net+crore+when:1d&hl=en-IN&gl=IN&ceid=IN:en"}
+    {
+      "name": "ET Markets",
+      "url": "https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms"
+    },
+    {
+      "name": "ET Stocks",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/rssfeeds/2146842.cms"
+    },
+    {
+      "name": "Moneycontrol (via Google News)",
+      "url": "https://news.google.com/rss/search?q=site:moneycontrol.com+markets+when:1d&hl=en-IN&gl=IN&ceid=IN:en"
+    },
+    {
+      "name": "Mint Markets",
+      "url": "https://www.livemint.com/rss/markets"
+    },
+    {
+      "name": "Business Standard Markets",
+      "url": "https://www.business-standard.com/rss/markets-106.rss"
+    },
+    {
+      "name": "Google News: Nifty",
+      "url": "https://news.google.com/rss/search?q=Nifty+OR+Sensex+when:1d&hl=en-IN&gl=IN&ceid=IN:en"
+    },
+    {
+      "name": "Google News: FII DII",
+      "url": "https://news.google.com/rss/search?q=FII+DII+net+crore+when:1d&hl=en-IN&gl=IN&ceid=IN:en"
+    },
+    {
+      "name": "Google News: global cues",
+      "url": "https://news.google.com/rss/search?q=crude+oil+OR+%22Wall+Street%22+OR+Fed+OR+rupee+markets+when:1d&hl=en-IN&gl=IN&ceid=IN:en"
+    }
   ]
 }
