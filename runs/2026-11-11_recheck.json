@@ -1,0 +1,254 @@
+{
+ "f30_high": 25417.0,
+ "f30_low": 25263.8,
+ "f30_range": 153.20000000000073,
+ "last": 25412.95,
+ "move_pct": 0.29659244291138714,
+ "move_pts": 75.15000000000146,
+ "new_headlines": [
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 3,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Sensex rallies 1143 points in early trade"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Amid Decline in International Crude Oil Prices, FCCPC Moves to Enforce Pump Price Cuts"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 3,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Sensex jumps 1,300 points in early trade | All Sensex 30 stocks trading in green | Inshorts"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Indian Stocks Rally as Nifty and Sensex Surge on Broad-Based Buying By Investing.com"
+  },
+  {
+   "label": {
+    "catalyst": "global_riskoff",
+    "direction": 1,
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Sensex zooms 1,100 pts, Nifty crosses 25,300 mark on positive global cues"
+  },
+  {
+   "label": {
+    "catalyst": "earnings",
+    "direction": 1,
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Kalyan Jewellers shares surge 10% as Q2 profit jumps 64%; UBS sees big upside, check target price - Moneycontrol.com"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 3,
+    "relevant": true
+   },
+   "source": "Business Standard Markets",
+   "title": "FPIs pump \u20b956,771 cr into equities in 8 days; biggest inflow since Dec 2020"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Mint Markets",
+   "title": "Stock Market Today: Massive jump in Sensex, Nifty! \u20b94.5 lakh cr wealth added in a few mins - Reasons for bullish party"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 3,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Sensex surges 1,300 pts, Nifty above 25,400: Strong FII buying among key factors behind market rally - Moneycontrol.com"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "NIFTY50, SENSEX rally over 1% after opening higher, IndiGo, M&M, among gainers; check factors behind today's surge"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Indian Stocks Higher Open: Softer Crude, Foreign Buying"
+  },
+  {
+   "label": {
+    "catalyst": "global_riskoff",
+    "direction": 1,
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "US-Iran War Over: Impact on Sensex, Nifty, Gold, Silver"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Market opens in green on Bhai Dhooj: Stock market surges, Sensex jumps 1,050 points, Nifty crosses 25,300"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 0,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Oil Is Stuck in Limbo, With No More Iran War But No Peace"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Oil Prices Sink as Trump Says New Iran Strikes Are 'Highly Unlikely'"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Market Today: Sensex Jumps Over 1,100 Points, Nifty Opens Above 25,300; Bank Nifty Crosses 60,600"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "ET Markets",
+   "title": "Punjab National Bank among 7 stocks showing White Marubozu pattern"
+  },
+  {
+   "label": {
+    "catalyst": "cpi",
+    "direction": -1,
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty Outlook - US CPI lifts rate hike prospects by Geojit Investments Ltd"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Stock Market Opening: Sensex jumps 1,000 points, Nifty above 25,300; all 30 Sensex stocks in green"
+  },
+  {
+   "label": {
+    "catalyst": "global_riskoff",
+    "direction": 1,
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Indian stocks markets skyrocket on geopolitical developments: Nifty jumps 300 points; Sensex soars past 82,..."
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "11 November, 2026 Stock Market Updates: Sensex surges 1,142 points, Nifty above 25,300 as crude prices decline"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Business Standard Markets",
+   "title": "Jefferies bets on largecaps as FPIs return; RIL, HDFC among top plays"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": -1,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty Takes a Breather After Seven-Session Rally - Religare Broking Ltd"
+  }
+ ],
+ "news_high_impact": 4,
+ "news_score": 0.773,
+ "open": 25337.8,
+ "or_high": 25399.1,
+ "or_low": 25263.8,
+ "orb": 1,
+ "p_n": 232,
+ "p_range_morning": 0.438,
+ "p_range_new": 0.483,
+ "range_so_far": 153.20000000000073,
+ "reason": "the morning call was to stand aside; this update is information only",
+ "status": "STILL NO TRADE",
+ "vix_morning": 17.03,
+ "vix_now": 17.76
+}

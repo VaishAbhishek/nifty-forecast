@@ -106,6 +106,29 @@
   "ts": "2026-11-11T09:16:45+05:30",
   "verdict": "NO_TRADE"
  },
+ "recheck": {
+  "checks": [
+   {
+    "detail": "30 bars",
+    "name": "intraday",
+    "ok": true
+   },
+   {
+    "detail": "{'p_range': 0.483, 'n': 232}",
+    "name": "first30_model",
+    "ok": true
+   },
+   {
+    "detail": "",
+    "name": "telegram",
+    "ok": true
+   }
+  ],
+  "code": "1eb89e9f58",
+  "ok": true,
+  "status": "STILL NO TRADE",
+  "ts": "2026-11-11T09:46:44+05:30"
+ },
  "selftest": {
   "checks": [
    {
