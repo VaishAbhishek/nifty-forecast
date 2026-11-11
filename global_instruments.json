@@ -1,0 +1,76 @@
+{
+ "matched": {
+  "gift": "GLOBAL_INDEX|SGX NIFTY",
+  "brent": "GLOBAL_INDICATOR|BZUSD",
+  "usdinr": "GLOBAL_INDICATOR|USDINR",
+  "spx": "GLOBAL_INDEX|^GSPC",
+  "nasdaq": "GLOBAL_INDEX|IXIX"
+ },
+ "available": [
+  {
+   "instrument_key": "GLOBAL_INDEX|^HSI",
+   "name": "HANG SENG",
+   "trading_symbol": "^HSI"
+  },
+  {
+   "instrument_key": "GLOBAL_INDEX|^DJI",
+   "name": "DOW JONES",
+   "trading_symbol": "^DJI"
+  },
+  {
+   "instrument_key": "GLOBAL_INDEX|^FTSE",
+   "name": "FTSE 100",
+   "trading_symbol": "^FTSE"
+  },
+  {
+   "instrument_key": "GLOBAL_INDICATOR|USDINR",
+   "name": "USD INR",
+   "trading_symbol": "USDINR"
+  },
+  {
+   "instrument_key": "GLOBAL_INDICATOR|BZUSD",
+   "name": "Oil (Brent)",
+   "trading_symbol": "BZUSD"
+  },
+  {
+   "instrument_key": "GLOBAL_INDEX|^GSPC",
+   "name": "S&P",
+   "trading_symbol": "^GSPC"
+  },
+  {
+   "instrument_key": "GLOBAL_INDEX|SGX NIFTY",
+   "name": "GIFT NIFTY",
+   "trading_symbol": "GIFT NIFTY"
+  },
+  {
+   "instrument_key": "GLOBAL_INDEX|^GDAXI",
+   "name": "DAX",
+   "trading_symbol": "^GDAXI"
+  },
+  {
+   "instrument_key": "GLOBAL_INDEX|IXIX",
+   "name": "US Tech 100",
+   "trading_symbol": "IXIX"
+  },
+  {
+   "instrument_key": "GLOBAL_INDEX|^FCHI",
+   "name": "CAC 40",
+   "trading_symbol": "^FCHI"
+  },
+  {
+   "instrument_key": "GLOBAL_INDICATOR|CLUSD",
+   "name": "Oil (WTI)",
+   "trading_symbol": "CLUSD"
+  },
+  {
+   "instrument_key": "GLOBAL_INDEX|DOW FUTURES",
+   "name": "US 30",
+   "trading_symbol": "DOW FUTURES"
+  },
+  {
+   "instrument_key": "GLOBAL_INDEX|^N225",
+   "name": "NIKKEI 225",
+   "trading_symbol": "^N225"
+  }
+ ]
+}

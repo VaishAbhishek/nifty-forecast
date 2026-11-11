@@ -1,0 +1,639 @@
+{
+ "context": {
+  "flows": {
+   "dii_net_cr": null,
+   "fii_net_cr": null,
+   "source": null
+  },
+  "global": {
+   "brent": {
+    "key": "GLOBAL_INDICATOR|BZUSD",
+    "last": 91.83,
+    "pct": -1.16,
+    "prev": 92.91
+   },
+   "gift": {
+    "key": "GLOBAL_INDEX|SGX NIFTY",
+    "last": 25324.5,
+    "pct": 0.8,
+    "prev": 25123.0
+   },
+   "nasdaq": {
+    "key": "GLOBAL_INDEX|IXIX",
+    "last": 25017.584,
+    "pct": -1.1,
+    "prev": 25296.271
+   },
+   "spx": {
+    "key": "GLOBAL_INDEX|^GSPC",
+    "last": 7531.51,
+    "pct": -0.68,
+    "prev": 7582.98
+   },
+   "usdinr": {
+    "key": "GLOBAL_INDICATOR|USDINR",
+    "last": 93.918,
+    "pct": 0.0,
+    "prev": 93.918
+   }
+  },
+  "open_source": "quote",
+  "options": {
+   "atm_strike": 25350.0,
+   "expiry": "2026-11-17",
+   "pcr": 1.14,
+   "straddle": 473.7
+  },
+  "vix_live": 17.03
+ },
+ "ensemble": {
+  "net_votes": 1,
+  "p_up": 0.5,
+  "reasons": [
+   "News and price signals point in opposite directions"
+  ],
+  "verdict": "NO_TRADE",
+  "votes": {
+   "S3_gap": {
+    "vote": 0,
+    "why": "large gap +1.17%: past studies conflict, no vote"
+   },
+   "S4_trend": {
+    "vote": 1,
+    "why": "uptrend: close above the 20, 50 and 200-day averages"
+   },
+   "S5_meanrev": {
+    "vote": -1,
+    "why": "overbought (RSI2 93, streak +1)"
+   },
+   "S8_news": {
+    "vote": 1,
+    "why": "news tone positive (+0.58)"
+   }
+  }
+ },
+ "features": {
+  "atr14": 336.1,
+  "ema20": 23687.2,
+  "ema200": 23944.0,
+  "ema50": 23474.3,
+  "gap_pct": 1.171,
+  "gap_pts": 293.1,
+  "nr7": false,
+  "open_0915": 25337.8,
+  "prev_close": 25044.65,
+  "prev_date": "2026-11-09",
+  "prev_range": 245.3,
+  "range_model": {
+   "clim60_oc": 0.083,
+   "clim60_range": 0.233,
+   "compressed": false,
+   "expected_range": 393.6,
+   "n": 500,
+   "n_cond": 385,
+   "p_oc": 0.14,
+   "p_range": 0.438,
+   "p_range_cond": 0.449
+  },
+  "rsi14": 77.9,
+  "rsi2": 92.7,
+  "streak": 1,
+  "vix_prev": 17.42
+ },
+ "feed_health": [
+  {
+   "error": null,
+   "items": 50,
+   "name": "ET Markets",
+   "newest_h": 1.2,
+   "ok": true
+  },
+  {
+   "error": null,
+   "items": 50,
+   "name": "ET Stocks",
+   "newest_h": 2.0,
+   "ok": true
+  },
+  {
+   "error": null,
+   "items": 100,
+   "name": "Moneycontrol (via Google News)",
+   "newest_h": 0.1,
+   "ok": true
+  },
+  {
+   "error": null,
+   "items": 35,
+   "name": "Mint Markets",
+   "newest_h": 0.6,
+   "ok": true
+  },
+  {
+   "error": null,
+   "items": 35,
+   "name": "Business Standard Markets",
+   "newest_h": 0.4,
+   "ok": true
+  },
+  {
+   "error": null,
+   "items": 98,
+   "name": "Google News: Nifty",
+   "newest_h": 0.1,
+   "ok": true
+  },
+  {
+   "error": null,
+   "items": 9,
+   "name": "Google News: FII DII",
+   "newest_h": 1.1,
+   "ok": true
+  },
+  {
+   "error": null,
+   "items": 100,
+   "name": "Google News: global cues",
+   "newest_h": 0.2,
+   "ok": true
+  }
+ ],
+ "headlines": [
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 3,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty 50 Rises 1.23% at Open on Wednesday",
+   "ts": "2026-11-11T09:12:34+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Pre-Market Commentary on Nifty & Bank Nifty for 11th November 2026 by Pabitro Mukherjee, Deputy Vice President-Research, Bajaj Broking",
+   "ts": "2026-11-11T09:11:46+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 3,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Stock Market Today: Sensex, Nifty Surge 1.7% at Pre-Open",
+   "ts": "2026-11-11T09:10:40+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Is the market rally sustainable? - Moneycontrol.com",
+   "ts": "2026-11-11T09:07:57+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Currency Check | Rupee opens higher by 29 paise at 93.74 per dollar - Moneycontrol.com",
+   "ts": "2026-11-11T09:07:28+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "cpi",
+    "direction": 1,
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Sensex & Nifty 50 | Stock Market Live Updates Today: GIFT Nifty Signals Gap-Up Opening; Global Cues, Crude Oil and US Inflation in Focus",
+   "ts": "2026-11-11T09:07:00+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Crude oil prices crash over 10% in a week! Brent hits 10-week low \u2013 What does it mean for India?",
+   "ts": "2026-11-11T09:05:52+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "India's Rupee Gains Ground As Cheaper Oil And Wall Street's AI Rout Shift Market Sentiment",
+   "ts": "2026-11-11T08:57:18+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Global Markets Today: Sensex, Nifty Eye Higher Opening",
+   "ts": "2026-11-11T08:57:05+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Google News: global cues",
+   "title": "FCCPC orders oil marketers to align prices with changing market realities",
+   "ts": "2026-11-11T08:54:24+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 3,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Gift Nifty Up 285 Points; Sensex, Nifty Eye Rally",
+   "ts": "2026-11-11T08:54:06+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": -1,
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Business Standard Markets",
+   "title": "Oil rises from 2-month low as Hormuz shipping attacks offset truce hopes",
+   "ts": "2026-11-11T08:52:24+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Google News: Nifty",
+   "title": "Hidden pain! Why did investors lose money in 750 smallcaps when Nifty rallied 2500 points?",
+   "ts": "2026-11-11T08:52:04+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty 50 at 8 month peak ahead of Diwali trading",
+   "ts": "2026-11-11T08:49:26+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Stock Market LIVE Updates, Sensex Today: Markets Likely To Open Flat",
+   "ts": "2026-11-11T08:48:02+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "fed",
+    "direction": -1,
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Markets See 90% Chance For Fed\u2019s Rate Hike in December as Inflation Exceeds Expectations",
+   "ts": "2026-11-11T08:40:55+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Mint Markets",
+   "title": "Indian stocks poised for higher open on softer crude, robust foreign buying",
+   "ts": "2026-11-11T08:40:35+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Mint Markets",
+   "title": "ONGC dividend 2026: Last day to buy today | Check dividend payout, record date, history, yield and returns",
+   "ts": "2026-11-11T08:37:01+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Anil Singhvi Market Strategy: Nifty50 strong buy area at 24,825-24,975\u2014Other key levels to track",
+   "ts": "2026-11-11T08:34:04+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 3,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty expected to open over 300 points higher at 25,340",
+   "ts": "2026-11-11T08:33:46+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Easing global headwinds, lower crude oil prices may further lift rupee in coming months: Economists",
+   "ts": "2026-11-11T08:33:00+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Google News: global cues",
+   "title": "IOC plans to acquire Crude Oil and LPG carriers as West Asia crisis highlights India's shipping vulnerabilities",
+   "ts": "2026-11-11T08:31:37+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Google News: global cues",
+   "title": "Why is the Canadian Dollar struggling despite higher oil prices?",
+   "ts": "2026-11-11T08:27:07+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Google News: Nifty",
+   "title": "Stock Market Prediction for Tomorrow: 11 Nov Levels, Nifty 25,045",
+   "ts": "2026-11-11T08:25:16+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 3,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty all set to open with 300 points gain",
+   "ts": "2026-11-11T08:24:43+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": -1,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Natural Gas, WTI Oil, Brent Oil Forecasts \u2013 Oil Rebounds From Session Lows On Dip-Buying",
+   "ts": "2026-11-11T08:21:41+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Trade Spotlight: How should you trade Canara Bank, Mankind Pharma, Amara Raja Energy, Bharat Dynamics,... - Moneycontrol.com",
+   "ts": "2026-11-11T08:20:47+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Bernstein Hikes Nifty 50 Target To 26,100 On Easing Iran Tensions, Lower Oil Prices; Sees Financials Most Attractive",
+   "ts": "2026-11-11T08:19:57+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "fed",
+    "direction": 0,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "GIFT Nifty signals strong start for Sensex, Nifty; Asian markets gain as US inflation fuels Fed rate hike... - Moneycontrol.com",
+   "ts": "2026-11-11T08:18:08+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Global brokerages turn more constructive on India, but Nifty targets remain wide apart - Moneycontrol.com",
+   "ts": "2026-11-11T08:14:41+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Gift Nifty 25331 \u092a\u0930 \u092b\u094d\u0932\u0948\u091f, \u091f\u093e\u091f\u093e \u092a\u093e\u0935\u0930 \u0935 \u092c\u091c\u093e\u091c \u0939\u093f\u0902\u0926\u0941\u0938\u094d\u0924\u093e\u0928 \u0936\u0941\u0917\u0930 \u0915\u0947 \u0928\u0924\u0940\u091c\u0947",
+   "ts": "2026-11-11T08:10:00+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Business Standard Markets",
+   "title": "What next for Nifty after a gap-up open on Wed? Analysts decode strategy",
+   "ts": "2026-11-11T08:09:50+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "D-St set for a cautious opening as GIFT Nifty signals muted start",
+   "ts": "2026-11-11T08:09:00+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Business Standard Markets",
+   "title": "Stocks to watch: Kalyan Jewellers, MTNL, Dabur, IIFL Finance, MRF, NBCC",
+   "ts": "2026-11-11T08:06:38+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Trade Setup for Today: GIFT Nifty Holds Steady as Asian Markets Diverge and Precious Metals Rally as of November 11, 2026",
+   "ts": "2026-11-11T08:06:24+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "GIFT Nifty Today, November 11: Will Nifty Continue Its Bull Run Today? Oil Prices, US Inflation In Focus",
+   "ts": "2026-11-11T08:05:49+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "India's battered rupee finds an unlikely rescue party in cheaper oil and Wall Street's AI rout",
+   "ts": "2026-11-11T08:05:44+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "ET Markets",
+   "title": "India\u2019s rich pivot to real estate after stock returns falter",
+   "ts": "2026-11-11T08:04:49+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "GIFT NIFTY futures indicate gap-up open on November 11; what investors need to track before market opens",
+   "ts": "2026-11-11T08:01:44+05:30"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "magnitude": 3,
+    "relevant": true
+   },
+   "source": "Business Standard Markets",
+   "title": "Stock Market LIVE: GIFT Nifty jumps 300 pts; Asia markets advance; Brent below $92",
+   "ts": "2026-11-11T07:59:40+05:30"
+  }
+ ],
+ "outages": [],
+ "sentiment": {
+  "binary_event_today": null,
+  "catalysts": {
+   "cpi": [
+    "Sensex & Nifty 50 | Stock Market Live Updates Today: GIFT Nifty Signals Gap-Up Opening; Global Cues, Crude Oil and US Inflation in Focus"
+   ],
+   "fed": [
+    "Markets See 90% Chance For Fed\u2019s Rate Hike in December as Inflation Exceeds Expectations",
+    "GIFT Nifty signals strong start for Sensex, Nifty; Asian markets gain as US inflation fuels Fed rate hike... - Moneycontrol.com"
+   ],
+   "oil_geo": [
+    "Crude oil prices crash over 10% in a week! Brent hits 10-week low \u2013 What does it mean for India?",
+    "India's Rupee Gains Ground As Cheaper Oil And Wall Street's AI Rout Shift Market Sentiment",
+    "Oil rises from 2-month low as Hormuz shipping attacks offset truce hopes",
+    "Easing global headwinds, lower crude oil prices may further lift rupee in coming months: Economists",
+    "Natural Gas, WTI Oil, Brent Oil Forecasts \u2013 Oil Rebounds From Session Lows On Dip-Buying",
+    "Bernstein Hikes Nifty 50 Target To 26,100 On Easing Iran Tensions, Lower Oil Prices; Sees Financials Most Attractive",
+    "India's battered rupee finds an unlikely rescue party in cheaper oil and Wall Street's AI rout",
+    "Stock Market LIVE: GIFT Nifty jumps 300 pts; Asia markets advance; Brent below $92"
+   ]
+  },
+  "dii_net_cr": null,
+  "fii_net_cr": null,
+  "key_risk": "A surprise in US inflation/Fed guidance or a sudden geopolitical shock that pushes oil sharply higher is the biggest risk to the bullish opening.",
+  "lexicon_score": 0.083,
+  "llm_error": null,
+  "method": "llm",
+  "model": "openai/gpt-5-mini",
+  "n_high_impact": 6,
+  "n_neg": 3,
+  "n_pos": 19,
+  "n_relevant": 31,
+  "score": 0.585,
+  "summary": "Most headlines point to a gap-up/higher open for the Nifty driven by softer crude, a firmer rupee and positive GIFT Nifty futures/foreign buying. Offsetting risks are firming Fed hike odds and episodic geopolitical oil-supply concerns that could quickly reverse gains."
+ }
+}

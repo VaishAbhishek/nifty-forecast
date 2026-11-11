@@ -1,4 +1,111 @@
 {
+ "morning": {
+  "checks": [
+   {
+    "detail": "780 days to 2026-11-09",
+    "name": "upstox_history",
+    "ok": true
+   },
+   {
+    "detail": "25337.8 via quote",
+    "name": "open_price",
+    "ok": true
+   },
+   {
+    "detail": "17.42",
+    "name": "vix",
+    "ok": true
+   },
+   {
+    "detail": "brent,gift,nasdaq,spx,usdinr",
+    "name": "global",
+    "ok": true
+   },
+   {
+    "detail": "{'expiry': '2026-11-17', 'atm_strike': 25350.0, 'straddle': 473.7, 'pcr': 1.14}",
+    "name": "options",
+    "ok": true
+   },
+   {
+    "detail": "40 headlines",
+    "name": "news",
+    "ok": true
+   },
+   {
+    "detail": "openai/gpt-5-mini",
+    "name": "llm",
+    "ok": true
+   },
+   {
+    "detail": "",
+    "name": "telegram",
+    "ok": true
+   }
+  ],
+  "code": "1eb89e9f58",
+  "feeds": [
+   {
+    "error": null,
+    "items": 50,
+    "name": "ET Markets",
+    "newest_h": 1.2,
+    "ok": true
+   },
+   {
+    "error": null,
+    "items": 50,
+    "name": "ET Stocks",
+    "newest_h": 2.0,
+    "ok": true
+   },
+   {
+    "error": null,
+    "items": 100,
+    "name": "Moneycontrol (via Google News)",
+    "newest_h": 0.1,
+    "ok": true
+   },
+   {
+    "error": null,
+    "items": 35,
+    "name": "Mint Markets",
+    "newest_h": 0.6,
+    "ok": true
+   },
+   {
+    "error": null,
+    "items": 35,
+    "name": "Business Standard Markets",
+    "newest_h": 0.4,
+    "ok": true
+   },
+   {
+    "error": null,
+    "items": 98,
+    "name": "Google News: Nifty",
+    "newest_h": 0.1,
+    "ok": true
+   },
+   {
+    "error": null,
+    "items": 9,
+    "name": "Google News: FII DII",
+    "newest_h": 1.1,
+    "ok": true
+   },
+   {
+    "error": null,
+    "items": 100,
+    "name": "Google News: global cues",
+    "newest_h": 0.2,
+    "ok": true
+   }
+  ],
+  "ok": true,
+  "seconds": 44.2,
+  "ts": "2026-11-11T09:16:45+05:30",
+  "verdict": "NO_TRADE"
+ },
  "selftest": {
   "checks": [
    {
