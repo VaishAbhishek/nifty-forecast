@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 from urllib.parse import quote, urlencode
 
 from . import net
-from .config import DATA_DIR, IST, env, now_ist
+from .config import CONFIG_DIR, DATA_DIR, IST, env, now_ist
 
 BASE = "https://api.upstox.com"
 NIFTY = "NSE_INDEX|Nifty 50"
@@ -99,6 +99,50 @@ def ltp(keys):
         last, prev = row.get("last_price"), row.get("cp")
         if last:
             out[k] = {"last": float(last), "prev": float(prev) if prev else None}
+    return out
+
+
+def ltp_safe(keys):
+    """Like ltp(), but one bad key cannot lose the rest: missing keys are retried alone."""
+    out = {}
+    try:
+        out = ltp(keys)
+    except UpstoxError:
+        pass
+    for k in keys:
+        if k not in out:
+            try:
+                out.update(ltp([k]))
+            except UpstoxError:
+                pass
+    return out
+
+
+def sector_snapshot(with_history=True):
+    """Sector indices and index heavyweights: move since the previous close, plus
+    yesterday's and the 5-session move for sectors. Context only, never a vote."""
+    cfg = json.loads((CONFIG_DIR / "sectors.json").read_text())
+    quotes = ltp_safe([x["key"] for x in cfg["sectors"] + cfg["heavyweights"]])
+    today = now_ist().date()
+    out = {"sectors": [], "heavy": [], "missing": []}
+    for group, dest in (("sectors", "sectors"), ("heavyweights", "heavy")):
+        for x in cfg[group]:
+            q = quotes.get(x["key"])
+            if not q or not q["prev"]:
+                out["missing"].append(x["name"])
+                continue
+            row = {"name": x["name"], "last": q["last"], "pct": round((q["last"] / q["prev"] - 1) * 100, 2)}
+            if dest == "sectors" and with_history:
+                try:
+                    c = [d["c"] for d in daily(x["key"], (today - timedelta(days=16)).isoformat(), today.isoformat())
+                         if d["date"] < today.isoformat()]
+                    if len(c) >= 2:
+                        row["yday"] = round((c[-1] / c[-2] - 1) * 100, 2)
+                    if len(c) >= 6:
+                        row["d5"] = round((c[-1] / c[-6] - 1) * 100, 2)
+                except UpstoxError:
+                    pass
+            out[dest].append(row)
     return out
 
 
@@ -237,18 +281,34 @@ def option_snapshot(spot):
         raise UpstoxError("No option expiry found")
     expiry = expiries[0]
     chain = _get("/v2/option/chain", {"instrument_key": NIFTY, "expiry_date": expiry}) or []
-    best, put_oi, call_oi = None, 0.0, 0.0
+    best, put_oi, call_oi, oi = None, 0.0, 0.0, []
     for row in chain:
         strike = row.get("strike_price")
         ce = ((row.get("call_options") or {}).get("market_data") or {})
         pe = ((row.get("put_options") or {}).get("market_data") or {})
         call_oi += float(ce.get("oi") or 0)
         put_oi += float(pe.get("oi") or 0)
+        if strike is not None:
+            oi.append((float(strike), float(ce.get("oi") or 0), float(pe.get("oi") or 0)))
         if strike is None or not ce.get("ltp") or not pe.get("ltp"):
             continue
         if best is None or abs(strike - spot) < abs(best[0] - spot):
             best = (float(strike), float(ce["ltp"]), float(pe["ltp"]))
     if not best:
         raise UpstoxError("No ATM strike with prices")
-    return {"expiry": expiry, "atm_strike": best[0], "straddle": round(best[1] + best[2], 1),
-            "pcr": round(put_oi / call_oi, 2) if call_oi else None}
+    out = {"expiry": expiry, "atm_strike": best[0], "straddle": round(best[1] + best[2], 1),
+           "pcr": round(put_oi / call_oi, 2) if call_oi else None}
+    # sessions left to expiry (weekdays, counting today), for a rough per-day implied move
+    d, n = now_ist().date(), 0
+    while d.isoformat() <= expiry:
+        n += 1 if d.weekday() < 5 else 0
+        d += timedelta(days=1)
+    out["sessions_left"] = max(1, n)
+    # the straddle is roughly 0.8 x the 1-sd move to expiry
+    out["implied_day_move"] = round(out["straddle"] * 1.25 / (out["sessions_left"] ** 0.5), 0)
+    near = [x for x in oi if abs(x[0] - spot) <= spot * 0.05]
+    if near and call_oi and put_oi:
+        out["call_wall"] = max((x for x in near if x[0] >= spot), key=lambda x: x[1], default=(None,))[0]
+        out["put_wall"] = max((x for x in near if x[0] <= spot), key=lambda x: x[2], default=(None,))[0]
+        out["max_pain"] = min(near, key=lambda s: sum(c * max(0, s[0] - k) + p * max(0, k - s[0]) for k, c, p in oi))[0]
+    return out

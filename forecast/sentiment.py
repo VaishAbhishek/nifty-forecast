@@ -25,6 +25,26 @@ NEGATIVE = {
 }
 NEGATORS = re.compile(r"\b(not|no|despite|fails? to|unlikely|pare[sd]?|erase[sd]?|off (day'?s )?(low|high)s?)\b", re.I)
 LABELS = list(catalysts.CATALYSTS) + ["other"]
+KINDS = ("driver", "market_report", "view", "irrelevant")
+
+# A "market report" only says where the index is or is expected to open. It is the
+# price itself, restated, so it must not count as news evidence.
+REPORT = re.compile(
+    r"(nifty|sensex|d-st|dalal street|stock market|share market|markets?|indices|benchmarks?|indian (stocks|shares|equities))"
+    r".{0,60}(open|pre-open|gap[- ]up|gap[- ]down|eyes?|set to|poised|signals?|indicates?|live|rises?|rose|surges?|jumps?|"
+    r"rall(y|ies)|zooms?|gains?|climbs?|falls?|fell|slips?|tanks?|crash(es)?|drops?|tumbles?|ends?|closes?|settles?|"
+    r"points?|pts|trade setup|higher|lower|flat|green|red|start)", re.I)
+VIEW = re.compile(
+    r"target|strategy|levels? to|buy area|sell area|should you|stocks? to (watch|buy)|trade spotlight|prediction|"
+    r"analysts?|brokerages?|outlook|technical (view|chart)|commentary|what next|sustainable\?|top picks|multibagger", re.I)
+
+
+def lexicon_kind(title, cats, direction):
+    if VIEW.search(title):
+        return "view"
+    if REPORT.search(title) and not cats:
+        return "market_report"
+    return "driver" if (cats or direction) else "irrelevant"
 
 
 def _has(text, phrase):
@@ -39,40 +59,54 @@ def lexicon_label(title):
     # "crude/oil rises" is bad for India; "crude/oil falls" is good
     if re.search(r"(crude|oil|brent)[^,;]{0,25}(surge|soar|jump|rise|climb|spike|rally)", t):
         pos, neg = 0, max(neg, 2)
-    if re.search(r"(crude|oil|brent)[^,;]{0,25}(fall|drop|slip|slide|plunge|tumble|decline)", t):
+    if re.search(r"(crude|oil|brent)[^,;]{0,25}(fall|fell|drop|slip|slide|plunge|tumble|decline|crash|slump|sink|plummet|cool|ease)", t):
         pos, neg = max(pos, 2), 0
     net_score = pos - neg
     if NEGATORS.search(t):
         net_score /= 2.0
     direction = 1 if net_score >= 1 else -1 if net_score <= -1 else 0
     cats = catalysts.tag(title)
-    return {"relevant": bool(cats) or direction != 0, "catalyst": cats[0] if cats else "other",
-            "direction": direction, "magnitude": min(3, max(1, int(abs(net_score)))) if direction else (1 if cats else 0)}
+    kind = lexicon_kind(title, cats, direction)
+    if kind != "driver":
+        return {"relevant": kind != "irrelevant", "kind": kind, "catalyst": cats[0] if cats else "other",
+                "direction": 0, "magnitude": 0}
+    return {"relevant": True, "kind": kind, "catalyst": cats[0] if cats else "other",
+            "direction": direction, "magnitude": min(3, max(1, int(abs(net_score)))) if direction else 1}
 
 
 def aggregate(labels):
-    """Magnitude-weighted net direction in [-1, 1], shrunk when evidence is thin."""
-    rel = [l for l in labels if l.get("relevant") and l.get("magnitude", 0) > 0]
+    """Magnitude-weighted net direction in [-1, 1], shrunk when evidence is thin.
+
+    Only "driver" headlines count. Market reports and analyst views are left out.
+    """
+    rel = [l for l in labels if l.get("kind") == "driver" and l.get("magnitude", 0) > 0]
     weight = sum(l["magnitude"] for l in rel)
     score = sum(l["direction"] * l["magnitude"] for l in rel) / (weight + 3.0) if rel else 0.0
     return {"score": round(max(-1.0, min(1.0, score)), 3), "n_relevant": len(rel),
             "n_high_impact": sum(1 for l in rel if l["magnitude"] >= 3),
-            "n_pos": sum(1 for l in rel if l["direction"] > 0), "n_neg": sum(1 for l in rel if l["direction"] < 0)}
+            "n_pos": sum(1 for l in rel if l["direction"] > 0), "n_neg": sum(1 for l in rel if l["direction"] < 0),
+            "n_reports": sum(1 for l in labels if l.get("kind") == "market_report"),
+            "n_views": sum(1 for l in labels if l.get("kind") == "view")}
 
 
 PROMPT = """You are an analyst of the Indian equity index Nifty 50. Below are news headlines published since the last market close, numbered from 0.
 
 For EACH headline give:
 - "id": its number
-- "relevant": true if it could plausibly move the Nifty 50 index today, else false
+- "kind": exactly one of
+    "driver": reports a cause, event or data point that can move the index (crude oil, rupee, US or Asian markets overnight, Fed, RBI, inflation, FII/DII flows, large-company results, policy, geopolitics)
+    "market_report": only says where Nifty, Sensex or GIFT Nifty is trading, opened, or is expected to open. If a headline mostly restates the index move, it is a market_report even when it mentions a cause in passing
+    "view": analyst or brokerage opinion, price targets, levels, strategy, stock tips
+    "irrelevant": about another country, single small stocks, personal finance, or anything that will not move the Nifty 50 today
 - "catalyst": one of %s
-- "direction": 1 if positive for the Nifty today, -1 if negative, 0 if neutral or unclear
-- "magnitude": 0 (none), 1 (minor), 2 (meaningful), 3 (major, could drive a 1%%+ index move)
+- "direction": 1 if positive for the Nifty today, -1 if negative, 0 if neutral or unclear. For a market_report or view use 0
+- "magnitude": 0 (none), 1 (minor), 2 (meaningful), 3 (major, could drive a 1%%+ index move). For a market_report or view use 0
 
 Remember India imports oil, so higher crude is negative. Do not guess beyond what a headline says. Most headlines are minor.
 
 Then give "overall":
-- "summary": two plain sentences on what the headlines mean for the Nifty today
+- "summary": two plain sentences on what the DRIVER headlines mean for the Nifty today. Do not just restate that the market opened up or down
+- "events_today": list of short strings naming scheduled events due later today or tonight that the headlines mention (data releases, central bank decisions, major results, expiry), or []
 - "key_risk": the single biggest risk to any directional view today, one sentence
 - "binary_event_today": name of any scheduled event decided DURING today's Indian session (RBI policy, Union Budget, election counting), else null
 - "fii_net_cr": yesterday's FII net cash figure in Rs crore if a headline states it (negative = sold), else null
@@ -130,10 +164,13 @@ def _parse(text, n):
         if not isinstance(i, int) or not 0 <= i < n:
             continue
         d, m = int(it.get("direction", 0)), int(it.get("magnitude", 0))
-        if d not in (-1, 0, 1) or not 0 <= m <= 3:
+        kind = it.get("kind")
+        if d not in (-1, 0, 1) or not 0 <= m <= 3 or kind not in KINDS:
             continue
+        if kind != "driver":
+            d, m = 0, 0
         cat = it.get("catalyst") if it.get("catalyst") in LABELS else "other"
-        labels[i] = {"relevant": bool(it.get("relevant")), "catalyst": cat, "direction": d, "magnitude": m}
+        labels[i] = {"relevant": kind != "irrelevant", "kind": kind, "catalyst": cat, "direction": d, "magnitude": m}
     if sum(1 for l in labels if l) < max(1, n // 2):
         raise ValueError("reply labelled fewer than half the headlines")
     return labels, js.get("overall") or {}
@@ -149,19 +186,21 @@ def _num(v):
 def score(headlines, use_llm=True):
     """Label every headline and return the combined view. Never raises."""
     lex = [lexicon_label(h["title"]) for h in headlines]
-    out = {"method": "lexicon", "model": None, "llm_error": None, "summary": None, "key_risk": None,
+    out = {"method": "lexicon", "model": None, "llm_error": None, "summary": None, "key_risk": None, "events_today": [],
            "binary_event_today": catalysts.binary_event_today(headlines), "fii_net_cr": None, "dii_net_cr": None,
            "labels": lex}
     if use_llm and headlines and provider():
         try:
-            listing = "\n".join("%d. [%s] %s" % (i, h["source"], h["title"]) for i, h in enumerate(headlines))
+            listing = "\n".join("%d. [%s] %s" % (i, h["source"], h["title"].replace("\n", " ")) for i, h in enumerate(headlines))
             text, p, model = _call_llm(PROMPT % (", ".join(LABELS), listing))
             labels, overall = _parse(text, len(headlines))
             out.update(method="llm", model="%s/%s" % (p, model),
                        labels=[l or lex[i] for i, l in enumerate(labels)],
                        summary=str(overall.get("summary") or "")[:500] or None,
                        key_risk=str(overall.get("key_risk") or "")[:300] or None,
-                       fii_net_cr=_num(overall.get("fii_net_cr")), dii_net_cr=_num(overall.get("dii_net_cr")))
+                       fii_net_cr=_num(overall.get("fii_net_cr")), dii_net_cr=_num(overall.get("dii_net_cr")),
+                       events_today=[str(e)[:90] for e in (overall.get("events_today") or []) if e][:5]
+                       if isinstance(overall.get("events_today"), list) else [])
             ev = overall.get("binary_event_today")
             if ev and str(ev).lower() not in ("null", "none", "false"):
                 out["binary_event_today"] = str(ev)[:120]
@@ -173,7 +212,7 @@ def score(headlines, use_llm=True):
     out["lexicon_score"] = aggregate(lex)["score"]
     cats = {}
     for h, l in zip(headlines, out["labels"]):
-        if l["relevant"] and l["catalyst"] != "other":
+        if l.get("kind") == "driver" and l["catalyst"] != "other":
             cats.setdefault(l["catalyst"], []).append(h["title"])
     out["catalysts"] = cats
     return out

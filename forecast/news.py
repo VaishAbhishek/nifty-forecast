@@ -59,8 +59,9 @@ def parse_feed(raw, source):
         title = html.unescape(TAGS.sub("", _text(el, ("title",)))).strip()
         ts = _when(_text(el, ("pubdate", "published", "updated", "date")))
         if title and ts:
+            desc = html.unescape(TAGS.sub(" ", html.unescape(_text(el, ("description", "summary")))))
             items.append({"title": re.sub(r"\s+", " ", title), "source": source, "ts": ts,
-                          "link": _text(el, ("link",))})
+                          "link": _text(el, ("link",)), "desc": re.sub(r"\s+", " ", desc).strip()[:400]})
     return items
 
 
@@ -90,25 +91,61 @@ def norm(title):
     return re.sub(r"[^a-z0-9 ]", "", title.lower())[:80].strip()
 
 
-def collect(since, limit=40, feeds=None):
-    """Market headlines published after `since`, newest first, de-duplicated."""
+STOP = set("the a an and or of to in on at for as by with from is are was be this that its it after amid over "
+           "today live updates update news stock stocks share shares market markets india indian says".split())
+
+
+def story_words(title):
+    return {w for w in re.findall(r"[a-z0-9]+", title.lower()) if len(w) > 2 and w not in STOP}
+
+
+def same_story(a, b):
+    """Two headlines that share most of their meaningful words are one story."""
+    if not a or not b:
+        return False
+    return len(a & b) / float(min(len(a), len(b))) >= 0.7 and len(a & b) >= 3
+
+
+def collect(since, limit=45, per_feed=8, per_google_feed=5, feeds=None):
+    """Market headlines published after `since`, newest first.
+
+    Sources take turns, so no single feed can crowd out the rest, and reworded
+    copies of one story are merged (the count is kept in "also").
+    """
     feeds = feeds or load_feeds()
     with ThreadPoolExecutor(max_workers=8) as pool:
         results = list(pool.map(fetch_feed, feeds))
     health = [h for _, h in results]
-    seen, out = set(), []
-    for items, _ in results:
-        for it in items:
-            if it["ts"] < since or it["ts"] > now_ist():
+    now = now_ist()
+    queues = []
+    for feed, (items, _) in zip(feeds, results):
+        google = "news.google.com" in feed["url"]
+        good = []
+        for it in sorted(items, key=lambda i: i["ts"], reverse=True):
+            if it["ts"] < since or it["ts"] > now:
                 continue
-            title = re.sub(r"\s+-\s+[^-]{2,40}$", "", it["title"]) if it["source"].startswith("Google") else it["title"]
-            key = norm(title)
-            if not key or key in seen or not MARKET_WORDS.search(title):
+            title = re.sub(r"\s+-\s+[^-]{2,40}$", "", it["title"]) if google else it["title"]
+            if norm(title) and MARKET_WORDS.search(title):
+                good.append(dict(it, title=title, also=0))
+        queues.append(good[:per_google_feed if google else per_feed])
+    out, seen = [], set()
+    for rank in range(per_feed):
+        for q in queues:
+            if rank >= len(q) or len(out) >= limit:
+                continue
+            it = q[rank]
+            key, words = norm(it["title"]), story_words(it["title"])
+            twin = next((o for o in out if same_story(words, o["_words"])), None)
+            if key in seen or twin:
+                if twin:
+                    twin["also"] += 1
                 continue
             seen.add(key)
-            out.append(dict(it, title=title))
+            out.append(dict(it, _words=words))
+    for o in out:
+        del o["_words"]
     out.sort(key=lambda i: i["ts"], reverse=True)
-    return out[:limit], health
+    return out, health
 
 
 FLOW = re.compile(
@@ -121,7 +158,7 @@ def flows_from_headlines(headlines):
     """Best-effort FII/DII net cash figures (Rs crore) mentioned in headlines."""
     out = {"fii_net_cr": None, "dii_net_cr": None, "source": None}
     for h in headlines:
-        for m in FLOW.finditer(h["title"]):
+        for m in FLOW.finditer(h["title"] + ". " + h.get("desc", "")):
             who = "fii" if m.group(1).lower()[0] == "f" else "dii"
             amt = float(m.group(4).replace(",", ""))
             if "lakh" in m.group(5).lower():

@@ -54,7 +54,8 @@ def base_record(today, kind, now, f):
 
 
 def n_scored():
-    return len({r["date"] for r in store.load() if r.get("outcome") and r.get("kind") in scoring.SCORED_KINDS})
+    return len({r["date"] for r in store.load() if r.get("outcome") and r.get("kind") in scoring.SCORED_KINDS
+                and r.get("rule_version") == RULE_VERSION})
 
 
 # ------------------------------------------------------------------ morning
@@ -109,6 +110,12 @@ def cmd_morning(args):
     except Exception as e:
         store.log("option snapshot failed: %s" % e)
 
+    try:
+        ctx["sectors"] = upstox.sector_snapshot(with_history=True)
+    except Exception as e:
+        store.log("sector snapshot failed: %s" % e)
+    lv = quant.levels(days, open_px, (f["range_model"] or {}).get("expected_range"))
+
     since = datetime.fromisoformat(f["prev_date"]).replace(hour=15, minute=30, tzinfo=IST)
     headlines, feed_health = news.collect(since)
     if not headlines:
@@ -137,13 +144,13 @@ def cmd_morning(args):
                      data_flags=outages))
 
     label = now.strftime("%a %d %b %Y")
-    msg = report.morning(label, f, ens, sent, headlines, ctx, outages, feed_health, n_scored())
+    msg = report.morning(label, f, ens, sent, headlines, ctx, outages, feed_health, n_scored(), lv, RULE_VERSION)
     store.append(recs)  # log first: the prediction must exist even if Telegram fails
     store.write_json("runs/%s_%s.json" % (today, kind), {
-        "features": f, "ensemble": ens, "context": ctx, "outages": outages, "feed_health": feed_health,
+        "features": f, "levels": lv, "ensemble": ens, "context": ctx, "outages": outages, "feed_health": feed_health,
         "sentiment": {k: v for k, v in sent.items() if k != "labels"},
-        "headlines": [{"title": h["title"], "source": h["source"], "ts": h["ts"].isoformat(), "label": l}
-                      for h, l in zip(headlines, sent["labels"])]})
+        "headlines": [{"title": h["title"], "source": h["source"], "ts": h["ts"].isoformat(), "also": h.get("also", 0),
+                       "label": l} for h, l in zip(headlines, sent["labels"])]})
     sent_ok = True
     try:
         telegram.send(msg, args.dry_run)
@@ -155,7 +162,10 @@ def cmd_morning(args):
               {"name": "vix", "ok": bool(f["vix_prev"]), "detail": str(f["vix_prev"])},
               {"name": "global", "ok": bool(ctx["global"]), "detail": ",".join(sorted(ctx["global"]))},
               {"name": "options", "ok": "options" in ctx, "detail": str(ctx.get("options"))[:120]},
-              {"name": "news", "ok": bool(headlines), "detail": "%d headlines" % len(headlines)},
+              {"name": "sectors", "ok": bool((ctx.get("sectors") or {}).get("sectors")) and not (ctx.get("sectors") or {}).get("missing"),
+               "detail": "missing: %s" % ((ctx.get("sectors") or {}).get("missing") if ctx.get("sectors") else "all")},
+              {"name": "news", "ok": bool(headlines), "detail": "%d headlines, %d drivers, %d sources"
+               % (len(headlines), sent["n_relevant"], len({h["source"] for h in headlines}))},
               {"name": "llm", "ok": sent["method"] == "llm", "detail": sent["model"] or sent["llm_error"] or "off"},
               {"name": "telegram", "ok": sent_ok, "detail": ""}]
     store.set_status("morning", sent_ok, checks, {"verdict": ens["verdict"], "feeds": feed_health, "seconds":
@@ -226,12 +236,17 @@ def cmd_recheck(args):
     except Exception:
         r["vix_now"] = None
 
-    seen = {news.norm(h["title"]) for h in run.get("headlines", [])}
+    seen = [news.story_words(h["title"]) for h in run.get("headlines", [])]
     since = datetime.fromisoformat(ens["run_ts"]) if ens else now - timedelta(minutes=35)
     fresh, _ = news.collect(since)
-    fresh = [h for h in fresh if news.norm(h["title"]) not in seen]
+    fresh = [h for h in fresh if not any(news.same_story(news.story_words(h["title"]), w) for w in seen)]
     sent = sentiment.score(fresh, use_llm=not args.no_llm and bool(fresh))
-    r.update(new_headlines=fresh, news_labels=sent["labels"], news_score=sent["score"], news_high_impact=sent["n_high_impact"])
+    r.update(new_headlines=fresh, news_labels=sent["labels"], news_score=sent["score"], news_high_impact=sent["n_high_impact"],
+             sent=sent, levels=quant.levels(days, open_px))
+    try:
+        r["sectors"] = upstox.sector_snapshot(with_history=False)
+    except Exception as e:
+        store.log("sector snapshot failed: %s" % e)
     news_vote = strategies.s8_news(sent)[0]
 
     verdict = ens["verdict"] if ens else None
@@ -249,7 +264,7 @@ def cmd_recheck(args):
                  f30_range=round(r["f30_range"], 1), n_new_headlines=len(fresh))]
     store.append(recs)
     store.write_json("runs/%s_%s.json" % (today, "recheck" if in_window else "recheck_manual"), dict(
-        {k: v for k, v in r.items() if k not in ("new_headlines", "news_labels")}, status=status, reason=reason,
+        {k: v for k, v in r.items() if k not in ("new_headlines", "news_labels", "sent")}, status=status, reason=reason,
         new_headlines=[{"title": h["title"], "source": h["source"], "label": l} for h, l in zip(fresh, sent["labels"])]))
     sent_ok = True
     try:
@@ -294,7 +309,7 @@ def cmd_score(args):
         store.log("score: no session data yet for %s" % ", ".join(pending))
         return 0
     store.rewrite(rows)
-    st = scoring.stats(rows)
+    st = scoring.stats(rows, RULE_VERSION)
     store.write_json("scores.json", st)
     last = max(filled)
     sent_ok = True
@@ -396,6 +411,13 @@ def cmd_selftest(args):
     check("upstox_quote_ohlc", lambda: upstox.day_ohlc(upstox.NIFTY), required=False)
     check("brent_usdinr_gift_us", globals_, required=False)
     check("upstox_option_chain", lambda: upstox.option_snapshot(upstox.day_ohlc(upstox.NIFTY)["last"]), required=False)
+
+    def sectors():
+        s = upstox.sector_snapshot(with_history=False)
+        if s["missing"]:
+            raise RuntimeError("no quote for %s" % s["missing"])
+        return "%d sectors, %d heavyweights" % (len(s["sectors"]), len(s["heavy"]))
+    check("sectors_and_heavyweights", sectors, required=False)
     check("rss_feeds", feeds)
     check("llm", llm, required=False)
     check("lexicon_fallback", lexicon)

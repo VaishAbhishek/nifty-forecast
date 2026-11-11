@@ -1,0 +1,25 @@
+{
+  "_note": "Upstox instrument keys for sector indices and index heavyweights. Shown as context only, never a vote. Fix a key here if the morning message lists it as missing.",
+  "sectors": [
+    {"name": "Bank", "key": "NSE_INDEX|Nifty Bank"},
+    {"name": "Financials", "key": "NSE_INDEX|Nifty Fin Service"},
+    {"name": "IT", "key": "NSE_INDEX|Nifty IT"},
+    {"name": "Auto", "key": "NSE_INDEX|Nifty Auto"},
+    {"name": "Pharma", "key": "NSE_INDEX|Nifty Pharma"},
+    {"name": "Metal", "key": "NSE_INDEX|Nifty Metal"},
+    {"name": "FMCG", "key": "NSE_INDEX|Nifty FMCG"},
+    {"name": "Energy", "key": "NSE_INDEX|Nifty Energy"},
+    {"name": "Realty", "key": "NSE_INDEX|Nifty Realty"}
+  ],
+  "heavyweights": [
+    {"name": "HDFC Bank", "key": "NSE_EQ|INE040A01034"},
+    {"name": "Reliance", "key": "NSE_EQ|INE002A01018"},
+    {"name": "ICICI Bank", "key": "NSE_EQ|INE090A01021"},
+    {"name": "Infosys", "key": "NSE_EQ|INE009A01021"},
+    {"name": "Bharti Airtel", "key": "NSE_EQ|INE397D01024"},
+    {"name": "TCS", "key": "NSE_EQ|INE467B01029"},
+    {"name": "L&T", "key": "NSE_EQ|INE018A01030"},
+    {"name": "ITC", "key": "NSE_EQ|INE154A01025"},
+    {"name": "SBI", "key": "NSE_EQ|INE062A01020"}
+  ]
+}

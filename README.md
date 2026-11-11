@@ -6,11 +6,20 @@ A morning forecast agent for the Nifty 50. It is **advisory, read-only and paper
 
 | Time (IST) | Message | What it does |
 |---|---|---|
-| 09:16 | Morning call | One verdict (UP-lean / DOWN-lean / QUIET / NO TRADE), odds of a 300+ point day, how each signal voted, quant setup, Brent / USD-INR / GIFT / US closes, FII/DII if a headline carries it, scored headlines, matched catalysts with their history, key risk |
-| 09:46 | 30-minute re-check | Whether the 09:16 call is STILL VALID / UNCONFIRMED / WEAKENED / INVALIDATED, the first-30-minute range, updated 300+ odds, new headlines since the open |
+| 09:16 | Morning call | One verdict (UP-lean / DOWN-lean / QUIET / NO TRADE), odds of a 300+ point day, how each signal voted, then four context sections: News, Sentiment, Technicals, Sectors. Ends with matched catalysts and the key risk |
+| 09:46 | 30-minute re-check | Whether the 09:16 call is STILL VALID / UNCONFIRMED / WEAKENED / INVALIDATED, the first-30-minute range, nearest levels, updated 300+ odds, sector and heavyweight moves, new driver headlines |
 | 15:45 | Scorecard | What actually happened, whether the call was right, and the running hit rate of every rule against a coin flip |
 
 Weekends and NSE holidays are skipped (Upstox holiday API first, `config/holidays.json` as fallback).
+
+### The four context sections
+
+- **News: what is driving the market.** Every headline is sorted into driver (a cause: crude, rupee, Fed, RBI, flows, results, geopolitics), market report (only restates where the index is or will open), analyst view, or irrelevant. **Only drivers count toward the tone.** Sources take turns so no feed dominates, and reworded copies of one story are merged.
+- **Sentiment.** India VIX, put/call ratio, GIFT Nifty, US overnight, Brent, USD-INR, FII/DII (when a headline carries the figure) and the driver news tone, each marked bullish, bearish or neutral.
+- **Technicals.** Trend against the 20/50/200-day averages, RSI, ATR, the nearest levels above and below the open (yesterday's high and low, pivot, R1/R2, S1/S2, 5-day high and low, the strikes with the heaviest call and put open interest), max pain, and the range the options market is pricing.
+- **Sectors.** Nine sector indices and nine index heavyweights (`config/sectors.json`): move since the previous close, yesterday's move and the 5-session move.
+
+Sentiment, Technicals and Sectors are context. They are shown and logged but they do not vote.
 
 ## Read this before trusting it
 
@@ -33,12 +42,16 @@ All of them are logged separately every day in `predictions.jsonl`, with a hash 
 | S3_gap | Gaps under 0.30% tend to fill: lean against the gap. No vote on larger gaps | yes |
 | S4_trend | Close above (below) the 20, 50 and 200-day averages | yes |
 | S5_meanrev | RSI(2) under 10 or three down closes: up. Over 90 or three up closes: down | yes |
-| S8_news | Headline tone at or beyond 0.40 either way | yes |
+| S8_news | Tone of driver headlines at or beyond 0.40 either way | yes |
 | S9_ensemble | **The published verdict.** Needs a net of 2 votes, no opposing gap, and no conflict between news and price | |
 | S6_orb | 09:46: first 5-minute close outside the first 15-minute range | no, logged only |
 | R1_first30 | 09:46: 300+ odds given the first 30 minutes | no, logged only |
 
-To change a rule, bump `RULE_VERSION` in `forecast/strategies.py`. Old and new versions are then counted separately. Editing a threshold in place would spoil the test.
+To change a rule, bump `RULE_VERSION` in `forecast/strategies.py`. Old and new versions are then counted separately, and the scorecard shows the current version only. Editing a threshold in place would spoil the test.
+
+Rule history:
+- **v1** (11 Nov 2026, 1 session): first version. The news tone counted headlines that merely restated the opening gap.
+- **v2** (from 12 Nov 2026): news tone counts driver headlines only; sources take turns; duplicate stories merged. Count restarted.
 
 ## Setup (once, on the VM)
 
@@ -102,7 +115,7 @@ If a run breaks, you get a short "run failed" Telegram message, so silence never
 
 - `~/nifty-forecast/`: this repo (`main` branch). Standard-library Python only, nothing to `pip install`.
 - `~/nifty-forecast-data/`: the `data` branch. `predictions.jsonl` (every prediction and outcome), `scores.json` (running tally), `status.json`, `runs/` (full research per day), `log/`.
-- `config/feeds.json`: RSS sources. `config/holidays.json`: fallback holiday list.
+- `config/feeds.json`: RSS sources. `config/sectors.json`: sector and heavyweight instrument keys. `config/holidays.json`: fallback holiday list.
 
 ## Hands-off updates
 

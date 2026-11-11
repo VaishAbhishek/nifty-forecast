@@ -190,3 +190,20 @@ def binom_p_one_sided(hits, n, p0=0.5):
     if n == 0:
         return 1.0
     return sum(math.comb(n, k) * p0 ** k * (1 - p0) ** (n - k) for k in range(hits, n + 1))
+
+
+def levels(days, open_px, expected_range=None):
+    """Reference price levels for today, from completed sessions only."""
+    p = days[-1]
+    pivot = (p["h"] + p["l"] + p["c"]) / 3
+    closes = [d["c"] for d in days]
+    e20 = ema(closes[-200:], 20)
+    out = {"pdh": p["h"], "pdl": p["l"], "pdc": p["c"], "pivot": pivot,
+           "r1": 2 * pivot - p["l"], "s1": 2 * pivot - p["h"],
+           "r2": pivot + (p["h"] - p["l"]), "s2": pivot - (p["h"] - p["l"]),
+           "hi5": max(d["h"] for d in days[-5:]), "lo5": min(d["l"] for d in days[-5:]),
+           "hi20": max(d["h"] for d in days[-20:]), "lo20": min(d["l"] for d in days[-20:]),
+           "dist20_pct": (p["c"] / e20 - 1) * 100}
+    if expected_range:
+        out["band_lo"], out["band_hi"] = open_px - expected_range / 2, open_px + expected_range / 2
+    return {k: round(v, 2) for k, v in out.items()}

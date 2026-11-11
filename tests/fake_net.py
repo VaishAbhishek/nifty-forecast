@@ -6,7 +6,7 @@ import os
 import random
 from datetime import datetime, timedelta, time as dtime
 from email.utils import format_datetime
-from urllib.parse import unquote
+from urllib.parse import unquote_plus as unquote
 from zoneinfo import ZoneInfo
 
 IST = ZoneInfo("Asia/Kolkata")
@@ -92,6 +92,8 @@ def _rss(source):
              ("FIIs net sold shares worth Rs 3,263 crore; DIIs bought Rs 5,283.9 crore on Monday", 600),
              ("Rupee weakens past 88 against the dollar", 120),
              ("Infosys Q2 net profit rises 6%, beats estimates", 700),
+             ("Nifty, Sensex seen opening lower as crude oil jumps 3% on Middle East tension worries", 45),
+             ("Sensex rallies 400 points in early trade", 30),
              ("Bollywood star buys a sea-facing flat", 50),
              ("%s old story about markets" % source, 60 * 24 * 5)]
     if now().time() >= dtime(9, 30):
@@ -173,8 +175,14 @@ def request(url, method="GET", headers=None, data=None, timeout=12, retries=1):
             return 200, json.dumps({"content": [{"type": "text", "text": "Sorry, I cannot help."}]}).encode()
         prompt = data["messages"][0]["content"]
         n = sum(1 for line in prompt.split("Headlines:")[1].splitlines() if line.strip())
-        items = [{"id": i, "relevant": True, "catalyst": "oil_geo", "direction": -1, "magnitude": 2} for i in range(n)]
+        lines = [l for l in prompt.split("Headlines:")[1].splitlines() if l.strip()]
+        items = []
+        for i, line in enumerate(lines):
+            report = "open lower" in line or "rallies" in line
+            items.append({"id": i, "kind": "market_report" if report else "driver", "catalyst": "oil_geo",
+                          "direction": 0 if report else -1, "magnitude": 0 if report else 2})
         reply = {"items": items, "overall": {"summary": "Global cues are weak.", "key_risk": "A reversal if crude cools.",
+                                             "events_today": ["US CPI at 19:00 IST"],
                                              "binary_event_today": None, "fii_net_cr": -3263, "dii_net_cr": 5283.9}}
         return 200, json.dumps({"content": [{"type": "text", "text": "```json\n%s\n```" % json.dumps(reply)}]}).encode()
     # anything else is an RSS feed

@@ -6,7 +6,10 @@ separately. The rule hash is written on every logged prediction.
 """
 import hashlib
 
-RULE_VERSION = "v1"
+# v2 (2026-11-11): the news vote counts only "driver" headlines. Headlines that merely
+# restate where the index opened are excluded, because they repeat the gap. Sources
+# take turns and reworded copies of one story are merged.
+RULE_VERSION = "v2"
 RULES = {
     "gap_fade_max_pct": 0.30,      # S3: gaps smaller than this are faded
     "gap_min_pct": 0.05,           # S3: below this there is no gap to speak of
@@ -64,12 +67,12 @@ def s5_meanrev(f):
 def s8_news(sent):
     s = sent["score"]
     if sent["n_relevant"] == 0:
-        return 0, "no relevant headlines"
+        return 0, "no driver headlines"
     if s >= RULES["news_lean"]:
-        return 1, "news tone positive (%+.2f)" % s
+        return 1, "driver news positive (%+.2f)" % s
     if s <= -RULES["news_lean"]:
-        return -1, "news tone negative (%+.2f)" % s
-    return 0, "news tone mixed (%+.2f)" % s
+        return -1, "driver news negative (%+.2f)" % s
+    return 0, "driver news mixed (%+.2f)" % s
 
 
 def ensemble(f, sent, outages):

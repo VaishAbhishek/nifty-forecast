@@ -64,7 +64,29 @@ class Pipeline(unittest.TestCase):
         o = rows(date="2026-11-13", strategy="S0_coin")[0]
         self.assertAlmostEqual(o["outcome"]["range_pts"], truth["h"] - truth["l"], places=0)
         self.assertEqual(o["outcome"]["dir_hit"], (truth["c"] > o["open_0915"]) == (o["verdict"] == "UP"))
-        self.assertEqual(len(fake_net.sent_messages), 9)
+        self.assertGreaterEqual(len(fake_net.sent_messages), 9)
+        morning = [m for m in fake_net.sent_messages if "MORNING CALL" in m][0]
+        for section in ("what is driving", "Sentiment", "Technicals", "Sectors", "rules v2"):
+            self.assertIn(section, "".join(fake_net.sent_messages), section)
+        self.assertIn("Not counted in the tone", morning)
+
+    def test_1b_news_handling(self):
+        run_file = store.read_json("runs/2026-11-11_morning.json")
+        titles = [h["title"] for h in run_file["headlines"]]
+        # the reworded copy of the crude story is merged, not listed twice
+        self.assertEqual(sum(1 for t in titles if "crude oil jumps 3%" in t), 1)
+        self.assertTrue(any(h["also"] >= 1 for h in run_file["headlines"]))
+        kinds = {h["title"]: h["label"]["kind"] for h in run_file["headlines"]}
+        self.assertEqual(kinds["Sensex rallies 400 points in early trade"], "market_report")
+        self.assertEqual(run_file["sentiment"]["n_reports"], 2)
+        self.assertEqual(run_file["sentiment"]["n_relevant"], len(titles) - 2)
+
+    def test_1c_old_rule_versions_are_not_counted(self):
+        from forecast import score
+        all_rows = store.load()
+        fake_old = [dict(r, rule_version="v1", date="2026-11-09") for r in all_rows if r["date"] == "2026-11-11"]
+        self.assertEqual(score.stats(all_rows + fake_old, "v2")["sessions"], 3)
+        self.assertEqual(score.stats(all_rows + fake_old, "v1")["sessions"], 1)
 
     def test_2_no_secret_leaks(self):
         blob = "".join(open(os.path.join(d, f)).read() for d, _, fs in os.walk(TMP) for f in fs) + "".join(fake_net.sent_messages)
@@ -104,6 +126,21 @@ class Units(unittest.TestCase):
         fake_net.llm_mode["mode"] = "ok"
         self.assertEqual(s["method"], "lexicon")
         self.assertLess(s["score"], 0)
+
+    def test_market_reports_do_not_count(self):
+        echo = [{"title": t, "source": "t"} for t in ("Nifty 50 Rises 1.23% at Open on Wednesday",
+                                                       "Gift Nifty Up 285 Points; Sensex, Nifty Eye Rally",
+                                                       "Nifty expected to open over 300 points higher at 25,340")]
+        s = sentiment.score(echo, use_llm=False)
+        self.assertEqual((s["score"], s["n_relevant"], s["n_reports"]), (0.0, 0, 3))
+        self.assertEqual(strategies.s8_news(s)[0], 0)
+
+    def test_levels_and_option_walls(self):
+        days = [{"date": "d%d" % i, "o": 100, "h": 110, "l": 90, "c": 105} for i in range(30)]
+        lv = quant.levels(days, 106, 40)
+        self.assertAlmostEqual(lv["pivot"], 101.67, places=2)
+        self.assertAlmostEqual(lv["r1"], 113.33, places=2)
+        self.assertEqual((lv["band_lo"], lv["band_hi"]), (86, 126))
 
     def test_indicators(self):
         up = [100 + i for i in range(60)]

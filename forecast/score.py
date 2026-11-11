@@ -33,11 +33,12 @@ def fill_outcome(rec, day):
     return rec
 
 
-def stats(rows):
-    """Running tally per strategy. Manual (out-of-window) runs are excluded."""
-    done = [r for r in rows if r.get("outcome") and r.get("kind") in SCORED_KINDS]
+def stats(rows, version=None):
+    """Running tally per strategy for one rule version. Manual runs are excluded."""
+    done = [r for r in rows if r.get("outcome") and r.get("kind") in SCORED_KINDS
+            and (version is None or r.get("rule_version") == version)]
     sessions = sorted({r["date"] for r in done})
-    res = {"sessions": len(sessions), "first": sessions[0] if sessions else None,
+    res = {"rule_version": version, "sessions": len(sessions), "first": sessions[0] if sessions else None,
            "last": sessions[-1] if sessions else None, "direction": {}, "probability": {}, "ensemble": {}}
     for s in DIRECTION:
         mine = [r for r in done if r["strategy"] == s]
@@ -92,7 +93,7 @@ def message(day, today_rows, st):
         L.append("09:46 re-check said: %s" % esc(rc.get("status", "n/a")))
 
     n = st["sessions"]
-    L.append("\n<b>Running tally: %d session%s</b>" % (n, "" if n == 1 else "s"))
+    L.append("\n<b>Running tally: %d session%s</b> (rules %s)" % (n, "" if n == 1 else "s", st.get("rule_version") or ""))
     rows = ["%-15s %5s %5s %9s" % ("Direction", "hits", "rate", "95% range")]
     for s, d in st["direction"].items():
         if d["days"] == 0:
