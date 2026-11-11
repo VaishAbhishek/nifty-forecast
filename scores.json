@@ -1,0 +1,124 @@
+{
+ "direction": {
+  "S0_coin": {
+   "calls": 1,
+   "ci95": [
+    0.0,
+    0.793
+   ],
+   "coverage": 1.0,
+   "days": 1,
+   "hit_rate": 0.0,
+   "hits": 0,
+   "p_vs_coin": 1.0
+  },
+  "S3_gap": {
+   "calls": 0,
+   "ci95": [
+    0.0,
+    1.0
+   ],
+   "coverage": 0.0,
+   "days": 1,
+   "hit_rate": null,
+   "hits": 0,
+   "p_vs_coin": 1.0
+  },
+  "S4_trend": {
+   "calls": 1,
+   "ci95": [
+    0.0,
+    0.793
+   ],
+   "coverage": 1.0,
+   "days": 1,
+   "hit_rate": 0.0,
+   "hits": 0,
+   "p_vs_coin": 1.0
+  },
+  "S5_meanrev": {
+   "calls": 1,
+   "ci95": [
+    0.207,
+    1.0
+   ],
+   "coverage": 1.0,
+   "days": 1,
+   "hit_rate": 1.0,
+   "hits": 1,
+   "p_vs_coin": 0.5
+  },
+  "S6_orb": {
+   "calls": 1,
+   "ci95": [
+    0.0,
+    0.793
+   ],
+   "coverage": 1.0,
+   "days": 1,
+   "hit_rate": 0.0,
+   "hits": 0,
+   "p_vs_coin": 1.0
+  },
+  "S8_news": {
+   "calls": 1,
+   "ci95": [
+    0.0,
+    0.793
+   ],
+   "coverage": 1.0,
+   "days": 1,
+   "hit_rate": 0.0,
+   "hits": 0,
+   "p_vs_coin": 1.0
+  },
+  "S9_ensemble": {
+   "calls": 0,
+   "ci95": [
+    0.0,
+    1.0
+   ],
+   "coverage": 0.0,
+   "days": 1,
+   "hit_rate": null,
+   "hits": 0,
+   "p_vs_coin": 1.0
+  }
+ },
+ "ensemble": {
+  "big_days": 1,
+  "days": 1,
+  "no_trade": 1,
+  "quiet_calls": 0,
+  "quiet_hits": 0
+ },
+ "first": "2026-11-11",
+ "last": "2026-11-11",
+ "probability": {
+  "R1_first30": {
+   "baseline_brier": 0.5883,
+   "brier": 0.2673,
+   "n": 1,
+   "skill": 0.546
+  },
+  "S0_clim": {
+   "baseline_brier": 0.5883,
+   "brier": 0.5883,
+   "n": 1,
+   "skill": 0.0
+  },
+  "S1_vol": {
+   "baseline_brier": 0.5883,
+   "brier": 0.3158,
+   "n": 1,
+   "skill": 0.463
+  },
+  "S2_compress": {
+   "baseline_brier": 0.5883,
+   "brier": 0.3036,
+   "n": 1,
+   "skill": 0.484
+  }
+ },
+ "sessions": 1
+}

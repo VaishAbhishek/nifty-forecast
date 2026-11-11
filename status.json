@@ -129,6 +129,19 @@
   "status": "STILL NO TRADE",
   "ts": "2026-11-11T09:46:44+05:30"
  },
+ "score": {
+  "checks": [
+   {
+    "detail": "2026-11-11",
+    "name": "scored_dates",
+    "ok": true
+   }
+  ],
+  "code": "1eb89e9f58",
+  "ok": true,
+  "sessions": 1,
+  "ts": "2026-11-11T15:45:04+05:30"
+ },
  "selftest": {
   "checks": [
    {
