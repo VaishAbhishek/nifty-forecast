@@ -117,6 +117,9 @@ Reply with one JSON object only, exactly: {"items": [...], "overall": {...}}
 Headlines:
 %s"""
 
+# Labelling ~40 headlines takes gpt-5-mini about 40s, so 45s timed out on 12 Nov 2026.
+# The unit allows 300s per run; 90s keeps the worst-case morning call near 09:17:35.
+LLM_TIMEOUT = 90
 DEFAULT_MODELS = {"anthropic": "claude-haiku-5-5", "openai": "gpt-5-mini", "gemini": "gemini-2.5-flash"}
 
 
@@ -138,18 +141,18 @@ def _call_llm(prompt):
     if p == "anthropic":
         js = net.post_json("https://api.anthropic.com/v1/messages",
                            {"model": model, "max_tokens": 4000, "messages": [{"role": "user", "content": prompt}]},
-                           headers={"x-api-key": env("ANTHROPIC_API_KEY"), "anthropic-version": "2023-06-01"}, timeout=45)
+                           headers={"x-api-key": env("ANTHROPIC_API_KEY"), "anthropic-version": "2023-06-01"}, timeout=LLM_TIMEOUT)
         return "".join(b.get("text", "") for b in js.get("content", []) if b.get("type") == "text"), p, model
     if p == "openai":
         js = net.post_json("https://api.openai.com/v1/chat/completions",
                            {"model": model, "messages": [{"role": "user", "content": prompt}],
                             "response_format": {"type": "json_object"}},
-                           headers={"Authorization": "Bearer " + env("OPENAI_API_KEY")}, timeout=45)
+                           headers={"Authorization": "Bearer " + env("OPENAI_API_KEY")}, timeout=LLM_TIMEOUT)
         return js["choices"][0]["message"]["content"], p, model
     js = net.post_json("https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent" % model,
                        {"contents": [{"parts": [{"text": prompt}]}],
                         "generationConfig": {"responseMimeType": "application/json", "temperature": 0}},
-                       headers={"x-goog-api-key": env("GEMINI_API_KEY")}, timeout=45)
+                       headers={"x-goog-api-key": env("GEMINI_API_KEY")}, timeout=LLM_TIMEOUT)
     return js["candidates"][0]["content"]["parts"][0]["text"], p, model
 
 
