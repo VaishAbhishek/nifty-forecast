@@ -1,0 +1,908 @@
+{
+ "context": {
+  "flows": {
+   "dii_net_cr": null,
+   "fii_net_cr": null,
+   "source": null
+  },
+  "global": {
+   "brent": {
+    "key": "GLOBAL_INDICATOR|BZUSD",
+    "last": 92.5,
+    "pct": 0.73,
+    "prev": 91.83
+   },
+   "gift": {
+    "key": "GLOBAL_INDEX|SGX NIFTY",
+    "last": 25243.0,
+    "pct": -0.32,
+    "prev": 25324.5
+   },
+   "nasdaq": {
+    "key": "GLOBAL_INDEX|IXIX",
+    "last": 25543.668,
+    "pct": 2.1,
+    "prev": 25017.584
+   },
+   "spx": {
+    "key": "GLOBAL_INDEX|^GSPC",
+    "last": 7647.46,
+    "pct": 1.54,
+    "prev": 7531.51
+   },
+   "usdinr": {
+    "key": "GLOBAL_INDICATOR|USDINR",
+    "last": 93.68,
+    "pct": -0.25,
+    "prev": 93.918
+   }
+  },
+  "open_source": "quote",
+  "options": {
+   "atm_strike": 25200.0,
+   "call_wall": 26000.0,
+   "expiry": "2026-11-17",
+   "implied_day_move": 273.0,
+   "max_pain": 25100.0,
+   "pcr": 0.77,
+   "put_wall": 24500.0,
+   "sessions_left": 4,
+   "straddle": 436.7
+  },
+  "sectors": {
+   "heavy": [
+    {
+     "last": 804.2,
+     "name": "HDFC Bank",
+     "pct": -0.3
+    },
+    {
+     "last": 1339.0,
+     "name": "Reliance",
+     "pct": 0.27
+    },
+    {
+     "last": 1581.7,
+     "name": "ICICI Bank",
+     "pct": 0.64
+    },
+    {
+     "last": 1137.3,
+     "name": "Infosys",
+     "pct": -1.53
+    },
+    {
+     "last": 2077.7,
+     "name": "Bharti Airtel",
+     "pct": -1.48
+    },
+    {
+     "last": 2436.7,
+     "name": "TCS",
+     "pct": -1.43
+    },
+    {
+     "last": 4200.8,
+     "name": "L&T",
+     "pct": -0.27
+    },
+    {
+     "last": 288.3,
+     "name": "ITC",
+     "pct": 1.16
+    },
+    {
+     "last": 1071.9,
+     "name": "SBI",
+     "pct": 1.01
+    }
+   ],
+   "missing": [],
+   "sectors": [
+    {
+     "d5": 8.73,
+     "last": 60997.45,
+     "name": "Bank",
+     "pct": 0.34,
+     "yday": 1.76
+    },
+    {
+     "d5": 8.14,
+     "last": 27804.8,
+     "name": "Financials",
+     "pct": 0.51,
+     "yday": 1.02
+    },
+    {
+     "d5": 0.73,
+     "last": 31884.95,
+     "name": "IT",
+     "pct": -1.27,
+     "yday": -0.53
+    },
+    {
+     "d5": 7.62,
+     "last": 28329.55,
+     "name": "Auto",
+     "pct": -0.68,
+     "yday": 2.14
+    },
+    {
+     "d5": 5.28,
+     "last": 28694.7,
+     "name": "Pharma",
+     "pct": -0.28,
+     "yday": -0.41
+    },
+    {
+     "d5": 2.4,
+     "last": 12785.45,
+     "name": "Metal",
+     "pct": -0.01,
+     "yday": 0.96
+    },
+    {
+     "d5": 2.0,
+     "last": 47161.0,
+     "name": "FMCG",
+     "pct": -0.06,
+     "yday": 1.13
+    },
+    {
+     "d5": 1.27,
+     "last": 37586.0,
+     "name": "Energy",
+     "pct": 0.1,
+     "yday": 1.03
+    },
+    {
+     "d5": 3.3,
+     "last": 896.7,
+     "name": "Realty",
+     "pct": 0.31,
+     "yday": -0.42
+    }
+   ]
+  },
+  "vix_live": 17.01
+ },
+ "ensemble": {
+  "net_votes": 1,
+  "p_up": 0.5,
+  "reasons": [
+   "Signals are weak or split (net vote +1 of 4)"
+  ],
+  "verdict": "NO_TRADE",
+  "votes": {
+   "S3_gap": {
+    "vote": 1,
+    "why": "small gap -0.17%: small gaps have tended to fill"
+   },
+   "S4_trend": {
+    "vote": 1,
+    "why": "uptrend: close above the 20, 50 and 200-day averages"
+   },
+   "S5_meanrev": {
+    "vote": -1,
+    "why": "overbought (RSI2 97, streak +2)"
+   },
+   "S8_news": {
+    "vote": 0,
+    "why": "driver news mixed (+0.21)"
+   }
+  }
+ },
+ "features": {
+  "atr14": 344.8,
+  "ema20": 23836.5,
+  "ema200": 23957.0,
+  "ema50": 23544.2,
+  "gap_pct": -0.165,
+  "gap_pts": -41.5,
+  "nr7": false,
+  "open_0915": 25213.5,
+  "prev_close": 25255.05,
+  "prev_date": "2026-11-11",
+  "prev_range": 329.0,
+  "range_model": {
+   "clim60_oc": 0.083,
+   "clim60_range": 0.25,
+   "compressed": false,
+   "expected_range": 402.2,
+   "n": 500,
+   "n_cond": 386,
+   "p_oc": 0.144,
+   "p_range": 0.452,
+   "p_range_cond": 0.466
+  },
+  "rsi14": 79.5,
+  "rsi2": 97.0,
+  "streak": 2,
+  "vix_prev": 17.56
+ },
+ "feed_health": [
+  {
+   "error": null,
+   "items": 50,
+   "name": "ET Markets",
+   "newest_h": 0.7,
+   "ok": true
+  },
+  {
+   "error": null,
+   "items": 50,
+   "name": "ET Stocks",
+   "newest_h": 0.3,
+   "ok": true
+  },
+  {
+   "error": null,
+   "items": 100,
+   "name": "Moneycontrol (via Google News)",
+   "newest_h": 0.7,
+   "ok": true
+  },
+  {
+   "error": null,
+   "items": 35,
+   "name": "Mint Markets",
+   "newest_h": 0.3,
+   "ok": true
+  },
+  {
+   "error": null,
+   "items": 35,
+   "name": "Business Standard Markets",
+   "newest_h": 0.9,
+   "ok": true
+  },
+  {
+   "error": null,
+   "items": 100,
+   "name": "Google News: Nifty",
+   "newest_h": 0.5,
+   "ok": true
+  },
+  {
+   "error": null,
+   "items": 27,
+   "name": "Google News: FII DII",
+   "newest_h": 1.1,
+   "ok": true
+  },
+  {
+   "error": null,
+   "items": 100,
+   "name": "Google News: global cues",
+   "newest_h": 0.2,
+   "ok": true
+  }
+ ],
+ "headlines": [
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 0,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Oil prices dip 1% on report of more U.S.-Iran diplomacy plans",
+   "ts": "2026-11-12T09:02:52+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 0,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "2027: A Major Shift in Crude Oil and Gold Markets \u2013 A Comprehensive Analysis of ING\u2019s Five Scenarios, Where Opportunities and Pitfalls Coexist",
+   "ts": "2026-11-12T09:02:34+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "global_riskoff",
+    "direction": -1,
+    "kind": "driver",
+    "magnitude": 3,
+    "relevant": true
+   },
+   "source": "Mint Markets",
+   "title": "Up and down, Why Nvidia stock crashed after bouncing back - What led to its fall? More trouble for CEO Jensen Huang!",
+   "ts": "2026-11-12T08:58:54+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "earnings",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "ET Stocks",
+   "title": "Tata Power shares in focus after Q2 results. Why brokerages are bullish despite target price cuts",
+   "ts": "2026-11-12T08:57:59+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty Extends Gains, Maintains Positive Momentum - Religare Broking Ltd",
+   "ts": "2026-11-12T08:45:50+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "cpi",
+    "direction": 0,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Flattish opening seen for Indian stocks; markets eye release of inflation data",
+   "ts": "2026-11-12T08:45:00+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "fed",
+    "direction": 0,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Fed tightening expectations rise; Mexico output falls",
+   "ts": "2026-11-12T08:39:24+05:30"
+  },
+  {
+   "also": 2,
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": -1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Nasdaq futures slide on Huang Ouster report | Crude oil prices rangebound",
+   "ts": "2026-11-12T08:36:20+05:30"
+  },
+  {
+   "also": 1,
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "ET Markets",
+   "title": "Positive Breakout: These 5 stocks close above their 200 DMA",
+   "ts": "2026-11-12T08:33:46+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Mint Markets",
+   "title": "Indian shares likely to consolidate after foreign inflow-driven rally",
+   "ts": "2026-11-12T08:26:51+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Business Standard Markets",
+   "title": "Asian stocks fragile, Nvidia plummets as board to decide CEO's fate",
+   "ts": "2026-11-12T08:20:54+05:30"
+  },
+  {
+   "also": 1,
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Business Standard Markets",
+   "title": "Oil prices drop as hopes for Iran, Ukraine peace talks pressure markets",
+   "ts": "2026-11-12T08:20:07+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "cpi",
+    "direction": 0,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "ET Markets",
+   "title": "India bonds to stay hemmed in by oil, Treasury moves ahead of inflation data",
+   "ts": "2026-11-12T08:18:53+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Trade Spotlight: How should you trade Devyani International, FACT, Federal Bank, MCX India, Samvardhana...",
+   "ts": "2026-11-12T08:16:37+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Mint Markets",
+   "title": "Great Eastern Shipping dividend 2026: Last day to buy today | Check record date, payout amount, history, yield, returns",
+   "ts": "2026-11-12T08:16:30+05:30"
+  },
+  {
+   "also": 1,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Business Standard Markets",
+   "title": "Stocks to watch: Bajaj Finance, GRSE, LIC, Meesho, ITC, Tata Investment",
+   "ts": "2026-11-12T08:14:47+05:30"
+  },
+  {
+   "also": 2,
+   "label": {
+    "catalyst": "global_riskoff",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 3,
+    "relevant": true
+   },
+   "source": "Google News: FII DII",
+   "title": "Trade Setup for Today: Wall Street Tech Rally and FII Buying Signal a Firm Opening as of November 12, 2026",
+   "ts": "2026-11-12T08:08:05+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "ET Stocks",
+   "title": "Adani Ent Share Price Live Updates: Adani Enterprises posts a notable monthly performance",
+   "ts": "2026-11-12T08:02:20+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "GIFT Nifty up, signals steady start for Sensex, Nifty; Nvidia plunges 8% after hours, crude oil falls",
+   "ts": "2026-11-12T08:02:03+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "ET Stocks",
+   "title": "BPCL Share Price Live Updates: BPCL's recent returns reflect a minor setback.",
+   "ts": "2026-11-12T08:00:33+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: FII DII",
+   "title": "GIFT NIFTY futures hint flat opening on November 12; what investors need to track before stock market open",
+   "ts": "2026-11-12T07:54:03+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Google News: FII DII",
+   "title": "3 PSU bank stocks in focus: IOB, Central Bank, Punjab & Sind plan share sales; what investors should know",
+   "ts": "2026-11-12T07:53:39+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "global_riskoff",
+    "direction": 0,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Business Standard Markets",
+   "title": "Stock Market LIVE: GIFT Nifty signals positive open; Asian markets advance; Nvidia drops 7%",
+   "ts": "2026-11-12T07:51:10+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Oil prices fall over $1 as Middle East, Russia-Ukraine peace hopes grow; Brent slips below $92",
+   "ts": "2026-11-12T07:49:19+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Trading Plan: Can healthy broader-market structure help Nifty 50 reclaim 25,300 and Bank Nifty regain...",
+   "ts": "2026-11-12T07:46:52+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Business Standard Markets",
+   "title": "Nifty could move to 25,500-25,750; Paytm among 3 stock ideas: Ajit Mishra",
+   "ts": "2026-11-12T07:43:05+05:30"
+  },
+  {
+   "also": 1,
+   "label": {
+    "catalyst": "global_riskoff",
+    "direction": 0,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "ET Markets",
+   "title": "Sensex Today | Nifty 50 | Stock Market Live Updates: GIFT Nifty signals a muted start; Asian shares trade mixed",
+   "ts": "2026-11-12T07:26:51+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "global_riskoff",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "ET Markets",
+   "title": "Wall Street gains as CoreWeave calms AI jitters",
+   "ts": "2026-11-12T07:22:23+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Mint Markets",
+   "title": "Top stocks to watch today: Tata Power, Bajaj Finance, HAL, IRCTC shares in focus on Thursday, 12 November | Full list",
+   "ts": "2026-11-12T07:20:28+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "ET Markets",
+   "title": "Global Market Today: Asian stocks mixed as Nvidia turmoil hits AI-linked shares",
+   "ts": "2026-11-12T07:03:51+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "earnings",
+    "direction": 0,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Mint Markets",
+   "title": "Thinking about buying the dip in HDFC Bank? Here are the pros and cons.",
+   "ts": "2026-11-12T07:00:38+05:30"
+  },
+  {
+   "also": 1,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "ET Stocks",
+   "title": "Bajaj Finance unveils share sale to raise up to $1.25 billion",
+   "ts": "2026-11-12T06:51:48+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "global_riskoff",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Mint Markets",
+   "title": "Stock market outlook today, 12 Nov: Sensex, Nifty prediction - DJIA, S&P, NASDAQ, GIFT Nifty, Kospi, Nikkei, Taiwan cues",
+   "ts": "2026-11-12T06:45:59+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Mint Markets",
+   "title": "Raja Venkatraman recommends three stocks for 12 November",
+   "ts": "2026-11-12T06:45:37+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Google News: FII DII",
+   "title": "Flows in the Cash Market on 11-Nov-26: DII Activity - Buy",
+   "ts": "2026-11-12T06:36:52+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "fed",
+    "direction": -1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "ET Markets",
+   "title": "Gold slips as strong US inflation data bolsters dollar, Fed hike expectations",
+   "ts": "2026-11-12T06:26:46+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Mint Markets",
+   "title": "Stock recommendations for 12 November from MarketSmith India",
+   "ts": "2026-11-12T06:00:16+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: FII DII",
+   "title": "Pre-market action: Here's the trade setup for today's session",
+   "ts": "2026-11-12T06:00:00+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "earnings",
+    "direction": 0,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Business Standard Markets",
+   "title": "Nifty eyes record as largecaps lead charge on strong corporate earnings",
+   "ts": "2026-11-11T22:52:03+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Business Standard Markets",
+   "title": "Benchmarks rise nearly 1%; auto, bank stocks lead gains amid FPI inflows",
+   "ts": "2026-11-11T22:26:51+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "ET Stocks",
+   "title": "Yes Bank bondholders press for compliance with Supreme Court's AT-1 order",
+   "ts": "2026-11-11T22:25:06+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "ET Stocks",
+   "title": "Market Trading Guide: Astra Microwave among 3 stock recommendations for Thursday",
+   "ts": "2026-11-11T20:44:07+05:30"
+  },
+  {
+   "also": 0,
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Business Standard Markets",
+   "title": "Equity MF inflows fall 14% in October as mid-, smallcap investments cool",
+   "ts": "2026-11-11T19:28:51+05:30"
+  }
+ ],
+ "levels": {
+  "band_hi": 25414.6,
+  "band_lo": 25012.4,
+  "dist20_pct": 5.95,
+  "hi20": 25424.35,
+  "hi5": 25424.35,
+  "lo20": 22372.0,
+  "lo5": 24296.3,
+  "pdc": 25255.05,
+  "pdh": 25424.35,
+  "pdl": 25095.35,
+  "pivot": 25258.25,
+  "r1": 25421.15,
+  "r2": 25587.25,
+  "s1": 25092.15,
+  "s2": 24929.25
+ },
+ "outages": [],
+ "sentiment": {
+  "binary_event_today": null,
+  "catalysts": {
+   "cpi": [
+    "Flattish opening seen for Indian stocks; markets eye release of inflation data",
+    "India bonds to stay hemmed in by oil, Treasury moves ahead of inflation data"
+   ],
+   "earnings": [
+    "Thinking about buying the dip in HDFC Bank? Here are the pros and cons.",
+    "Nifty eyes record as largecaps lead charge on strong corporate earnings"
+   ],
+   "fed": [
+    "Fed tightening expectations rise; Mexico output falls",
+    "Gold slips as strong US inflation data bolsters dollar, Fed hike expectations"
+   ],
+   "global_riskoff": [
+    "Up and down, Why Nvidia stock crashed after bouncing back - What led to its fall? More trouble for CEO Jensen Huang!",
+    "Trade Setup for Today: Wall Street Tech Rally and FII Buying Signal a Firm Opening as of November 12, 2026",
+    "Stock Market LIVE: GIFT Nifty signals positive open; Asian markets advance; Nvidia drops 7%",
+    "Sensex Today | Nifty 50 | Stock Market Live Updates: GIFT Nifty signals a muted start; Asian shares trade mixed",
+    "Wall Street gains as CoreWeave calms AI jitters"
+   ],
+   "oil_geo": [
+    "Oil prices dip 1% on report of more U.S.-Iran diplomacy plans",
+    "2027: A Major Shift in Crude Oil and Gold Markets \u2013 A Comprehensive Analysis of ING\u2019s Five Scenarios, Where Opportunities and Pitfalls Coexist",
+    "Nasdaq futures slide on Huang Ouster report | Crude oil prices rangebound",
+    "Oil prices drop as hopes for Iran, Ukraine peace talks pressure markets",
+    "GIFT Nifty up, signals steady start for Sensex, Nifty; Nvidia plunges 8% after hours, crude oil falls",
+    "Oil prices fall over $1 as Middle East, Russia-Ukraine peace hopes grow; Brent slips below $92"
+   ]
+  },
+  "dii_net_cr": null,
+  "events_today": [],
+  "fii_net_cr": null,
+  "key_risk": null,
+  "lexicon_score": 0.214,
+  "llm_error": "TimeoutError for https://api.openai.com/v1/chat/completions: The read operation timed out",
+  "method": "lexicon",
+  "model": null,
+  "n_high_impact": 2,
+  "n_neg": 3,
+  "n_pos": 6,
+  "n_relevant": 18,
+  "n_reports": 7,
+  "n_views": 5,
+  "score": 0.214,
+  "summary": null
+ }
+}
