@@ -1,0 +1,224 @@
+{
+ "f30_high": 25355.85,
+ "f30_low": 25142.95,
+ "f30_range": 212.89999999999782,
+ "last": 25346.8,
+ "levels": {
+  "dist20_pct": 5.95,
+  "hi20": 25424.35,
+  "hi5": 25424.35,
+  "lo20": 22372.0,
+  "lo5": 24296.3,
+  "pdc": 25255.05,
+  "pdh": 25424.35,
+  "pdl": 25095.35,
+  "pivot": 25258.25,
+  "r1": 25421.15,
+  "r2": 25587.25,
+  "s1": 25092.15,
+  "s2": 24929.25
+ },
+ "move_pct": 0.5286850298451198,
+ "move_pts": 133.29999999999927,
+ "new_headlines": [
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty Momentum Strong, but Exhaustion Signs Emerge - Tradebulls Securities Pvt Ltd"
+  },
+  {
+   "label": {
+    "catalyst": "cpi",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Sensex, Nifty open flat as FIIs buy, DIIs sell; October CPI in focus"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty Faces Profit-Booking Near 24,400 - ICICI Direct"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Mint Markets",
+   "title": "Sensex Expiry Today Prediction 12 November Thursday: What should be your trading strategy? Check support, resistance"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: FII DII",
+   "title": "Shikhara's Rahul Chadha turns overweight on India, favours banks and manufacturing stocks"
+  },
+  {
+   "label": {
+    "catalyst": "earnings",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Tata Power shares rise after Q2 profit jumps 49%; brokerages eye growth prospects amid execution risks"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Sensex opens 100 points higher, Nifty above 25,200; HUL down 1%"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Pre-Market Commentary on Nifty & Bank Nifty for 12th November 2026 by Pabitro Mukherjee, Deputy Vice President-Research, Bajaj Broking"
+  }
+ ],
+ "news_high_impact": 0,
+ "news_score": 0.0,
+ "open": 25213.5,
+ "or_high": 25342.0,
+ "or_low": 25142.95,
+ "orb": 1,
+ "p_n": 232,
+ "p_range_morning": 0.452,
+ "p_range_new": 0.815,
+ "range_so_far": 212.89999999999782,
+ "reason": "the morning call was to stand aside; this update is information only",
+ "sectors": {
+  "heavy": [
+   {
+    "last": 810.15,
+    "name": "HDFC Bank",
+    "pct": 0.44
+   },
+   {
+    "last": 1337.7,
+    "name": "Reliance",
+    "pct": 0.17
+   },
+   {
+    "last": 1586.8,
+    "name": "ICICI Bank",
+    "pct": 0.97
+   },
+   {
+    "last": 1149.9,
+    "name": "Infosys",
+    "pct": -0.44
+   },
+   {
+    "last": 2092.6,
+    "name": "Bharti Airtel",
+    "pct": -0.78
+   },
+   {
+    "last": 2464.3,
+    "name": "TCS",
+    "pct": -0.32
+   },
+   {
+    "last": 4193.5,
+    "name": "L&T",
+    "pct": -0.44
+   },
+   {
+    "last": 287.95,
+    "name": "ITC",
+    "pct": 1.04
+   },
+   {
+    "last": 1072.6,
+    "name": "SBI",
+    "pct": 1.07
+   }
+  ],
+  "missing": [],
+  "sectors": [
+   {
+    "last": 61292.25,
+    "name": "Bank",
+    "pct": 0.82
+   },
+   {
+    "last": 27971.25,
+    "name": "Financials",
+    "pct": 1.11
+   },
+   {
+    "last": 32203.7,
+    "name": "IT",
+    "pct": -0.28
+   },
+   {
+    "last": 28538.2,
+    "name": "Auto",
+    "pct": 0.05
+   },
+   {
+    "last": 28721.2,
+    "name": "Pharma",
+    "pct": -0.19
+   },
+   {
+    "last": 12853.55,
+    "name": "Metal",
+    "pct": 0.53
+   },
+   {
+    "last": 47206.45,
+    "name": "FMCG",
+    "pct": 0.04
+   },
+   {
+    "last": 37600.3,
+    "name": "Energy",
+    "pct": 0.14
+   },
+   {
+    "last": 907.7,
+    "name": "Realty",
+    "pct": 1.54
+   }
+  ]
+ },
+ "status": "STILL NO TRADE",
+ "vix_morning": 17.01,
+ "vix_now": 17.26
+}

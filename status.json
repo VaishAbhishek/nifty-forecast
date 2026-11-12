@@ -119,7 +119,7 @@
     "ok": true
    },
    {
-    "detail": "{'p_range': 0.483, 'n': 232}",
+    "detail": "{'p_range': 0.815, 'n': 232}",
     "name": "first30_model",
     "ok": true
    },
@@ -129,10 +129,10 @@
     "ok": true
    }
   ],
-  "code": "1eb89e9f58",
+  "code": "222438887a",
   "ok": true,
   "status": "STILL NO TRADE",
-  "ts": "2026-11-11T09:46:44+05:30"
+  "ts": "2026-11-12T09:46:42+05:30"
  },
  "score": {
   "checks": [
