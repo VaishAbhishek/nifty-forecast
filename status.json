@@ -2,17 +2,17 @@
  "morning": {
   "checks": [
    {
-    "detail": "780 days to 2026-11-11",
+    "detail": "781 days to 2026-11-12",
     "name": "upstox_history",
     "ok": true
    },
    {
-    "detail": "25213.5 via quote",
+    "detail": "25209.85 via quote",
     "name": "open_price",
     "ok": true
    },
    {
-    "detail": "17.56",
+    "detail": "16.62",
     "name": "vix",
     "ok": true
    },
@@ -22,7 +22,7 @@
     "ok": true
    },
    {
-    "detail": "{'expiry': '2026-11-17', 'atm_strike': 25200.0, 'straddle': 436.7, 'pcr': 0.77, 'sessions_left': 4, 'implied_day_move': ",
+    "detail": "{'expiry': '2026-11-17', 'atm_strike': 25200.0, 'straddle': 355.5, 'pcr': 0.85, 'sessions_left': 3, 'implied_day_move': ",
     "name": "options",
     "ok": true
    },
@@ -32,14 +32,14 @@
     "ok": true
    },
    {
-    "detail": "43 headlines, 18 drivers, 8 sources",
+    "detail": "39 headlines, 12 drivers, 8 sources",
     "name": "news",
     "ok": true
    },
    {
-    "detail": "TimeoutError for https://api.openai.com/v1/chat/completions: The read operation timed out",
+    "detail": "openai/gpt-5-mini",
     "name": "llm",
-    "ok": false
+    "ok": true
    },
    {
     "detail": "",
@@ -47,7 +47,7 @@
     "ok": true
    }
   ],
-  "code": "222438887a",
+  "code": "b9cf702700",
   "feeds": [
    {
     "error": null,
@@ -60,14 +60,14 @@
     "error": null,
     "items": 50,
     "name": "ET Stocks",
-    "newest_h": 0.3,
+    "newest_h": 0.7,
     "ok": true
    },
    {
     "error": null,
     "items": 100,
     "name": "Moneycontrol (via Google News)",
-    "newest_h": 0.7,
+    "newest_h": 0.3,
     "ok": true
    },
    {
@@ -81,34 +81,34 @@
     "error": null,
     "items": 35,
     "name": "Business Standard Markets",
-    "newest_h": 0.9,
+    "newest_h": 1.2,
     "ok": true
    },
    {
     "error": null,
     "items": 100,
     "name": "Google News: Nifty",
-    "newest_h": 0.5,
+    "newest_h": 0.2,
     "ok": true
    },
    {
     "error": null,
-    "items": 27,
+    "items": 28,
     "name": "Google News: FII DII",
-    "newest_h": 1.1,
+    "newest_h": 0.1,
     "ok": true
    },
    {
     "error": null,
     "items": 100,
     "name": "Google News: global cues",
-    "newest_h": 0.2,
+    "newest_h": 0.1,
     "ok": true
    }
   ],
   "ok": true,
-  "seconds": 48.6,
-  "ts": "2026-11-12T09:16:49+05:30",
+  "seconds": 57.7,
+  "ts": "2026-11-13T09:16:58+05:30",
   "verdict": "NO_TRADE"
  },
  "recheck": {
