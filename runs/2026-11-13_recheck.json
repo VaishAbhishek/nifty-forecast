@@ -1,0 +1,246 @@
+{
+ "f30_high": 25209.85,
+ "f30_low": 25077.55,
+ "f30_range": 132.29999999999927,
+ "last": 25185.6,
+ "levels": {
+  "dist20_pct": 5.52,
+  "hi20": 25424.35,
+  "hi5": 25424.35,
+  "lo20": 22372.0,
+  "lo5": 24388.05,
+  "pdc": 25299.35,
+  "pdh": 25384.8,
+  "pdl": 25142.95,
+  "pivot": 25275.7,
+  "r1": 25408.45,
+  "r2": 25517.55,
+  "s1": 25166.6,
+  "s2": 25033.85
+ },
+ "move_pct": -0.09619255965426213,
+ "move_pts": -24.25,
+ "new_headlines": [
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": -1,
+    "kind": "driver",
+    "magnitude": 3,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Saudi Aramco Attack Raises Global Oil Supply Fears: Brent And WTI Rally; Will Crude Prices Cross $100? What\u2019s Next?"
+  },
+  {
+   "label": {
+    "catalyst": "cpi",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Sensex down 180 points, Nifty loses 0.7% in opening session as rising CPI turns investors cautious"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Sensex down 400 pts, Nifty near 25,150: Rise in crude oil prices among key factors behind market decline"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Mint Markets",
+   "title": "Automotive Axles share price jumps 15%: Why the small-cap stock rallied in trade today. Do you own? Check stock trend"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty Forms Inside Bar Pattern on Daily Chart - ICICI Direct"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Page Industries stock: Brokerages bullish despite Q2 earnings miss, eye volume growth amid regulatory risks"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": -1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Oil Still Above $85, EOG Up 41% in a Year: Is the Stock Still a Buy?"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Indian Stocks Open Lower as Crude Oil Prices and Weaker Rupee Weigh on Sentiment By Investing.com"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Business Standard Markets",
+   "title": "Ola Electric shares skid nearly 7% as Q2 revenue falls 39%, loss narrows"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Market Today: Gift Nifty Signals Weak Start As Asian Markets Gain; FIIs Pour Rs 75,000 Cr In Nov"
+  }
+ ],
+ "news_high_impact": 1,
+ "news_score": -0.571,
+ "open": 25209.85,
+ "or_high": 25209.85,
+ "or_low": 25077.55,
+ "orb": 0,
+ "p_n": 232,
+ "p_range_morning": 0.418,
+ "p_range_new": 0.328,
+ "range_so_far": 132.29999999999927,
+ "reason": "the morning call was to stand aside; this update is information only",
+ "sectors": {
+  "heavy": [
+   {
+    "last": 802.1,
+    "name": "HDFC Bank",
+    "pct": -1.26
+   },
+   {
+    "last": 1333.4,
+    "name": "Reliance",
+    "pct": -0.47
+   },
+   {
+    "last": 1584.6,
+    "name": "ICICI Bank",
+    "pct": -0.34
+   },
+   {
+    "last": 1149.1,
+    "name": "Infosys",
+    "pct": -0.18
+   },
+   {
+    "last": 2097.3,
+    "name": "Bharti Airtel",
+    "pct": 0.06
+   },
+   {
+    "last": 2436.7,
+    "name": "TCS",
+    "pct": -0.23
+   },
+   {
+    "last": 4173.4,
+    "name": "L&T",
+    "pct": 0.34
+   },
+   {
+    "last": 284.0,
+    "name": "ITC",
+    "pct": -0.02
+   },
+   {
+    "last": 1077.5,
+    "name": "SBI",
+    "pct": -0.83
+   }
+  ],
+  "missing": [],
+  "sectors": [
+   {
+    "last": 61057.55,
+    "name": "Bank",
+    "pct": -0.75
+   },
+   {
+    "last": 27845.5,
+    "name": "Financials",
+    "pct": -0.75
+   },
+   {
+    "last": 32230.5,
+    "name": "IT",
+    "pct": 0.21
+   },
+   {
+    "last": 28007.0,
+    "name": "Auto",
+    "pct": -0.79
+   },
+   {
+    "last": 28858.8,
+    "name": "Pharma",
+    "pct": 0.64
+   },
+   {
+    "last": 12727.4,
+    "name": "Metal",
+    "pct": -0.35
+   },
+   {
+    "last": 46799.95,
+    "name": "FMCG",
+    "pct": -0.08
+   },
+   {
+    "last": 37512.35,
+    "name": "Energy",
+    "pct": 0.33
+   },
+   {
+    "last": 928.75,
+    "name": "Realty",
+    "pct": -0.59
+   }
+  ]
+ },
+ "status": "STILL NO TRADE",
+ "vix_morning": 16.81,
+ "vix_now": 16.37
+}
