@@ -1,0 +1,301 @@
+{
+ "f30_high": 25310.7,
+ "f30_low": 25195.35,
+ "f30_range": 115.35000000000218,
+ "last": 25298.25,
+ "levels": {
+  "dist20_pct": 4.39,
+  "hi20": 25424.35,
+  "hi5": 25424.35,
+  "lo20": 22372.0,
+  "lo5": 24838.75,
+  "pdc": 25144.3,
+  "pdh": 25246.35,
+  "pdl": 25054.4,
+  "pivot": 25148.35,
+  "r1": 25242.3,
+  "r2": 25340.3,
+  "s1": 25050.35,
+  "s2": 24956.4
+ },
+ "move_pct": 0.36538701864425366,
+ "move_pts": 92.09999999999854,
+ "new_headlines": [
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty Bullish Trend Faces Indecision at Higher Levels - Tradebulls Securities Pvt Ltd"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: FII DII",
+   "title": "Daily Market Update - 16th November 2026 by Ventura Securities Ltd"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty Gains Fade as Profit Booking Emerges at 25,500 Resistance - ICICI Direct"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Sensex Rises 478 Points, Nifty 50 Gains 117 Points as Oil Prices Decline"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "SENSEX up 400 pts, NIFTY50 hovers around 25,200 in early trade; Eicher Motors, Airtel gain, TMPV skids over 7%"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Sensex gains 450 pts, Nifty above 25,250: Strong FII inflows among key factors behind market rise"
+  },
+  {
+   "label": {
+    "catalyst": "fed",
+    "direction": -1,
+    "kind": "driver",
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "U.S. Treasury Secretary's Low-Rate Argument Shows Cracks as Fed Official Sounds Alarm on Services Price Pressure"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Rediff files UDRHP with SEBI, plans to raise up to Rs 600 crore via IPO"
+  },
+  {
+   "label": {
+    "catalyst": "earnings",
+    "direction": -1,
+    "kind": "driver",
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Business Standard Markets",
+   "title": "Tata Motors PV shares plunge 9% after Q2 results; brokerages cut target"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Mint Markets",
+   "title": "Goldman Sachs Predicts \u2018Sizeable Surplus\u2019 for Oil Market in 2027"
+  },
+  {
+   "label": {
+    "catalyst": "earnings",
+    "direction": -1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Hindalco shares fall 1% after Novelis announces $265-million sale of China units"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Crude Oil Falls as Global Supply Surplus Fears Intensify"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: FII DII",
+   "title": "Sensex jumps over 550 points, Nifty near 25,300 in early trade; Tata Motors PV down 8%"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Sensex, Nifty surge in early trade as crude dips: Check major gainers and laggards"
+  },
+  {
+   "label": {
+    "catalyst": "earnings",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Kaynes Technology shares hit 10% lower circuit as Q2 profit plunges 62%; brokerages flag margin pressure,..."
+  }
+ ],
+ "news_high_impact": 0,
+ "news_score": -0.3,
+ "open": 25206.15,
+ "or_high": 25310.7,
+ "or_low": 25195.35,
+ "orb": 0,
+ "p_n": 231,
+ "p_range_morning": 0.386,
+ "p_range_new": 0.238,
+ "range_so_far": 115.35000000000218,
+ "reason": "the morning call was to stand aside; this update is information only",
+ "sectors": {
+  "heavy": [
+   {
+    "last": 807.25,
+    "name": "HDFC Bank",
+    "pct": 0.4
+   },
+   {
+    "last": 1344.4,
+    "name": "Reliance",
+    "pct": 0.35
+   },
+   {
+    "last": 1587.7,
+    "name": "ICICI Bank",
+    "pct": 0.26
+   },
+   {
+    "last": 1155.1,
+    "name": "Infosys",
+    "pct": 1.19
+   },
+   {
+    "last": 2166.8,
+    "name": "Bharti Airtel",
+    "pct": 2.89
+   },
+   {
+    "last": 2425.2,
+    "name": "TCS",
+    "pct": 0.74
+   },
+   {
+    "last": 4156.7,
+    "name": "L&T",
+    "pct": 0.31
+   },
+   {
+    "last": 289.9,
+    "name": "ITC",
+    "pct": 1.72
+   },
+   {
+    "last": 1093.35,
+    "name": "SBI",
+    "pct": 1.24
+   }
+  ],
+  "missing": [],
+  "sectors": [
+   {
+    "last": 61481.9,
+    "name": "Bank",
+    "pct": 0.73
+   },
+   {
+    "last": 27994.75,
+    "name": "Financials",
+    "pct": 0.5
+   },
+   {
+    "last": 32218.7,
+    "name": "IT",
+    "pct": 0.9
+   },
+   {
+    "last": 27902.1,
+    "name": "Auto",
+    "pct": -0.1
+   },
+   {
+    "last": 28739.75,
+    "name": "Pharma",
+    "pct": 0.71
+   },
+   {
+    "last": 12594.55,
+    "name": "Metal",
+    "pct": -0.42
+   },
+   {
+    "last": 47199.2,
+    "name": "FMCG",
+    "pct": 0.78
+   },
+   {
+    "last": 37253.8,
+    "name": "Energy",
+    "pct": -0.39
+   },
+   {
+    "last": 916.95,
+    "name": "Realty",
+    "pct": -0.47
+   }
+  ]
+ },
+ "status": "STILL NO TRADE",
+ "vix_morning": 15.64,
+ "vix_now": 15.63
+}
