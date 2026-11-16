@@ -53,6 +53,41 @@ Rule history:
 - **v1** (11 Nov 2026, 1 session): first version. The news tone counted headlines that merely restated the opening gap.
 - **v2** (from 12 Nov 2026): news tone counts driver headlines only; sources take turns; duplicate stories merged. Count restarted.
 
+## Momentum jobs (F&O stocks)
+
+A second set of jobs in `momentum/`, separate from the Nifty forecast above and with no effect on its rules or its forward test. They are **advisory and read-only** in the same way. They give the daily stock report (a scheduled Claude task, not part of this repo) measured numbers to work from, tell you what the open actually looks like, and keep score.
+
+| Time (IST) | Job | What it does |
+|---|---|---|
+| 08:10 | `data` | For every F&O stock: last session's move in units of its normal range, volume against its 20-day average, 20-day breakouts, futures open-interest change, strength against Nifty, beta, expected gap, and for the busiest names the move the options market is pricing. Also the index regime (trend or chop), GIFT Nifty, FII/DII, sectors, and a table of what past gaps did next. Written to `momentum/latest.json` and `momentum/brief/<date>.md`. No Telegram message |
+| 09:07 | `preopen` | Reads the indicative opening prices from the pre-open auction and sends the real gaps, plus each of the day's picks marked valid, partly priced in, mostly priced in or gapping against |
+| 09:20 | `check5` | Stocks trading at twice their usual volume for this time of day ("in play"), and whether each pick has reached its confirm or cancel level |
+| 09:47 | `check30` | The same after 30 minutes |
+| 16:05 | `eod` | Scores every pick from the open (direction, against Nifty, and the confirm/cancel trade in R), follows swing picks for five sessions, updates `momentum/scorecard.md`, and saves futures open interest for the next morning |
+
+The report's picks arrive as `momentum/picks/<date>.json` on the `data` branch. Without that file the jobs still run and send the gap and in-play lists.
+
+### Read this before trusting it
+
+- A gap is already in the opening price. The pre-open message tells you how much of a pick's expected move is gone, not that there is money in the gap.
+- The gap table and the scorecard are the only numbers here that are measured on outcomes. Everything else describes yesterday.
+- The in-play opening-range breakout is logged and scored as a forward test only. It comes from a study of US stocks and has not been shown to work here.
+- R results ignore brokerage, taxes and slippage.
+- Judge nothing before about 30 scored picks in a group. `scorecard.md` shows how many right calls a coin flip would need.
+- To change a threshold, bump `RULES_VERSION` in `momentum/calc.py`; every scored row records the version it was made under.
+
+### Run and monitor
+
+```bash
+systemctl list-timers 'nifty-momentum*'
+journalctl -u 'nifty-momentum@*' --since today -o cat
+sudo systemctl start nifty-momentum@selftest.service          # checks every Upstox call the jobs depend on
+cd ~/nifty-forecast && set -a && source ~/.nifty_forecast_env && set +a \
+  && NF_DATA_DIR=~/nifty-forecast-data python3 -m momentum.run data --force --dry-run
+```
+
+The jobs use the same credentials file and the same Telegram bot as the forecast agent, and the same sandbox. Upstox use is about 300 GET requests before the open and a handful during the day.
+
 ## Setup (once, on the VM)
 
 **1. Deploy key, so the VM can pull code and push its logs for this one repo only**
@@ -80,6 +115,8 @@ The first run creates `~/.nifty_forecast_env` and stops.
 nano ~/.nifty_forecast_env
 ~/nifty-forecast/deploy/install.sh
 ```
+
+After a code update that adds or changes timers (the sync job's `sync_status.json` says so), run `~/nifty-forecast/deploy/install.sh` once more.
 
 The second run installs the timers, runs a live self-test inside the sandbox, sends a test message to Telegram, pushes the result to GitHub, and prints the EMA bot's state before and after so you can see it was not touched.
 
@@ -132,5 +169,6 @@ If a run breaks, you get a short "run failed" Telegram message, so silence never
 
 ```bash
 sudo systemctl disable --now nifty-forecast-morning.timer nifty-forecast-recheck.timer nifty-forecast-score.timer nifty-forecast-sync.timer
-sudo rm /etc/systemd/system/nifty-forecast*; sudo systemctl daemon-reload
+sudo systemctl disable --now nifty-momentum-data.timer nifty-momentum-preopen.timer nifty-momentum-check5.timer nifty-momentum-check30.timer nifty-momentum-eod.timer nifty-momentum-sync.timer
+sudo rm /etc/systemd/system/nifty-forecast* /etc/systemd/system/nifty-momentum*; sudo systemctl daemon-reload
 ```

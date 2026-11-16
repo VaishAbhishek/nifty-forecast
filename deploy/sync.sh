@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Pushes the agent's logs to the "data" branch and pulls code updates from "main".
+# Pushes the logs to the "data" branch (after pulling what is there) and pulls code updates from "main".
 # Touches only ~/nifty-forecast and ~/nifty-forecast-data. Never the EMA bot.
 set -u
 # Wrapped in a function so bash reads the whole file before running it
@@ -40,8 +40,13 @@ printf '{"ts": "%s", "pull": "%s", "reinstall_needed": "%s", "code": "%s"}\n' \
   "$now" "$pull" "$reinstall" "$(git -C "$CODE" rev-parse --short HEAD 2>/dev/null)" > "$DATA/sync_status.json"
 git -C "$DATA" add -A
 git -C "$DATA" diff --cached --quiet || git -C "$DATA" commit -qm "data $now"
-if ! git -C "$DATA" push -q origin HEAD:data 2>/dev/null; then
-  # someone else pushed to the branch: replay our commits on top and retry once
+# Once the momentum jobs are installed, the morning report writes its picks to this branch from
+# outside, so take what is there first. Until then this script behaves exactly as before.
+if [ -e /etc/systemd/system/nifty-momentum-sync.timer ] && ! git -C "$DATA" pull -q --rebase origin data 2>/dev/null; then
+  git -C "$DATA" rebase --abort 2>/dev/null
+  push="FAILED: could not pull the data branch"
+elif ! git -C "$DATA" push -q origin HEAD:data 2>/dev/null; then
+  # someone pushed in between: replay our commits on top and retry once
   git -C "$DATA" pull -q --rebase origin data 2>/dev/null && git -C "$DATA" push -q origin HEAD:data 2>/dev/null || push="FAILED"
 fi
 echo "sync $now | pull: $pull | push: $push | reinstall needed: $reinstall"

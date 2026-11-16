@@ -1,0 +1,16 @@
+[Unit]
+Description=F&O momentum: extra syncs with GitHub (data file out, picks in, scores out)
+
+[Timer]
+# 08:27 pushes the data file before the morning report starts; 09:05 pulls the report's picks
+# before the pre-open job; 09:10 and 16:12 push what the jobs wrote.
+OnCalendar=Mon..Fri *-*-* 08:27:00 Asia/Kolkata
+OnCalendar=Mon..Fri *-*-* 09:05:40 Asia/Kolkata
+OnCalendar=Mon..Fri *-*-* 09:10:30 Asia/Kolkata
+OnCalendar=Mon..Fri *-*-* 16:12:00 Asia/Kolkata
+AccuracySec=2s
+Persistent=false
+Unit=nifty-forecast-sync.service
+
+[Install]
+WantedBy=timers.target

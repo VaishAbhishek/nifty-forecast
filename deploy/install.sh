@@ -2,7 +2,7 @@
 # One-time installer for the Nifty forecast agent. Safe to run again after updates.
 #
 # It creates files only under ~/nifty-forecast, ~/nifty-forecast-data, ~/.nifty_forecast_env
-# and /etc/systemd/system/nifty-forecast*. It never edits, restarts, stops or signals
+# and /etc/systemd/system/nifty-forecast* and nifty-momentum*. It never edits, restarts, stops or signals
 # nifty_bot.service; it only reads that service's state to prove it was left alone.
 set -euo pipefail
 
@@ -66,18 +66,23 @@ sudo install -m 644 "$tmp"/* /etc/systemd/system/
 rm -rf "$tmp"
 sudo systemctl daemon-reload
 sudo systemctl enable --now nifty-forecast-morning.timer nifty-forecast-recheck.timer nifty-forecast-score.timer nifty-forecast-sync.timer
+sudo systemctl enable --now nifty-momentum-data.timer nifty-momentum-preopen.timer nifty-momentum-check5.timer nifty-momentum-check30.timer nifty-momentum-eod.timer nifty-momentum-sync.timer
 cat "$CODE"/deploy/*.service "$CODE"/deploy/*.timer | sha256sum | cut -c1-16 > "$DATA/cache/installed_units"
 
 say "Live self-test, run through systemd so the sandbox is tested too"
 sudo systemctl start nifty-forecast@selftest.service || true
 journalctl -u nifty-forecast@selftest.service --no-pager -o cat -n 25
 
+say "Momentum jobs: live self-test (F&O list, quotes, candles, option chain, flows)"
+sudo systemctl start nifty-momentum@selftest.service || true
+journalctl -u nifty-momentum@selftest.service --no-pager -o cat -n 14
+
 say "First sync with GitHub (sends the self-test result so it can be reviewed remotely)"
 sudo systemctl start nifty-forecast-sync.service || true
 journalctl -u nifty-forecast-sync.service --no-pager -o cat -n 3
 
 say "Timers"
-systemctl list-timers 'nifty-forecast*' --no-pager
+systemctl list-timers 'nifty-forecast*' 'nifty-momentum*' --no-pager
 
 say "EMA bot state after install"
 AFTER="$(bot_state)"; echo "${AFTER:-$BOT_UNIT not found}"

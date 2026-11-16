@@ -1,0 +1,11 @@
+[Unit]
+Description=F&O momentum: pre-open gaps (09:07:20 IST, Mon-Fri)
+
+[Timer]
+OnCalendar=Mon..Fri *-*-* 09:07:20 Asia/Kolkata
+AccuracySec=1s
+Persistent=false
+Unit=nifty-momentum@preopen.service
+
+[Install]
+WantedBy=timers.target

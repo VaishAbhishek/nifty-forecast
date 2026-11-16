@@ -1,0 +1,11 @@
+[Unit]
+Description=F&O momentum: 5-minute check (09:20:15 IST, Mon-Fri)
+
+[Timer]
+OnCalendar=Mon..Fri *-*-* 09:20:15 Asia/Kolkata
+AccuracySec=1s
+Persistent=false
+Unit=nifty-momentum@check5.service
+
+[Install]
+WantedBy=timers.target

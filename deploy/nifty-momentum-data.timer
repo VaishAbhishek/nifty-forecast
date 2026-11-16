@@ -1,0 +1,11 @@
+[Unit]
+Description=F&O momentum: data file for the morning report (08:10:00 IST, Mon-Fri)
+
+[Timer]
+OnCalendar=Mon..Fri *-*-* 08:10:00 Asia/Kolkata
+AccuracySec=1s
+Persistent=false
+Unit=nifty-momentum@data.service
+
+[Install]
+WantedBy=timers.target
