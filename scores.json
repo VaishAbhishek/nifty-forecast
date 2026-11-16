@@ -1,40 +1,40 @@
 {
  "direction": {
   "S0_coin": {
-   "calls": 2,
+   "calls": 3,
    "ci95": [
-    0.095,
-    0.905
+    0.061,
+    0.792
    ],
    "coverage": 1.0,
-   "days": 2,
-   "hit_rate": 0.5,
+   "days": 3,
+   "hit_rate": 0.333,
    "hits": 1,
-   "p_vs_coin": 0.75
+   "p_vs_coin": 0.875
   },
   "S3_gap": {
-   "calls": 1,
-   "ci95": [
-    0.207,
-    1.0
-   ],
-   "coverage": 0.5,
-   "days": 2,
-   "hit_rate": 1.0,
-   "hits": 1,
-   "p_vs_coin": 0.5
-  },
-  "S4_trend": {
    "calls": 2,
    "ci95": [
     0.095,
     0.905
    ],
-   "coverage": 1.0,
-   "days": 2,
+   "coverage": 0.667,
+   "days": 3,
    "hit_rate": 0.5,
    "hits": 1,
    "p_vs_coin": 0.75
+  },
+  "S4_trend": {
+   "calls": 3,
+   "ci95": [
+    0.208,
+    0.939
+   ],
+   "coverage": 1.0,
+   "days": 3,
+   "hit_rate": 0.667,
+   "hits": 2,
+   "p_vs_coin": 0.5
   },
   "S5_meanrev": {
    "calls": 2,
@@ -42,8 +42,8 @@
     0.095,
     0.905
    ],
-   "coverage": 1.0,
-   "days": 2,
+   "coverage": 0.667,
+   "days": 3,
    "hit_rate": 0.5,
    "hits": 1,
    "p_vs_coin": 0.75
@@ -54,8 +54,8 @@
     0.0,
     0.793
    ],
-   "coverage": 0.5,
-   "days": 2,
+   "coverage": 0.333,
+   "days": 3,
    "hit_rate": 0.0,
    "hits": 0,
    "p_vs_coin": 1.0
@@ -66,8 +66,8 @@
     0.207,
     1.0
    ],
-   "coverage": 0.5,
-   "days": 2,
+   "coverage": 0.333,
+   "days": 3,
    "hit_rate": 1.0,
    "hits": 1,
    "p_vs_coin": 0.5
@@ -79,7 +79,7 @@
     1.0
    ],
    "coverage": 0.0,
-   "days": 2,
+   "days": 3,
    "hit_rate": null,
    "hits": 0,
    "p_vs_coin": 1.0
@@ -87,39 +87,39 @@
  },
  "ensemble": {
   "big_days": 0,
-  "days": 2,
-  "no_trade": 2,
+  "days": 3,
+  "no_trade": 3,
   "quiet_calls": 0,
   "quiet_hits": 0
  },
  "first": "2026-11-12",
- "last": "2026-11-13",
+ "last": "2026-11-16",
  "probability": {
   "R1_first30": {
    "baseline_brier": 0.0625,
-   "brier": 0.3859,
-   "n": 2,
-   "skill": -5.174
+   "brier": 0.2761,
+   "n": 3,
+   "skill": -3.418
   },
   "S0_clim": {
    "baseline_brier": 0.0625,
    "brier": 0.0625,
-   "n": 2,
+   "n": 3,
    "skill": 0.0
   },
   "S1_vol": {
    "baseline_brier": 0.0625,
-   "brier": 0.1895,
-   "n": 2,
-   "skill": -2.032
+   "brier": 0.176,
+   "n": 3,
+   "skill": -1.816
   },
   "S2_compress": {
    "baseline_brier": 0.0625,
-   "brier": 0.2011,
-   "n": 2,
-   "skill": -2.217
+   "brier": 0.1863,
+   "n": 3,
+   "skill": -1.981
   }
  },
  "rule_version": "v2",
- "sessions": 2
+ "sessions": 3
 }
