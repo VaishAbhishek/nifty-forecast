@@ -1,4 +1,53 @@
 {
+ "momentum_selftest": {
+  "checks": [
+   {
+    "detail": "218 F&O stocks, Nifty future NSE_FO|61471, e.g. ['360ONE', 'ABB', 'ABCAPITAL']",
+    "name": "fo_universe",
+    "ok": true,
+    "required": true
+   },
+   {
+    "detail": "RELIANCE last 1344.8 prev 1339.7 volume 7653528.0 iep 0.0 traded_on 2026-11-16 | future oi 121331500.0 prev_oi 120643500.0",
+    "name": "quote_fields",
+    "ok": true,
+    "required": true
+   },
+   {
+    "detail": "RELIANCE: 27 daily (last volume 7653528), 300 five-minute bars",
+    "name": "candles_with_volume",
+    "ok": true,
+    "required": true
+   },
+   {
+    "detail": "RELIANCE {'expiry': '2026-11-23', 'sessions_left': 5, 'straddle_pct': 2.27, 'day_move_pct': 1.27, 'pcr': 0.78}",
+    "name": "stock_option_chain",
+    "ok": true,
+    "required": false
+   },
+   {
+    "detail": "{'fii_cash': {'date': '2026-11-05', 'net': 14974.7}, 'fii_index_fut': {'date': '2026-11-05', 'net': 7883.8, 'long_share': 0.215}, 'fii_stock_fut': {'date': '2026-11-05', 'net': 2936.2, 'long_share': 0.589}, 'dii_cash': {'date': '2026-11-05'",
+    "name": "fii_dii",
+    "ok": true,
+    "required": false
+   },
+   {
+    "detail": "writable",
+    "name": "data_dir",
+    "ok": true,
+    "required": true
+   },
+   {
+    "detail": "test message sent",
+    "name": "telegram_send",
+    "ok": true,
+    "required": true
+   }
+  ],
+  "code": "5a688f853c",
+  "ok": true,
+  "ts": "2026-11-17T00:42:42+05:30"
+ },
  "morning": {
   "checks": [
    {
@@ -150,13 +199,13 @@
  "selftest": {
   "checks": [
    {
-    "detail": "15 candles, last 2026-11-09 close 25044.7",
+    "detail": "13 candles, last 2026-11-13 close 25144.3",
     "name": "upstox_nifty_daily",
     "ok": true,
     "required": true
    },
    {
-    "detail": "15 candles, last 2026-11-09 close 17.42",
+    "detail": "14 candles, last 2026-11-16 close 15.68",
     "name": "upstox_vix_daily",
     "ok": true,
     "required": true
@@ -168,43 +217,49 @@
     "required": true
    },
    {
-    "detail": "185 candles, first bar times ['09:15', '09:45']",
+    "detail": "172 candles, first bar times ['09:15', '09:45']",
     "name": "upstox_30min_history",
     "ok": true,
     "required": false
    },
    {
-    "detail": "today is a holiday: True",
+    "detail": "today is a holiday: False",
     "name": "upstox_holiday_api",
     "ok": true,
     "required": false
    },
    {
-    "detail": "{'o': 25076.4, 'h': 25084.05, 'l': 24838.75, 'c': 25044.65, 'last': 25044.65}",
+    "detail": "{'o': 25206.15, 'h': 25337.6, 'l': 25172.1, 'c': 25291.1, 'last': 25291.1}",
     "name": "upstox_quote_ohlc",
     "ok": true,
     "required": false
    },
    {
-    "detail": "RuntimeError: no data for ['spx']. keys={'gift': 'GLOBAL_INDEX|SGX NIFTY', 'brent': 'GLOBAL_INDICATOR|BZUSD', 'usdinr': 'GLOBAL_INDICATOR|USDINR', 'nasdaq': 'GLOBAL_INDEX|IXIX'}. got: gift=GLOBAL_INDEX|SGX NIFTY 25123.00",
+    "detail": "gift 25232.00 (-0.19%); brent 95.79 (-0.46%); usdinr 94.23 (+0.21%); spx 7564.35 (-0.74%); nasdaq 25103.75 (-1.07%)",
     "name": "brent_usdinr_gift_us",
-    "ok": false,
+    "ok": true,
     "required": false
    },
    {
-    "detail": "{'expiry': '2026-11-17', 'atm_strike': 25050.0, 'straddle': 492.4, 'pcr': 1.13}",
+    "detail": "{'expiry': '2026-11-17', 'atm_strike': 25300.0, 'straddle': 167.9, 'pcr': 0.94, 'sessions_left': 1, 'implied_day_move': 210.0, 'call_wall': 26000.0, 'put_wall': 25000.0, 'max_pain': 25200.0}",
     "name": "upstox_option_chain",
     "ok": true,
     "required": false
    },
    {
-    "detail": "6 of 9 feeds fresh; down: Moneycontrol Latest, Moneycontrol Markets, Moneycontrol Economy",
+    "detail": "9 sectors, 9 heavyweights",
+    "name": "sectors_and_heavyweights",
+    "ok": true,
+    "required": false
+   },
+   {
+    "detail": "8 of 8 feeds fresh",
     "name": "rss_feeds",
     "ok": true,
     "required": true
    },
    {
-    "detail": "openai/gpt-5-mini scored 2 test headlines: [-1, 1]",
+    "detail": "openai/gpt-5-mini scored 2 test headlines: [0, 1]",
     "name": "llm",
     "ok": true,
     "required": false
@@ -234,10 +289,10 @@
     "required": true
    }
   ],
-  "code": "3dab94bbdf",
+  "code": "5a688f853c",
   "ok": true,
   "python": "3.10.12",
-  "ts": "2026-11-10T15:50:24+05:30",
-  "tz_now": "2026-11-10T15:50:04+05:30"
+  "ts": "2026-11-17T00:42:39+05:30",
+  "tz_now": "2026-11-17T00:42:16+05:30"
  }
 }
