@@ -1,4 +1,28 @@
 {
+ "momentum_check30": {
+  "checks": [
+   {
+    "detail": "218 stocks, 110 with a volume baseline, 17 in play",
+    "name": "quotes",
+    "ok": true
+   }
+  ],
+  "code": "5a688f853c",
+  "ok": true,
+  "ts": "2026-11-17T09:47:02+05:30"
+ },
+ "momentum_check5": {
+  "checks": [
+   {
+    "detail": "218 stocks, 110 with a volume baseline, 15 in play",
+    "name": "quotes",
+    "ok": true
+   }
+  ],
+  "code": "5a688f853c",
+  "ok": true,
+  "ts": "2026-11-17T09:20:17+05:30"
+ },
  "momentum_data": {
   "checks": [
    {
@@ -209,7 +233,7 @@
     "ok": true
    },
    {
-    "detail": "{'p_range': 0.238, 'n': 231}",
+    "detail": "{'p_range': 0.091, 'n': 232}",
     "name": "first30_model",
     "ok": true
    },
@@ -219,10 +243,10 @@
     "ok": true
    }
   ],
-  "code": "b9cf702700",
+  "code": "5a688f853c",
   "ok": true,
-  "status": "STILL NO TRADE",
-  "ts": "2026-11-16T09:46:33+05:30"
+  "status": "STILL VALID",
+  "ts": "2026-11-17T09:46:28+05:30"
  },
  "score": {
   "checks": [

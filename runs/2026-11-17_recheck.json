@@ -1,0 +1,290 @@
+{
+ "f30_high": 25358.05,
+ "f30_low": 25267.3,
+ "f30_range": 90.75,
+ "last": 25347.2,
+ "levels": {
+  "dist20_pct": 4.5,
+  "hi20": 25424.35,
+  "hi5": 25424.35,
+  "lo20": 22372.0,
+  "lo5": 24838.75,
+  "pdc": 25291.1,
+  "pdh": 25337.6,
+  "pdl": 25172.1,
+  "pivot": 25266.93,
+  "r1": 25361.77,
+  "r2": 25432.43,
+  "s1": 25196.27,
+  "s2": 25101.43
+ },
+ "move_pct": 0.2765326992993771,
+ "move_pts": 69.90000000000146,
+ "new_headlines": [
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Mint Markets",
+   "title": "Tata Chemicals share price jumps 9%: Volume surge, Tata Sons listing buzz behind the Tata Group stock rally. Do you own?"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Crude oil prices drop as supply recovers and de..."
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Brent crude slips below $92, WTI at $83 as supply surplus outlook outweighs Middle East tensions"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty Bank hits record high after 22% recovery from April lows - Here are the top gainers"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "SENSEX gains over 240 pts, NIFTY50 rises after weak opening on Nov 17; BSE, IndiGo, Asian Paints among top gainers"
+  },
+  {
+   "label": {
+    "catalyst": "rbi",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Tata Chemicals shares rise 8% as RBI tells Tata Sons to comply with listing rule: Here's why"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Crude Oil Falls As Restored Middle East Shipments Fuel Global Surplus Concerns By Kedia Advisory"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Mint Markets",
+   "title": "Aegis Logistics closes \u20b93500 crore QIP; over 83% of shares issued to Nomura India, Quant Mutual Fund, 2 US-based FPIs"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty Outlook - IT stocks drag US down by Geojit Investments Ltd"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Groww shares rise over 1% after Rs 1,905 crore worth of shares change hands in block deal"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Oil Price Forecast: Brent and WTI Slide on Supply Surplus Outlook"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "ET Markets",
+   "title": "ITC among 6 stocks showing White Marubozu pattern"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Sensex opens over 100 points higher, Nifty above 25,300; Adani Ports, Asian Paints among top gainers"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Pre-Market Commentary on Nifty & Bank Nifty for 17th November 2026 by Pabitro Mukherjee, Deputy Vice President-Research, Bajaj Broking"
+  }
+ ],
+ "news_high_impact": 0,
+ "news_score": 0.571,
+ "open": 25277.3,
+ "or_high": 25358.05,
+ "or_low": 25267.3,
+ "orb": 0,
+ "p_n": 232,
+ "p_range_morning": 0.362,
+ "p_range_new": 0.091,
+ "range_so_far": 90.75,
+ "reason": "price is moving with the call (+0.28% from the open)",
+ "sectors": {
+  "heavy": [
+   {
+    "last": 813.5,
+    "name": "HDFC Bank",
+    "pct": -0.37
+   },
+   {
+    "last": 1341.5,
+    "name": "Reliance",
+    "pct": -0.25
+   },
+   {
+    "last": 1588.5,
+    "name": "ICICI Bank",
+    "pct": 0.22
+   },
+   {
+    "last": 1139.5,
+    "name": "Infosys",
+    "pct": -0.49
+   },
+   {
+    "last": 2150.8,
+    "name": "Bharti Airtel",
+    "pct": -0.13
+   },
+   {
+    "last": 2426.2,
+    "name": "TCS",
+    "pct": 0.88
+   },
+   {
+    "last": 4149.8,
+    "name": "L&T",
+    "pct": 0.24
+   },
+   {
+    "last": 295.8,
+    "name": "ITC",
+    "pct": 0.24
+   },
+   {
+    "last": 1103.5,
+    "name": "SBI",
+    "pct": 1.19
+   }
+  ],
+  "missing": [],
+  "sectors": [
+   {
+    "last": 61899.35,
+    "name": "Bank",
+    "pct": 0.53
+   },
+   {
+    "last": 28116.1,
+    "name": "Financials",
+    "pct": 0.36
+   },
+   {
+    "last": 31926.7,
+    "name": "IT",
+    "pct": -0.04
+   },
+   {
+    "last": 27888.2,
+    "name": "Auto",
+    "pct": 1.15
+   },
+   {
+    "last": 28152.45,
+    "name": "Pharma",
+    "pct": 0.19
+   },
+   {
+    "last": 12502.75,
+    "name": "Metal",
+    "pct": 0.36
+   },
+   {
+    "last": 47839.5,
+    "name": "FMCG",
+    "pct": 0.28
+   },
+   {
+    "last": 37278.2,
+    "name": "Energy",
+    "pct": 0.0
+   },
+   {
+    "last": 929.8,
+    "name": "Realty",
+    "pct": 2.3
+   }
+  ]
+ },
+ "status": "STILL VALID",
+ "vix_morning": 15.34,
+ "vix_now": 15.22
+}
