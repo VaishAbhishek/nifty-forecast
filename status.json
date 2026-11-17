@@ -28,6 +28,18 @@
   "ok": true,
   "ts": "2026-11-17T08:11:59+05:30"
  },
+ "momentum_preopen": {
+  "checks": [
+   {
+    "detail": "indicative, 218 of 218",
+    "name": "prices",
+    "ok": true
+   }
+  ],
+  "code": "5a688f853c",
+  "ok": true,
+  "ts": "2026-11-17T09:08:39+05:30"
+ },
  "momentum_selftest": {
   "checks": [
    {
