@@ -1,0 +1,44 @@
+{
+ "in_play": {
+  "avg_alpha": null,
+  "avg_alpha_5d": null,
+  "avg_r": -1.0,
+  "avg_ret": null,
+  "avg_ret_5d": null,
+  "hit": 0.0,
+  "n": 8,
+  "n_5d": 0,
+  "needs_for_95": 7,
+  "right": 0,
+  "total_r": -4.0,
+  "trades": 4
+ },
+ "picks": {
+  "all": {
+   "all": {
+    "avg_alpha": null,
+    "avg_alpha_5d": null,
+    "avg_r": null,
+    "avg_ret": null,
+    "avg_ret_5d": null,
+    "hit": null,
+    "n": 0,
+    "n_5d": 0,
+    "needs_for_95": null,
+    "right": 0,
+    "total_r": null,
+    "trades": 0
+   }
+  },
+  "conviction": {},
+  "direction": {},
+  "evidence": {},
+  "gap_verdict": {},
+  "horizon": {},
+  "regime": {},
+  "tier": {}
+ },
+ "rules_version": 1,
+ "sessions": 0,
+ "updated": "2026-11-17T16:05:01+05:30"
+}
