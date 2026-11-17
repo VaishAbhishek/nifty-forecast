@@ -3,56 +3,56 @@
   "error": null,
   "items": 50,
   "name": "ET Markets",
-  "newest_h": 0.7,
+  "newest_h": 2.7,
   "ok": true
  },
  {
   "error": null,
   "items": 50,
   "name": "ET Stocks",
-  "newest_h": 6.1,
+  "newest_h": 3.0,
   "ok": true
  },
  {
   "error": null,
   "items": 100,
   "name": "Moneycontrol (via Google News)",
-  "newest_h": 0.5,
+  "newest_h": 0.1,
   "ok": true
  },
  {
   "error": null,
   "items": 35,
   "name": "Mint Markets",
-  "newest_h": 0.2,
+  "newest_h": 1.7,
   "ok": true
  },
  {
   "error": null,
   "items": 35,
   "name": "Business Standard Markets",
-  "newest_h": 1.5,
+  "newest_h": 0.4,
   "ok": true
  },
  {
   "error": null,
   "items": 100,
   "name": "Google News: Nifty",
-  "newest_h": 0.8,
+  "newest_h": 0.7,
   "ok": true
  },
  {
   "error": null,
-  "items": 29,
+  "items": 21,
   "name": "Google News: FII DII",
-  "newest_h": 0.8,
+  "newest_h": 3.4,
   "ok": true
  },
  {
   "error": null,
   "items": 100,
   "name": "Google News: global cues",
-  "newest_h": 0.2,
+  "newest_h": 0.6,
   "ok": true
  }
 ]
