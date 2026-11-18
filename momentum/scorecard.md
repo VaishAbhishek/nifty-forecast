@@ -50,4 +50,4 @@ Do not read much into any row with fewer than about 30 picks.
 Stocks at twice their usual volume five minutes after the open; entry on a break of the first five minutes' range
 in the direction of the first move, stop 10% of ATR away, exit at the close.
 
-8 signals, 4 trades, average -1.00 R, total -4.0 R.
+16 signals, 5 trades, average -1.00 R, total -5.0 R.

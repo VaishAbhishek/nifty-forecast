@@ -6,11 +6,11 @@
 {"atr": 63.51, "date": "2026-11-17", "direction": "UP", "or_high": 1615.5, "or_low": 1582.7, "relvol": 3.4, "rules_version": 1, "symbol": "BLUESTARCO", "trade": {"entry": 1615.5, "r": -1.0, "status": "stopped"}}
 {"atr": 184.11, "date": "2026-11-17", "direction": "UP", "or_high": 4199.0, "or_low": 4090.0, "relvol": 3.1, "rules_version": 1, "symbol": "CUMMINSIND", "trade": {"status": "cancelled"}}
 {"atr": 71.52, "date": "2026-11-17", "direction": "UP", "or_high": 2641.5, "or_low": 2611.7, "relvol": 3.0, "rules_version": 1, "symbol": "ASIANPAINT", "trade": {"status": "cancelled"}}
-{"atr": 13.29, "date": "2026-11-18", "direction": "UP", "or_high": 361.5, "or_low": 351.6, "relvol": 10.3, "rules_version": 1, "symbol": "ANGELONE", "trade": null}
-{"atr": 141.14, "date": "2026-11-18", "direction": "UP", "or_high": 2897.7, "or_low": 2858.1, "relvol": 4.9, "rules_version": 1, "symbol": "KAYNES", "trade": null}
-{"atr": 223.89, "date": "2026-11-18", "direction": "DOWN", "or_high": 7670.0, "or_low": 7534.0, "relvol": 4.9, "rules_version": 1, "symbol": "POLYCAB", "trade": null}
-{"atr": 1229.8, "date": "2026-11-18", "direction": "DOWN", "or_high": 31015.0, "or_low": 30675.0, "relvol": 4.8, "rules_version": 1, "symbol": "PAGEIND", "trade": null}
-{"atr": 89.66, "date": "2026-11-18", "direction": "DOWN", "or_high": 2665.6, "or_low": 2631.6, "relvol": 4.6, "rules_version": 1, "symbol": "GLENMARK", "trade": null}
-{"atr": 40.5, "date": "2026-11-18", "direction": "UP", "or_high": 1978.0, "or_low": 1954.6, "relvol": 3.8, "rules_version": 1, "symbol": "LUPIN", "trade": null}
-{"atr": 58.22, "date": "2026-11-18", "direction": "DOWN", "or_high": 1686.8, "or_low": 1669.3, "relvol": 3.5, "rules_version": 1, "symbol": "PRESTIGE", "trade": null}
-{"atr": 2.64, "date": "2026-11-18", "direction": "UP", "or_high": 96.87, "or_low": 95.44, "relvol": 3.5, "rules_version": 1, "symbol": "MAHABANK", "trade": null}
+{"atr": 13.29, "date": "2026-11-18", "direction": "UP", "or_high": 361.5, "or_low": 351.6, "relvol": 10.3, "rules_version": 1, "symbol": "ANGELONE", "trade": {"status": "cancelled"}}
+{"atr": 141.14, "date": "2026-11-18", "direction": "UP", "or_high": 2897.7, "or_low": 2858.1, "relvol": 4.9, "rules_version": 1, "symbol": "KAYNES", "trade": {"status": "cancelled"}}
+{"atr": 223.89, "date": "2026-11-18", "direction": "DOWN", "or_high": 7670.0, "or_low": 7534.0, "relvol": 4.9, "rules_version": 1, "symbol": "POLYCAB", "trade": {"status": "cancelled"}}
+{"atr": 1229.8, "date": "2026-11-18", "direction": "DOWN", "or_high": 31015.0, "or_low": 30675.0, "relvol": 4.8, "rules_version": 1, "symbol": "PAGEIND", "trade": {"status": "cancelled"}}
+{"atr": 89.66, "date": "2026-11-18", "direction": "DOWN", "or_high": 2665.6, "or_low": 2631.6, "relvol": 4.6, "rules_version": 1, "symbol": "GLENMARK", "trade": {"entry": 2631.6, "r": -1.0, "status": "stopped"}}
+{"atr": 40.5, "date": "2026-11-18", "direction": "UP", "or_high": 1978.0, "or_low": 1954.6, "relvol": 3.8, "rules_version": 1, "symbol": "LUPIN", "trade": {"status": "cancelled"}}
+{"atr": 58.22, "date": "2026-11-18", "direction": "DOWN", "or_high": 1686.8, "or_low": 1669.3, "relvol": 3.5, "rules_version": 1, "symbol": "PRESTIGE", "trade": {"status": "cancelled"}}
+{"atr": 2.64, "date": "2026-11-18", "direction": "UP", "or_high": 96.87, "or_low": 95.44, "relvol": 3.5, "rules_version": 1, "symbol": "MAHABANK", "trade": {"status": "cancelled"}}
