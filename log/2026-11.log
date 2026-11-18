@@ -21,3 +21,6 @@
 2026-11-18T08:22:53+05:30 momentum data: 218 stocks, 0 failed, focus 20
 2026-11-18T09:08:40+05:30 momentum preopen: indicative, 218 of 218, 0 picks
 2026-11-18T09:17:18+05:30 morning: UP logged (morning), net votes +2, p_range300 0.342
+2026-11-18T09:20:17+05:30 momentum check5: 29 in play, 0 picks
+2026-11-18T09:46:29+05:30 recheck: INVALIDATED (price has moved 0.36% against the call)
+2026-11-18T09:47:02+05:30 momentum check30: 21 in play, 0 picks

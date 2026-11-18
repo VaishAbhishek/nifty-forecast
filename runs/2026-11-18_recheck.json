@@ -1,0 +1,279 @@
+{
+ "f30_high": 25390.8,
+ "f30_low": 25227.55,
+ "f30_range": 163.25,
+ "last": 25231.5,
+ "levels": {
+  "dist20_pct": 4.41,
+  "hi20": 25501.35,
+  "hi5": 25501.35,
+  "lo20": 22372.0,
+  "lo5": 25054.4,
+  "pdc": 25387.4,
+  "pdh": 25501.35,
+  "pdl": 25267.3,
+  "pivot": 25385.35,
+  "r1": 25503.4,
+  "r2": 25619.4,
+  "s1": 25269.35,
+  "s2": 25151.3
+ },
+ "move_pct": -0.36192179882835057,
+ "move_pts": -91.65000000000146,
+ "new_headlines": [
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Mint Markets",
+   "title": "IIFL Finance share price: NBFC stock jumps 6% after \u20b93,454 cr block deal: Why is Fairfax selling entire 13.25% stake?"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Sensex declines 75 points to 82,482 in early trade, Nifty skids 26 points to 25,355"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "ET Markets",
+   "title": "Prime Focus among 4 stocks that closed above VWAP"
+  },
+  {
+   "label": {
+    "catalyst": "earnings",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Sensex, Nifty open flat as Nvidia earnings beat offsets Wall Street sell-off; Bank Nifty near record high"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Pre-Market Commentary on Nifty & Bank Nifty for 18th November 2026 by Pabitro Mukherjee, Deputy Vice President-Research, Bajaj Broking"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Crude Oil Falls As Recovering Middle East Exports Fuel Supply Surplus Concerns By Kedia Advisory"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty Extends Gains for Second Consecutive Session - Religare Broking Ltd"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Business Standard Markets",
+   "title": "IIFL Finance shares gain 6% after block deal; Fairfax likely seller"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "ET Stocks",
+   "title": "Laurus Labs among 4 stocks showing White Marubozu pattern"
+  },
+  {
+   "label": {
+    "catalyst": "global_riskoff",
+    "direction": -1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Asian markets mostly decline after Wall Street losses as AI stocks swing"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "MCX gold futures fall nearly 2% to Rs 1.31 lakh, silver slide 3% below Rs 1.70 lakh: How much further..."
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Sensex, Nifty open in the red in early trade: Check major gainers and laggards"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Sensex and Nifty End Flat Amid Mixed Sectoral Trends; Utilities Lead Gains"
+  }
+ ],
+ "news_high_impact": 0,
+ "news_score": 0.167,
+ "open": 25323.15,
+ "or_high": 25390.8,
+ "or_low": 25281.8,
+ "orb": -1,
+ "p_n": 232,
+ "p_range_morning": 0.342,
+ "p_range_new": 0.543,
+ "range_so_far": 163.25,
+ "reason": "price has moved 0.36% against the call",
+ "sectors": {
+  "heavy": [
+   {
+    "last": 807.5,
+    "name": "HDFC Bank",
+    "pct": -0.91
+   },
+   {
+    "last": 1355.4,
+    "name": "Reliance",
+    "pct": -0.85
+   },
+   {
+    "last": 1599.6,
+    "name": "ICICI Bank",
+    "pct": 0.06
+   },
+   {
+    "last": 1118.4,
+    "name": "Infosys",
+    "pct": -1.03
+   },
+   {
+    "last": 2137.0,
+    "name": "Bharti Airtel",
+    "pct": -0.06
+   },
+   {
+    "last": 2392.2,
+    "name": "TCS",
+    "pct": -0.6
+   },
+   {
+    "last": 4160.3,
+    "name": "L&T",
+    "pct": 0.12
+   },
+   {
+    "last": 289.9,
+    "name": "ITC",
+    "pct": -1.16
+   },
+   {
+    "last": 1106.0,
+    "name": "SBI",
+    "pct": -0.23
+   }
+  ],
+  "missing": [],
+  "sectors": [
+   {
+    "last": 61791.65,
+    "name": "Bank",
+    "pct": -0.77
+   },
+   {
+    "last": 27962.6,
+    "name": "Financials",
+    "pct": -0.82
+   },
+   {
+    "last": 31384.6,
+    "name": "IT",
+    "pct": -0.85
+   },
+   {
+    "last": 27531.65,
+    "name": "Auto",
+    "pct": -0.86
+   },
+   {
+    "last": 28161.45,
+    "name": "Pharma",
+    "pct": 0.02
+   },
+   {
+    "last": 12310.4,
+    "name": "Metal",
+    "pct": -1.75
+   },
+   {
+    "last": 47097.6,
+    "name": "FMCG",
+    "pct": -1.08
+   },
+   {
+    "last": 36873.3,
+    "name": "Energy",
+    "pct": -0.82
+   },
+   {
+    "last": 918.05,
+    "name": "Realty",
+    "pct": -0.91
+   }
+  ]
+ },
+ "status": "INVALIDATED",
+ "vix_morning": 15.88,
+ "vix_now": 15.82
+}
