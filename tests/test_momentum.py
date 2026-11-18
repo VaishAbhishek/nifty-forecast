@@ -369,5 +369,35 @@ class Pipeline(unittest.TestCase):
         self.assertFalse(store.read_json("status.json")["momentum_preopen"]["ok"])
 
 
+class Flows(unittest.TestCase):
+    def test_single_day_from_walks_back(self):
+        # The live API answers with only the day named in 'from'; the newest day with data is 2 weekdays back.
+        days = list(api._flow_days())
+        have = days[2]
+        calls = []
+
+        def fake_get(path, params=None, timeout=15):
+            frm = dict(params)["from"]
+            calls.append((path, frm))
+            if frm != have:
+                return {}
+            ts = int(datetime.fromisoformat(have + "T00:00:00+05:30").timestamp() * 1000)
+            rec = {"time_stamp": ts, "buy_amount": 10.0, "sell_amount": 4.0,
+                   "total_long_contracts": 1, "total_short_contracts": 3}
+            return {seg: [rec] for k, seg in params if k == "data_type"}
+
+        old = api._get
+        api._get = fake_get
+        try:
+            f = api.flows()
+        finally:
+            api._get = old
+        for name in ("fii_cash", "fii_index_fut", "fii_stock_fut", "dii_cash"):
+            self.assertEqual(f[name]["date"], have)
+            self.assertEqual(f[name]["net"], 6.0)
+        self.assertEqual(f["fii_index_fut"]["long_share"], 0.25)
+        self.assertEqual(len(calls), 6)
+
+
 if __name__ == "__main__":
     unittest.main()

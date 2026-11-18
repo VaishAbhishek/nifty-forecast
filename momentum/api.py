@@ -219,34 +219,62 @@ def load_universe(force=False):
         raise UpstoxError("could not build the F&O universe: %s" % str(e)[:200])
 
 
+FLOWS_LOOKBACK_DAYS = 10
+
+
+def _flow_days():
+    """Candidate 'from' dates, newest first, weekends skipped."""
+    today = now_ist().date()
+    for back in range(FLOWS_LOOKBACK_DAYS + 1):
+        d = today - timedelta(days=back)
+        if d.weekday() < 5:
+            yield d.isoformat()
+
+
+def _latest(rows):
+    rows = sorted(rows or [], key=lambda r: _f(r.get("time_stamp")) or 0)
+    return rows[-1] if rows else None
+
+
 def flows():
-    """Latest FII and DII figures. Best effort; returns {} parts that fail."""
+    """Latest FII and DII figures. Best effort; returns {} parts that fail.
+
+    Live runs showed /v2/market/fii and /dii answer with the single day named in
+    'from' (a 'from' 12 days back always came back with that day's figures), so we
+    walk back from today one weekday at a time and keep the newest day found for
+    each segment. If the API instead returns a range, the first call already
+    holds the newest day and the loop stops there.
+    """
     out = {}
-    frm = (now_ist().date() - timedelta(days=12)).isoformat()
+    fii_segs = (("NSE_EQ|CASH", "fii_cash"), ("NSE_FO|INDEX_FUTURES", "fii_index_fut"),
+                ("NSE_FO|STOCK_FUTURES", "fii_stock_fut"))
     try:
-        data = _get("/v2/market/fii", [("data_type", "NSE_EQ|CASH"), ("data_type", "NSE_FO|INDEX_FUTURES"),
-                                         ("data_type", "NSE_FO|STOCK_FUTURES"), ("interval", "1D"), ("from", frm)]) or {}
-        for seg, name in (("NSE_EQ|CASH", "fii_cash"), ("NSE_FO|INDEX_FUTURES", "fii_index_fut"),
-                          ("NSE_FO|STOCK_FUTURES", "fii_stock_fut")):
-            rows = sorted(data.get(seg) or [], key=lambda r: r.get("time_stamp") or 0)
-            if not rows:
-                continue
-            r = rows[-1]
-            item = {"date": _to_date(r.get("time_stamp")),
-                    "net": round((_f(r.get("buy_amount")) or 0) - (_f(r.get("sell_amount")) or 0), 1)}
-            lng, sht = _f(r.get("total_long_contracts")) or 0, _f(r.get("total_short_contracts")) or 0
-            if lng + sht > 0:
-                item["long_share"] = round(lng / (lng + sht), 3)
-            out[name] = item
+        for frm in _flow_days():
+            missing = [(seg, name) for seg, name in fii_segs if name not in out]
+            if not missing:
+                break
+            data = _get("/v2/market/fii", [("data_type", seg) for seg, _ in missing]
+                        + [("interval", "1D"), ("from", frm)]) or {}
+            for seg, name in missing:
+                r = _latest(data.get(seg))
+                if not r:
+                    continue
+                item = {"date": _to_date(r.get("time_stamp")),
+                        "net": round((_f(r.get("buy_amount")) or 0) - (_f(r.get("sell_amount")) or 0), 1)}
+                lng, sht = _f(r.get("total_long_contracts")) or 0, _f(r.get("total_short_contracts")) or 0
+                if lng + sht > 0:
+                    item["long_share"] = round(lng / (lng + sht), 3)
+                out[name] = item
     except UpstoxError as e:
         out["fii_error"] = str(e)[:160]
     try:
-        data = _get("/v2/market/dii", [("data_type", "NSE_EQ|CASH"), ("interval", "1D"), ("from", frm)]) or {}
-        rows = sorted(data.get("NSE_EQ|CASH") or [], key=lambda r: r.get("time_stamp") or 0)
-        if rows:
-            r = rows[-1]
-            out["dii_cash"] = {"date": _to_date(r.get("time_stamp")),
-                               "net": round((_f(r.get("buy_amount")) or 0) - (_f(r.get("sell_amount")) or 0), 1)}
+        for frm in _flow_days():
+            data = _get("/v2/market/dii", [("data_type", "NSE_EQ|CASH"), ("interval", "1D"), ("from", frm)]) or {}
+            r = _latest(data.get("NSE_EQ|CASH"))
+            if r:
+                out["dii_cash"] = {"date": _to_date(r.get("time_stamp")),
+                                   "net": round((_f(r.get("buy_amount")) or 0) - (_f(r.get("sell_amount")) or 0), 1)}
+                break
     except UpstoxError as e:
         out["dii_error"] = str(e)[:160]
     return out
