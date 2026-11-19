@@ -31,17 +31,17 @@
     "ok": true
    },
    {
-    "detail": "218 ok, 0 failed, session 2026-11-17",
+    "detail": "218 ok, 0 failed, session 2026-11-18",
     "name": "daily_candles",
     "ok": true
    },
    {
-    "detail": "20 of 20 focus stocks",
+    "detail": "11 of 11 focus stocks",
     "name": "options",
     "ok": true
    },
    {
-    "detail": "backfilled 108 of 108",
+    "detail": "backfilled 0 of 0",
     "name": "opening_volume_baseline",
     "ok": true
    }
@@ -50,7 +50,7 @@
   "failed": [],
   "notes": [],
   "ok": true,
-  "ts": "2026-11-18T08:22:53+05:30"
+  "ts": "2026-11-19T08:11:19+05:30"
  },
  "momentum_eod": {
   "checks": [

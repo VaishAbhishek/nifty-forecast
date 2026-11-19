@@ -1,191 +1,176 @@
-# F&O momentum data for 2026-11-18
+# F&O momentum data for 2026-11-19
 
-Built 08:10 on the VM from Upstox. 218 stocks, 0 failed. Prices are the last completed session (2026-11-17).
+Built 08:10 on the VM from Upstox. 218 stocks, 0 failed. Prices are the last completed session (2026-11-18).
 Numbers here are measured. Reasons are not: this file cannot tell why a stock moved.
 
 ## Market
 
-- Nifty: close 25387.4, last day +0.38%, 5 days +1.37%. Regime: **trend_up** (10-day efficiency 0.80, against 20/50-day averages: up).
-- India VIX: 15.52.
-- Expected index gap: -0.07% (GIFT Nifty 25362.5 against the Nifty futures close 25381.1; GIFT's own change +0.27%). An estimate, not the open.
-- Overnight: brent +0.69%, nasdaq -1.58%, spx -1.60%, usdinr -0.49%.
+- Nifty: close 25228.0, last day -0.63%, 5 days -0.11%. Regime: **trend_up** (10-day efficiency 0.64, against 20/50-day averages: up).
+- India VIX: 15.57.
+- Expected index gap: -0.22% (GIFT Nifty 25178.5 against the Nifty futures close 25234.3; GIFT's own change -0.73%). An estimate, not the open.
+- Overnight: brent -1.56%, nasdaq +0.96%, spx +0.19%, usdinr +0.00%.
 - Flows (units as Upstox reports them): FII cash net +13750 (2026-11-06); DII cash net -5969 (2026-11-06); FII index futures 25% long; FII stock futures 59% long.
-- Sector indices, last session and 5 sessions: Bank +1.1% / +4.2%, Financials +0.6% / +3.0%, IT -0.9% / -2.5%, Auto +0.7% / -0.6%, Pharma +0.2% / -2.6%, Metal +0.6% / -1.1%, FMCG -0.2% / +2.0%, Energy -0.3% / +0.0%, Realty +1.9% / +3.2%.
+- Sector indices, last session and 5 sessions: Bank -0.4% / +2.0%, Financials -0.7% / +1.2%, IT -1.2% / -3.2%, Auto -1.4% / -4.0%, Pharma +0.1% / -2.0%, Metal -2.5% / -4.4%, FMCG -0.1% / +0.8%, Energy -0.5% / -1.5%, Realty -0.8% / +2.8%.
 
-## What past gaps did next (all F&O stocks, about one year, 20158 gaps)
+## What past gaps did next (all F&O stocks, about one year, 20177 gaps)
 
 Kept going = closed beyond the open in the gap's direction. Filled = traded back to the previous close that day.
 
 | Gap | Count | Kept going | Filled | Average open-to-close in the gap's direction |
 |---|---|---|---|---|
-| down 0.5-1% | 4962 | 50% | 63% | +0.05% |
-| down 1-2% | 2551 | 53% | 41% | +0.19% |
-| down 2-4% | 910 | 43% | 28% | -0.31% |
-| down 4+% | 190 | 34% | 13% | -0.77% |
-| up 0.5-1% | 7031 | 46% | 69% | -0.04% |
-| up 1-2% | 3190 | 51% | 45% | +0.08% |
-| up 2-4% | 1002 | 53% | 24% | +0.24% |
-| up 4+% | 322 | 40% | 8% | -0.44% |
+| down 0.5-1% | 4977 | 51% | 63% | +0.06% |
+| down 1-2% | 2563 | 53% | 41% | +0.19% |
+| down 2-4% | 906 | 43% | 28% | -0.30% |
+| down 4+% | 189 | 34% | 13% | -0.72% |
+| up 0.5-1% | 7034 | 46% | 69% | -0.04% |
+| up 1-2% | 3188 | 51% | 45% | +0.08% |
+| up 2-4% | 1001 | 53% | 24% | +0.24% |
+| up 4+% | 319 | 39% | 8% | -0.45% |
 
-Futures open interest source: end-of-day snapshot of 2026-11-17.
+Futures open interest source: end-of-day snapshot of 2026-11-18.
 
 ## Focus list: stocks on two or more lists below
 
 | Stock | Close | Last day | In ATRs | Volume | Close in range | 5d | 20d | ATR | Futures OI | Est. gap | Options: 1-day move | From 52w high | Trend, flags |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| LICHSGFIN | 622.5 | +2.8% | +0.9 | 3.0x | 0.97 | +12.8% | +21.7% | 2.9% | +4% long build-up | -0.0% | 2.1% | -0% | mixed 20d-up |
-| KAYNES | 2858.0 | -4.1% | -0.9 | 3.8x | 0.05 | -13.4% | -12.1% | 4.9% | +5% short build-up | -0.1% | 3.7% | -56% | down |
-| MAHABANK | 96.0 | +4.3% | +1.5 | 2.0x | 0.97 | +9.5% | +18.6% | 2.7% | +2% | -0.1% | 2.5% | -0% | up 20d-up |
-| PNB | 150.0 | +3.7% | +1.3 | 1.8x | 0.79 | +13.5% | +23.1% | 2.9% | -1% | -0.0% | 2.2% | -1% | up 20d-up |
-| DELHIVERY | 457.9 | +4.0% | +1.2 | 2.4x | 0.71 | +5.7% | +14.5% | 3.2% | +2% | -0.1% | 1.9% | -13% | mixed 20d-up |
-| CUMMINSIND | 4065.0 | -4.0% | -0.9 | 1.6x | 0.15 | -1.7% | -11.9% | 4.7% | +7% short build-up | +0.0% | 2.0% | -33% | down |
-| MAXHEALTH | 1030.9 | +2.1% | +0.7 | 1.6x | 0.68 | +12.7% | +24.2% | 2.8% | +14% long build-up | -0.1% | 2.0% | -13% | mixed 20d-up |
-| MOTILALOFS | 1240.2 | +1.9% | +0.4 | 1.7x | 0.51 | +8.1% | +21.5% | 4.3% | +8% long build-up | -0.1% | 2.7% | -3% | up 20d-up |
-| BANKINDIA | 159.3 | +4.1% | +1.4 | 2.1x | 0.90 | +9.8% | +16.4% | 2.8% | -1% | -0.0% | 2.3% | -11% | up 20d-up |
-| KEI | 3851.0 | -4.2% | -1.3 | 1.3x | 0.09 | -3.8% | -13.3% | 3.3% | +1% | -0.1% | 2.5% | -35% | down |
-| POLYCAB | 7702.0 | -3.2% | -1.1 | 1.8x | 0.02 | -1.7% | -4.0% | 3.0% | +7% short build-up | -0.0% | 2.1% | -24% | down |
-| ASHOKLEY | 160.5 | -4.2% | -1.1 | 2.6x | 0.00 | -8.2% | +8.7% | 4.0% | +4% short build-up | -0.1% | 2.6% | -25% | up |
-| ADANIENSOL | 1493.7 | +2.8% | +0.9 | 1.2x | 1.00 | +3.8% | +9.4% | 3.0% | +7% long build-up | -0.1% | 2.2% | -17% | up 20d-up |
-| GMRAIRPORT | 104.5 | +2.6% | +0.9 | 2.2x | 0.80 | +5.1% | +16.0% | 2.9% | +5% long build-up | -0.1% | 1.7% | -10% | mixed 20d-up |
-| HCLTECH | 1355.7 | -2.1% | -0.8 | 0.9x | 0.17 | -3.6% | -1.8% | 2.6% | -1% | -0.1% | 2.0% | -24% | mixed 20d-down |
-| ASIANPAINT | 2625.0 | +2.0% | +0.7 | 1.4x | 0.40 | +4.6% | +12.6% | 2.8% | +6% long build-up | -0.1% | 1.4% | -12% | up 20d-up |
-| CANBK | 134.0 | +1.2% | +0.5 | 2.2x | 0.39 | +4.6% | +9.8% | 2.4% | +2% | -0.0% | 1.9% | -18% | up 20d-up |
-| ETERNAL | 375.1 | +1.1% | +0.4 | 1.1x | 0.67 | +3.2% | +17.1% | 2.4% | +5% long build-up | -0.1% | 1.6% | -1% | up 20d-up |
-| PAGEIND | 31105.0 | -1.1% | -0.3 | 1.6x | 0.26 | -14.5% | -13.0% | 4.0% | +2% | -0.0% | 2.1% | -29% | down 20d-down |
-| PIIND | 1672.0 | -0.5% | -0.1 | 0.4x | 0.15 | -2.4% | -22.7% | 4.8% | +1% | +0.0% | 2.1% | -55% | down 20d-down |
+| NAVINFLUOR | 10278.0 | +4.7% | +1.4 | 1.6x | 0.97 | +6.4% | +28.2% | 3.3% | -25% short covering | -0.0% | 2.7% | -0% | up 20d-up |
+| SBIN | 1135.0 | +2.4% | +1.0 | 2.4x | 0.79 | +7.0% | +17.9% | 2.3% | +16% long build-up | -0.2% | 1.6% | -8% | up 20d-up |
+| POLYCAB | 7307.5 | -5.1% | -1.6 | 2.8x | 0.04 | -8.1% | -6.0% | 3.3% | +0% | -0.1% | 2.3% | -28% | down 20d-down |
+| CIPLA | 1417.0 | +2.1% | +1.2 | 2.1x | 0.66 | -0.2% | +7.8% | 1.6% | +5% long build-up | -0.1% | 1.4% | -8% | up |
+| GAIL | 190.0 | +1.6% | +0.7 | 1.6x | 0.76 | +0.1% | +13.6% | 2.2% | +6% long build-up | -0.1% | 1.6% | -1% | up 20d-up |
+| MAHABANK | 96.0 | +0.0% | +0.0 | 1.7x | 0.45 | +6.4% | +21.5% | 2.8% | -11% short covering | -0.2% | 2.4% | -1% | up |
+| TATACONSUM | 1130.9 | +1.7% | +0.8 | 0.8x | 1.00 | +3.5% | +16.5% | 2.0% | -1% | -0.1% | 1.3% | -12% | up 20d-up |
+| PIIND | 1624.0 | -2.9% | -0.6 | 0.8x | 0.08 | -7.8% | -22.8% | 4.8% | -25% long unwinding | +0.1% | 2.0% | -55% | down 20d-down |
+| PAGEIND | 30810.0 | -0.9% | -0.2 | 1.0x | 0.61 | -15.8% | -11.6% | 4.0% | -17% long unwinding | -0.1% | 2.0% | -30% | down 20d-down |
+| KAYNES | 2882.0 | +0.8% | +0.2 | 1.8x | 0.29 | -14.8% | -8.9% | 4.9% | -19% short covering | -0.1% | 2.8% | -56% | down NR7 |
+| ADANIENSOL | 1490.0 | -0.2% | -0.1 | 2.3x | 0.55 | +5.2% | +12.5% | 2.9% | +16% short build-up | -0.2% | 2.1% | -17% | up |
 
 ## Biggest up-moves last session (in units of the stock's normal daily range)
 
 | Stock | Close | Last day | In ATRs | Volume | Close in range | 5d | 20d | ATR | Futures OI | Est. gap | Options: 1-day move | From 52w high | Trend, flags |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| MAHABANK | 96.0 | +4.3% | +1.5 | 2.0x | 0.97 | +9.5% | +18.6% | 2.7% | +2% | -0.1% | 2.5% | -0% | up 20d-up |
-| BANKINDIA | 159.3 | +4.1% | +1.4 | 2.1x | 0.90 | +9.8% | +16.4% | 2.8% | -1% | -0.0% | 2.3% | -11% | up 20d-up |
-| PNB | 150.0 | +3.7% | +1.3 | 1.8x | 0.79 | +13.5% | +23.1% | 2.9% | -1% | -0.0% | 2.2% | -1% | up 20d-up |
-| LAURUSLABS | 2338.0 | +5.3% | +1.2 | 1.7x | 0.92 | -4.7% | +13.0% | 4.2% | -2% | -0.0% | - | -6% | up |
-| DELHIVERY | 457.9 | +4.0% | +1.2 | 2.4x | 0.71 | +5.7% | +14.5% | 3.2% | +2% | -0.1% | 1.9% | -13% | mixed 20d-up |
-| ADANIENT | 2745.1 | +3.2% | +1.2 | 1.6x | 0.88 | +1.4% | +3.3% | 2.7% | +1% | -0.1% | - | -15% | mixed |
-| IDFCFIRSTB | 83.6 | +2.8% | +1.1 | 1.3x | 0.95 | +7.3% | +9.5% | 2.4% | -1% | -0.1% | - | -7% | mixed 20d-up |
-| EICHERMOT | 7828.0 | +3.0% | +1.1 | 1.4x | 0.92 | +2.6% | +6.5% | 2.6% | +2% | -0.1% | - | -5% | up |
-| AXISBANK | 1369.0 | +2.0% | +0.9 | 1.1x | 0.80 | +4.5% | +10.8% | 2.1% | +0% | -0.1% | - | -3% | up 20d-up |
-| ADANIENSOL | 1493.7 | +2.8% | +0.9 | 1.2x | 1.00 | +3.8% | +9.4% | 3.0% | +7% long build-up | -0.1% | 2.2% | -17% | up 20d-up |
+| NAVINFLUOR | 10278.0 | +4.7% | +1.4 | 1.6x | 0.97 | +6.4% | +28.2% | 3.3% | -25% short covering | -0.0% | 2.7% | -0% | up 20d-up |
+| CIPLA | 1417.0 | +2.1% | +1.2 | 2.1x | 0.66 | -0.2% | +7.8% | 1.6% | +5% long build-up | -0.1% | 1.4% | -8% | up |
+| SBIN | 1135.0 | +2.4% | +1.0 | 2.4x | 0.79 | +7.0% | +17.9% | 2.3% | +16% long build-up | -0.2% | 1.6% | -8% | up 20d-up |
+| SAGILITY | 45.1 | +2.9% | +1.0 | 1.1x | 0.80 | +2.7% | +1.7% | 2.9% | +2% | -0.1% | - | -17% | mixed |
+| TATACONSUM | 1130.9 | +1.7% | +0.8 | 0.8x | 1.00 | +3.5% | +16.5% | 2.0% | -1% | -0.1% | 1.3% | -12% | up 20d-up |
 
 ## Biggest down-moves last session
 
 | Stock | Close | Last day | In ATRs | Volume | Close in range | 5d | 20d | ATR | Futures OI | Est. gap | Options: 1-day move | From 52w high | Trend, flags |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| KEI | 3851.0 | -4.2% | -1.3 | 1.3x | 0.09 | -3.8% | -13.3% | 3.3% | +1% | -0.1% | 2.5% | -35% | down |
-| APLAPOLLO | 2188.5 | -2.7% | -1.1 | 0.7x | 0.10 | +0.3% | +2.0% | 2.5% | -1% | -0.1% | - | -5% | up |
-| POLYCAB | 7702.0 | -3.2% | -1.1 | 1.8x | 0.02 | -1.7% | -4.0% | 3.0% | +7% short build-up | -0.0% | 2.1% | -24% | down |
-| ASHOKLEY | 160.5 | -4.2% | -1.1 | 2.6x | 0.00 | -8.2% | +8.7% | 4.0% | +4% short build-up | -0.1% | 2.6% | -25% | up |
-| CUMMINSIND | 4065.0 | -4.0% | -0.9 | 1.6x | 0.15 | -1.7% | -11.9% | 4.7% | +7% short build-up | +0.0% | 2.0% | -33% | down |
-| KAYNES | 2858.0 | -4.1% | -0.9 | 3.8x | 0.05 | -13.4% | -12.1% | 4.9% | +5% short build-up | -0.1% | 3.7% | -56% | down |
-| OFSS | 9741.0 | -2.2% | -0.8 | 0.7x | 0.06 | -3.0% | -4.6% | 2.7% | +0% | -0.0% | - | -22% | down |
-| HCLTECH | 1355.7 | -2.1% | -0.8 | 0.9x | 0.17 | -3.6% | -1.8% | 2.6% | -1% | -0.1% | 2.0% | -24% | mixed 20d-down |
+| TITAN | 4648.1 | -5.3% | -2.0 | 1.4x | 0.00 | -6.5% | +6.1% | 2.9% | +5% short build-up | -0.2% | - | -10% | down |
+| POLYCAB | 7307.5 | -5.1% | -1.6 | 2.8x | 0.04 | -8.1% | -6.0% | 3.3% | +0% | -0.1% | 2.3% | -28% | down 20d-down |
+| HINDZINC | 527.0 | -4.2% | -1.4 | 1.4x | 0.09 | -9.0% | +0.4% | 3.2% | -2% | -0.2% | - | -28% | down |
+| SAIL | 164.0 | -4.3% | -1.3 | 1.5x | 0.24 | -6.5% | -3.2% | 3.3% | -1% | -0.3% | - | -22% | down |
+| VEDL | 245.4 | -3.8% | -1.3 | 0.9x | 0.05 | -7.0% | +3.6% | 3.0% | +3% | -0.2% | - | -69% | down |
+| HDFCLIFE | 575.5 | -3.3% | -1.3 | 0.8x | 0.00 | +0.3% | +6.6% | 2.7% | +2% | -0.2% | - | -27% | up |
+| ICICIGI | 1646.5 | -2.8% | -1.2 | 1.1x | 0.03 | -1.8% | +0.4% | 2.3% | -4% long unwinding | -0.1% | - | -20% | up |
+| JINDALSTEL | 1103.0 | -3.0% | -1.2 | 0.5x | 0.06 | -5.0% | +7.3% | 2.5% | +0% | -0.2% | - | -16% | mixed |
+| INDHOTEL | 875.0 | -2.9% | -1.2 | 0.5x | 0.04 | +0.2% | +16.2% | 2.5% | +4% short build-up | -0.2% | - | -4% | up |
+| HAVELLS | 1140.0 | -3.0% | -1.2 | 0.9x | 0.13 | -2.9% | +6.4% | 2.6% | -0% | -0.2% | - | -25% | up |
 
 ## Unusual volume last session (against its own 20-day average)
 
 | Stock | Close | Last day | In ATRs | Volume | Close in range | 5d | 20d | ATR | Futures OI | Est. gap | Options: 1-day move | From 52w high | Trend, flags |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| ANGELONE | 349.8 | +0.5% | +0.1 | 11.1x | 0.15 | +3.5% | +15.5% | 3.7% | +2% | -0.1% | - | -8% | up |
-| KAYNES | 2858.0 | -4.1% | -0.9 | 3.8x | 0.05 | -13.4% | -12.1% | 4.9% | +5% short build-up | -0.1% | 3.7% | -56% | down |
-| COALINDIA | 391.6 | -1.5% | -0.7 | 3.1x | 0.35 | -2.5% | -4.9% | 2.3% | +1% | -0.0% | - | -20% | down |
-| LICHSGFIN | 622.5 | +2.8% | +0.9 | 3.0x | 0.97 | +12.8% | +21.7% | 2.9% | +4% long build-up | -0.0% | 2.1% | -0% | mixed 20d-up |
-| ASHOKLEY | 160.5 | -4.2% | -1.1 | 2.6x | 0.00 | -8.2% | +8.7% | 4.0% | +4% short build-up | -0.1% | 2.6% | -25% | up |
-| IREDA | 117.4 | +1.2% | +0.4 | 2.5x | 0.36 | -1.9% | +10.2% | 3.5% | -6% short covering | -0.1% | - | -24% | mixed |
-| KFINTECH | 965.0 | +2.9% | +0.8 | 2.5x | 0.62 | +5.5% | +10.6% | 3.4% | +1% | -0.1% | - | -14% | up |
-| DELHIVERY | 457.9 | +4.0% | +1.2 | 2.4x | 0.71 | +5.7% | +14.5% | 3.2% | +2% | -0.1% | 1.9% | -13% | mixed 20d-up |
-| CAMS | 744.0 | +2.9% | +0.8 | 2.4x | 0.46 | +4.6% | +8.2% | 3.7% | -1% | -0.1% | - | -12% | mixed |
-| GMRAIRPORT | 104.5 | +2.6% | +0.9 | 2.2x | 0.80 | +5.1% | +16.0% | 2.9% | +5% long build-up | -0.1% | 1.7% | -10% | mixed 20d-up |
-| CANBK | 134.0 | +1.2% | +0.5 | 2.2x | 0.39 | +4.6% | +9.8% | 2.4% | +2% | -0.0% | 1.9% | -18% | up 20d-up |
-| BSE | 3864.9 | -0.6% | -0.2 | 2.1x | 0.14 | +1.3% | +15.8% | 2.8% | +2% | -0.1% | - | -13% | up |
+| IEX | 115.0 | +0.5% | +0.2 | 3.3x | 0.29 | +0.8% | +11.3% | 2.9% | -11% short covering | -0.2% | - | -28% | mixed |
+| ICICILIFE | 444.4 | -1.9% | -0.7 | 3.2x | 0.38 | -1.3% | +3.0% | 2.8% | -9% long unwinding | -0.2% | - | -37% | mixed |
+| ANGELONE | 338.3 | -3.3% | -0.8 | 2.9x | 0.18 | -0.0% | +15.4% | 4.3% | -5% long unwinding | -0.3% | - | -11% | up |
+| POLYCAB | 7307.5 | -5.1% | -1.6 | 2.8x | 0.04 | -8.1% | -6.0% | 3.3% | +0% | -0.1% | 2.3% | -28% | down 20d-down |
+| MANAPPURAM | 283.0 | -4.6% | -1.1 | 2.6x | 0.23 | -11.6% | -6.2% | 4.4% | +2% | -0.3% | - | -26% | down |
+| SBIN | 1135.0 | +2.4% | +1.0 | 2.4x | 0.79 | +7.0% | +17.9% | 2.3% | +16% long build-up | -0.2% | 1.6% | -8% | up 20d-up |
+| ADANIENSOL | 1490.0 | -0.2% | -0.1 | 2.3x | 0.55 | +5.2% | +12.5% | 2.9% | +16% short build-up | -0.2% | 2.1% | -17% | up |
+| IREDA | 119.8 | +2.0% | +0.6 | 2.3x | 0.66 | -0.3% | +15.6% | 3.7% | -8% short covering | -0.2% | - | -21% | mixed |
+| CIPLA | 1417.0 | +2.1% | +1.2 | 2.1x | 0.66 | -0.2% | +7.8% | 1.6% | +5% long build-up | -0.1% | 1.4% | -8% | up |
+| KAYNES | 2882.0 | +0.8% | +0.2 | 1.8x | 0.29 | -14.8% | -8.9% | 4.9% | -19% short covering | -0.1% | 2.8% | -56% | down NR7 |
+| MUTHOOTFIN | 2640.0 | -4.0% | -1.0 | 1.7x | 0.16 | -9.0% | +6.0% | 4.2% | +0% | -0.3% | - | -36% | down |
+| MAHABANK | 96.0 | +0.0% | +0.0 | 1.7x | 0.45 | +6.4% | +21.5% | 2.8% | -11% short covering | -0.2% | 2.4% | -1% | up |
 
 ## Closed above the 20-day high
 
 | Stock | Close | Last day | In ATRs | Volume | Close in range | 5d | 20d | ATR | Futures OI | Est. gap | Options: 1-day move | From 52w high | Trend, flags |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| LICHSGFIN | 622.5 | +2.8% | +0.9 | 3.0x | 0.97 | +12.8% | +21.7% | 2.9% | +4% long build-up | -0.0% | 2.1% | -0% | mixed 20d-up |
-| DELHIVERY | 457.9 | +4.0% | +1.2 | 2.4x | 0.71 | +5.7% | +14.5% | 3.2% | +2% | -0.1% | 1.9% | -13% | mixed 20d-up |
-| GMRAIRPORT | 104.5 | +2.6% | +0.9 | 2.2x | 0.80 | +5.1% | +16.0% | 2.9% | +5% long build-up | -0.1% | 1.7% | -10% | mixed 20d-up |
-| CANBK | 134.0 | +1.2% | +0.5 | 2.2x | 0.39 | +4.6% | +9.8% | 2.4% | +2% | -0.0% | 1.9% | -18% | up 20d-up |
-| BANKINDIA | 159.3 | +4.1% | +1.4 | 2.1x | 0.90 | +9.8% | +16.4% | 2.8% | -1% | -0.0% | 2.3% | -11% | up 20d-up |
-| MAHABANK | 96.0 | +4.3% | +1.5 | 2.0x | 0.97 | +9.5% | +18.6% | 2.7% | +2% | -0.1% | 2.5% | -0% | up 20d-up |
-| PNB | 150.0 | +3.7% | +1.3 | 1.8x | 0.79 | +13.5% | +23.1% | 2.9% | -1% | -0.0% | 2.2% | -1% | up 20d-up |
-| MOTILALOFS | 1240.2 | +1.9% | +0.4 | 1.7x | 0.51 | +8.1% | +21.5% | 4.3% | +8% long build-up | -0.1% | 2.7% | -3% | up 20d-up |
-| MAXHEALTH | 1030.9 | +2.1% | +0.7 | 1.6x | 0.68 | +12.7% | +24.2% | 2.8% | +14% long build-up | -0.1% | 2.0% | -13% | mixed 20d-up |
-| ASIANPAINT | 2625.0 | +2.0% | +0.7 | 1.4x | 0.40 | +4.6% | +12.6% | 2.8% | +6% long build-up | -0.1% | 1.4% | -12% | up 20d-up |
+| SBIN | 1135.0 | +2.4% | +1.0 | 2.4x | 0.79 | +7.0% | +17.9% | 2.3% | +16% long build-up | -0.2% | 1.6% | -8% | up 20d-up |
+| GAIL | 190.0 | +1.6% | +0.7 | 1.6x | 0.76 | +0.1% | +13.6% | 2.2% | +6% long build-up | -0.1% | 1.6% | -1% | up 20d-up |
+| NAVINFLUOR | 10278.0 | +4.7% | +1.4 | 1.6x | 0.97 | +6.4% | +28.2% | 3.3% | -25% short covering | -0.0% | 2.7% | -0% | up 20d-up |
+| APOLLOHOSP | 8821.0 | +1.2% | +0.6 | 1.0x | 0.65 | +2.5% | +16.1% | 2.1% | -3% | -0.1% | - | -3% | mixed 20d-up |
+| TATACONSUM | 1130.9 | +1.7% | +0.8 | 0.8x | 1.00 | +3.5% | +16.5% | 2.0% | -1% | -0.1% | 1.3% | -12% | up 20d-up |
 
 ## Closed below the 20-day low
 
 | Stock | Close | Last day | In ATRs | Volume | Close in range | 5d | 20d | ATR | Futures OI | Est. gap | Options: 1-day move | From 52w high | Trend, flags |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| PAGEIND | 31105.0 | -1.1% | -0.3 | 1.6x | 0.26 | -14.5% | -13.0% | 4.0% | +2% | -0.0% | 2.1% | -29% | down 20d-down |
-| HCLTECH | 1355.7 | -2.1% | -0.8 | 0.9x | 0.17 | -3.6% | -1.8% | 2.6% | -1% | -0.1% | 2.0% | -24% | mixed 20d-down |
-| PIIND | 1672.0 | -0.5% | -0.1 | 0.4x | 0.15 | -2.4% | -22.7% | 4.8% | +1% | +0.0% | 2.1% | -55% | down 20d-down |
+| POLYCAB | 7307.5 | -5.1% | -1.6 | 2.8x | 0.04 | -8.1% | -6.0% | 3.3% | +0% | -0.1% | 2.3% | -28% | down 20d-down |
+| TMPV | 252.6 | -2.6% | -0.7 | 1.3x | 0.05 | -15.6% | -8.4% | 3.6% | -3% long unwinding | -0.2% | - | -38% | down 20d-down |
+| PAGEIND | 30810.0 | -0.9% | -0.2 | 1.0x | 0.61 | -15.8% | -11.6% | 4.0% | -17% long unwinding | -0.1% | 2.0% | -30% | down 20d-down |
+| PIIND | 1624.0 | -2.9% | -0.6 | 0.8x | 0.08 | -7.8% | -22.8% | 4.8% | -25% long unwinding | +0.1% | 2.0% | -55% | down 20d-down |
+| HCLTECH | 1344.7 | -0.8% | -0.3 | 0.6x | 0.40 | -3.6% | -5.6% | 2.6% | +7% short build-up | -0.1% | - | -24% | mixed 20d-down |
+| TCS | 2379.5 | -1.1% | -0.5 | 0.4x | 0.00 | -3.8% | -5.9% | 2.4% | -0% | -0.1% | - | -29% | mixed 20d-down NR7 |
 
 ## Futures: price up with open interest up (long build-up)
 
 | Stock | Close | Last day | In ATRs | Volume | Close in range | 5d | 20d | ATR | Futures OI | Est. gap | Options: 1-day move | From 52w high | Trend, flags |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| MAXHEALTH | 1030.9 | +2.1% | +0.7 | 1.6x | 0.68 | +12.7% | +24.2% | 2.8% | +14% long build-up | -0.1% | 2.0% | -13% | mixed 20d-up |
-| PETRONET | 328.1 | +0.6% | +0.3 | 0.7x | 0.22 | +2.4% | +11.7% | 2.5% | +11% long build-up | -0.1% | - | -2% | up NR7 |
-| MOTILALOFS | 1240.2 | +1.9% | +0.4 | 1.7x | 0.51 | +8.1% | +21.5% | 4.3% | +8% long build-up | -0.1% | 2.7% | -3% | up 20d-up |
-| ADANIENSOL | 1493.7 | +2.8% | +0.9 | 1.2x | 1.00 | +3.8% | +9.4% | 3.0% | +7% long build-up | -0.1% | 2.2% | -17% | up 20d-up |
-| CHOLAFIN | 1884.7 | +1.9% | +0.7 | 0.6x | 1.00 | +5.2% | +21.4% | 2.7% | +6% long build-up | -0.1% | - | -3% | mixed 20d-up |
-| BAJAJ-AUTO | 10770.0 | +0.3% | +0.2 | 0.9x | 0.45 | -1.9% | +4.7% | 2.0% | +6% long build-up | -0.1% | - | -14% | mixed |
-| ASIANPAINT | 2625.0 | +2.0% | +0.7 | 1.4x | 0.40 | +4.6% | +12.6% | 2.8% | +6% long build-up | -0.1% | 1.4% | -12% | up 20d-up |
-| ETERNAL | 375.1 | +1.1% | +0.4 | 1.1x | 0.67 | +3.2% | +17.1% | 2.4% | +5% long build-up | -0.1% | 1.6% | -1% | up 20d-up |
+| SBIN | 1135.0 | +2.4% | +1.0 | 2.4x | 0.79 | +7.0% | +17.9% | 2.3% | +16% long build-up | -0.2% | 1.6% | -8% | up 20d-up |
+| GAIL | 190.0 | +1.6% | +0.7 | 1.6x | 0.76 | +0.1% | +13.6% | 2.2% | +6% long build-up | -0.1% | 1.6% | -1% | up 20d-up |
+| CIPLA | 1417.0 | +2.1% | +1.2 | 2.1x | 0.66 | -0.2% | +7.8% | 1.6% | +5% long build-up | -0.1% | 1.4% | -8% | up |
+| LT | 4159.0 | +0.1% | +0.1 | 0.5x | 0.51 | -1.3% | +14.4% | 1.8% | +4% long build-up | -0.2% | - | -6% | up |
+| TRENT | 3190.0 | +0.4% | +0.2 | 1.4x | 0.42 | -1.0% | +13.0% | 2.6% | +4% long build-up | -0.2% | - | -6% | up |
+| 360ONE | 1211.0 | +0.7% | +0.2 | 1.6x | 0.73 | +3.5% | +16.7% | 3.1% | +4% long build-up | -0.3% | - | -2% | up |
+| ITC | 296.6 | +1.1% | +0.5 | 0.8x | 0.85 | +4.1% | +13.2% | 2.3% | +4% long build-up | -0.2% | - | -28% | up |
 
 ## Futures: price down with open interest up (short build-up)
 
 | Stock | Close | Last day | In ATRs | Volume | Close in range | 5d | 20d | ATR | Futures OI | Est. gap | Options: 1-day move | From 52w high | Trend, flags |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| CUB | 232.4 | -0.3% | -0.1 | 0.8x | 0.22 | +3.3% | +0.6% | 3.6% | +19% short build-up | -0.0% | - | -7% | mixed |
-| ITC | 293.3 | -0.6% | -0.3 | 0.8x | 0.22 | +5.2% | +12.5% | 2.3% | +16% short build-up | -0.1% | - | -29% | up |
-| JINDALSTEL | 1137.5 | -0.1% | -0.1 | 1.2x | 0.83 | -0.7% | +9.2% | 2.4% | +8% short build-up | -0.1% | - | -13% | up |
-| INFY | 1130.0 | -1.3% | -0.5 | 0.5x | 0.24 | -2.1% | -0.1% | 2.5% | +7% short build-up | -0.0% | - | -35% | mixed |
-| CUMMINSIND | 4065.0 | -4.0% | -0.9 | 1.6x | 0.15 | -1.7% | -11.9% | 4.7% | +7% short build-up | +0.0% | 2.0% | -33% | down |
-| POLYCAB | 7702.0 | -3.2% | -1.1 | 1.8x | 0.02 | -1.7% | -4.0% | 3.0% | +7% short build-up | -0.0% | 2.1% | -24% | down |
-| TITAN | 4908.0 | -0.0% | -0.0 | 0.5x | 0.42 | -1.9% | +10.9% | 2.5% | +6% short build-up | -0.1% | - | -5% | mixed NR7 |
-| KAYNES | 2858.0 | -4.1% | -0.9 | 3.8x | 0.05 | -13.4% | -12.1% | 4.9% | +5% short build-up | -0.1% | 3.7% | -56% | down |
+| ADANIENSOL | 1490.0 | -0.2% | -0.1 | 2.3x | 0.55 | +5.2% | +12.5% | 2.9% | +16% short build-up | -0.2% | 2.1% | -17% | up |
+| AXISBANK | 1360.0 | -0.7% | -0.3 | 1.1x | 0.21 | +1.8% | +12.4% | 2.1% | +14% short build-up | -0.2% | - | -4% | up |
+| HDFCAMC | 2649.1 | -1.9% | -0.6 | 0.4x | 0.20 | -2.4% | +14.6% | 3.0% | +12% short build-up | -0.3% | - | -9% | up |
+| BAJAJFINSV | 1856.2 | -0.8% | -0.3 | 1.1x | 0.67 | +0.6% | +9.8% | 2.5% | +11% short build-up | -0.3% | - | -12% | mixed NR7 |
+| GODREJPROP | 1877.6 | -0.8% | -0.2 | 1.1x | 0.47 | +4.4% | +20.0% | 3.3% | +10% short build-up | -0.3% | - | -16% | up |
+| BAJFINANCE | 1093.8 | -2.4% | -0.9 | 0.9x | 0.15 | +1.4% | +18.1% | 2.8% | +10% short build-up | -0.3% | - | -7% | up |
+| MFSL | 1420.8 | -0.7% | -0.2 | 1.0x | 0.17 | +9.0% | +13.2% | 3.2% | +10% short build-up | -0.3% | - | -25% | mixed |
+| BAJAJ-AUTO | 10570.0 | -1.9% | -1.0 | 1.1x | 0.14 | -4.3% | +4.9% | 2.0% | +9% short build-up | -0.2% | - | -15% | down |
 
 ## Strongest against Nifty over 20 sessions
 
 | Stock | Close | Last day | In ATRs | Volume | Close in range | 5d | 20d | ATR | Futures OI | Est. gap | Options: 1-day move | From 52w high | Trend, flags |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| ATHERENERG | 1908.6 | -1.6% | -0.5 | 0.6x | 0.04 | +2.6% | +30.8% | 3.6% | +5% short build-up | -0.1% | - | -6% | up |
-| UNOMINDA | 1388.1 | +3.0% | +0.8 | 0.9x | 0.89 | +2.5% | +27.6% | 3.6% | -3% | -0.1% | - | -1% | up |
-| MAXHEALTH | 1030.9 | +2.1% | +0.7 | 1.6x | 0.68 | +12.7% | +24.2% | 2.8% | +14% long build-up | -0.1% | 2.0% | -13% | mixed 20d-up |
-| KALYANKJIL | 682.8 | -3.6% | -0.8 | 1.2x | 0.17 | +11.7% | +23.8% | 4.7% | -7% long unwinding | -0.1% | - | -6% | mixed |
-| PNB | 150.0 | +3.7% | +1.3 | 1.8x | 0.79 | +13.5% | +23.1% | 2.9% | -1% | -0.0% | 2.2% | -1% | up 20d-up |
-| DIVISLAB | 11150.0 | +0.6% | +0.2 | 0.8x | 0.68 | -3.6% | +22.7% | 3.2% | +2% | -0.0% | - | -6% | up NR7 |
-| LICHSGFIN | 622.5 | +2.8% | +0.9 | 3.0x | 0.97 | +12.8% | +21.7% | 2.9% | +4% long build-up | -0.0% | 2.1% | -0% | mixed 20d-up |
-| MOTILALOFS | 1240.2 | +1.9% | +0.4 | 1.7x | 0.51 | +8.1% | +21.5% | 4.3% | +8% long build-up | -0.1% | 2.7% | -3% | up 20d-up |
+| ATHERENERG | 1901.1 | -0.4% | -0.1 | 0.4x | 0.00 | +1.8% | +31.4% | 3.6% | -16% long unwinding | -0.2% | - | -6% | up |
+| UNOMINDA | 1370.0 | -1.3% | -0.4 | 0.9x | 0.18 | -0.2% | +28.6% | 3.7% | +5% short build-up | -0.3% | - | -3% | up |
+| NAVINFLUOR | 10278.0 | +4.7% | +1.4 | 1.6x | 0.97 | +6.4% | +28.2% | 3.3% | -25% short covering | -0.0% | 2.7% | -0% | up 20d-up |
+| MOTILALOFS | 1229.0 | -0.9% | -0.2 | 0.9x | 0.37 | +6.3% | +24.8% | 4.5% | -20% long unwinding | -0.4% | - | -4% | up |
+| MAXHEALTH | 1022.9 | -0.8% | -0.3 | 0.5x | 0.38 | +10.2% | +24.8% | 2.9% | +2% | -0.1% | - | -14% | mixed |
+| CHOLAFIN | 1875.0 | -0.5% | -0.2 | 0.6x | 1.00 | +3.3% | +22.6% | 2.6% | -4% long unwinding | -0.3% | - | -4% | up |
+| PNB | 149.6 | -0.3% | -0.1 | 1.1x | 0.20 | +8.0% | +22.1% | 2.8% | +4% short build-up | -0.1% | - | -2% | up |
+| MAHABANK | 96.0 | +0.0% | +0.0 | 1.7x | 0.45 | +6.4% | +21.5% | 2.8% | -11% short covering | -0.2% | 2.4% | -1% | up |
 
 ## Weakest against Nifty over 20 sessions
 
 | Stock | Close | Last day | In ATRs | Volume | Close in range | 5d | 20d | ATR | Futures OI | Est. gap | Options: 1-day move | From 52w high | Trend, flags |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| PIIND | 1672.0 | -0.5% | -0.1 | 0.4x | 0.15 | -2.4% | -22.7% | 4.8% | +1% | +0.0% | 2.1% | -55% | down 20d-down |
-| SWIGGY | 188.5 | -1.1% | -0.3 | 0.4x | 0.21 | +0.3% | -17.7% | 3.9% | +0% | -0.1% | - | -55% | down |
-| KEI | 3851.0 | -4.2% | -1.3 | 1.3x | 0.09 | -3.8% | -13.3% | 3.3% | +1% | -0.1% | 2.5% | -35% | down |
-| PAGEIND | 31105.0 | -1.1% | -0.3 | 1.6x | 0.26 | -14.5% | -13.0% | 4.0% | +2% | -0.0% | 2.1% | -29% | down 20d-down |
-| ASTRAL | 1242.6 | -1.1% | -0.3 | 0.5x | 0.03 | -2.4% | -13.0% | 3.3% | -0% | -0.0% | - | -30% | down |
-| KAYNES | 2858.0 | -4.1% | -0.9 | 3.8x | 0.05 | -13.4% | -12.1% | 4.9% | +5% short build-up | -0.1% | 3.7% | -56% | down |
-| CUMMINSIND | 4065.0 | -4.0% | -0.9 | 1.6x | 0.15 | -1.7% | -11.9% | 4.7% | +7% short build-up | +0.0% | 2.0% | -33% | down |
-| SUPREMEIND | 3231.3 | -1.1% | -0.4 | 0.5x | 0.30 | -2.0% | -10.8% | 3.0% | +2% | -0.0% | - | -21% | down |
+| PIIND | 1624.0 | -2.9% | -0.6 | 0.8x | 0.08 | -7.8% | -22.8% | 4.8% | -25% long unwinding | +0.1% | 2.0% | -55% | down 20d-down |
+| SWIGGY | 180.5 | -4.2% | -1.0 | 0.6x | 0.05 | -4.5% | -19.3% | 4.3% | -3% long unwinding | -0.3% | - | -57% | down |
+| KEI | 3725.0 | -3.3% | -1.0 | 1.0x | 0.09 | -7.0% | -11.9% | 3.5% | -13% long unwinding | -0.2% | - | -37% | down |
+| ASTRAL | 1230.3 | -1.0% | -0.3 | 0.4x | 0.02 | -3.6% | -11.9% | 3.3% | -6% long unwinding | -0.0% | - | -30% | down |
+| PAGEIND | 30810.0 | -0.9% | -0.2 | 1.0x | 0.61 | -15.8% | -11.6% | 4.0% | -17% long unwinding | -0.1% | 2.0% | -30% | down 20d-down |
+| SUPREMEIND | 3151.0 | -2.5% | -0.8 | 0.6x | 0.00 | -5.1% | -11.3% | 3.1% | -11% long unwinding | -0.1% | - | -23% | down |
+| CUMMINSIND | 4005.0 | -1.5% | -0.3 | 1.3x | 0.44 | -5.3% | -9.8% | 4.7% | +1% | +0.1% | - | -34% | down |
+| KAYNES | 2882.0 | +0.8% | +0.2 | 1.8x | 0.29 | -14.8% | -8.9% | 4.9% | -19% short covering | -0.1% | 2.8% | -56% | down NR7 |
 
 ## Within 2% of the 52-week high
 
 | Stock | Close | Last day | In ATRs | Volume | Close in range | 5d | 20d | ATR | Futures OI | Est. gap | Options: 1-day move | From 52w high | Trend, flags |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| MAHABANK | 96.0 | +4.3% | +1.5 | 2.0x | 0.97 | +9.5% | +18.6% | 2.7% | +2% | -0.1% | 2.5% | -0% | up 20d-up |
-| MARICO | 924.0 | +1.1% | +0.4 | 0.7x | 1.00 | +2.4% | +18.8% | 2.5% | +2% | -0.1% | - | -0% | up |
-| LICHSGFIN | 622.5 | +2.8% | +0.9 | 3.0x | 0.97 | +12.8% | +21.7% | 2.9% | +4% long build-up | -0.0% | 2.1% | -0% | mixed 20d-up |
-| KOTAKBANK | 497.2 | +0.6% | +0.3 | 0.8x | 0.66 | +3.7% | +12.4% | 2.1% | +0% | -0.1% | - | -1% | up |
-| ETERNAL | 375.1 | +1.1% | +0.4 | 1.1x | 0.67 | +3.2% | +17.1% | 2.4% | +5% long build-up | -0.1% | 1.6% | -1% | up 20d-up |
-| UNIONBANK | 207.9 | +1.1% | +0.5 | 0.8x | 0.50 | +5.5% | +15.1% | 2.1% | -0% | -0.0% | - | -1% | up 20d-up |
-| INDHOTEL | 901.5 | +1.8% | +0.8 | 0.9x | 0.67 | +1.1% | +18.6% | 2.3% | -2% | -0.1% | - | -1% | up |
-| DLF | 766.0 | +1.5% | +0.6 | 1.1x | 0.64 | +1.4% | +13.8% | 2.6% | -0% | -0.1% | - | -1% | up |
+| NAVINFLUOR | 10278.0 | +4.7% | +1.4 | 1.6x | 0.97 | +6.4% | +28.2% | 3.3% | -25% short covering | -0.0% | 2.7% | -0% | up 20d-up |
+| GAIL | 190.0 | +1.6% | +0.7 | 1.6x | 0.76 | +0.1% | +13.6% | 2.2% | +6% long build-up | -0.1% | 1.6% | -1% | up 20d-up |
+| UNIONBANK | 207.9 | -0.0% | -0.0 | 0.6x | 1.00 | +2.8% | +14.2% | 2.1% | +7% short build-up | -0.1% | - | -1% | up |
+| ICICIBANK | 1601.3 | +0.2% | +0.1 | 0.7x | 0.54 | +1.9% | +15.6% | 2.1% | +2% | -0.2% | - | -1% | up NR7 |
+| MAHABANK | 96.0 | +0.0% | +0.0 | 1.7x | 0.45 | +6.4% | +21.5% | 2.8% | -11% short covering | -0.2% | 2.4% | -1% | up |
+| DRREDDY | 1398.2 | +0.7% | +0.5 | 0.6x | 0.73 | +1.5% | +12.3% | 1.6% | -3% short covering | -0.1% | - | -1% | up |
+| DLF | 764.3 | -0.2% | -0.1 | 0.6x | 0.55 | +2.9% | +15.1% | 2.4% | -8% long unwinding | -0.2% | - | -1% | up NR7 |
+| ANANDRATHI | 2375.1 | -0.0% | -0.0 | 0.5x | 0.85 | -0.4% | +8.0% | 1.4% | -11% long unwinding | -0.0% | - | -1% | up |
 
 ## Reading the columns
 
