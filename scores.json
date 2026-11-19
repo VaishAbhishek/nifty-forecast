@@ -1,40 +1,40 @@
 {
  "direction": {
   "S0_coin": {
-   "calls": 5,
+   "calls": 6,
    "ci95": [
-    0.118,
-    0.769
+    0.097,
+    0.7
    ],
    "coverage": 1.0,
-   "days": 5,
-   "hit_rate": 0.4,
+   "days": 6,
+   "hit_rate": 0.333,
    "hits": 2,
-   "p_vs_coin": 0.8125
+   "p_vs_coin": 0.8906
   },
   "S3_gap": {
-   "calls": 4,
-   "ci95": [
-    0.15,
-    0.85
-   ],
-   "coverage": 0.8,
-   "days": 5,
-   "hit_rate": 0.5,
-   "hits": 2,
-   "p_vs_coin": 0.6875
-  },
-  "S4_trend": {
    "calls": 5,
    "ci95": [
     0.231,
     0.882
    ],
-   "coverage": 1.0,
-   "days": 5,
+   "coverage": 0.833,
+   "days": 6,
    "hit_rate": 0.6,
    "hits": 3,
    "p_vs_coin": 0.5
+  },
+  "S4_trend": {
+   "calls": 6,
+   "ci95": [
+    0.3,
+    0.903
+   ],
+   "coverage": 1.0,
+   "days": 6,
+   "hit_rate": 0.667,
+   "hits": 4,
+   "p_vs_coin": 0.3438
   },
   "S5_meanrev": {
    "calls": 2,
@@ -42,8 +42,8 @@
     0.095,
     0.905
    ],
-   "coverage": 0.4,
-   "days": 5,
+   "coverage": 0.333,
+   "days": 6,
    "hit_rate": 0.5,
    "hits": 1,
    "p_vs_coin": 0.75
@@ -54,8 +54,8 @@
     0.095,
     0.905
    ],
-   "coverage": 0.4,
-   "days": 5,
+   "coverage": 0.333,
+   "days": 6,
    "hit_rate": 0.5,
    "hits": 1,
    "p_vs_coin": 0.75
@@ -66,60 +66,60 @@
     0.207,
     1.0
    ],
-   "coverage": 0.2,
-   "days": 5,
+   "coverage": 0.167,
+   "days": 6,
    "hit_rate": 1.0,
    "hits": 1,
    "p_vs_coin": 0.5
   },
   "S9_ensemble": {
-   "calls": 2,
+   "calls": 3,
    "ci95": [
-    0.095,
-    0.905
+    0.208,
+    0.939
    ],
-   "coverage": 0.4,
-   "days": 5,
-   "hit_rate": 0.5,
-   "hits": 1,
-   "p_vs_coin": 0.75
+   "coverage": 0.5,
+   "days": 6,
+   "hit_rate": 0.667,
+   "hits": 2,
+   "p_vs_coin": 0.5
   }
  },
  "ensemble": {
-  "big_days": 0,
-  "days": 5,
+  "big_days": 1,
+  "days": 6,
   "no_trade": 3,
   "quiet_calls": 0,
   "quiet_hits": 0
  },
  "first": "2026-11-12",
- "last": "2026-11-18",
+ "last": "2026-11-19",
  "probability": {
   "R1_first30": {
-   "baseline_brier": 0.0625,
-   "brier": 0.2263,
-   "n": 5,
-   "skill": -2.621
+   "baseline_brier": 0.1458,
+   "brier": 0.2394,
+   "n": 6,
+   "skill": -0.641
   },
   "S0_clim": {
-   "baseline_brier": 0.0625,
-   "brier": 0.0625,
-   "n": 5,
+   "baseline_brier": 0.1458,
+   "brier": 0.1458,
+   "n": 6,
    "skill": 0.0
   },
   "S1_vol": {
-   "baseline_brier": 0.0625,
-   "brier": 0.1552,
-   "n": 5,
-   "skill": -1.483
+   "baseline_brier": 0.1458,
+   "brier": 0.2028,
+   "n": 6,
+   "skill": -0.391
   },
   "S2_compress": {
-   "baseline_brier": 0.0625,
-   "brier": 0.1644,
-   "n": 5,
-   "skill": -1.63
+   "baseline_brier": 0.1458,
+   "brier": 0.2191,
+   "n": 6,
+   "skill": -0.502
   }
  },
  "rule_version": "v2",
- "sessions": 5
+ "sessions": 6
 }
