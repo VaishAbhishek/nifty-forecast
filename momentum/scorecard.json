@@ -6,12 +6,12 @@
   "avg_ret": null,
   "avg_ret_5d": null,
   "hit": 0.0,
-  "n": 16,
+  "n": 24,
   "n_5d": 0,
-  "needs_for_95": 12,
+  "needs_for_95": 17,
   "right": 0,
-  "total_r": -5.0,
-  "trades": 5
+  "total_r": -6.0,
+  "trades": 6
  },
  "picks": {
   "all": {
@@ -40,5 +40,5 @@
  },
  "rules_version": 1,
  "sessions": 0,
- "updated": "2026-11-18T16:05:01+05:30"
+ "updated": "2026-11-19T16:05:01+05:30"
 }

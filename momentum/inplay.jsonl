@@ -14,11 +14,11 @@
 {"atr": 40.5, "date": "2026-11-18", "direction": "UP", "or_high": 1978.0, "or_low": 1954.6, "relvol": 3.8, "rules_version": 1, "symbol": "LUPIN", "trade": {"status": "cancelled"}}
 {"atr": 58.22, "date": "2026-11-18", "direction": "DOWN", "or_high": 1686.8, "or_low": 1669.3, "relvol": 3.5, "rules_version": 1, "symbol": "PRESTIGE", "trade": {"status": "cancelled"}}
 {"atr": 2.64, "date": "2026-11-18", "direction": "UP", "or_high": 96.87, "or_low": 95.44, "relvol": 3.5, "rules_version": 1, "symbol": "MAHABANK", "trade": {"status": "cancelled"}}
-{"atr": 59.05, "date": "2026-11-19", "direction": "UP", "or_high": 1683.0, "or_low": 1621.8, "relvol": 9.3, "rules_version": 1, "symbol": "BLUESTARCO", "trade": null}
-{"atr": 56.27, "date": "2026-11-19", "direction": "DOWN", "or_high": 1808.9, "or_low": 1765.1, "relvol": 8.1, "rules_version": 1, "symbol": "PAYTM", "trade": null}
-{"atr": 41.29, "date": "2026-11-19", "direction": "UP", "or_high": 1184.0, "or_low": 1131.0, "relvol": 6.1, "rules_version": 1, "symbol": "VOLTAS", "trade": null}
-{"atr": 4.51, "date": "2026-11-19", "direction": "UP", "or_high": 123.4, "or_low": 119.7, "relvol": 5.4, "rules_version": 1, "symbol": "IREDA", "trade": null}
-{"atr": 238.27, "date": "2026-11-19", "direction": "UP", "or_high": 7307.0, "or_low": 7238.0, "relvol": 5.3, "rules_version": 1, "symbol": "POLYCAB", "trade": null}
-{"atr": 8.7, "date": "2026-11-19", "direction": "DOWN", "or_high": 365.9, "or_low": 356.55, "relvol": 5.1, "rules_version": 1, "symbol": "ETERNAL", "trade": null}
-{"atr": 131.51, "date": "2026-11-19", "direction": "DOWN", "or_high": 4644.1, "or_low": 4581.6, "relvol": 5.1, "rules_version": 1, "symbol": "TITAN", "trade": null}
-{"atr": 26.59, "date": "2026-11-19", "direction": "DOWN", "or_high": 1152.5, "or_low": 1141.3, "relvol": 4.7, "rules_version": 1, "symbol": "SBIN", "trade": null}
+{"atr": 59.05, "date": "2026-11-19", "direction": "UP", "or_high": 1683.0, "or_low": 1621.8, "relvol": 9.3, "rules_version": 1, "symbol": "BLUESTARCO", "trade": {"status": "cancelled"}}
+{"atr": 56.27, "date": "2026-11-19", "direction": "DOWN", "or_high": 1808.9, "or_low": 1765.1, "relvol": 8.1, "rules_version": 1, "symbol": "PAYTM", "trade": {"status": "cancelled"}}
+{"atr": 41.29, "date": "2026-11-19", "direction": "UP", "or_high": 1184.0, "or_low": 1131.0, "relvol": 6.1, "rules_version": 1, "symbol": "VOLTAS", "trade": {"status": "cancelled"}}
+{"atr": 4.51, "date": "2026-11-19", "direction": "UP", "or_high": 123.4, "or_low": 119.7, "relvol": 5.4, "rules_version": 1, "symbol": "IREDA", "trade": {"status": "cancelled"}}
+{"atr": 238.27, "date": "2026-11-19", "direction": "UP", "or_high": 7307.0, "or_low": 7238.0, "relvol": 5.3, "rules_version": 1, "symbol": "POLYCAB", "trade": {"entry": 7307.0, "r": -1.0, "status": "stopped"}}
+{"atr": 8.7, "date": "2026-11-19", "direction": "DOWN", "or_high": 365.9, "or_low": 356.55, "relvol": 5.1, "rules_version": 1, "symbol": "ETERNAL", "trade": {"status": "cancelled"}}
+{"atr": 131.51, "date": "2026-11-19", "direction": "DOWN", "or_high": 4644.1, "or_low": 4581.6, "relvol": 5.1, "rules_version": 1, "symbol": "TITAN", "trade": {"status": "cancelled"}}
+{"atr": 26.59, "date": "2026-11-19", "direction": "DOWN", "or_high": 1152.5, "or_low": 1141.3, "relvol": 4.7, "rules_version": 1, "symbol": "SBIN", "trade": {"status": "cancelled"}}
