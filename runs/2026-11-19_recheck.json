@@ -1,0 +1,246 @@
+{
+ "f30_high": 25255.6,
+ "f30_low": 25104.8,
+ "f30_range": 150.79999999999927,
+ "last": 25224.85,
+ "levels": {
+  "dist20_pct": 3.39,
+  "hi20": 25501.35,
+  "hi5": 25501.35,
+  "lo20": 22372.0,
+  "lo5": 25054.4,
+  "pdc": 25227.95,
+  "pdh": 25390.8,
+  "pdl": 25141.8,
+  "pivot": 25253.52,
+  "r1": 25365.23,
+  "r2": 25502.52,
+  "s1": 25116.23,
+  "s2": 25004.52
+ },
+ "move_pct": 0.1510711960233109,
+ "move_pts": 38.04999999999927,
+ "new_headlines": [
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty Remains Weak in Narrow Trading Range - Jainam"
+  },
+  {
+   "label": {
+    "catalyst": "fed",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Sensex, Nifty open flat amid Fed rate hike concerns; investors remain cautious"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "GTA 6 fever grips India: Millions tune in as creators bet on a bigger gaming market"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Crude Oil Price Forecast: WTI and Brent Slide as US Inventories Rise"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "NIFTY50, SENSEX trade lower in early deals; SBI gains 1%, RIL, HDFC Bank fall"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Pre-Market Commentary on Nifty & Bank Nifty for 19th November 2026 by Pabitro Mukherjee, Deputy Vice President-Research, Bajaj Broking"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty witnessed renewed selling pressure as profit booking intensified after the recent rally - Tradebulls Securities Pvt Ltd"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Crude Oil Falls As US Crude And Fuel Inventories Rise In Latest Weekly Figures By Kedia Advisory"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "ET Stocks",
+   "title": "CreditAccess Grameen among 7 stocks closing below VWAP"
+  },
+  {
+   "label": {
+    "catalyst": "fed",
+    "direction": -1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Gold futures slide near Rs 1.29 lakh, silver below Rs 1.60 lakh on MCX amid hawkish Fed signals: Should..."
+  }
+ ],
+ "news_high_impact": 0,
+ "news_score": 0.167,
+ "open": 25186.8,
+ "or_high": 25255.6,
+ "or_low": 25115.9,
+ "orb": 0,
+ "p_n": 232,
+ "p_range_morning": 0.336,
+ "p_range_new": 0.448,
+ "range_so_far": 150.79999999999927,
+ "reason": "price is moving with the call (+0.15% from the open)",
+ "sectors": {
+  "heavy": [
+   {
+    "last": 809.15,
+    "name": "HDFC Bank",
+    "pct": 0.12
+   },
+   {
+    "last": 1360.7,
+    "name": "Reliance",
+    "pct": -0.17
+   },
+   {
+    "last": 1591.4,
+    "name": "ICICI Bank",
+    "pct": -0.62
+   },
+   {
+    "last": 1083.3,
+    "name": "Infosys",
+    "pct": -2.3
+   },
+   {
+    "last": 2142.8,
+    "name": "Bharti Airtel",
+    "pct": 0.51
+   },
+   {
+    "last": 2351.1,
+    "name": "TCS",
+    "pct": -1.19
+   },
+   {
+    "last": 4136.7,
+    "name": "L&T",
+    "pct": -0.54
+   },
+   {
+    "last": 298.3,
+    "name": "ITC",
+    "pct": 0.57
+   },
+   {
+    "last": 1144.85,
+    "name": "SBI",
+    "pct": 0.87
+   }
+  ],
+  "missing": [],
+  "sectors": [
+   {
+    "last": 62312.7,
+    "name": "Bank",
+    "pct": 0.44
+   },
+   {
+    "last": 28015.0,
+    "name": "Financials",
+    "pct": 0.08
+   },
+   {
+    "last": 30797.45,
+    "name": "IT",
+    "pct": -1.49
+   },
+   {
+    "last": 28009.45,
+    "name": "Auto",
+    "pct": 2.24
+   },
+   {
+    "last": 28171.9,
+    "name": "Pharma",
+    "pct": -0.1
+   },
+   {
+    "last": 12203.45,
+    "name": "Metal",
+    "pct": -0.15
+   },
+   {
+    "last": 47885.2,
+    "name": "FMCG",
+    "pct": 0.66
+   },
+   {
+    "last": 37094.0,
+    "name": "Energy",
+    "pct": 0.31
+   },
+   {
+    "last": 926.55,
+    "name": "Realty",
+    "pct": 0.86
+   }
+  ]
+ },
+ "status": "STILL VALID",
+ "vix_morning": 15.75,
+ "vix_now": 15.99
+}
