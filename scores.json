@@ -1,16 +1,16 @@
 {
  "direction": {
   "S0_coin": {
-   "calls": 6,
+   "calls": 7,
    "ci95": [
-    0.097,
-    0.7
+    0.158,
+    0.75
    ],
    "coverage": 1.0,
-   "days": 6,
-   "hit_rate": 0.333,
-   "hits": 2,
-   "p_vs_coin": 0.8906
+   "days": 7,
+   "hit_rate": 0.429,
+   "hits": 3,
+   "p_vs_coin": 0.7734
   },
   "S3_gap": {
    "calls": 5,
@@ -18,23 +18,23 @@
     0.231,
     0.882
    ],
-   "coverage": 0.833,
-   "days": 6,
+   "coverage": 0.714,
+   "days": 7,
    "hit_rate": 0.6,
    "hits": 3,
    "p_vs_coin": 0.5
   },
   "S4_trend": {
-   "calls": 6,
+   "calls": 7,
    "ci95": [
-    0.3,
-    0.903
+    0.359,
+    0.918
    ],
    "coverage": 1.0,
-   "days": 6,
-   "hit_rate": 0.667,
-   "hits": 4,
-   "p_vs_coin": 0.3438
+   "days": 7,
+   "hit_rate": 0.714,
+   "hits": 5,
+   "p_vs_coin": 0.2266
   },
   "S5_meanrev": {
    "calls": 2,
@@ -42,8 +42,8 @@
     0.095,
     0.905
    ],
-   "coverage": 0.333,
-   "days": 6,
+   "coverage": 0.286,
+   "days": 7,
    "hit_rate": 0.5,
    "hits": 1,
    "p_vs_coin": 0.75
@@ -54,23 +54,23 @@
     0.095,
     0.905
    ],
-   "coverage": 0.333,
-   "days": 6,
+   "coverage": 0.286,
+   "days": 7,
    "hit_rate": 0.5,
    "hits": 1,
    "p_vs_coin": 0.75
   },
   "S8_news": {
-   "calls": 1,
+   "calls": 2,
    "ci95": [
-    0.207,
-    1.0
+    0.095,
+    0.905
    ],
-   "coverage": 0.167,
-   "days": 6,
-   "hit_rate": 1.0,
+   "coverage": 0.286,
+   "days": 7,
+   "hit_rate": 0.5,
    "hits": 1,
-   "p_vs_coin": 0.5
+   "p_vs_coin": 0.75
   },
   "S9_ensemble": {
    "calls": 3,
@@ -78,48 +78,48 @@
     0.208,
     0.939
    ],
-   "coverage": 0.5,
-   "days": 6,
+   "coverage": 0.429,
+   "days": 7,
    "hit_rate": 0.667,
    "hits": 2,
    "p_vs_coin": 0.5
   }
  },
  "ensemble": {
-  "big_days": 1,
-  "days": 6,
-  "no_trade": 3,
+  "big_days": 2,
+  "days": 7,
+  "no_trade": 4,
   "quiet_calls": 0,
   "quiet_hits": 0
  },
  "first": "2026-11-12",
- "last": "2026-11-19",
+ "last": "2026-11-20",
  "probability": {
   "R1_first30": {
-   "baseline_brier": 0.1458,
-   "brier": 0.2394,
-   "n": 6,
-   "skill": -0.641
+   "baseline_brier": 0.2018,
+   "brier": 0.2428,
+   "n": 7,
+   "skill": -0.203
   },
   "S0_clim": {
-   "baseline_brier": 0.1458,
-   "brier": 0.1458,
-   "n": 6,
+   "baseline_brier": 0.2018,
+   "brier": 0.2018,
+   "n": 7,
    "skill": 0.0
   },
   "S1_vol": {
-   "baseline_brier": 0.1458,
-   "brier": 0.2028,
-   "n": 6,
-   "skill": -0.391
+   "baseline_brier": 0.2018,
+   "brier": 0.2372,
+   "n": 7,
+   "skill": -0.176
   },
   "S2_compress": {
-   "baseline_brier": 0.1458,
-   "brier": 0.2191,
-   "n": 6,
-   "skill": -0.502
+   "baseline_brier": 0.2018,
+   "brier": 0.2495,
+   "n": 7,
+   "skill": -0.236
   }
  },
  "rule_version": "v2",
- "sessions": 6
+ "sessions": 7
 }
