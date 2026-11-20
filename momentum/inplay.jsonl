@@ -22,11 +22,11 @@
 {"atr": 8.7, "date": "2026-11-19", "direction": "DOWN", "or_high": 365.9, "or_low": 356.55, "relvol": 5.1, "rules_version": 1, "symbol": "ETERNAL", "trade": {"status": "cancelled"}}
 {"atr": 131.51, "date": "2026-11-19", "direction": "DOWN", "or_high": 4644.1, "or_low": 4581.6, "relvol": 5.1, "rules_version": 1, "symbol": "TITAN", "trade": {"status": "cancelled"}}
 {"atr": 26.59, "date": "2026-11-19", "direction": "DOWN", "or_high": 1152.5, "or_low": 1141.3, "relvol": 4.7, "rules_version": 1, "symbol": "SBIN", "trade": {"status": "cancelled"}}
-{"atr": 60.42, "date": "2026-11-20", "direction": "UP", "or_high": 1820.0, "or_low": 1758.7, "relvol": 13.4, "rules_version": 1, "symbol": "BLUESTARCO", "trade": null}
-{"atr": 5.28, "date": "2026-11-20", "direction": "UP", "or_high": 131.5, "or_low": 128.01, "relvol": 11.1, "rules_version": 1, "symbol": "IREDA", "trade": null}
-{"atr": 278.06, "date": "2026-11-20", "direction": "UP", "or_high": 12817.0, "or_low": 12575.0, "relvol": 10.1, "rules_version": 1, "symbol": "ULTRACEMCO", "trade": null}
-{"atr": 5.15, "date": "2026-11-20", "direction": "DOWN", "or_high": 179.07, "or_low": 174.6, "relvol": 8.0, "rules_version": 1, "symbol": "TATASTEEL", "trade": null}
-{"atr": 29.73, "date": "2026-11-20", "direction": "UP", "or_high": 1074.7, "or_low": 1050.05, "relvol": 7.1, "rules_version": 1, "symbol": "MAXHEALTH", "trade": null}
-{"atr": 44.87, "date": "2026-11-20", "direction": "UP", "or_high": 1248.0, "or_low": 1231.9, "relvol": 6.1, "rules_version": 1, "symbol": "VOLTAS", "trade": null}
-{"atr": 10.96, "date": "2026-11-20", "direction": "UP", "or_high": 399.5, "or_low": 394.55, "relvol": 5.6, "rules_version": 1, "symbol": "AMBUJACEM", "trade": null}
-{"atr": 7.49, "date": "2026-11-20", "direction": "UP", "or_high": 221.56, "or_low": 217.03, "relvol": 5.2, "rules_version": 1, "symbol": "CROMPTON", "trade": null}
+{"atr": 60.42, "date": "2026-11-20", "direction": "UP", "or_high": 1820.0, "or_low": 1758.7, "relvol": 13.4, "rules_version": 1, "symbol": "BLUESTARCO", "trade": {"status": "cancelled"}}
+{"atr": 5.28, "date": "2026-11-20", "direction": "UP", "or_high": 131.5, "or_low": 128.01, "relvol": 11.1, "rules_version": 1, "symbol": "IREDA", "trade": {"status": "cancelled"}}
+{"atr": 278.06, "date": "2026-11-20", "direction": "UP", "or_high": 12817.0, "or_low": 12575.0, "relvol": 10.1, "rules_version": 1, "symbol": "ULTRACEMCO", "trade": {"status": "cancelled"}}
+{"atr": 5.15, "date": "2026-11-20", "direction": "DOWN", "or_high": 179.07, "or_low": 174.6, "relvol": 8.0, "rules_version": 1, "symbol": "TATASTEEL", "trade": {"status": "cancelled"}}
+{"atr": 29.73, "date": "2026-11-20", "direction": "UP", "or_high": 1074.7, "or_low": 1050.05, "relvol": 7.1, "rules_version": 1, "symbol": "MAXHEALTH", "trade": {"status": "cancelled"}}
+{"atr": 44.87, "date": "2026-11-20", "direction": "UP", "or_high": 1248.0, "or_low": 1231.9, "relvol": 6.1, "rules_version": 1, "symbol": "VOLTAS", "trade": {"status": "cancelled"}}
+{"atr": 10.96, "date": "2026-11-20", "direction": "UP", "or_high": 399.5, "or_low": 394.55, "relvol": 5.6, "rules_version": 1, "symbol": "AMBUJACEM", "trade": {"status": "cancelled"}}
+{"atr": 7.49, "date": "2026-11-20", "direction": "UP", "or_high": 221.56, "or_low": 217.03, "relvol": 5.2, "rules_version": 1, "symbol": "CROMPTON", "trade": {"status": "cancelled"}}
