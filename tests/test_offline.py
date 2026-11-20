@@ -183,6 +183,13 @@ class Units(unittest.TestCase):
     def test_flows_and_dedupe(self):
         fl = news.flows_from_headlines([{"title": "FPIs offload Rs 1,200 crore; DIIs purchased Rs 900 cr", "source": "x"}])
         self.assertEqual((fl["fii_net_cr"], fl["dii_net_cr"]), (-1200.0, 900.0))
+        # monthly totals quoted like daily figures must not be read as yesterday's flow (seen 19 Nov 2026)
+        fl = news.flows_from_headlines([{"title": "DIIs sell \u20b955,570 cr in Nov, FPIs buy \u20b994,230 cr: Tactical or behavioural?",
+                                         "source": "x"}])
+        self.assertEqual((fl["fii_net_cr"], fl["dii_net_cr"]), (None, None))
+        fl = news.flows_from_headlines([{"title": "FPIs pulled out Rs 8,000 crore so far this month", "source": "x"},
+                                        {"title": "FIIs bought Rs 3,120 crore on Nov 19, DIIs sold Rs 1,050 cr", "source": "y"}])
+        self.assertEqual((fl["fii_net_cr"], fl["dii_net_cr"]), (3120.0, -1050.0))
 
 
 if __name__ == "__main__":

@@ -154,18 +154,38 @@ FLOW = re.compile(
     r"[^.;]{0,50}?(?:Rs\.?|₹|INR)\s?([\d,]+(?:\.\d+)?)\s*(lakh crore|crore|cr\b)", re.I)
 
 
+# Monthly, weekly or year-to-date totals are often quoted in the same words as daily figures
+# ("FPIs buy Rs 94,230 cr in Nov"); a figure followed or framed by a period is not yesterday's flow.
+_MONTHS = r"jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|june?|july?|aug(?:ust)?|sept?(?:ember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?"
+PERIOD_AFTER = re.compile(
+    r"^\W*(?:so far|till date|to date|ytd|year[- ]to[- ]date|this (?:month|week|year|fortnight|quarter|fiscal)|"
+    r"(?:in|during|for|since|over|across|through)\s+(?:the\s+|a\s+)?(?:past\s+|last\s+|first\s+|current\s+|\d+\s+)?"
+    r"(?:months?|weeks?|years?|fortnights?|quarters?|sessions|days|fy\s?\d*|cy\s?\d*|20\d\d|" + _MONTHS + r")\b)",
+    re.I)
+MAX_DAILY_CR = 30000  # parser sanity bound: larger "daily" figures are period totals misread
+
+
+def _is_period_total(text, m):
+    """True when the amount is framed as a monthly, weekly or year-to-date total, not a day's flow."""
+    return bool(PERIOD_AFTER.search(text[m.end():m.end() + 40])) or \
+        bool(re.search(r"\b(monthly|weekly|ytd|so far|this (?:month|week|year))\b", m.group(0), re.I))
+
+
 def flows_from_headlines(headlines):
     """Best-effort FII/DII net cash figures (Rs crore) mentioned in headlines."""
     out = {"fii_net_cr": None, "dii_net_cr": None, "source": None}
     for h in headlines:
-        for m in FLOW.finditer(h["title"] + ". " + h.get("desc", "")):
+        text = h["title"] + ". " + h.get("desc", "")
+        for m in FLOW.finditer(text):
+            if _is_period_total(text, m):
+                continue
             who = "fii" if m.group(1).lower()[0] == "f" else "dii"
             amt = float(m.group(4).replace(",", ""))
             if "lakh" in m.group(5).lower():
                 amt *= 100000
             verb = m.group(3).lower()
             sign = -1 if re.match(r"sold|sell|offload|dump|pull|withdr", verb) else 1
-            if out[who + "_net_cr"] is None and amt < 100000:  # daily figures only
+            if out[who + "_net_cr"] is None and amt <= MAX_DAILY_CR:  # daily figures only
                 out[who + "_net_cr"] = sign * amt
                 out["source"] = h["source"]
     return out

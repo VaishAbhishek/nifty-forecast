@@ -123,7 +123,7 @@ def cmd_morning(args):
     sent = sentiment.score(headlines, use_llm=not args.no_llm)
     flows = news.flows_from_headlines(headlines)
     for k in ("fii_net_cr", "dii_net_cr"):
-        if flows[k] is None and sent.get(k) is not None:
+        if flows[k] is None and sent.get(k) is not None and abs(sent[k]) <= news.MAX_DAILY_CR:
             flows[k] = sent[k]
     ctx["flows"] = flows
 
