@@ -95,25 +95,25 @@
     "required": true
    },
    {
-    "detail": "RELIANCE last 1367.0 prev 1344.8 volume 15905595.0 iep 0.0 traded_on 2026-11-17 | future oi 117891500.0 prev_oi 112632000.0",
+    "detail": "RELIANCE last 1377.5 prev 1375.6 volume 13167730.0 iep 0.0 traded_on 2026-11-20 | future oi 52886500.0 prev_oi 47137500.0",
     "name": "quote_fields",
     "ok": true,
     "required": true
    },
    {
-    "detail": "RELIANCE: 27 daily (last volume 7653528), 300 five-minute bars",
+    "detail": "RELIANCE: 28 daily (last volume 13167730), 375 five-minute bars",
     "name": "candles_with_volume",
     "ok": true,
     "required": true
    },
    {
-    "detail": "RELIANCE {'expiry': '2026-11-23', 'sessions_left': 5, 'straddle_pct': 2.37, 'day_move_pct': 1.33, 'pcr': 0.77}",
+    "detail": "RELIANCE {'expiry': '2026-11-23', 'sessions_left': 1, 'straddle_pct': 1.72, 'day_move_pct': 2.16, 'pcr': 0.75}",
     "name": "stock_option_chain",
     "ok": true,
     "required": false
    },
    {
-    "detail": "{'fii_cash': {'date': '2026-11-05', 'net': 14974.7}, 'fii_index_fut': {'date': '2026-11-05', 'net': 7883.8, 'long_share': 0.215}, 'fii_stock_fut': {'date': '2026-11-05', 'net': 2936.2, 'long_share': 0.589}, 'dii_cash': {'date': '2026-11-05'",
+    "detail": "{'fii_cash': {'date': '2026-11-20', 'net': 10308.4}, 'fii_index_fut': {'date': '2026-11-20', 'net': -369.8, 'long_share': 0.341}, 'fii_stock_fut': {'date': '2026-11-20', 'net': 770.4, 'long_share': 0.579}, 'dii_cash': {'date': '2026-11-20',",
     "name": "fii_dii",
     "ok": true,
     "required": false
@@ -131,9 +131,9 @@
     "required": true
    }
   ],
-  "code": "5a688f853c",
+  "code": "5d9fc411a6",
   "ok": true,
-  "ts": "2026-11-17T23:06:58+05:30"
+  "ts": "2026-11-22T15:35:16+05:30"
  },
  "morning": {
   "checks": [
@@ -286,25 +286,25 @@
  "selftest": {
   "checks": [
    {
-    "detail": "14 candles, last 2026-11-16 close 25291.1",
+    "detail": "15 candles, last 2026-11-20 close 25800.6",
     "name": "upstox_nifty_daily",
     "ok": true,
     "required": true
    },
    {
-    "detail": "14 candles, last 2026-11-16 close 15.68",
+    "detail": "15 candles, last 2026-11-20 close 17.32",
     "name": "upstox_vix_daily",
     "ok": true,
     "required": true
    },
    {
-    "detail": "375 bars today, first 09:15 open 25277.3",
+    "detail": "0 bars today (normal outside market hours)",
     "name": "upstox_intraday",
     "ok": true,
     "required": true
    },
    {
-    "detail": "172 candles, first bar times ['09:15', '09:45']",
+    "detail": "185 candles, first bar times ['09:15', '09:45']",
     "name": "upstox_30min_history",
     "ok": true,
     "required": false
@@ -316,19 +316,19 @@
     "required": false
    },
    {
-    "detail": "{'o': 25277.3, 'h': 25501.35, 'l': 25267.3, 'c': 25387.4, 'last': 25387.4}",
+    "detail": "{'o': 25368.0, 'h': 25808.8, 'l': 25345.2, 'c': 25800.6, 'last': 25800.6}",
     "name": "upstox_quote_ohlc",
     "ok": true,
     "required": false
    },
    {
-    "detail": "gift 25295.00 (+0.25%); brent 92.29 (-3.65%); usdinr 93.92 (-0.33%); spx 7446.91 (-1.55%); nasdaq 24589.18 (-2.05%)",
+    "detail": "gift 25838.00 (+1.40%); brent 91.88 (-0.87%); usdinr 92.66 (-0.66%); spx 7036.03 (-2.52%); nasdaq 23038.01 (-3.96%)",
     "name": "brent_usdinr_gift_us",
     "ok": true,
     "required": false
    },
    {
-    "detail": "{'expiry': '2026-11-17', 'atm_strike': 25400.0, 'straddle': 12.6, 'pcr': 1.01, 'sessions_left': 1, 'implied_day_move': 16.0, 'call_wall': 25400.0, 'put_wall': 25350.0, 'max_pain': 25400.0}",
+    "detail": "{'expiry': '2026-11-23', 'atm_strike': 25800.0, 'straddle': 225.2, 'pcr': 1.69, 'sessions_left': 1, 'implied_day_move': 282.0, 'call_wall': 26000.0, 'put_wall': 25000.0, 'max_pain': 25500.0}",
     "name": "upstox_option_chain",
     "ok": true,
     "required": false
@@ -376,10 +376,10 @@
     "required": true
    }
   ],
-  "code": "5a688f853c",
+  "code": "5d9fc411a6",
   "ok": true,
   "python": "3.10.12",
-  "ts": "2026-11-17T23:06:54+05:30",
-  "tz_now": "2026-11-17T23:06:37+05:30"
+  "ts": "2026-11-22T15:35:12+05:30",
+  "tz_now": "2026-11-22T15:34:52+05:30"
  }
 }
