@@ -280,35 +280,82 @@ def flows():
     return out
 
 
-def option_move(eq_key, spot):
-    """Nearest-expiry at-the-money straddle for one stock: the move the options market is pricing."""
+def option_expiries(eq_key):
+    """Upcoming option expiries for one stock, nearest first."""
     contracts = _get("/v2/option/contract", {"instrument_key": eq_key}) or []
     today = now_ist().date().isoformat()
-    expiries = sorted({str(c.get("expiry"))[:10] for c in contracts if str(c.get("expiry", ""))[:10] >= today})
-    if not expiries:
-        raise UpstoxError("no option expiry")
-    expiry = expiries[0]
-    chain = _get("/v2/option/chain", {"instrument_key": eq_key, "expiry_date": expiry}) or []
-    best, put_oi, call_oi = None, 0.0, 0.0
-    for row in chain:
-        strike = _f(row.get("strike_price"))
-        ce = ((row.get("call_options") or {}).get("market_data") or {})
-        pe = ((row.get("put_options") or {}).get("market_data") or {})
-        call_oi += _f(ce.get("oi")) or 0
-        put_oi += _f(pe.get("oi")) or 0
-        if strike is None or not ce.get("ltp") or not pe.get("ltp"):
-            continue
-        if best is None or abs(strike - spot) < abs(best[0] - spot):
-            best = (strike, float(ce["ltp"]), float(pe["ltp"]))
-    if not best or not spot:
-        raise UpstoxError("no at-the-money strike with prices")
+    return sorted({str(c.get("expiry"))[:10] for c in contracts if str(c.get("expiry", ""))[:10] >= today})
+
+
+def sessions_until(expiry):
+    """Weekdays from today to expiry, both included (holidays not removed)."""
     d, n = now_ist().date(), 0
     while d.isoformat() <= expiry:
         n += 1 if d.weekday() < 5 else 0
         d += timedelta(days=1)
-    n = max(1, n)
+    return max(1, n)
+
+
+def pick_expiry(expiries, min_sessions=5):
+    """Nearest expiry with at least min_sessions left; otherwise the next one.
+
+    Buying a stock option in its last few sessions means fast time decay and
+    jumpy prices near settlement, so expiry week rolls to the next month.
+    """
+    for e in expiries:
+        if sessions_until(e) >= min_sessions:
+            return e
+    return expiries[-1] if expiries else None
+
+
+def _num(d, k):
+    return _f((d or {}).get(k))
+
+
+def option_chain(eq_key, expiry):
+    """Rows of {strike, CE: {...}, PE: {...}} with price, bid/ask, OI, volume and greeks."""
+    rows = []
+    for row in _get("/v2/option/chain", {"instrument_key": eq_key, "expiry_date": expiry}) or []:
+        strike = _f(row.get("strike_price"))
+        if strike is None:
+            continue
+        item = {"strike": strike}
+        for side, name in (("call_options", "CE"), ("put_options", "PE")):
+            o = row.get(side) or {}
+            md, gk = o.get("market_data") or {}, o.get("option_greeks") or {}
+            item[name] = {"key": o.get("instrument_key"), "ltp": _num(md, "ltp"), "close": _num(md, "close_price"),
+                          "bid": _num(md, "bid_price"), "ask": _num(md, "ask_price"), "oi": _num(md, "oi"),
+                          "prev_oi": _num(md, "prev_oi"), "volume": _num(md, "volume"),
+                          "iv": _num(gk, "iv"), "delta": _num(gk, "delta"), "theta": _num(gk, "theta")}
+        rows.append(item)
+    rows.sort(key=lambda r: r["strike"])
+    return rows
+
+
+def option_move(eq_key, spot, expiries=None):
+    """At-the-money straddle on the nearest usable expiry: the move the options market is pricing."""
+    expiries = expiries or option_expiries(eq_key)
+    expiry = pick_expiry(expiries, min_sessions=1)
+    if not expiry:
+        raise UpstoxError("no option expiry")
+    chain = option_chain(eq_key, expiry)
+    best, put_oi, call_oi = None, 0.0, 0.0
+    for row in chain:
+        ce, pe = row["CE"], row["PE"]
+        call_oi += ce["oi"] or 0
+        put_oi += pe["oi"] or 0
+        cp, pp = ce["ltp"] or ce["close"], pe["ltp"] or pe["close"]
+        if not cp or not pp:
+            continue
+        if best is None or abs(row["strike"] - spot) < abs(best[0] - spot):
+            best = (row["strike"], cp, pp, ce["iv"], pe["iv"])
+    if not best or not spot:
+        raise UpstoxError("no at-the-money strike with prices")
+    n = sessions_until(expiry)
     straddle = best[1] + best[2]
+    ivs = [x for x in best[3:] if x]
     return {"expiry": expiry, "sessions_left": n, "straddle_pct": round(straddle / spot * 100, 2),
             # a straddle is roughly 0.8 of the one-standard-deviation move to expiry
             "day_move_pct": round(straddle * 1.25 / (n ** 0.5) / spot * 100, 2),
+            "atm_iv": round(sum(ivs) / len(ivs), 1) if ivs else None,
             "pcr": round(put_oi / call_oi, 2) if call_oi else None}

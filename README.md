@@ -67,6 +67,15 @@ A second set of jobs in `momentum/`, separate from the Nifty forecast above and 
 
 The report's picks arrive as `momentum/picks/<date>.json` on the `data` branch. Without that file the jobs still run and send the gap and in-play lists.
 
+### Rules version 2 (from 23 Nov 2026)
+
+- **Swing list** in the 08:10 data file: F&O stocks in the top 30% on volatility-adjusted 6- and 12-month momentum (NSE's momentum-index method), within 15% of the 52-week high, in a tight base (10-day range of 4 ATRs or less) or an orderly pullback to the 20-day average. Each has a trigger, stop and 2R target. Weak-momentum shorts near the 52-week low are listed separately and need futures or puts.
+- **Momentum crash gate**: flagged when Nifty is below its 50-day average, 5% or more below its 20-day high, and India VIX is at least 1.3 times its 60-day median.
+- **Options for intraday picks** at 09:20: the expiry with at least five sessions left, the strike with delta nearest 0.55, the premium stop and 2R target translated by delta, cost and risk per lot, and warnings for a spread above 2.5%, implied volatility 1.6 times realised or more, and time decay of 4% a day or more. At 09:47 the current premium is shown. At the close the option is scored at the same minutes as the stock trade.
+- **In play**: the top 10 stocks at three times their usual opening volume (was every stock at twice).
+- **Opening-range test**: stop at the other side of the opening range (the v1 stop sat inside the range, so most signals were cancelled before entry).
+- **Swing picks** are scored at 5 and 10 sessions.
+
 ### Read this before trusting it
 
 - A gap is already in the opening price. The pre-open message tells you how much of a pick's expected move is gone, not that there is money in the gap.

@@ -1,4 +1,6 @@
 """Text output: the morning brief (markdown, read by the report's agents) and Telegram messages."""
+from datetime import datetime
+
 from forecast.telegram import esc
 
 LISTS = (("gainers", "Biggest up-moves last session (in units of the stock's normal daily range)"),
@@ -52,6 +54,11 @@ def render_brief(d):
                   n.get("tag"), num(n.get("efficiency_10d"), "%.2f"), n.get("vs_averages")))
     if m.get("vix") is not None:
         out.append("- India VIX: %.2f." % m["vix"])
+    pn = m.get("panic") or {}
+    if pn:
+        out.append("- Momentum crash risk: **%s** (Nifty %s from its 20-day high, %s its 50-day average; VIX %s times its 60-day median)."
+                   % ("HIGH - cut picks and conviction" if pn.get("panic") else "normal", num(pn.get("drawdown_20d"), "%+.1f%%"),
+                      "below" if pn.get("below_sma50") else "above", num(pn.get("vix_vs_60d_median"), "%.2f")))
     g = m.get("index_gap") or {}
     if g:
         out.append("- Expected index gap: %s (GIFT Nifty %s against the Nifty futures close %s; GIFT's own change %s). An estimate, not the open."
@@ -80,7 +87,25 @@ def render_brief(d):
         out.append("| %s%% | %d | %.0f%% | %.0f%% | %+.2f%% |" % (k, v["n"], v["cont"] * 100, v["fill"] * 100, v["avg_oc"]))
     out += ["", "Futures open interest source: %s." % d.get("oi_source"), ""]
     st = d["stocks"]
-    out += ["## Focus list: stocks on two or more lists below", "", HEAD]
+    out += ["## Swing candidates (rules v%s)" % d.get("rules_version"), "",
+            "Strong 6- and 12-month momentum adjusted for volatility (NSE's momentum-index method), within 15% of the",
+            "52-week high, in a tight base or an orderly pullback. Enter only on a close above the trigger; stop below",
+            "the base. Shorts (weak momentum near the 52-week low) need futures or puts.", "",
+            "| Stock | Dir | Momentum pct | Setup | Volume drying up | Close | Trigger | Stop | Target 2R | Risk (ATRs) | From 52w high | 5d | Options IV vs realised | Expiry |",
+            "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
+    for key, dname in (("swing_up", "UP"), ("swing_down", "DOWN")):
+        for sym in d["lists"].get(key) or []:
+            f = st[sym]
+            su = f.get("setup_up" if dname == "UP" else "setup_down") or {}
+            opt = f.get("opt") or {}
+            out.append("| %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s |" % (
+                sym, dname, f.get("mom_pct"), su.get("kind"), "yes" if su.get("quiet_volume") else "no",
+                num(f.get("close"), "%.1f"), num(su.get("trigger"), "%.1f"), num(su.get("stop"), "%.1f"),
+                num(su.get("target"), "%.1f"), num(su.get("risk_atr"), "%.1f"), num(f.get("from_52w_high"), "%+.0f%%"),
+                num(f.get("chg5"), "%+.1f%%"), num(opt.get("iv_vs_rv"), "%.2f"), opt.get("expiry") or "-"))
+    if not (d["lists"].get("swing_up") or d["lists"].get("swing_down")):
+        out.append("| none today | | | | | | | | | | | | | |")
+    out += ["", "## Focus list: stocks on two or more lists below", "", HEAD]
     out += [_row(s, st[s]) for s in d["lists"].get("focus", [])] or ["| none | | | | | | | | | | | | | |"]
     for key, title in LISTS:
         syms = d["lists"].get(key) or []
@@ -91,7 +116,10 @@ def render_brief(d):
             "- In ATRs: last day's move divided by the stock's average true range. Above 1.5 is an unusually large day.",
             "- Close in range: 1.00 closed at the day's high, 0.00 at the low.",
             "- Est. gap: the stock's beta times the expected index gap. It ignores stock news, which usually matters more.",
-            "- Options: 1-day move: the daily move implied by the nearest at-the-money straddle. Shown for the focus list only.",
+            "- Options: 1-day move: the daily move implied by the nearest at-the-money straddle. Shown for focus and swing stocks.",
+            "- Options IV vs realised: at-the-money implied volatility divided by the stock's 20-day realised volatility.",
+            "  Above about 1.6 the options are expensive (often before results) and buying them needs a bigger move.",
+            "- Momentum pct: rank 0-100 across F&O stocks on volatility-adjusted 6- and 12-month returns.",
             "- The full per-stock data is in momentum/latest.json."]
     return "\n".join(out) + "\n"
 
@@ -133,6 +161,40 @@ def check_message(d):
         ptbl = ["%-11s %-4s %+5.1f%%  %s%s" % (p["symbol"][:11], p["direction"], p["from_open"], p["status"],
                                                ("  vol %.1fx" % p["relvol"]) if p.get("relvol") else "") for p in d["picks"]]
         lines += ["<b>Today's picks</b> (move since the open)", _pre(ptbl)]
+        opts = [p for p in d["picks"] if p.get("option")]
+        if opts:
+            lines.append("<b>Options for intraday picks</b>")
+            for p in opts:
+                lines.append(esc(option_line(p["symbol"], p["option"])))
+    lines.append("<i>Advisory only.</i>")
+    return "\n".join(lines)
+
+
+def option_line(sym, o):
+    if o.get("error"):
+        return "%s: option data failed (%s)" % (sym, o["error"])
+    try:
+        exp = datetime.strptime(o.get("expiry") or "", "%Y-%m-%d").strftime("%d %b")
+    except ValueError:
+        exp = o.get("expiry") or ""
+    parts = ["%s %g %s %s expiry" % (sym, o["strike"], o["side"], exp),
+             "premium %s" % num(o.get("premium"), "%.2f")]
+    if o.get("now") is not None:
+        parts.append("now %.2f" % o["now"])
+    if o.get("spread_pct") is not None:
+        parts.append("spread %.1f%%" % o["spread_pct"])
+    if o.get("premium_stop") is not None:
+        parts.append("stop %.2f / target %.2f" % (o["premium_stop"], o["premium_target"]))
+    if o.get("cost_per_lot"):
+        parts.append("lot %s = Rs %s" % (o.get("lot"), format(o["cost_per_lot"], ",")))
+    if o.get("risk_per_lot"):
+        parts.append("risk Rs %s per lot" % format(o["risk_per_lot"], ","))
+    if o.get("delta") is not None:
+        parts.append("delta %.2f" % o["delta"])
+    text = " | ".join(parts)
+    if o.get("flags"):
+        text += " | CAUTION: " + "; ".join(o["flags"])
+    return text
     lines.append("<i>Advisory only.</i>")
     return "\n".join(lines)
 
@@ -150,6 +212,8 @@ def eod_message(d):
         for r in d["today"]:
             t = r.get("trade") or {}
             trade = t.get("status", "") + (" %+.1fR" % t["r"] if t.get("r") is not None else "")
+            if (r.get("option") or {}).get("premium_ret") is not None:
+                trade += " opt %+.0f%%" % r["option"]["premium_ret"]
             tbl.append("%-11s %-4s %+5.1f%% %6s  %s" % ((("*" if r.get("tier") == "best" else " ") + r["symbol"])[:11], r["direction"],
                                                         r["ret"], num(r.get("alpha"), "%+.1f%%"), trade))
         lines += [_pre(tbl), "* = best 3. o-c is open to close in the pick's direction."]
@@ -179,17 +243,21 @@ def render_scorecard(sc, inplay, n_days):
            "Do not read much into any row with fewer than about 30 picks.", ""]
     for group, tallies in sc.items():
         out += ["## By %s" % group.replace("_", " "), "",
-                "| Group | Picks | Hit | Needed for 95% | Avg open-to-close | Avg alpha | Trades | Avg R | Total R | 5-day picks | Avg 5-day | Avg 5-day alpha |",
-                "|---|---|---|---|---|---|---|---|---|---|---|---|"]
+                "| Group | Picks | Hit | Needed for 95% | Avg open-to-close | Avg alpha | Trades | Avg R | Total R | Option trades | Option wins | Avg option return | 5-day picks | Avg 5-day | 10-day picks | 10-day hit | Avg 10-day | Avg 10-day alpha |",
+                "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
         for k, t in tallies.items():
-            out.append("| %s | %d | %s | %s | %s | %s | %d | %s | %s | %d | %s | %s |" % (
+            out.append("| %s | %d | %s | %s | %s | %s | %d | %s | %s | %d | %s | %s | %d | %s | %d | %s | %s | %s |" % (
                 k, t["n"], ("%.0f%%" % (t["hit"] * 100)) if t["hit"] is not None else "-", t["needs_for_95"] or "-",
                 num(t["avg_ret"], "%+.2f%%"), num(t["avg_alpha"], "%+.2f%%"), t["trades"], num(t["avg_r"], "%+.2f"),
-                num(t["total_r"], "%+.1f"), t["n_5d"], num(t["avg_ret_5d"], "%+.2f%%"), num(t["avg_alpha_5d"], "%+.2f%%")))
+                num(t["total_r"], "%+.1f"), t["opt_trades"], ("%.0f%%" % (t["opt_win"] * 100)) if t["opt_win"] is not None else "-",
+                num(t["opt_avg_ret"], "%+.1f%%"), t["n_5d"], num(t["avg_ret_5d"], "%+.2f%%"), t["n_10d"],
+                ("%.0f%%" % (t["hit_10d"] * 100)) if t["hit_10d"] is not None else "-",
+                num(t["avg_ret_10d"], "%+.2f%%"), num(t["avg_alpha_10d"], "%+.2f%%")))
         out.append("")
     if inplay:
         out += ["## In-play opening-range breakout (forward test, logged only)", "",
-                "Stocks at twice their usual volume five minutes after the open; entry on a break of the first five minutes' range",
-                "in the direction of the first move, stop 10% of ATR away, exit at the close.", "",
+                "Rules v2 (from 23 Nov 2026): the top 10 stocks at three times their usual volume five minutes after the open; entry on a",
+                "break of the first five minutes' range in the direction of the first move, stop at the other side of the range, exit at",
+                "the close. Rules v1 signals (stop 10% of ATR inside the range) are kept but were mostly cancelled before entry.", "",
                 "%d signals, %d trades, average %s R, total %s R." % (inplay["n"], inplay["trades"], num(inplay["avg_r"], "%+.2f"), num(inplay["total_r"], "%+.1f")), ""]
     return "\n".join(out)

@@ -111,6 +111,35 @@ def request(url, method="GET", headers=None, data=None, timeout=12, retries=1):
             rec = {"time_stamp": ts, "buy_amount": 9000.5, "sell_amount": 11000.0, "total_long_contracts": 300, "total_short_contracts": 700}
             segs = [p.split("=")[1] for p in u.split("?")[1].split("&") if p.startswith("data_type=")]
             return ok({seg: [rec, dict(rec, time_stamp=ts - 86400000, buy_amount=1.0)] for seg in segs})
+        if ("/v2/option/contract" in u or "/v2/option/chain" in u) and BY_KEY.get(u.split("instrument_key=")[1].split("&")[0]):
+            sym = BY_KEY[u.split("instrument_key=")[1].split("&")[0]]
+            if "/v2/option/contract" in u:
+                return ok([{"expiry": "2026-11-24", "strike_price": 1}, {"expiry": "2026-12-29", "strike_price": 1}])
+            spot = [d["c"] for d in stock_days(sym) if d["date"] < today][-1]
+            step = round(spot * 0.01, 2)
+            rows = []
+            for k in range(-5, 6):
+                strike = round(spot + k * step, 2)
+                d_ce = max(0.05, min(0.95, 0.5 - k * 0.09))
+                ce, pe = round(max(0.5, spot - strike) + spot * 0.02, 2), round(max(0.5, strike - spot) + spot * 0.02, 2)
+                rows.append({"strike_price": strike,
+                             "call_options": {"instrument_key": "NSE_FO|OPT-%s-CE-%d" % (sym, k),
+                                              "market_data": {"ltp": ce, "bid_price": ce * 0.995, "ask_price": ce * 1.005, "oi": 5000, "volume": 900},
+                                              "option_greeks": {"delta": d_ce, "iv": 30.0, "theta": -0.4}},
+                             "put_options": {"instrument_key": "NSE_FO|OPT-%s-PE-%d" % (sym, k),
+                                             "market_data": {"ltp": pe, "bid_price": pe * 0.995, "ask_price": pe * 1.005, "oi": 5000, "volume": 900},
+                                             "option_greeks": {"delta": d_ce - 1, "iv": 30.0, "theta": -0.4}}})
+            return ok(rows)
+        if "/historical-candle/intraday/NSE_FO|OPT-" in u:
+            name = u.split("/historical-candle/intraday/")[1].split("/")[0]
+            parts = name.split("-")
+            sym, side = parts[1], parts[2]
+            sgn = 1 if side == "CE" else -1
+            bars = stock_bars(sym, today)
+            base = bars[0][1] * 0.03
+            cutoff = now.replace(second=0, microsecond=0)
+            rows = [[b[0]] + [round(base + sgn * 0.55 * (x - bars[0][1]), 2) for x in b[1:5]] + [100, 0] for b in bars]
+            return ok({"candles": [b for b in reversed(rows) if datetime.fromisoformat(b[0]) < cutoff]})
         if "/historical-candle/" in u:
             intr = "/historical-candle/intraday/" in u
             path = u.split("/historical-candle/intraday/" if intr else "/v3/historical-candle/")[1].split("/")
@@ -157,6 +186,22 @@ class Calculations(unittest.TestCase):
         return out
 
     def test_walk(self):
+        real = calc.walk
+
+        def walk(*a, **k):
+            r = real(*a, **k)
+            r.pop("entry_i", None)
+            r.pop("exit_i", None)
+            return r
+        calc_walk, calc.walk = calc.walk, walk
+        try:
+            self._walk_cases()
+        finally:
+            calc.walk = calc_walk
+        r = calc.walk(self.bars(100, 101, 103, 106, 104), "UP", 102, 99.5, 105)
+        self.assertEqual((r["entry_i"], r["exit_i"]), (2, 3))
+
+    def _walk_cases(self):
         b = self.bars(100, 101, 103, 106, 104)
         self.assertEqual(calc.walk(b, "UP", 102, 99.5, 105), {"status": "target", "entry": 102.0, "r": 1.2})
         self.assertEqual(calc.walk(b, "UP", 102, 99.5), {"status": "closed", "entry": 102.0, "r": 0.8})
@@ -215,6 +260,62 @@ class Calculations(unittest.TestCase):
             for chunk in (7, 64, 100000):
                 self.assertEqual(list(api.iter_objects(payload, chunk)), rows)
 
+    def test_option_plan(self):
+        chain = [{"strike": 95 + i * 5, "CE": {"key": "C%d" % i, "ltp": 8 - i * 2, "bid": 7.95 - i * 2, "ask": 8.05 - i * 2,
+                                            "delta": 0.8 - i * 0.2, "iv": 30, "theta": -0.2, "oi": 100},
+                  "PE": {"key": "P%d" % i, "ltp": 2 + i * 2, "bid": 1.9 + i * 2, "ask": 2.1 + i * 2,
+                         "delta": -0.2 - i * 0.2, "iv": 30, "theta": -0.2, "oi": 100}} for i in range(4)]
+        p = calc.option_plan(chain, "UP", 500, 2.0, rv20=25)
+        self.assertEqual((p["strike"], p["side"]), (100, "CE"))          # delta 0.6, nearest 0.55
+        self.assertEqual(p["cost_per_lot"], 3000)
+        self.assertAlmostEqual(p["premium_stop"], 6 - 0.6 * 2 * 1.15, places=2)
+        self.assertAlmostEqual(p["premium_target"], 6 + 0.6 * 4, places=2)
+        self.assertEqual(p["risk_per_lot"], round(0.6 * 2 * 1.15 * 500))
+        self.assertEqual(p["grade"], "ok")
+        q = calc.option_plan(chain, "DOWN", 500, 2.0, rv20=10)
+        self.assertEqual(q["side"], "PE")
+        self.assertIn("expensive", " ".join(q["flags"]))
+        chain[1]["CE"].update(bid=5.0, ask=7.0)
+        self.assertIn("wide spread", " ".join(calc.option_plan(chain, "UP", 500, 2.0)["flags"]))
+        self.assertIsNone(calc.option_plan([], "UP", 500, 2.0))
+
+    def test_option_leg(self):
+        und = [{"ts": i, "o": 100 + i, "h": 100 + i, "l": 100 + i, "c": 100 + i} for i in range(10)]
+        opt = [{"ts": i, "c": 5 + i * 0.5} for i in range(0, 10, 2)]   # option prints every other minute
+        leg = calc.option_leg({"entry_i": 2, "exit_i": 7}, opt, und)
+        self.assertEqual(leg, {"premium_in": 6.0, "premium_out": 8.0, "premium_ret": 33.33})
+        self.assertIsNone(calc.option_leg({"status": "no_trigger"}, opt, und))
+
+    def test_swing_setup(self):
+        days = []
+        price = 100.0
+        for i in range(300):
+            price *= 1.003 if i < 280 else 1.0005       # steady uptrend, then a quiet sideways base
+            days.append({"date": "d%03d" % i, "o": price, "h": price * 1.01, "l": price * 0.99, "c": price,
+                         "v": 1000 if i < 290 else 600})
+        f = calc.features(days)
+        self.assertGreater(f["mom6"], 1)
+        su = f["setup_up"]
+        self.assertEqual(su["kind"], "tight base")
+        self.assertTrue(su["quiet_volume"])
+        self.assertGreater(su["trigger"], f["close"])
+        self.assertLess(su["stop"], f["close"])
+        self.assertAlmostEqual(su["target"] - su["trigger"], 2 * (su["trigger"] - su["stop"]), places=1)
+        self.assertIsNone(f["setup_down"])
+        fall = [dict(d, o=1e4 / d["o"], h=1e4 / d["l"], l=1e4 / d["h"], c=1e4 / d["c"]) for d in days]
+        g = calc.features(fall)
+        self.assertIsNone(g["setup_up"])
+        self.assertEqual(g["setup_down"]["kind"], "tight base")
+
+    def test_panic_state(self):
+        up = [{"c": 100 + i} for i in range(80)]
+        calm = [{"c": 12.0} for _ in range(80)]
+        self.assertFalse(calc.panic_state(up, calm)["panic"])
+        crash = up[:70] + [{"c": 170 - i * 2.5} for i in range(10)]
+        scared = calm[:75] + [{"c": 18.0} for _ in range(5)]
+        st = calc.panic_state(crash, scared)
+        self.assertTrue(st["panic"], st)
+
     def test_scorecard(self):
         rows = [{"tier": "best", "conviction": "high", "horizon": "intraday", "direction": "UP", "evidence": ["catalyst", "volume"],
                  "right": True, "ret": 1.0, "alpha": 0.5, "trade": {"status": "target", "r": 2.0}},
@@ -263,6 +364,9 @@ class Pipeline(unittest.TestCase):
         text = (Path(self.tmp) / "momentum" / "brief" / ("%s.md" % day)).read_text()
         for needle in ("## Market", "Focus list", "What past gaps did next", "Regime"):
             self.assertIn(needle, text)
+        self.assertIn("swing_up", d["lists"])
+        self.assertIn("panic", d["market"])
+        self.assertIn("Swing candidates", text)
         some = d["stocks"]["STOCK07"]
         for k in ("chg1", "vol_ratio", "atr_pct", "move_atr", "beta", "est_gap", "oi_chg", "from_52w_high"):
             self.assertIsNotNone(some.get(k), k)
@@ -298,6 +402,16 @@ class Pipeline(unittest.TestCase):
             self.assertEqual([p["symbol"] for p in c["picks"]], ["STOCK07", "STOCK11"])
             self.assertEqual(c["picks"][1]["direction"], "DOWN")
             self.assertEqual([r["symbol"] for r in c["in_play"]], ["STOCK07"])  # the one stock given five times its volume
+            o = c["picks"][0]["option"]
+            self.assertEqual(o["side"], "CE")
+            self.assertTrue(o["key"].startswith("NSE_FO|OPT-STOCK07-CE"))
+            self.assertIn(o["expiry"], ("2026-11-24", "2026-12-29"))
+            self.assertGreaterEqual(o["sessions_left"], 5)
+            self.assertIn("premium_stop", o)
+            self.assertNotIn("option", c["picks"][1])          # swing pick: no option plan
+            if label == "30":
+                self.assertIn("now", o)
+            self.assertIn("Options for intraday picks", sent[-1])
 
         at(day + "T16:05:00+05:30")
         self.assertEqual(run.main(["eod"]), 0)
@@ -309,6 +423,8 @@ class Pipeline(unittest.TestCase):
         self.assertEqual(a["right"], fake_net.BY_DATE[day]["c"] > fake_net.BY_DATE[day]["o"])
         self.assertAlmostEqual(a["alpha"], 0.0, places=1)  # the fake stocks are scaled copies of the index
         self.assertEqual(next(r for r in rows if r["symbol"] == "STOCK11")["trade"]["status"], "not_intraday")
+        if a["trade"].get("entry_i") is not None:
+            self.assertIn("premium_ret", a["option"])
         self.assertEqual(run.main(["eod"]), 0)  # a second run must not score twice
         self.assertEqual(len([r for r in store.load("momentum/scores.jsonl") if r["date"] == day]), 2)
         self.assertEqual(self.read("eod_latest.json")["date"], day)

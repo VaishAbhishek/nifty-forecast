@@ -26,8 +26,10 @@ OPENVOL = "cache/momentum_openvol.json"
 WINDOWS = {"data": (dtime(7, 30), dtime(9, 0)), "preopen": (dtime(9, 0), dtime(9, 14)),
            "check5": (dtime(9, 18), dtime(9, 35)), "check30": (dtime(9, 40), dtime(10, 20)),
            "eod": (dtime(15, 45), dtime(23, 30))}
-IN_PLAY_RELVOL = 2.0
-ORB_STOP_ATR = 0.10
+IN_PLAY_RELVOL = 3.0   # rules v2: at least 3x usual opening volume, and only the top IN_PLAY_TOP
+IN_PLAY_TOP = 10
+SWING_TOP = 12
+OPTION_SCAN = 40       # stocks whose options are checked in the 08:10 data job
 
 
 def trading_day(now):
@@ -133,6 +135,34 @@ def build_lists(stocks, index_chg20):
     return lists
 
 
+def build_swing(stocks):
+    """Swing candidates: strongest (or weakest) 6- and 12-month momentum, adjusted for volatility,
+    close to the 52-week high (or low), in a tight base or orderly pullback.
+
+    Rules version 2. Evidence: momentum over 3-12 months persists in Indian stocks while
+    1-4 week moves tend to reverse; nearness to the 52-week high predicts returns
+    (George and Hwang 2004); NSE's momentum indices rank on volatility-adjusted
+    6- and 12-month returns.
+    """
+    z6 = calc.zscores({s: f.get("mom6") for s, f in stocks.items()})
+    z12 = calc.zscores({s: f.get("mom12") for s, f in stocks.items()})
+    score = {}
+    for sym in stocks:
+        parts = [z for z in (z6.get(sym), z12.get(sym)) if z is not None]
+        if parts:
+            score[sym] = sum(parts) / len(parts)
+    ranked = sorted(score, key=score.get)
+    n = len(ranked)
+    for i, sym in enumerate(ranked):
+        stocks[sym]["mom_score"] = calc.r2(score[sym])
+        stocks[sym]["mom_pct"] = round(100 * i / max(1, n - 1))
+    up = [s for s in ranked[::-1] if stocks[s]["mom_pct"] >= 70 and stocks[s].get("setup_up")
+          and (stocks[s].get("from_52w_high") or -99) >= -15]
+    down = [s for s in ranked if stocks[s]["mom_pct"] <= 30 and stocks[s].get("setup_down")
+            and (stocks[s].get("from_52w_low") or 99) <= 15]
+    return {"swing_up": up[:SWING_TOP], "swing_down": down[:SWING_TOP // 2]}
+
+
 def backfill_openvol(stocks, today, limit=110):
     """Usual volume in the first 5 and 30 minutes, from 5-minute history, for stocks that lack a baseline."""
     hist = store.read_json(OPENVOL, {}) or {}
@@ -227,8 +257,9 @@ def cmd_data(args):
 
     market = {"nifty": calc.regime(nifty_days)}
     try:
-        vix = [d for d in api.daily(api.VIX, (now.date() - timedelta(days=10)).isoformat(), today) if d["date"] < today]
+        vix = [d for d in api.daily(api.VIX, (now.date() - timedelta(days=130)).isoformat(), today) if d["date"] < today]
         market["vix"] = vix[-1]["c"] if vix else None
+        market["panic"] = calc.panic_state(nifty_days, vix)
     except Exception as e:
         notes.append("VIX failed: %s" % redact(str(e))[:60])
     try:
@@ -258,15 +289,21 @@ def cmd_data(args):
         notes.append("sectors failed: %s" % redact(str(e))[:60])
 
     lists = build_lists(stocks, index_chg20)
+    swing = build_swing(stocks)
+    lists.update(swing)
+    scan = list(dict.fromkeys(lists["focus"] + swing["swing_up"] + swing["swing_down"]))[:OPTION_SCAN]
     opt_ok = 0
-    for sym in lists["focus"][:20]:
+    for sym in scan:
         try:
-            stocks[sym]["opt"] = api.option_move(universe[sym]["eq"], stocks[sym]["close"])
+            o = api.option_move(universe[sym]["eq"], stocks[sym]["close"])
+            if o.get("atm_iv") and stocks[sym].get("rv20"):
+                o["iv_vs_rv"] = calc.r2(o["atm_iv"] / stocks[sym]["rv20"])
+            stocks[sym]["opt"] = o
             opt_ok += 1
         except Exception:
             pass
         time.sleep(api.PACE_S)
-    checks.append({"name": "options", "ok": True, "detail": "%d of %d focus stocks" % (opt_ok, len(lists["focus"][:20]))})
+    checks.append({"name": "options", "ok": True, "detail": "%d of %d focus and swing stocks" % (opt_ok, len(scan))})
     try:
         need, done = backfill_openvol(universe, today)
         checks.append({"name": "opening_volume_baseline", "ok": True, "detail": "backfilled %d of %d" % (done, need)})
@@ -358,7 +395,7 @@ def cmd_preopen(args):
                             "opening price": "opening prices"}[source],
            "index_gap": index_gap, "coverage": "%d of %d" % (len(gaps), len(by_key)),
            "up": [r for r in reversed(rows) if r["gap"] >= 0.5][:8], "down": [r for r in rows if r["gap"] <= -0.5][:8],
-           "picks": picks, "picks_note": None if picks else "No picks file for today yet, so this is the gap list only."}
+           "picks": picks, "picks_note": None if picks else "WARNING: no picks file arrived from the morning report, so today's picks will not be checked or scored."}
     write_compact(D + "gaps/%s.json" % today, dict(out, all=gaps))
     telegram.send(brief.preopen_message(out), args.dry_run)
     store.set_status("momentum_preopen", True, [{"name": "prices", "ok": True, "detail": "%s, %s" % (source, out["coverage"])}])
@@ -384,6 +421,26 @@ def touch_status(p, row):
     if hit_x:
         return "CANCELLED at %g" % cancel
     return "waiting (%g confirms)" % confirm
+
+
+def plan_option(p, universe, feats):
+    """Live contract for an intraday pick: expiry with at least five sessions left, delta near 0.55."""
+    u = universe.get(p["symbol"])
+    if not u:
+        return None
+    f = feats.get(p["symbol"]) or {}
+    try:
+        risk = abs(float(p["confirm"]) - float(p["cancel"]))
+    except (TypeError, ValueError):
+        risk = (f.get("atr_pct") or 0) / 100 * (f.get("close") or 0) * 0.5 or None
+    expiry = api.pick_expiry(api.option_expiries(u["eq"]))
+    if not expiry:
+        return None
+    plan = calc.option_plan(api.option_chain(u["eq"], expiry), p["direction"], u.get("lot"), risk,
+                            rv20=f.get("rv20"), expiry=expiry, sessions_left=api.sessions_until(expiry))
+    if plan:
+        plan["risk_per_share"] = calc.r2(risk)
+    return plan
 
 
 def cmd_check(args, label):
@@ -418,26 +475,44 @@ def cmd_check(args, label):
             del h[day]
         write_compact(OPENVOL, hist)
     for sym, rv in sorted(relvol.items(), key=lambda x: -x[1]):
-        if rv < IN_PLAY_RELVOL:
+        if rv < IN_PLAY_RELVOL or len(in_play) >= IN_PLAY_TOP:
             break
         r = rows[sym]
         in_play.append({"symbol": sym, "relvol": calc.r2(rv, 1), "chg": calc.r2(calc.pct(r["last"], r["prev"])),
                         "from_open": calc.r2(calc.pct(r["last"], r["open"])), "high": r["high"], "low": r["low"],
                         "open": r["open"], "last": r["last"]})
     picks = []
+    feats = (store.read_json(D + "latest.json") or {}).get("stocks") or {}
+    earlier = {}
+    if label == "30":
+        earlier = {(x["symbol"], x["horizon"]): x.get("option") for x in
+                   (store.read_json(D + "checks/%s_5.json" % today) or {}).get("picks") or []}
     for p in load_picks(today):
         r = rows.get(p["symbol"])
-        if r:
-            picks.append(dict(p, from_open=calc.r2(calc.pct(r["last"], r["open"])), status=touch_status(p, r),
-                              relvol=calc.r2(relvol.get(p["symbol"]), 1)))
-    out = {"date": today, "label": label, "time": now.strftime("%d %b %H:%M"), "in_play": in_play[:8], "picks": picks,
+        if not r:
+            continue
+        row = dict(p, from_open=calc.r2(calc.pct(r["last"], r["open"])), status=touch_status(p, r),
+                   relvol=calc.r2(relvol.get(p["symbol"]), 1))
+        if p["horizon"] in ("intraday", "both"):
+            opt = earlier.get((p["symbol"], p["horizon"]))
+            try:
+                if not opt:
+                    opt = plan_option(p, universe, feats)
+                    time.sleep(api.PACE_S)
+                elif opt.get("key"):
+                    opt = dict(opt, now=(api.quotes([opt["key"]]).get(opt["key"]) or {}).get("last"))
+            except Exception as e:
+                opt = {"error": redact(str(e))[:100]}
+            row["option"] = opt
+        picks.append(row)
+    out = {"date": today, "label": label, "time": now.strftime("%d %b %H:%M"), "in_play": in_play, "picks": picks,
            "in_play_note": None if relvol else "Usual opening volume is still being measured; the in-play list starts once it is."}
     write_compact(D + "checks/%s_%s.json" % (today, label), out)
     if label == "5" and in_play:
         feats = (store.read_json(D + "latest.json") or {}).get("stocks") or {}
         logged = {(r["date"], r["symbol"]) for r in store.load(D + "inplay.jsonl")}
         new = []
-        for r in in_play[:8]:
+        for r in in_play:
             atr_pct = (feats.get(r["symbol"]) or {}).get("atr_pct")
             if (today, r["symbol"]) in logged or not atr_pct or r["last"] == r["open"]:
                 continue
@@ -460,27 +535,29 @@ def session_bars(key, today, after=None):
 
 
 def fill_swing(rows, universe, today):
-    """Five-session result for swing picks whose window has closed."""
-    todo = [r for r in rows if r.get("horizon") in ("swing", "both") and r.get("ret_5d") is None
-            and r.get("open") and r["date"] < today and r["symbol"] in universe]
+    """Five- and ten-session results for swing picks whose window has closed."""
+    todo = [r for r in rows if r.get("horizon") in ("swing", "both") and r.get("open") and r["date"] < today
+            and r["symbol"] in universe and (r.get("ret_5d") is None or r.get("ret_10d") is None)]
     if not todo:
         return 0
     start = min(r["date"] for r in todo)
-    idx = [d for d in api.daily(api.NIFTY, start, today) if d["date"] <= today]
+    idx = {d["date"]: d for d in api.daily(api.NIFTY, start, today) if d["date"] <= today}
     done = 0
     for r in todo:
         try:
             days = [d for d in api.daily(universe[r["symbol"]]["eq"], r["date"], today) if d["date"] >= r["date"]]
-            if len(days) < 5:
-                continue
-            end = days[4]
             s = 1 if r["direction"] == "UP" else -1
-            r["ret_5d"] = calc.r2(calc.pct(end["c"], r["open"]) * s)
-            i0 = next((d for d in idx if d["date"] == r["date"]), None)
-            i1 = next((d for d in idx if d["date"] == end["date"]), None)
-            if i0 and i1:
-                r["alpha_5d"] = calc.r2(r["ret_5d"] - calc.pct(i1["c"], i0["o"]) * s)
-            done += 1
+            i0 = idx.get(r["date"])
+            for n in (5, 10):
+                key = "ret_%dd" % n
+                if r.get(key) is not None or len(days) < n:
+                    continue
+                end = days[n - 1]
+                r[key] = calc.r2(calc.pct(end["c"], r["open"]) * s)
+                i1 = idx.get(end["date"])
+                if i0 and i1:
+                    r["alpha_%dd" % n] = calc.r2(r[key] - calc.pct(i1["c"], i0["o"]) * s)
+                done += 1
         except Exception:
             pass
         time.sleep(api.PACE_S)
@@ -521,6 +598,8 @@ def cmd_eod(args):
     feats = latest.get("stocks") or {}
     regime = ((latest.get("market") or {}).get("nifty") or {}).get("tag") if latest.get("date") == today else None
     todays, errors = [], 0
+    plans = {(x["symbol"], x["horizon"]): x.get("option") for x in
+             (store.read_json(D + "checks/%s_5.json" % today) or {}).get("picks") or []}
     if picks:
         idx = session_bars(api.NIFTY, today)
         for p in picks:
@@ -535,6 +614,15 @@ def cmd_eod(args):
                            gap_verdict=calc.gap_verdict(p["direction"], g, (feats.get(p["symbol"]) or {}).get("atr_pct")), **res)
                 row["trade"] = calc.walk(bars, p["direction"], p["confirm"], p["cancel"], p["target"]) \
                     if p["horizon"] in ("intraday", "both") else {"status": "not_intraday"}
+                opt = plans.get((p["symbol"], p["horizon"])) or {}
+                if opt.get("key"):
+                    row["option"] = {k: opt.get(k) for k in ("side", "strike", "expiry", "premium", "spread_pct", "iv_vs_rv", "grade")}
+                    try:
+                        leg = calc.option_leg(row["trade"], session_bars(opt["key"], today), bars)
+                        if leg:
+                            row["option"].update(leg)
+                    except Exception as e:
+                        row["option"]["error"] = redact(str(e))[:100]
                 todays.append(row)
             except Exception as e:
                 errors += 1
@@ -557,8 +645,12 @@ def cmd_eod(args):
         try:
             bars = session_bars(universe[r["symbol"]]["eq"], today, after=dtime(9, 20))
             up = r["direction"] == "UP"
-            level = r["or_high"] if up else r["or_low"]
-            stop = level - ORB_STOP_ATR * r["atr"] if up else level + ORB_STOP_ATR * r["atr"]
+            if r.get("rules_version", 1) >= 2:
+                # v2: classic opening-range breakout, stop at the other side of the range
+                level, stop = (r["or_high"], r["or_low"]) if up else (r["or_low"], r["or_high"])
+            else:
+                level = r["or_high"] if up else r["or_low"]
+                stop = level - 0.10 * r["atr"] if up else level + 0.10 * r["atr"]
             r["trade"] = calc.walk(bars, r["direction"], level, stop)
         except Exception as e:
             store.log("momentum eod: in-play %s failed: %s" % (r["symbol"], e))
