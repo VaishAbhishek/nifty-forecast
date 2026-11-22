@@ -107,7 +107,7 @@
     "required": true
    },
    {
-    "detail": "RELIANCE {'expiry': '2026-11-23', 'sessions_left': 1, 'straddle_pct': 1.72, 'day_move_pct': 2.16, 'pcr': 0.75}",
+    "detail": "RELIANCE {'expiry': '2026-11-23', 'sessions_left': 1, 'straddle_pct': 1.72, 'day_move_pct': 2.16, 'atm_iv': 22.3, 'pcr': 0.75}",
     "name": "stock_option_chain",
     "ok": true,
     "required": false
@@ -131,9 +131,9 @@
     "required": true
    }
   ],
-  "code": "5d9fc411a6",
+  "code": "07ec3b2e61",
   "ok": true,
-  "ts": "2026-11-22T15:35:16+05:30"
+  "ts": "2026-11-22T20:36:29+05:30"
  },
  "morning": {
   "checks": [
@@ -376,10 +376,10 @@
     "required": true
    }
   ],
-  "code": "5d9fc411a6",
+  "code": "07ec3b2e61",
   "ok": true,
   "python": "3.10.12",
-  "ts": "2026-11-22T15:35:12+05:30",
-  "tz_now": "2026-11-22T15:34:52+05:30"
+  "ts": "2026-11-22T20:36:25+05:30",
+  "tz_now": "2026-11-22T20:36:07+05:30"
  }
 }

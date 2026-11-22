@@ -3,14 +3,14 @@
   "error": null,
   "items": 50,
   "name": "ET Markets",
-  "newest_h": 1.7,
+  "newest_h": 3.3,
   "ok": true
  },
  {
   "error": null,
   "items": 50,
   "name": "ET Stocks",
-  "newest_h": 3.5,
+  "newest_h": 8.5,
   "ok": true
  },
  {
@@ -24,35 +24,35 @@
   "error": null,
   "items": 35,
   "name": "Mint Markets",
-  "newest_h": 0.1,
+  "newest_h": 0.2,
   "ok": true
  },
  {
   "error": null,
   "items": 35,
   "name": "Business Standard Markets",
-  "newest_h": 0.3,
+  "newest_h": 5.3,
   "ok": true
  },
  {
   "error": null,
-  "items": 41,
+  "items": 44,
   "name": "Google News: Nifty",
-  "newest_h": 0.3,
+  "newest_h": 0.2,
   "ok": true
  },
  {
   "error": null,
-  "items": 7,
+  "items": 6,
   "name": "Google News: FII DII",
-  "newest_h": 0.1,
+  "newest_h": 3.3,
   "ok": true
  },
  {
   "error": null,
-  "items": 51,
+  "items": 50,
   "name": "Google News: global cues",
-  "newest_h": 0.0,
+  "newest_h": 1.3,
   "ok": true
  }
 ]
