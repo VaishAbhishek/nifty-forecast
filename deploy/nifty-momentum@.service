@@ -1,4 +1,4 @@
-# Installed by deploy/install.sh. %i is one of: data, preopen, check5, check30, eod, selftest
+# Installed by deploy/install.sh. %i is one of: data, preopen, check5, check30, watch, eod, selftest
 [Unit]
 Description=F&O momentum jobs: %i (advisory, read-only, places no orders)
 After=network-online.target

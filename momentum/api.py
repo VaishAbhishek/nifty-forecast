@@ -359,3 +359,59 @@ def option_move(eq_key, spot, expiries=None):
             "day_move_pct": round(straddle * 1.25 / (n ** 0.5) / spot * 100, 2),
             "atm_iv": round(sum(ivs) / len(ivs), 1) if ivs else None,
             "pcr": round(put_oi / call_oi, 2) if call_oi else None}
+
+
+# ------------------------------------------------------------------ industries
+
+NIFTY500_LIST = "https://niftyindices.com/IndexConstituent/ind_nifty500list.csv"
+INDUSTRY_FILE = "stock_industries.csv"   # in config/: a copy of NSE's Nifty 500 list, used if the download fails
+
+
+def parse_industries(text):
+    """{SYMBOL: industry} from NSE's index list CSV (columns include Symbol and Industry)."""
+    import csv
+    import io
+    rows = list(csv.reader(io.StringIO(text.lstrip("﻿"))))
+    if not rows:
+        return {}
+    head = [h.strip().lower() for h in rows[0]]
+    try:
+        si, ii = head.index("symbol"), head.index("industry")
+    except ValueError:
+        return {}
+    return {r[si].strip().upper(): r[ii].strip() for r in rows[1:] if len(r) > max(si, ii) and r[si].strip()}
+
+
+def industries():
+    """Industry of each stock: NSE's Nifty 500 list (refreshed weekly), else config/stock_industries.csv.
+
+    Returns ({symbol: industry}, source text). Empty when neither is available; the
+    peer map from price correlation still works without it.
+    """
+    from forecast.config import CONFIG_DIR
+    cache = DATA_DIR / "cache" / "industries.json"
+    old = None
+    try:
+        old = json.loads(cache.read_text())
+        age = (now_ist().date() - datetime.fromisoformat(old["date"]).date()).days
+        if old.get("map") and age < 7:
+            return old["map"], old["source"]
+    except Exception:
+        pass
+    try:
+        _, raw = net.request(NIFTY500_LIST, headers={"User-Agent": "Mozilla/5.0"}, timeout=20)
+        m = parse_industries(raw.decode("utf-8", "replace"))
+        if len(m) >= 300:
+            cache.parent.mkdir(parents=True, exist_ok=True)
+            cache.write_text(json.dumps({"date": now_ist().date().isoformat(), "source": "NSE Nifty 500 list", "map": m}))
+            return m, "NSE Nifty 500 list"
+    except Exception:
+        pass
+    local = CONFIG_DIR / INDUSTRY_FILE
+    if local.exists():
+        m = parse_industries(local.read_text(errors="replace"))
+        if m:
+            return m, "config/%s" % INDUSTRY_FILE
+    if old and old.get("map"):
+        return old["map"], "%s (cached %s)" % (old["source"], old["date"])
+    return {}, "none"

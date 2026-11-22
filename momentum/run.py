@@ -4,6 +4,7 @@ data     08:10  numbers for every F&O stock -> momentum/latest.json and momentum
 preopen  09:07  indicative opening prices -> Telegram: the real gaps, and each pick against its gap
 check5   09:20  stocks trading at twice their usual volume, and where each pick stands
 check30  09:47  the same after 30 minutes
+watch    every minute 09:16-15:16: alerts the moment a pick or its option hits a level
 eod      16:05  scores the day's picks, updates the scorecard, saves futures open interest
 
 Advisory and read-only. It places no orders and does not touch the EMA bot or the forecast rules.
@@ -79,7 +80,8 @@ def load_picks(today):
         out.append({"symbol": sym, "direction": direction, "horizon": horizon,
                     "tier": str(p.get("tier") or "list").lower(), "conviction": str(p.get("conviction") or "unknown").lower(),
                     "evidence": [str(e).lower() for e in (ev if isinstance(ev, list) else [ev])],
-                    "confirm": p.get("confirm"), "cancel": p.get("cancel"), "target": p.get("target")})
+                    "confirm": p.get("confirm"), "cancel": p.get("cancel"), "target": p.get("target"),
+                    "surprise_pct": p.get("surprise_pct")})
     return out
 
 
@@ -218,7 +220,7 @@ def cmd_data(args):
     index_ret = calc.returns_by_date(nifty_days)
     index_chg20 = calc.pct(nifty_days[-1]["c"], nifty_days[-21]["c"])
 
-    stocks, failed, events = {}, [], []
+    stocks, failed, events, rets = {}, [], [], {}
     for sym in sorted(universe):
         try:
             days = [d for d in api.daily(universe[sym]["eq"], frm, today) if d["date"] < today]
@@ -230,6 +232,7 @@ def cmd_data(args):
                     f["stale"] = True
                 stocks[sym] = f
                 events += calc.gap_events(days)
+                rets[sym] = dict(list(calc.returns_by_date(days).items())[-61:])
         except Exception as e:
             failed.append("%s: %s" % (sym, redact(str(e))[:70]))
         time.sleep(api.PACE_S)
@@ -289,6 +292,26 @@ def cmd_data(args):
         notes.append("sectors failed: %s" % redact(str(e))[:60])
 
     lists = build_lists(stocks, index_chg20)
+    # peers by co-movement, industries from NSE's list, and industry strength among F&O stocks
+    try:
+        peers = calc.peer_map(rets, index_ret)
+        for sym, pr in peers.items():
+            stocks[sym]["peers"] = pr
+        checks.append({"name": "peers", "ok": True, "detail": "%d stocks with peers" % len(peers)})
+    except Exception as e:
+        notes.append("peer map failed: %s" % redact(str(e))[:60])
+    ind, ind_source = api.industries()
+    for sym, f in stocks.items():
+        if ind.get(sym):
+            f["industry"] = ind[sym]
+    sectors = calc.sector_table(stocks, ind) if ind else []
+    rank = {r["industry"]: r["rank"] for r in sectors}
+    for f in stocks.values():
+        if f.get("industry") in rank:
+            f["industry_rank"] = rank[f["industry"]]
+    market["industries"] = {"source": ind_source, "count": len(sectors), "table": sectors}
+    if not ind:
+        notes.append("no industry list: NSE download failed and config/stock_industries.csv is missing")
     swing = build_swing(stocks)
     lists.update(swing)
     scan = list(dict.fromkeys(lists["focus"] + swing["swing_up"] + swing["swing_down"]))[:OPTION_SCAN]
@@ -527,6 +550,134 @@ def cmd_check(args, label):
     return 0
 
 
+# ------------------------------------------------------------------ live watch
+
+WATCH_FROM, WATCH_TO = dtime(9, 16), dtime(15, 16)
+ENTRY_UNTIL = dtime(9, 50)
+EXIT_BY = dtime(15, 0)
+
+
+def trading_day_cached(now):
+    """trading_day() once per date; the watcher runs every minute."""
+    path = "cache/tradingday.json"
+    c = store.read_json(path, {}) or {}
+    day = now.date().isoformat()
+    if c.get("date") != day:
+        ok, why = trading_day(now)
+        c = {"date": day, "ok": ok, "why": why}
+        write_compact(path, c)
+    return c["ok"], c["why"]
+
+
+def watch_events(p, last, state, now):
+    """New alerts for one pick from its latest price. Mutates state; returns alert texts."""
+    out = []
+    up = p["direction"] == "UP"
+    try:
+        confirm, cancel = float(p["confirm"]), float(p["cancel"])
+    except (TypeError, ValueError):
+        return out
+    target = p.get("target")
+    beyond = (lambda x: last >= x) if up else (lambda x: last <= x)
+    before = (lambda x: last <= x) if up else (lambda x: last >= x)
+    st = state.get("stage", "waiting")
+    if p["horizon"] == "swing":
+        if st == "waiting" and now.time() >= dtime(15, 5) and beyond(confirm):
+            state["stage"] = "flagged"
+            out.append("SWING %s %s: at %.2f, beyond its trigger %.2f. Enters only if it CLOSES there; stop %.2f."
+                       % (p["symbol"], p["direction"], last, confirm, cancel))
+        return out
+    if st == "waiting":
+        if before(cancel):
+            state["stage"] = "done"
+            out.append("CANCELLED %s %s: %.2f hit the cancel level %.2f before confirming. No trade."
+                       % (p["symbol"], p["direction"], last, cancel))
+        elif beyond(confirm):
+            state["stage"] = "entered" if now.time() <= ENTRY_UNTIL else "late"
+            if state["stage"] == "entered":
+                out.append("ENTRY %s %s: %.2f traded through confirm %.2f. Stop %.2f%s."
+                           % (p["symbol"], p["direction"], last, confirm, cancel,
+                              (", target %.2f" % float(target)) if target not in (None, "") else ""))
+            else:
+                out.append("LATE %s %s: confirmed at %.2f after 09:50, outside the entry window. Skip by the rules."
+                           % (p["symbol"], p["direction"], last))
+    elif st == "entered":
+        if before(cancel):
+            state["stage"] = "done"
+            out.append("STOP %s %s: %.2f hit the stop %.2f. Exit." % (p["symbol"], p["direction"], last, cancel))
+        elif target not in (None, "") and beyond(float(target)):
+            state["stage"] = "done"
+            out.append("TARGET %s %s: %.2f reached the target %.2f." % (p["symbol"], p["direction"], last, float(target)))
+        elif now.time() >= EXIT_BY and not state.get("exit_sent"):
+            state["exit_sent"] = True
+            out.append("15:00 EXIT %s %s: still open at %.2f. The plan is to be out now." % (p["symbol"], p["direction"], last))
+    return out
+
+
+def option_events(opt, price, state):
+    out = []
+    if price is None or not opt or opt.get("premium_stop") is None or state.get("opt_done"):
+        return out
+    name = "%s %g %s" % (opt.get("symbol", ""), opt["strike"], opt["side"])
+    if price <= opt["premium_stop"]:
+        state["opt_done"] = True
+        out.append("OPTION STOP %s: premium %.2f at or below the stop %.2f." % (name, price, opt["premium_stop"]))
+    elif opt.get("premium_target") is not None and price >= opt["premium_target"]:
+        state["opt_done"] = True
+        out.append("OPTION TARGET %s: premium %.2f reached %.2f." % (name, price, opt["premium_target"]))
+    return out
+
+
+def cmd_watch(args):
+    """Every minute from 09:16 to 15:16: check each pick (and its option) twice, alert on any level hit."""
+    now = now_ist()
+    if not args.force and not (WATCH_FROM <= now.time() <= WATCH_TO):
+        return 0
+    if now.weekday() >= 5:
+        return 0
+    ok, _ = trading_day_cached(now)
+    if not ok:
+        return 0
+    today = now.date().isoformat()
+    picks = load_picks(today)
+    if not picks:
+        return 0
+    uni = api.load_universe()["stocks"]
+    plans = {(x["symbol"], x["horizon"]): x.get("option") for x in
+             (store.read_json(D + "checks/%s_5.json" % today) or {}).get("picks") or []}
+    path = D + "watch/%s.json" % today
+    state = store.read_json(path, {}) or {}
+    alerts = []
+    for poll in range(1 if args.force else 2):
+        if poll:
+            time.sleep(28)
+            now = now_ist()
+        keys = [uni[p["symbol"]]["eq"] for p in picks if p["symbol"] in uni]
+        keys += [o["key"] for o in plans.values() if o and o.get("key")]
+        try:
+            q = api.quotes(keys)
+        except Exception as e:
+            store.log("momentum watch: quotes failed: %s" % e)
+            break
+        for p in picks:
+            if p["symbol"] not in uni:
+                continue
+            k = "%s|%s" % (p["symbol"], p["horizon"])
+            st = state.setdefault(k, {})
+            last = (q.get(uni[p["symbol"]]["eq"]) or {}).get("last")
+            if last:
+                alerts += watch_events(p, last, st, now)
+            opt = plans.get((p["symbol"], p["horizon"]))
+            if opt and opt.get("key") and st.get("stage") == "entered":
+                alerts += option_events(dict(opt, symbol=p["symbol"]), (q.get(opt["key"]) or {}).get("last"), st)
+    write_compact(path, state)
+    if alerts:
+        telegram.send("<b>Pick alert</b> %s\n%s\n<i>Advisory only.</i>" % (now.strftime("%H:%M"),
+                      "\n".join(telegram.esc(a) for a in alerts)), args.dry_run)
+        store.log("momentum watch: " + " | ".join(alerts))
+    return 0
+
+
 # ------------------------------------------------------------------ end of day
 
 def session_bars(key, today, after=None):
@@ -659,10 +810,12 @@ def cmd_eod(args):
     ip_tally = calc.tally([dict(r, right=False) for r in inplay if r.get("trade")]) if inplay else None
 
     sc = calc.scorecard(rows)
+    learned = calc.learn(rows)
     n_days = len({r["date"] for r in rows})
     store.write_json(D + "scorecard.json", {"updated": now.isoformat(timespec="seconds"), "sessions": n_days,
-                                            "rules_version": calc.RULES_VERSION, "picks": sc, "in_play": ip_tally})
-    write_text(D + "scorecard.md", brief.render_scorecard(sc, ip_tally, n_days))
+                                            "rules_version": calc.RULES_VERSION, "picks": sc, "in_play": ip_tally,
+                                            "learned": learned})
+    write_text(D + "scorecard.md", brief.render_scorecard(sc, ip_tally, n_days) + brief.render_learned(learned))
     msg = {"date": now.strftime("%d %b"), "today": todays, "scorecard": sc, "inplay": ip_tally if ip_tally and ip_tally["n"] else None,
            "note": None if todays else ("Today's picks were already scored." if load_picks(today) else "No picks file was logged today.")}
     telegram.send(brief.eod_message(msg), args.dry_run)
@@ -749,13 +902,13 @@ def cmd_selftest(args):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="momentum.run", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("command", choices=["data", "preopen", "check5", "check30", "eod", "selftest"])
+    ap.add_argument("command", choices=["data", "preopen", "check5", "check30", "watch", "eod", "selftest"])
     ap.add_argument("--dry-run", action="store_true", help="print Telegram messages instead of sending")
     ap.add_argument("--force", action="store_true", help="run outside the normal time window")
     ap.add_argument("--no-telegram", action="store_true", help="selftest: skip the Telegram test message")
     args = ap.parse_args(argv)
     fn = {"data": cmd_data, "preopen": cmd_preopen, "check5": lambda a: cmd_check(a, "5"),
-          "check30": lambda a: cmd_check(a, "30"), "eod": cmd_eod, "selftest": cmd_selftest}[args.command]
+          "check30": lambda a: cmd_check(a, "30"), "watch": cmd_watch, "eod": cmd_eod, "selftest": cmd_selftest}[args.command]
     try:
         return fn(args)
     except Exception as e:

@@ -1,0 +1,13 @@
+[Unit]
+Description=F&O momentum: live watch of the day's picks (every minute 09:16-15:16 IST, Mon-Fri)
+
+[Timer]
+# Fires every minute 09:00-15:59; the job itself exits at once outside 09:16-15:16,
+# on holidays and when there are no picks.
+OnCalendar=Mon..Fri *-*-* 09..15:*:05 Asia/Kolkata
+AccuracySec=1s
+Persistent=false
+Unit=nifty-momentum@watch.service
+
+[Install]
+WantedBy=timers.target

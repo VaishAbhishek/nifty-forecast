@@ -66,7 +66,7 @@ sudo install -m 644 "$tmp"/* /etc/systemd/system/
 rm -rf "$tmp"
 sudo systemctl daemon-reload
 sudo systemctl enable --now nifty-forecast-morning.timer nifty-forecast-recheck.timer nifty-forecast-score.timer nifty-forecast-sync.timer
-sudo systemctl enable --now nifty-momentum-data.timer nifty-momentum-preopen.timer nifty-momentum-check5.timer nifty-momentum-check30.timer nifty-momentum-eod.timer nifty-momentum-sync.timer
+sudo systemctl enable --now nifty-momentum-data.timer nifty-momentum-preopen.timer nifty-momentum-check5.timer nifty-momentum-check30.timer nifty-momentum-watch.timer nifty-momentum-eod.timer nifty-momentum-sync.timer
 cat "$CODE"/deploy/*.service "$CODE"/deploy/*.timer | sha256sum | cut -c1-16 > "$DATA/cache/installed_units"
 
 say "Live self-test, run through systemd so the sandbox is tested too"

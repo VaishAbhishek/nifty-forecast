@@ -99,6 +99,12 @@ def request(url, method="GET", headers=None, data=None, timeout=12, retries=1):
 
     if url.endswith("/NSE.json.gz"):
         return 200, instruments_file()
+    if "ind_nifty500list.csv" in url:
+        inds = ["Financial Services", "Information Technology", "Automobile and Auto Components", "Healthcare"]
+        lines = ["Company Name,Industry,Symbol,Series,ISIN Code"]
+        lines += ["%s Ltd.,%s,%s,EQ,INE%04dA01" % (sy, inds[i % 4], sy, i) for i, sy in enumerate(SYMS)]
+        lines += ["Other %d Ltd.,Chemicals,OTHER%d,EQ,INE9%03dZ01" % (i, i, i) for i in range(300)]
+        return 200, ("\ufeff" + "\n".join(lines)).encode()
     if "api.upstox.com" in url:
         assert method == "GET", "momentum must only ever GET from Upstox"
         assert (headers or {}).get("Authorization", "").startswith("Bearer ")
@@ -316,6 +322,80 @@ class Calculations(unittest.TestCase):
         st = calc.panic_state(crash, scared)
         self.assertTrue(st["panic"], st)
 
+    def test_industries_and_peers(self):
+        m = api.parse_industries("\ufeffCompany Name,Industry,Symbol,Series,ISIN Code\nA Ltd.,Power,aaa,EQ,X\nB Ltd.,\"Oil, Gas\",BBB,EQ,Y\n")
+        self.assertEqual(m, {"AAA": "Power", "BBB": "Oil, Gas"})
+        self.assertEqual(api.parse_industries("x,y\n1,2"), {})
+        import random as rnd
+        r = rnd.Random(1)
+        dates = ["d%02d" % i for i in range(60)]
+        idx = {d: r.gauss(0, 1) for d in dates}
+        drv = {d: r.gauss(0, 1) for d in dates}
+        rets = {"A": {d: idx[d] + drv[d] + r.gauss(0, 0.3) for d in dates},
+                "B": {d: idx[d] + drv[d] + r.gauss(0, 0.3) for d in dates},
+                "C": {d: idx[d] + r.gauss(0, 1) for d in dates}}
+        peers = calc.peer_map(rets, idx)
+        self.assertEqual(peers["A"][0][0], "B")
+        self.assertNotIn("C", [x[0] for x in peers.get("A", [])])
+        st = {"A": {"chg1": 1, "chg5": 2, "rs20": 5}, "B": {"chg1": 1, "chg5": 2, "rs20": 3}, "C": {"chg1": -1, "chg5": -2, "rs20": -4},
+              "D": {"chg1": 0, "chg5": 1, "rs20": 1}, "E": {"chg1": 0, "chg5": -1, "rs20": -2}, "F": {"chg1": 0, "chg5": 0, "rs20": 0}}
+        t = calc.sector_table(st, {"A": "X", "B": "X", "D": "X", "C": "Y", "E": "Y", "F": "Y"})
+        self.assertEqual([(x["industry"], x["rank"], x["rs20"]) for x in t], [("X", 1, 3), ("Y", 2, -2)])
+
+    def test_learn(self):
+        import random as rnd
+        r = rnd.Random(7)
+        rows = []
+        for i in range(160):
+            cat = i % 2 == 0
+            rows.append({"evidence": ["catalyst", "volume"] if cat else ["volume"], "horizon": "intraday", "direction": "UP",
+                         "regime": "trend_up", "right": r.random() < (0.7 if cat else 0.35), "surprise_pct": 12 if cat else None})
+        L = calc.learn(rows)
+        self.assertEqual(L["n"], 160)
+        w = {x["feature"]: x["weight"] for x in L["model"]["weights"]}
+        self.assertGreater(w["tag:catalyst"], 0.3)
+        t = {x["feature"]: x for x in L["table"]}
+        self.assertLess(t["tag:catalyst"]["lo90"], t["tag:catalyst"]["hit"])
+        self.assertIn("surprise:beat 10%+", t)
+        few = calc.learn(rows[:40])
+        self.assertIsNone(few["model"])
+        self.assertIn("40 so far", few["note"])
+        self.assertIn("Model weights", brief.render_learned(L))
+        self.assertEqual(calc.surprise_bucket(-12), "miss 10%+")
+        self.assertEqual(calc.wilson(0, 0), (None, None))
+
+    def test_watch_events(self):
+        from datetime import datetime as dt
+        p = {"symbol": "ABC", "direction": "UP", "horizon": "intraday", "confirm": 100, "cancel": 98, "target": 104}
+        st = {}
+        t = dt(2026, 11, 23, 9, 30, tzinfo=IST)
+        self.assertEqual(run.watch_events(p, 99.5, st, t), [])
+        self.assertTrue(run.watch_events(p, 100.2, st, t)[0].startswith("ENTRY ABC UP"))
+        self.assertEqual(run.watch_events(p, 101, st, t), [])          # no repeat
+        self.assertTrue(run.watch_events(p, 104.1, st, t)[0].startswith("TARGET"))
+        self.assertEqual(run.watch_events(p, 90, st, t), [])           # done
+        st = {}
+        self.assertTrue(run.watch_events(p, 97.9, st, t)[0].startswith("CANCELLED"))
+        st = {}
+        late = dt(2026, 11, 23, 10, 5, tzinfo=IST)
+        self.assertTrue(run.watch_events(p, 100.5, st, late)[0].startswith("LATE"))
+        st = {"stage": "entered"}
+        self.assertTrue(run.watch_events(p, 101, st, dt(2026, 11, 23, 15, 1, tzinfo=IST))[0].startswith("15:00 EXIT"))
+        self.assertEqual(run.watch_events(p, 101, st, dt(2026, 11, 23, 15, 2, tzinfo=IST)), [])
+        d = dict(p, direction="DOWN", confirm=100, cancel=102, target=96)
+        st = {}
+        self.assertTrue(run.watch_events(d, 99.8, st, t)[0].startswith("ENTRY ABC DOWN"))
+        self.assertTrue(run.watch_events(d, 102.1, st, t)[0].startswith("STOP"))
+        sw = dict(p, horizon="swing")
+        st = {}
+        self.assertEqual(run.watch_events(sw, 101, st, t), [])
+        self.assertTrue(run.watch_events(sw, 101, st, dt(2026, 11, 23, 15, 6, tzinfo=IST))[0].startswith("SWING"))
+        o = {"symbol": "ABC", "strike": 100, "side": "CE", "premium_stop": 4.0, "premium_target": 9.0}
+        ost = {}
+        self.assertEqual(run.option_events(o, 5, ost), [])
+        self.assertTrue(run.option_events(o, 9.5, ost)[0].startswith("OPTION TARGET"))
+        self.assertEqual(run.option_events(o, 3, ost), [])
+
     def test_scorecard(self):
         rows = [{"tier": "best", "conviction": "high", "horizon": "intraday", "direction": "UP", "evidence": ["catalyst", "volume"],
                  "right": True, "ret": 1.0, "alpha": 0.5, "trade": {"status": "target", "r": 2.0}},
@@ -367,6 +447,10 @@ class Pipeline(unittest.TestCase):
         self.assertIn("swing_up", d["lists"])
         self.assertIn("panic", d["market"])
         self.assertIn("Swing candidates", text)
+        self.assertEqual(d["market"]["industries"]["source"], "NSE Nifty 500 list")
+        self.assertEqual(d["market"]["industries"]["count"], 4)
+        self.assertIn("Industry strength among F&O stocks", text)
+        self.assertEqual(d["stocks"]["STOCK06"]["industry"], "Automobile and Auto Components")
         some = d["stocks"]["STOCK07"]
         for k in ("chg1", "vol_ratio", "atr_pct", "move_atr", "beta", "est_gap", "oi_chg", "from_52w_high"):
             self.assertIsNotNone(some.get(k), k)
@@ -413,6 +497,13 @@ class Pipeline(unittest.TestCase):
                 self.assertIn("now", o)
             self.assertIn("Options for intraday picks", sent[-1])
 
+        for clock in ("09:55:05", "15:06:05"):
+            at(day + "T%s+05:30" % clock)
+            self.assertEqual(run.main(["watch"]), 0)
+        self.assertTrue((Path(self.tmp) / "momentum" / "watch" / ("%s.json" % day)).exists())
+        at(day + "T08:00:05+05:30")
+        self.assertEqual(run.main(["watch"]), 0)                    # outside the window: nothing happens
+
         at(day + "T16:05:00+05:30")
         self.assertEqual(run.main(["eod"]), 0)
         self.assertIn("Momentum picks: results", sent[-1])
@@ -445,6 +536,8 @@ class Pipeline(unittest.TestCase):
         self.assertEqual(sc["picks"]["evidence"]["catalyst"]["n"], 7)
         self.assertEqual(sc["in_play"]["n"], 7)
         self.assertIn("In-play", (Path(self.tmp) / "momentum" / "scorecard.md").read_text())
+        self.assertIn("What the record says", (Path(self.tmp) / "momentum" / "scorecard.md").read_text())
+        self.assertEqual(sc["learned"]["n"], 10)   # 7 intraday + the 3 swing picks whose 5-day window closed
 
     def test_2_skips_and_windows(self):
         n = len(fake_net.sent_messages)

@@ -282,10 +282,11 @@ def tally(rows):
 def scorecard(rows):
     """Tallies overall and by tier, conviction, horizon, direction, evidence, market regime and gap verdict."""
     groups = {"all": {"all": rows}}
-    for field in ("tier", "conviction", "horizon", "direction", "regime", "gap_verdict"):
+    for field in ("tier", "conviction", "horizon", "direction", "regime", "gap_verdict", "surprise"):
         g = {}
         for r in rows:
-            g.setdefault(str(r.get(field) or "unknown").lower(), []).append(r)
+            v = surprise_bucket(r.get("surprise_pct")) if field == "surprise" else r.get(field)
+            g.setdefault(str(v or "unknown").lower(), []).append(r)
         groups[field] = g
     ev = {}
     for r in rows:
@@ -446,3 +447,171 @@ def option_plan(chain, direction, lot, risk_per_share, rv20=None, expiry=None, s
     plan["flags"] = flags
     plan["grade"] = "ok" if not flags or flags == ["no live bid/ask"] else "caution"
     return plan
+
+
+# ------------------------------------------------------------------ peers and sectors (rules version 2)
+
+def correlation(a, b):
+    n = len(a)
+    if n < 20:
+        return None
+    ma, mb = sum(a) / n, sum(b) / n
+    va = sum((x - ma) ** 2 for x in a)
+    vb = sum((y - mb) ** 2 for y in b)
+    if va <= 0 or vb <= 0:
+        return None
+    return sum((x - ma) * (y - mb) for x, y in zip(a, b)) / (va * vb) ** 0.5
+
+
+def peer_map(returns, index_ret=None, n=60, top=5, min_corr=0.45):
+    """Each stock's closest peers by correlation of daily returns over n sessions.
+
+    The market's own move is taken out first (returns minus beta x index), so two
+    stocks count as peers because they share an industry driver, not just because
+    both follow Nifty.
+    """
+    dates = None
+    for r in returns.values():
+        ds = set(r)
+        dates = ds if dates is None else dates & ds
+    dates = sorted(dates or [])[-n:]
+    if len(dates) < 30:
+        return {}
+    series = {}
+    for sym, r in returns.items():
+        xs = [r[d] for d in dates]
+        if index_ret and all(d in index_ret for d in dates):
+            ix = [index_ret[d] for d in dates]
+            mi = sum(ix) / len(ix)
+            vi = sum((v - mi) ** 2 for v in ix)
+            if vi > 0:
+                mx = sum(xs) / len(xs)
+                b = sum((v - mi) * (x - mx) for v, x in zip(ix, xs)) / vi
+                xs = [x - b * v for x, v in zip(xs, ix)]
+        series[sym] = xs
+    syms = sorted(series)
+    best = {s: [] for s in syms}
+    for i, a in enumerate(syms):
+        for b in syms[i + 1:]:
+            c = correlation(series[a], series[b])
+            if c is not None and c >= min_corr:
+                best[a].append((c, b))
+                best[b].append((c, a))
+    return {s: [[b, r2(c)] for c, b in sorted(v, reverse=True)[:top]] for s, v in best.items() if v}
+
+
+def sector_table(stocks, industry_of, min_members=3):
+    """Median move of the F&O stocks in each industry, ranked by 20-session strength against Nifty."""
+    groups = {}
+    for sym, f in stocks.items():
+        ind = industry_of.get(sym)
+        if ind:
+            groups.setdefault(ind, []).append(f)
+    rows = []
+    for ind, fs in groups.items():
+        if len(fs) < min_members:
+            continue
+        rows.append({"industry": ind, "members": len(fs), "chg1": r2(median([f.get("chg1") for f in fs])),
+                     "chg5": r2(median([f.get("chg5") for f in fs])), "rs20": r2(median([f.get("rs20") for f in fs])),
+                     "up_share": r2(sum(1 for f in fs if (f.get("chg5") or 0) > 0) / len(fs))})
+    rows.sort(key=lambda r: -(r["rs20"] if r["rs20"] is not None else -99))
+    for i, r in enumerate(rows):
+        r["rank"] = i + 1
+    return rows
+
+
+# ------------------------------------------------------------------ learning from the record
+
+def wilson(k, n, z=1.645):
+    """90% Wilson interval for a hit rate of k out of n."""
+    if not n:
+        return None, None
+    p = k / n
+    d = 1 + z * z / n
+    c = (p + z * z / (2 * n)) / d
+    h = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d
+    return r2(c - h), r2(c + h)
+
+
+def surprise_bucket(x):
+    try:
+        x = float(x)
+    except (TypeError, ValueError):
+        return None
+    if x >= 10:
+        return "beat 10%+"
+    if x >= 0:
+        return "beat 0-10%"
+    if x > -10:
+        return "miss 0-10%"
+    return "miss 10%+"
+
+
+def outcome(r):
+    """1 if the pick worked: for swing the 10-session result (or 5 if that is all there is), else open to close."""
+    if r.get("horizon") == "swing":
+        v = r.get("ret_10d") if r.get("ret_10d") is not None else r.get("ret_5d")
+        return None if v is None else (1.0 if v > 0 else 0.0)
+    return 1.0 if r.get("right") else 0.0
+
+
+def features_of(r):
+    names = ["tag:" + str(e).lower() for e in (r.get("evidence") or [])]
+    names += ["horizon:" + str(r.get("horizon")), "direction:" + str(r.get("direction")),
+              "regime:" + str(r.get("regime") or "unknown")]
+    b = surprise_bucket(r.get("surprise_pct"))
+    if b:
+        names.append("surprise:" + b)
+    return names
+
+
+LEARN_MIN = 100
+
+
+def learn(rows, min_rows=LEARN_MIN, steps=3000, lr=0.3, l2=1.0):
+    """What the record says about each kind of evidence.
+
+    Always: hit rate with a 90% interval for every tag, horizon, direction, regime and
+    surprise bucket. Once there are min_rows finished picks: a logistic regression on
+    the same features (standard library, gradient descent with a ridge penalty), so each
+    piece of evidence gets a weight with the others held fixed. Positive weight = it
+    has gone with picks that worked.
+    """
+    data = [(features_of(r), outcome(r)) for r in rows]
+    data = [(f, y) for f, y in data if y is not None]
+    groups = {}
+    for f, y in data:
+        for name in f:
+            g = groups.setdefault(name, [0, 0])
+            g[0] += 1
+            g[1] += y
+    table = []
+    for name, (n, k) in sorted(groups.items()):
+        lo, hi = wilson(k, n)
+        table.append({"feature": name, "n": n, "hit": r2(k / n), "lo90": lo, "hi90": hi})
+    out = {"n": len(data), "table": table, "model": None}
+    if len(data) < min_rows or len({y for _, y in data}) < 2:
+        out["note"] = "model starts at %d finished picks; %d so far" % (min_rows, len(data))
+        return out
+    names = sorted(n for n, (c, _) in groups.items() if c >= 10)
+    idx = {n: i for i, n in enumerate(names)}
+    w, b = [0.0] * len(names), 0.0
+    X = [[idx[n] for n in f if n in idx] for f, _ in data]
+    Y = [y for _, y in data]
+    m = len(data)
+    for _ in range(steps):
+        gw, gb = [0.0] * len(names), 0.0
+        for xs, y in zip(X, Y):
+            z = b + sum(w[i] for i in xs)
+            p = 1 / (1 + math.exp(-max(-30, min(30, z))))
+            e = p - y
+            gb += e
+            for i in xs:
+                gw[i] += e
+        b -= lr * gb / m
+        for i in range(len(w)):
+            w[i] -= lr * (gw[i] / m + l2 * w[i] / m)
+    out["model"] = {"intercept": r2(b, 3), "base_rate": r2(sum(Y) / m),
+                    "weights": sorted(({"feature": n, "weight": r2(w[idx[n]], 3), "n": groups[n][0]} for n in names),
+                                      key=lambda x: -x["weight"])}
+    return out

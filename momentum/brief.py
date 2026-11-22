@@ -105,6 +105,27 @@ def render_brief(d):
                 num(f.get("chg5"), "%+.1f%%"), num(opt.get("iv_vs_rv"), "%.2f"), opt.get("expiry") or "-"))
     if not (d["lists"].get("swing_up") or d["lists"].get("swing_down")):
         out.append("| none today | | | | | | | | | | | | | |")
+    ind = m.get("industries") or {}
+    out += ["", "## Industry strength among F&O stocks (source: %s)" % ind.get("source", "none"), ""]
+    if ind.get("table"):
+        out += ["Ranked by median 20-session strength against Nifty. Industries need 3+ F&O members.", "",
+                "| Rank | Industry | Members | Median last day | Median 5d | Median vs Nifty 20d | Share up 5d |", "|---|---|---|---|---|---|---|"]
+        for r in ind["table"]:
+            out.append("| %d | %s | %d | %s | %s | %s | %.0f%% |" % (r["rank"], r["industry"], r["members"], num(r["chg1"], "%+.1f%%"),
+                                                                 num(r["chg5"], "%+.1f%%"), num(r["rs20"], "%+.1f%%"), r["up_share"] * 100))
+    else:
+        out.append("No industry list today. Peers below still come from price co-movement.")
+    watch = list(dict.fromkeys((d["lists"].get("focus") or []) + (d["lists"].get("swing_up") or []) + (d["lists"].get("swing_down") or [])))
+    out += ["", "## Industry and peers of focus and swing stocks", "",
+            "Peers = F&O stocks whose daily moves (market move removed) tracked this stock most closely over 60 sessions.",
+            "When a stock has news, check whether its peers have moved yet.", "",
+            "| Stock | Industry (rank) | Peers (correlation) | Peers' last day |", "|---|---|---|---|"]
+    for sym in watch:
+        f = st[sym]
+        pr = f.get("peers") or []
+        out.append("| %s | %s | %s | %s |" % (sym, ("%s (%s)" % (f["industry"], f.get("industry_rank", "-"))) if f.get("industry") else "-",
+                                           ", ".join("%s %.2f" % (a, c) for a, c in pr) or "-",
+                                           ", ".join("%s %s" % (a, num((st.get(a) or {}).get("chg1"), "%+.1f%%")) for a, _ in pr) or "-"))
     out += ["", "## Focus list: stocks on two or more lists below", "", HEAD]
     out += [_row(s, st[s]) for s in d["lists"].get("focus", [])] or ["| none | | | | | | | | | | | | | |"]
     for key, title in LISTS:
@@ -261,3 +282,22 @@ def render_scorecard(sc, inplay, n_days):
                 "the close. Rules v1 signals (stop 10% of ATR inside the range) are kept but were mostly cancelled before entry.", "",
                 "%d signals, %d trades, average %s R, total %s R." % (inplay["n"], inplay["trades"], num(inplay["avg_r"], "%+.2f"), num(inplay["total_r"], "%+.1f")), ""]
     return "\n".join(out)
+
+
+def render_learned(L):
+    out = ["", "## What the record says about each kind of evidence", "",
+           "Finished picks: %d. Worked = intraday closed beyond the open in the pick's direction; swing = up (or down) after 10 sessions." % L["n"],
+           "The 90% range shows how uncertain each rate is; a range that includes 50% means no evidence either way yet.", ""]
+    if L["table"]:
+        out += ["| Feature | Picks | Worked | 90% range |", "|---|---|---|---|"]
+        for t in sorted(L["table"], key=lambda t: (-t["n"], t["feature"])):
+            out.append("| %s | %d | %.0f%% | %.0f%%-%.0f%% |" % (t["feature"], t["n"], t["hit"] * 100, t["lo90"] * 100, t["hi90"] * 100))
+    m = L.get("model")
+    if m:
+        out += ["", "### Model weights (logistic regression, each feature with the others held fixed)", "",
+                "Base rate %.0f%%. Positive weight = went with picks that worked. Features with fewer than 10 picks are left out." % (m["base_rate"] * 100),
+                "", "| Feature | Weight | Picks |", "|---|---|---|"]
+        out += ["| %s | %+.2f | %d |" % (w["feature"], w["weight"], w["n"]) for w in m["weights"]]
+    else:
+        out += ["", "Model: %s." % L.get("note", "not yet")]
+    return "\n".join(out) + "\n"

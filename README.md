@@ -76,6 +76,13 @@ The report's picks arrive as `momentum/picks/<date>.json` on the `data` branch. 
 - **Opening-range test**: stop at the other side of the opening range (the v1 stop sat inside the range, so most signals were cancelled before entry).
 - **Swing picks** are scored at 5 and 10 sessions.
 
+### Added 22 Nov 2026
+
+- **Live watch** (`watch`, every minute 09:16-15:16): checks each of the day's picks twice a minute and sends a Telegram alert the moment one confirms (ENTRY, only until 09:50; LATE after that), cancels, hits its stop or target, or its option premium hits the premium stop or target; a 15:00 exit reminder for open intraday picks; and for swing picks, a 15:05 note when price is beyond the trigger (entry still needs the close). Needs `deploy/install.sh` run once more for the new timer.
+- **Industries and peers** in the data file: NSE's Nifty 500 list gives each stock's industry (downloaded weekly; if the VM cannot reach NSE, put a copy of `ind_nifty500list.csv` at `config/stock_industries.csv`). Industries are ranked by median 20-session strength of their F&O members. Peers come from correlation of daily returns with the market's move removed (60 sessions), so they need no outside data.
+- **Learning from the record**: `scorecard.md` now shows, for every evidence tag, horizon, direction, regime and earnings-surprise bucket, how often picks with it worked and a 90% range. From 100 finished picks a logistic regression gives each feature a weight with the others held fixed.
+- **Earnings surprise**: picks may carry `surprise_pct` (actual profit against the analyst poll); the scorecard groups by surprise size.
+
 ### Read this before trusting it
 
 - A gap is already in the opening price. The pre-open message tells you how much of a pick's expected move is gone, not that there is money in the gap.
@@ -178,6 +185,6 @@ If a run breaks, you get a short "run failed" Telegram message, so silence never
 
 ```bash
 sudo systemctl disable --now nifty-forecast-morning.timer nifty-forecast-recheck.timer nifty-forecast-score.timer nifty-forecast-sync.timer
-sudo systemctl disable --now nifty-momentum-data.timer nifty-momentum-preopen.timer nifty-momentum-check5.timer nifty-momentum-check30.timer nifty-momentum-eod.timer nifty-momentum-sync.timer
+sudo systemctl disable --now nifty-momentum-data.timer nifty-momentum-preopen.timer nifty-momentum-check5.timer nifty-momentum-check30.timer nifty-momentum-watch.timer nifty-momentum-eod.timer nifty-momentum-sync.timer
 sudo rm /etc/systemd/system/nifty-forecast* /etc/systemd/system/nifty-momentum*; sudo systemctl daemon-reload
 ```
