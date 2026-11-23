@@ -333,9 +333,14 @@ def option_chain(eq_key, expiry):
 
 
 def option_move(eq_key, spot, expiries=None):
-    """At-the-money straddle on the nearest usable expiry: the move the options market is pricing."""
+    """At-the-money straddle on the nearest usable expiry: the move the options market is pricing.
+
+    On expiry day the expiring contract is skipped: its IV and straddle (taken at
+    08:10 from the previous close) describe a contract with hours left, which made
+    the brief's "IV vs realised" read about 0.5 for every stock on 23 Nov 2026.
+    """
     expiries = expiries or option_expiries(eq_key)
-    expiry = pick_expiry(expiries, min_sessions=1)
+    expiry = pick_expiry(expiries, min_sessions=2)
     if not expiry:
         raise UpstoxError("no option expiry")
     chain = option_chain(eq_key, expiry)
