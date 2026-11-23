@@ -1,0 +1,386 @@
+{
+ "date": "2026-11-23",
+ "generated": "08:45",
+ "no_trade": false,
+ "picks": [
+  {
+   "symbol": "APOLLOHOSP",
+   "direction": "UP",
+   "horizon": "intraday",
+   "tier": "best",
+   "conviction": "medium",
+   "evidence": [
+    "catalyst",
+    "analyst",
+    "volume",
+    "price",
+    "oi"
+   ],
+   "confirm": 9290.0,
+   "cancel": 9167.5,
+   "target": 9535.0,
+   "surprise_pct": null,
+   "reason": "Macquarie double upgrade 20 Nov; vol 2.4x, OI long build-up; partly priced"
+  },
+  {
+   "symbol": "MAXHEALTH",
+   "direction": "UP",
+   "horizon": "intraday",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "catalyst",
+    "analyst",
+    "volume",
+    "price",
+    "oi"
+   ],
+   "confirm": 1091.0,
+   "cancel": 1076.4,
+   "target": 1120.2,
+   "surprise_pct": null,
+   "reason": "Same Macquarie upgrade; extended +33% in 20d; correlated with Apollo"
+  },
+  {
+   "symbol": "TATASTEEL",
+   "direction": "UP",
+   "horizon": "intraday",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "catalyst"
+   ],
+   "confirm": 179.5,
+   "cancel": 175.8,
+   "target": 186.9,
+   "surprise_pct": null,
+   "reason": "Rs28k cr sale to APL Apollo; no confirming data yet"
+  },
+  {
+   "symbol": "ADANIENSOL",
+   "direction": "UP",
+   "horizon": "intraday",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "catalyst"
+   ],
+   "confirm": null,
+   "cancel": null,
+   "target": null,
+   "surprise_pct": null,
+   "reason": "WBSEDCL 1750MW power supply award; no confirming data"
+  },
+  {
+   "symbol": "MARUTI",
+   "direction": "UP",
+   "horizon": "intraday",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "catalyst",
+    "volume",
+    "price",
+    "oi"
+   ],
+   "confirm": 14055.0,
+   "cancel": 13866.0,
+   "target": 14433.0,
+   "surprise_pct": null,
+   "reason": "Minor 0.31% price hike; Friday move had no news"
+  },
+  {
+   "symbol": "ANANDRATHI",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "best",
+   "conviction": "high",
+   "evidence": [
+    "momentum",
+    "setup",
+    "sector"
+   ],
+   "confirm": 2413.2,
+   "cancel": 2344.3,
+   "target": 2550.9,
+   "surprise_pct": null,
+   "reason": "Mom pct 99, 1.4% below 52w high, volume drying, industry rank 5"
+  },
+  {
+   "symbol": "PHOENIXLTD",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup",
+    "sector"
+   ],
+   "confirm": 2309.7,
+   "cancel": 2098.2,
+   "target": 2732.8,
+   "surprise_pct": null,
+   "reason": "Realty rank 2, near high; no volume dry-up, wide stop"
+  },
+  {
+   "symbol": "INDHOTEL",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 915.3,
+   "cancel": 865.4,
+   "target": 1015.1,
+   "surprise_pct": null,
+   "reason": "At 52w high, tight base; industry rank 12"
+  },
+  {
+   "symbol": "SONACOMS",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 937.1,
+   "cancel": 882.5,
+   "target": 1046.3,
+   "surprise_pct": null,
+   "reason": "Mom 98, tight base, 5% below high"
+  },
+  {
+   "symbol": "NYKAA",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup",
+    "oi"
+   ],
+   "confirm": 369.3,
+   "cancel": 346.1,
+   "target": 415.6,
+   "surprise_pct": null,
+   "reason": "Tight base near high; industry rank 12; new-age beta"
+  },
+  {
+   "symbol": "SUZLON",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup",
+    "sector"
+   ],
+   "confirm": 35.7,
+   "cancel": 39.6,
+   "target": 27.9,
+   "surprise_pct": null,
+   "reason": "Weak momentum, capital goods bottom 3; against up regime"
+  },
+  {
+   "symbol": "MAZDOCK",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup",
+    "sector"
+   ],
+   "confirm": 1812.3,
+   "cancel": 1927.3,
+   "target": 1582.3,
+   "surprise_pct": null,
+   "reason": "Weak momentum, capital goods bottom 3; against up regime"
+  },
+  {
+   "symbol": "TVSMOTOR",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 4647.1,
+   "cancel": 4360.0,
+   "target": 5221.2,
+   "surprise_pct": null,
+   "reason": "Near high but short build-up in futures"
+  },
+  {
+   "symbol": "ATHERENERG",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 2028.1,
+   "cancel": 1808.6,
+   "target": 2467.2,
+   "surprise_pct": null,
+   "reason": "Mom 100 but post-lock-up block-deal overhang"
+  },
+  {
+   "symbol": "DIVISLAB",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 11859.6,
+   "cancel": 10669.0,
+   "target": 14240.9,
+   "surprise_pct": null,
+   "reason": "Trigger 6% away, no volume dry-up"
+  },
+  {
+   "symbol": "KARURVYSYA",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 399.1,
+   "cancel": 364.3,
+   "target": 468.7,
+   "surprise_pct": null,
+   "reason": "5% below high, no dry-up; RBI 4 Dec"
+  },
+  {
+   "symbol": "AUROPHARMA",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 1864.1,
+   "cancel": 1778.0,
+   "target": 2036.2,
+   "surprise_pct": null,
+   "reason": "Mixed USFDA headlines"
+  },
+  {
+   "symbol": "ETERNAL",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 378.9,
+   "cancel": 356.5,
+   "target": 423.7,
+   "surprise_pct": null,
+   "reason": "No dry-up; new-age beta after US tech rout"
+  },
+  {
+   "symbol": "BOSCHLTD",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 51471.8,
+   "cancel": 48370.0,
+   "target": 57675.5,
+   "surprise_pct": null,
+   "reason": "6% below high, no dry-up"
+  },
+  {
+   "symbol": "SWIGGY",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 176.0,
+   "cancel": 201.3,
+   "target": 125.5,
+   "surprise_pct": null,
+   "reason": "Weak momentum; unverified MSCI exit talk"
+  },
+  {
+   "symbol": "VMM",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 89.1,
+   "cancel": 97.8,
+   "target": 71.5,
+   "surprise_pct": null,
+   "reason": "Weak momentum; industry mid-ranked"
+  },
+  {
+   "symbol": "TIINDIA",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 2112.6,
+   "cancel": 2349.0,
+   "target": 1639.8,
+   "surprise_pct": null,
+   "reason": "Weak momentum; no dry-up"
+  },
+  {
+   "symbol": "TMPV",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 250.5,
+   "cancel": 280.4,
+   "target": 190.9,
+   "surprise_pct": null,
+   "reason": "Pullback near low; short-covering risk"
+  }
+ ]
+}
