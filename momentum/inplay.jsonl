@@ -30,3 +30,13 @@
 {"atr": 44.87, "date": "2026-11-20", "direction": "UP", "or_high": 1248.0, "or_low": 1231.9, "relvol": 6.1, "rules_version": 1, "symbol": "VOLTAS", "trade": {"status": "cancelled"}}
 {"atr": 10.96, "date": "2026-11-20", "direction": "UP", "or_high": 399.5, "or_low": 394.55, "relvol": 5.6, "rules_version": 1, "symbol": "AMBUJACEM", "trade": {"status": "cancelled"}}
 {"atr": 7.49, "date": "2026-11-20", "direction": "UP", "or_high": 221.56, "or_low": 217.03, "relvol": 5.2, "rules_version": 1, "symbol": "CROMPTON", "trade": {"status": "cancelled"}}
+{"atr": 49.65, "date": "2026-11-23", "direction": "DOWN", "or_high": 2006.4, "or_low": 1909.5, "relvol": 102.9, "rules_version": 2, "symbol": "APLAPOLLO", "trade": null}
+{"atr": 4.95, "date": "2026-11-23", "direction": "DOWN", "or_high": 173.8, "or_low": 169.56, "relvol": 16.9, "rules_version": 2, "symbol": "TATASTEEL", "trade": null}
+{"atr": 8.0, "date": "2026-11-23", "direction": "DOWN", "or_high": 253.99, "or_low": 249.1, "relvol": 7.9, "rules_version": 2, "symbol": "CUB", "trade": null}
+{"atr": 7.64, "date": "2026-11-23", "direction": "DOWN", "or_high": 195.95, "or_low": 192.01, "relvol": 5.3, "rules_version": 2, "symbol": "RVNL", "trade": null}
+{"atr": 28.86, "date": "2026-11-23", "direction": "DOWN", "or_high": 1015.0, "or_low": 992.1, "relvol": 5.1, "rules_version": 2, "symbol": "SHRIRAMFIN", "trade": null}
+{"atr": 36.8, "date": "2026-11-23", "direction": "UP", "or_high": 1227.55, "or_low": 1214.45, "relvol": 5.0, "rules_version": 2, "symbol": "360ONE", "trade": null}
+{"atr": 5.18, "date": "2026-11-23", "direction": "DOWN", "or_high": 132.4, "or_low": 128.8, "relvol": 4.9, "rules_version": 2, "symbol": "IREDA", "trade": null}
+{"atr": 43.03, "date": "2026-11-23", "direction": "DOWN", "or_high": 1524.5, "or_low": 1499.3, "relvol": 4.7, "rules_version": 2, "symbol": "ADANIENSOL", "trade": null}
+{"atr": 84.69, "date": "2026-11-23", "direction": "DOWN", "or_high": 2268.6, "or_low": 2234.9, "relvol": 4.6, "rules_version": 2, "symbol": "TIINDIA", "trade": null}
+{"atr": 10.07, "date": "2026-11-23", "direction": "DOWN", "or_high": 405.0, "or_low": 397.2, "relvol": 4.5, "rules_version": 2, "symbol": "AMBUJACEM", "trade": null}

@@ -1,0 +1,257 @@
+{
+ "f30_high": 25992.6,
+ "f30_low": 25567.3,
+ "f30_range": 425.2999999999993,
+ "last": 25690.8,
+ "levels": {
+  "dist20_pct": 4.75,
+  "hi20": 25808.8,
+  "hi5": 25808.8,
+  "lo20": 22387.35,
+  "lo5": 25104.8,
+  "pdc": 25800.6,
+  "pdh": 25808.8,
+  "pdl": 25345.2,
+  "pivot": 25651.53,
+  "r1": 25957.87,
+  "r2": 26115.13,
+  "s1": 25494.27,
+  "s2": 25187.93
+ },
+ "move_pct": -0.919235686476426,
+ "move_pts": -238.35000000000218,
+ "new_headlines": [
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: FII DII",
+   "title": "Daily Market Update - 23rd November 2026 by Ventura Securities Ltd"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "GIFT NIFTY futures signal gap-up opening on November 23; what investors should track ahead of market open"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Sensex jumps 502 points, Nifty crosses 25,900 in early trade; indices turn volatile"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Indian markets trade higher on sustained FPI buying, strong rupee"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "23 November, 2026 Stock Market Updates: Sensex jumps 500 points, Nifty above 25,900 amid volatility"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty, Sensex within striking distance of record highs. Will FIIs keep buying after \u20b91.3 lakh crore inflow"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": -1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Business Standard Markets",
+   "title": "IndusInd Bank down 1% after terminating ex-CEO Kathpalia, invoking clawback"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Indian Stocks Rise as Rupee Strengthens and Gold Surges By Investing.com"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Sensex, Nifty jump in early trade, then slip in the red: Check major gainers & laggards"
+  },
+  {
+   "label": {
+    "catalyst": "earnings",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Stock Market Today (November 23): Sensex, Nifty Trade Higher; Experts Flag Improving Rupee, Earnings Outlook"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": -1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "APL Apollo Tubes shares plunge 10%, Tata Steel falls 4% as Rs 5,825 crore block deal follows acquisition..."
+  }
+ ],
+ "news_high_impact": 0,
+ "news_score": 0.3,
+ "open": 25929.15,
+ "or_high": 25992.6,
+ "or_low": 25668.85,
+ "orb": -1,
+ "p_n": 0,
+ "p_range_morning": 0.358,
+ "p_range_new": 1.0,
+ "range_so_far": 425.2999999999993,
+ "reason": "the morning call was to stand aside; this update is information only",
+ "sectors": {
+  "heavy": [
+   {
+    "last": 836.75,
+    "name": "HDFC Bank",
+    "pct": -1.09
+   },
+   {
+    "last": 1371.6,
+    "name": "Reliance",
+    "pct": -0.43
+   },
+   {
+    "last": 1620.8,
+    "name": "ICICI Bank",
+    "pct": -1.17
+   },
+   {
+    "last": 1121.0,
+    "name": "Infosys",
+    "pct": 2.09
+   },
+   {
+    "last": 2139.5,
+    "name": "Bharti Airtel",
+    "pct": -1.03
+   },
+   {
+    "last": 2446.8,
+    "name": "TCS",
+    "pct": 2.97
+   },
+   {
+    "last": 4190.0,
+    "name": "L&T",
+    "pct": -0.45
+   },
+   {
+    "last": 300.25,
+    "name": "ITC",
+    "pct": 0.38
+   },
+   {
+    "last": 1148.05,
+    "name": "SBI",
+    "pct": -1.46
+   }
+  ],
+  "missing": [],
+  "sectors": [
+   {
+    "last": 63602.3,
+    "name": "Bank",
+    "pct": -1.6
+   },
+   {
+    "last": 28574.8,
+    "name": "Financials",
+    "pct": -1.03
+   },
+   {
+    "last": 31977.0,
+    "name": "IT",
+    "pct": 2.09
+   },
+   {
+    "last": 28758.8,
+    "name": "Auto",
+    "pct": -0.1
+   },
+   {
+    "last": 28361.15,
+    "name": "Pharma",
+    "pct": -0.09
+   },
+   {
+    "last": 12016.55,
+    "name": "Metal",
+    "pct": -2.07
+   },
+   {
+    "last": 48706.55,
+    "name": "FMCG",
+    "pct": 0.35
+   },
+   {
+    "last": 37058.5,
+    "name": "Energy",
+    "pct": -0.7
+   },
+   {
+    "last": 937.2,
+    "name": "Realty",
+    "pct": -0.18
+   }
+  ]
+ },
+ "status": "STILL NO TRADE",
+ "vix_morning": 17.85,
+ "vix_now": 18.25
+}
