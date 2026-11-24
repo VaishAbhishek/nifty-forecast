@@ -12,6 +12,7 @@ Advisory and read-only. It places no orders and does not touch the EMA bot or th
 """
 import argparse
 import json
+import os
 import sys
 import time
 import traceback
@@ -31,6 +32,7 @@ WINDOWS = {"data": (dtime(7, 30), dtime(9, 0)), "preopen": (dtime(9, 0), dtime(9
 IN_PLAY_RELVOL = 3.0   # rules v2: at least 3x usual opening volume, and only the top IN_PLAY_TOP
 IN_PLAY_TOP = 10
 SWING_TOP = 12
+RISK_PER_TRADE = int(os.environ.get("NF_RISK_PER_TRADE", "20000"))   # rupees lost if a trade hits its stop
 OPTION_SCAN = 40       # stocks whose options are checked in the 08:10 data job
 
 
@@ -538,6 +540,9 @@ def plan_option(p, universe, feats):
                             rv20=f.get("rv20"), expiry=expiry, sessions_left=api.sessions_until(expiry))
     if plan:
         plan["risk_per_share"] = calc.r2(risk)
+        sz = calc.size_lots(plan.get("risk_per_lot"), RISK_PER_TRADE, plan.get("cost_per_lot"))
+        if sz:
+            plan["size"] = sz
     return plan
 
 
@@ -661,7 +666,7 @@ def run_engine(today, now, in_play, relvol, rows, nifty_q, universe, feats, args
         d["pass"] = False
         d["gates"].append({"gate": "theme", "ok": False, "why": "same theme as a higher-ranked trade"})
     watch_only = [p for s, p in watch.items() if s not in {e["symbol"] for e in evaluated}]
-    eng = {"date": today, "time": now.strftime("%H:%M"), "rules_version": calc.RULES_VERSION,
+    eng = {"date": today, "time": now.strftime("%H:%M"), "rules_version": calc.RULES_VERSION, "risk_per_trade": RISK_PER_TRADE,
            "nifty_from_open": calc.r2(calc.pct(nifty_q["last"], nifty_q["open"])) if nifty_q.get("open") and nifty_q.get("last") else None,
            "trades": trades, "rejected": [e for e in evaluated if not e["pass"]],
            "watchlist_not_in_play": [{"symbol": p["symbol"], "direction": p["direction"],

@@ -220,6 +220,14 @@ def option_line(sym, o):
         parts.append("risk Rs %s per lot" % format(o["risk_per_lot"], ","))
     if o.get("delta") is not None:
         parts.append("delta %.2f" % o["delta"])
+    sz = o.get("size")
+    if sz and sz["lots"]:
+        parts.append("SIZE %d lot%s: risk Rs %s, cost Rs %s (budget Rs %s)" % (
+            sz["lots"], "" if sz["lots"] == 1 else "s", format(sz["risk_total"], ","),
+            format(sz.get("cost_total") or 0, ","), format(sz["budget"], ",")))
+    elif sz:
+        parts.append("SIZE 0: one lot risks Rs %s, more than the Rs %s budget. Skip" % (
+            format(o["risk_per_lot"], ","), format(sz["budget"], ",")))
     text = " | ".join(parts)
     if o.get("flags"):
         text += " | CAUTION: " + "; ".join(o["flags"])
@@ -338,5 +346,7 @@ def engine_message(e):
     if e.get("watchlist_not_in_play"):
         lines.append("Watchlist names not in play (no trade): " + ", ".join(
             "%s %s" % (w["symbol"], ("%.1fx" % w["relvol"]) if w.get("relvol") else "") for w in e["watchlist_not_in_play"]))
-    lines.append("<i>Advisory only. Live alerts follow for entry, 2R, stop and exit. Daily stop at -3R.</i>")
+    rk = e.get("risk_per_trade")
+    lines.append("<i>Advisory only. Live alerts follow for entry, 2R, stop and exit. Risk per trade Rs %s; daily stop at -3R%s.</i>"
+                 % (format(rk, ",") if rk else "-", (" (Rs %s)" % format(3 * rk, ",")) if rk else ""))
     return "\n".join(lines)

@@ -437,6 +437,9 @@ class Calculations(unittest.TestCase):
         self.assertTrue(calc.trade_step(t, 99.7, None, t_(9, 25), st)[0].startswith("CANCELLED"))
         st = {}
         self.assertTrue(calc.trade_step(t, 100.5, None, t_(10, 16), st)[0].startswith("EXPIRED"))
+        self.assertEqual(calc.size_lots(7000, 20000, 15000), {"lots": 2, "budget": 20000, "risk_total": 14000, "cost_total": 30000})
+        self.assertEqual(calc.size_lots(25000, 20000)["lots"], 0)
+        self.assertIsNone(calc.size_lots(None, 20000))
         self.assertEqual(calc.day_r({"a": {"r": -1.0}, "b": {"r": -1.0}, "c": {}}), -2.0)
         rows = calc.rank_trades([{"symbol": "A", "relvol": 9, "direction": "UP"}, {"symbol": "B", "relvol": 4, "fresh": True, "news": True, "direction": "UP"},
                                  {"symbol": "C", "relvol": 5, "direction": "UP"}])
@@ -549,6 +552,8 @@ class Pipeline(unittest.TestCase):
             self.assertIn(o["expiry"], ("2026-11-24", "2026-12-29"))
             self.assertGreaterEqual(o["sessions_left"], 5)
             self.assertIn("premium_stop", o)
+            self.assertEqual(o["size"]["budget"], 20000)
+            self.assertIn("SIZE", sent[-1])
             self.assertNotIn("option", c["picks"][1])          # swing pick: no option plan
             if label == "30":
                 self.assertIn("now", o)

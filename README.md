@@ -74,6 +74,7 @@ The report's picks arrive as `momentum/picks/<date>.json` on the `data` branch. 
 - **09:07–09:09 auction**: buy/sell imbalance of unmatched orders, and auction volume against its 20-day usual (needs 5 sessions of history) -> "In play before the open" in the pre-open message.
 - **09:20 engine** (`check5`): each in-play stock (3x usual opening volume, top 10) must pass five gates: in play; first 5 minutes agree with the gap and any news; Nifty not against it; opening range <= 1 ATR and gap <= 1.5 ATR; option spread/IV/OI ok. Ranked fresh news > news > volume, one trade per theme. Saved to `momentum/trades/<date>.json`, sent as **09:20 TRADE CALLS**.
 - **Watcher**: entry on a break of the 5-minute range between 09:20 and 10:15, stop at the other side, half at 2R, rest trails VWAP (never below entry), out by 15:00, no new entries after -3R in a day. Morning-report picks with levels also wait for 09:20 now.
+- **Size**: lots = Rs 20,000 (env `NF_RISK_PER_TRADE`) divided by the option's stop-loss risk per lot, rounded down; 0 lots means skip.
 - **EOD**: engine trades and their R appended to `momentum/trades.jsonl`. Proper re-scoring of all three versions (report ideas, pure in-play breakout, in-play + news) with costs comes next.
 
 ### Rules version 2 (from 23 Nov 2026)

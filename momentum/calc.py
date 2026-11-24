@@ -774,6 +774,17 @@ def trade_step(t, last, vwap, now_t, st):
     return out
 
 
+def size_lots(risk_per_lot, budget, cost_per_lot=None):
+    """Whole lots whose stop-loss risk fits the rupee budget. 0 means even one lot risks more."""
+    if not risk_per_lot or risk_per_lot <= 0 or not budget:
+        return None
+    lots = int(budget // risk_per_lot)
+    out = {"lots": lots, "budget": budget, "risk_total": round(lots * risk_per_lot)}
+    if cost_per_lot:
+        out["cost_total"] = round(lots * cost_per_lot)
+    return out
+
+
 def day_r(states):
     return round(sum(s.get("r") or 0 for s in states.values()), 2)
 
