@@ -198,6 +198,7 @@ def cmd_recheck(args):
     ok, why = trading_day(now)
     if not ok:
         store.log("recheck: skipped, %s" % why)
+        store.set_status("recheck", True, [], {"skipped": why})
         return 0
     in_window = dtime(9, 40) <= now.time() <= dtime(10, 30)
     if not in_window and not args.force:
