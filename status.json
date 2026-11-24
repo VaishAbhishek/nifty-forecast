@@ -1,27 +1,17 @@
 {
  "momentum_check30": {
-  "checks": [
-   {
-    "detail": "218 stocks, 218 with a volume baseline, 10 in play",
-    "name": "quotes",
-    "ok": true
-   }
-  ],
-  "code": "07ec3b2e61",
+  "checks": [],
+  "code": "161f57d6a3",
   "ok": true,
-  "ts": "2026-11-23T09:47:02+05:30"
+  "skipped": "NSE holiday (Upstox)",
+  "ts": "2026-11-24T09:47:01+05:30"
  },
  "momentum_check5": {
-  "checks": [
-   {
-    "detail": "218 stocks, 218 with a volume baseline, 10 in play",
-    "name": "quotes",
-    "ok": true
-   }
-  ],
-  "code": "07ec3b2e61",
+  "checks": [],
+  "code": "161f57d6a3",
   "ok": true,
-  "ts": "2026-11-23T09:20:19+05:30"
+  "skipped": "NSE holiday (Upstox)",
+  "ts": "2026-11-24T09:20:16+05:30"
  },
  "momentum_data": {
   "checks": [],
