@@ -165,6 +165,14 @@ def preopen_message(d):
         lines += ["<b>Today's picks against the gap</b>", _pre(ptbl)]
     elif d.get("picks_note"):
         lines.append("<i>%s</i>" % esc(d["picks_note"]))
+    au = d.get("auction") or {}
+    if au.get("in_play"):
+        tbl = ["%-12s %6s %6s %5s" % ("AUCTION", "vol", "gap", "imbal")]
+        tbl += ["%-12s %5.1fx %6s %5s" % (r["symbol"][:12], r["relvol"], num(r.get("gap"), "%+.1f%%"), num(r.get("imbalance"), "%+.2f"))
+                for r in au["in_play"]]
+        lines += ["<b>In play before the open</b> (auction volume vs usual)", _pre(tbl)]
+    elif au.get("note"):
+        lines.append("<i>%s</i>" % esc(au["note"]))
     lines.append("<i>Advisory only. The gap is already in the opening price.</i>")
     return "\n".join(lines)
 
@@ -301,3 +309,34 @@ def render_learned(L):
     else:
         out += ["", "Model: %s." % L.get("note", "not yet")]
     return "\n".join(out) + "\n"
+
+
+def engine_message(e):
+    """09:20 decision: trades that passed all five gates, and why the rest did not."""
+    lines = ["<b>09:20 TRADE CALLS</b> %s (rules v%s)" % (e["date"], e["rules_version"])]
+    if e.get("nifty_from_open") is not None:
+        lines.append("Nifty %+.2f%% from its open" % e["nifty_from_open"])
+    if not e["trades"]:
+        lines.append("<b>No trade.</b> Nothing passed all five gates. Sitting out is a position.")
+    for t in e["trades"]:
+        word = "BUY above" if t["direction"] == "UP" else "SELL below"
+        lines.append("\n<b>TRADE %s %s</b>%s" % (esc(t["symbol"]), t["direction"], "  (fresh news)" if t.get("fresh") else "  (news)" if t.get("news") else ""))
+        lines.append("%s %.2f (5-min range), stop %.2f, book half at %.2f (2R), trail rest on VWAP, out by 15:00. Entry valid till 10:15."
+                     % (word, t["entry"], t["stop"], t["half"]))
+        lines.append("Volume %.1fx usual, gap %+.2f%%, range %.2f ATR." % (t["relvol"] or 0, t["gap"] or 0, t["or_atr"] or 0))
+        if t.get("option"):
+            lines.append(esc(option_line(t["symbol"], t["option"])))
+        if t.get("news_text"):
+            lines.append("<i>%s</i>" % esc(t["news_text"][:200]))
+    if e.get("rejected"):
+        tbl = ["%-11s %-4s %s" % ("NOT TAKEN", "dir", "failed gate")]
+        for r in e["rejected"][:10]:
+            bad = next((g for g in r["gates"] if not g["ok"]), None)
+            tbl.append("%-11s %-4s %s" % (r["symbol"][:11], r.get("direction") or "-",
+                                          ("%s: %s" % (bad["gate"], bad["why"]))[:48] if bad else "-"))
+        lines.append(_pre(tbl))
+    if e.get("watchlist_not_in_play"):
+        lines.append("Watchlist names not in play (no trade): " + ", ".join(
+            "%s %s" % (w["symbol"], ("%.1fx" % w["relvol"]) if w.get("relvol") else "") for w in e["watchlist_not_in_play"]))
+    lines.append("<i>Advisory only. Live alerts follow for entry, 2R, stop and exit. Daily stop at -3R.</i>")
+    return "\n".join(lines)

@@ -67,6 +67,15 @@ A second set of jobs in `momentum/`, separate from the Nifty forecast above and 
 
 The report's picks arrive as `momentum/picks/<date>.json` on the `data` branch. Without that file the jobs still run and send the gap and in-play lists.
 
+### Rules version 3 (from 25 Nov 2026): prepare before the open, decide after it
+
+- **08:10 filings**: BSE corporate announcements since the last close, matched to F&O stocks, saved to `momentum/news/<date>.json` with a `fresh` flag (published after 15:30). The morning report reads this first. If BSE refuses the VM, the report's web search is the fallback.
+- **08:40 report = ranked watchlist**: fresh, material news with a direction and what the open must show. No pre-set entry levels for intraday names.
+- **09:07–09:09 auction**: buy/sell imbalance of unmatched orders, and auction volume against its 20-day usual (needs 5 sessions of history) -> "In play before the open" in the pre-open message.
+- **09:20 engine** (`check5`): each in-play stock (3x usual opening volume, top 10) must pass five gates: in play; first 5 minutes agree with the gap and any news; Nifty not against it; opening range <= 1 ATR and gap <= 1.5 ATR; option spread/IV/OI ok. Ranked fresh news > news > volume, one trade per theme. Saved to `momentum/trades/<date>.json`, sent as **09:20 TRADE CALLS**.
+- **Watcher**: entry on a break of the 5-minute range between 09:20 and 10:15, stop at the other side, half at 2R, rest trails VWAP (never below entry), out by 15:00, no new entries after -3R in a day. Morning-report picks with levels also wait for 09:20 now.
+- **EOD**: engine trades and their R appended to `momentum/trades.jsonl`. Proper re-scoring of all three versions (report ideas, pure in-play breakout, in-play + news) with costs comes next.
+
 ### Rules version 2 (from 23 Nov 2026)
 
 - **Swing list** in the 08:10 data file: F&O stocks in the top 30% on volatility-adjusted 6- and 12-month momentum (NSE's momentum-index method), within 15% of the 52-week high, in a tight base (10-day range of 4 ATRs or less) or an orderly pullback to the 20-day average. Each has a trigger, stop and 2R target. Weak-momentum shorts near the 52-week low are listed separately and need futures or puts.

@@ -1,8 +1,9 @@
 """Pure calculations for the momentum jobs. No network, no clock, no files."""
+import re
 import math
 
 GAP_BUCKETS = ((0.5, 1.0), (1.0, 2.0), (2.0, 4.0), (4.0, 1e9))
-RULES_VERSION = 2   # bump when a threshold below changes, so the scorecard can keep versions apart
+RULES_VERSION = 3   # bump when a threshold below changes, so the scorecard can keep versions apart
 
 
 def pct(a, b):
@@ -614,4 +615,190 @@ def learn(rows, min_rows=LEARN_MIN, steps=3000, lr=0.3, l2=1.0):
     out["model"] = {"intercept": r2(b, 3), "base_rate": r2(sum(Y) / m),
                     "weights": sorted(({"feature": n, "weight": r2(w[idx[n]], 3), "n": groups[n][0]} for n in names),
                                       key=lambda x: -x["weight"])}
+    return out
+
+
+# ------------------------------------------------------------------ 09:20 trade engine (rules version 3)
+#
+# Prepare before the open, decide after it. A stock becomes a trade only when the
+# market shows its hand in the first five minutes: unusual volume, a clear
+# direction that agrees with the gap (and the news, if any), a market that is not
+# fighting it, room left to run, and an option that can be traded cheaply.
+
+GATE_OR_MAX_ATR = 1.0     # opening range no wider than one day's normal range
+GATE_GAP_MAX_ATR = 1.5    # the gap has not already used up the move
+GATE_GAP_FLAT = 0.25      # gaps smaller than this (%) count as no gap
+ENTRY_FROM = (9, 20)      # after the five-minute opening range
+ENTRY_TILL = (10, 15)
+HALF_AT_R = 2.0
+DAILY_STOP_R = -3.0
+
+
+def trade_gates(sym, q, atr_pct, relvol, rank, nifty, news=None, option=None):
+    """Five gates for one in-play stock at 09:20. Returns {"pass", "direction", "gates", plan levels}.
+
+    q: the stock's quote (open, high, low, last, prev). nifty: Nifty quote (open, last).
+    news: watchlist item {"direction", "fresh"} or None. option: option_plan() result or None.
+    """
+    o, hi, lo, last, prev = q["open"], q["high"], q["low"], q["last"], q["prev"]
+    direction = "UP" if last > o else "DOWN" if last < o else None
+    atr = (atr_pct or 0) / 100 * prev if prev else 0
+    gap = pct(o, prev) if prev else 0
+    gates = []
+
+    def gate(name, ok, why):
+        gates.append({"gate": name, "ok": bool(ok), "why": why})
+
+    gate("in play", relvol is not None and rank is not None,
+         "%.1fx usual opening volume, #%s" % (relvol or 0, rank))
+    gap_dir = "UP" if gap > GATE_GAP_FLAT else "DOWN" if gap < -GATE_GAP_FLAT else None
+    agree = direction is not None and (gap_dir is None or gap_dir == direction)
+    why = "first 5 min %s, gap %+.2f%%" % (direction or "flat", gap)
+    if news and news.get("direction") in ("UP", "DOWN"):
+        agree = agree and news["direction"] == direction
+        why += ", news %s" % news["direction"]
+    gate("direction", agree, why)
+    if nifty and nifty.get("open") and nifty.get("last"):
+        m = pct(nifty["last"], nifty["open"])
+        ok = direction == "UP" and m >= 0 or direction == "DOWN" and m <= 0
+        gate("market", ok, "Nifty %+.2f%% from its open" % m)
+    else:
+        gate("market", False, "no Nifty quote")
+    if atr:
+        or_atr, gap_atr = (hi - lo) / atr, abs(o - prev) / atr
+        gate("room", or_atr <= GATE_OR_MAX_ATR and gap_atr <= GATE_GAP_MAX_ATR,
+             "range %.2f ATR, gap %.2f ATR" % (or_atr, gap_atr))
+    else:
+        or_atr = gap_atr = None
+        gate("room", False, "no ATR")
+    if option is None:
+        gate("tradeable", False, "no option contract found")
+    else:
+        gate("tradeable", option.get("grade") == "ok", ", ".join(option.get("flags") or []) or
+             "spread %s%%" % option.get("spread_pct"))
+    out = {"symbol": sym, "direction": direction, "gates": gates, "pass": all(g["ok"] for g in gates),
+           "relvol": r2(relvol, 1), "rank": rank, "gap": r2(gap), "or_atr": r2(or_atr), "gap_atr": r2(gap_atr),
+           "news": bool(news), "fresh": bool(news and news.get("fresh"))}
+    if direction and hi > lo:
+        up = direction == "UP"
+        entry, stop = (hi, lo) if up else (lo, hi)
+        risk = abs(entry - stop)
+        out.update(entry=r2(entry), stop=r2(stop), risk=r2(risk),
+                   half=r2(entry + HALF_AT_R * risk if up else entry - HALF_AT_R * risk))
+    return out
+
+
+def rank_trades(rows):
+    """Fresh news first, then any news, then volume."""
+    return sorted(rows, key=lambda r: (not r.get("fresh"), not r.get("news"), -(r.get("relvol") or 0)))
+
+
+def one_per_theme(rows, theme_of):
+    """Keep the best trade per (theme, direction): three bank stocks falling on one news item are one bet."""
+    seen, keep, dropped = set(), [], []
+    for r in rows:
+        t = (theme_of(r["symbol"]) or r["symbol"], r["direction"])
+        (dropped if t in seen else keep).append(r)
+        seen.add(t)
+    return keep, dropped
+
+
+def _hm(t):
+    return (t.hour, t.minute)
+
+
+def trade_step(t, last, vwap, now_t, st):
+    """Advance one engine trade from its latest price. Mutates st; returns alert texts.
+
+    Stages: waiting -> entered -> half (half booked at 2R, rest trails VWAP) -> done.
+    Before 09:20 nothing happens. A break of the stop side before entry cancels; no
+    break by 10:15 expires. R results land in st["r"] for the daily stop.
+    """
+    out = []
+    if last is None or _hm(now_t) < ENTRY_FROM:
+        return out
+    up = t["direction"] == "UP"
+    entry, stop, risk = t["entry"], t["stop"], t["risk"]
+    beyond = (lambda x: last >= x) if up else (lambda x: last <= x)
+    before = (lambda x: last <= x) if up else (lambda x: last >= x)
+    name = "%s %s" % (t["symbol"], t["direction"])
+    stage = st.get("stage", "waiting")
+    if stage == "waiting":
+        if before(stop):
+            st["stage"] = "done"
+            st["result"] = "cancelled"
+            out.append("CANCELLED %s: %.2f broke the other side of the range (%.2f) first. No trade." % (name, last, stop))
+        elif beyond(entry):
+            if st.get("blocked"):
+                st["stage"] = "done"
+                st["result"] = "skipped (daily stop)"
+            elif _hm(now_t) > ENTRY_TILL:
+                st["stage"] = "done"
+                st["result"] = "expired"
+            else:
+                st["stage"] = "entered"
+                st["entry_px"] = last
+                st["entry_t"] = now_t.strftime("%H:%M")
+                out.append("ENTRY %s: %.2f broke the opening range %.2f. Stop %.2f, book half at %.2f (2R)."
+                           % (name, last, entry, stop, t["half"]))
+        elif _hm(now_t) > ENTRY_TILL:
+            st["stage"] = "done"
+            st["result"] = "expired"
+            out.append("EXPIRED %s: no break of %.2f by 10:15. No trade." % (name, entry))
+        return out
+    if stage == "entered":
+        if before(stop):
+            st.update(stage="done", result="stop", r=-1.0)
+            out.append("STOP %s: %.2f hit the stop %.2f. Exit (-1R)." % (name, last, stop))
+        elif beyond(t["half"]):
+            st.update(stage="half", trail=entry)
+            out.append("BOOK HALF %s: %.2f reached 2R (%.2f). Sell half; trail the rest along VWAP, never below entry %.2f."
+                       % (name, last, t["half"], entry))
+        elif _hm(now_t) >= (15, 0):
+            r = (last - entry) / risk * (1 if up else -1)
+            st.update(stage="done", result="15:00 exit", r=round(r, 2))
+            out.append("15:00 EXIT %s: out at %.2f (%+.1fR)." % (name, last, r))
+        return out
+    if stage == "half":
+        trail = st.get("trail", entry)
+        if vwap:
+            trail = max(trail, vwap) if up else min(trail, vwap)
+        st["trail"] = trail
+        if before(trail) or _hm(now_t) >= (15, 0):
+            r_rest = (last - entry) / risk * (1 if up else -1)
+            r = 0.5 * HALF_AT_R + 0.5 * r_rest
+            st.update(stage="done", result="trail" if before(trail) else "15:00 exit", r=round(r, 2))
+            out.append("%s %s: rest out at %.2f (%s). Trade %+.1fR."
+                       % ("TRAIL EXIT" if before(trail) else "15:00 EXIT", name, last,
+                          "crossed VWAP/entry %.2f" % trail if before(trail) else "end of day", r))
+    return out
+
+
+def day_r(states):
+    return round(sum(s.get("r") or 0 for s in states.values()), 2)
+
+
+# ------------------------------------------------------------------ filings (rules version 3)
+
+_SUFFIX = re.compile(r"\b(limited|ltd|the|india|of|and|co|company|corporation|corp|industries|inds|enterprises)\b")
+
+
+def norm_name(s):
+    s = re.sub(r"[^a-z0-9 ]", " ", str(s or "").lower().replace("&", " and "))
+    return " ".join(_SUFFIX.sub(" ", s).split())
+
+
+def match_filings(items, universe):
+    """Tag exchange announcements with the F&O symbol they belong to (by company name). Unmatched are dropped."""
+    names = {}
+    for sym, u in universe.items():
+        for n in (u.get("name"), sym):
+            k = norm_name(n)
+            if k:
+                names.setdefault(k, sym)
+    out = []
+    for it in items:
+        sym = names.get(norm_name(it.get("company")))
+        if sym:
+            out.append(dict(it, symbol=sym))
     return out

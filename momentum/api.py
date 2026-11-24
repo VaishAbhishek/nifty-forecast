@@ -108,7 +108,8 @@ def _quote_row(row):
             "open": _f(o.get("open")), "high": _f(o.get("high")), "low": _f(o.get("low")),
             "ohlc_date": _to_date(o.get("ts")),
             "volume": _f(row.get("volume")), "oi": _f(row.get("oi")), "prev_oi": _f(row.get("previous_oi")),
-            "iep": _f(row.get("indicative_equilibrium_price")),
+            "iep": _f(row.get("indicative_equilibrium_price")), "vwap": _f(row.get("average_price")),
+            "buy_qty": _f(row.get("total_buy_quantity")), "sell_qty": _f(row.get("total_sell_quantity")),
             "traded_on": _to_date(row.get("last_trade_time")),
             "year_high": _f(row.get("year_high")), "year_low": _f(row.get("year_low"))}
 
@@ -420,3 +421,33 @@ def industries():
     if old and old.get("map"):
         return old["map"], "%s (cached %s)" % (old["source"], old["date"])
     return {}, "none"
+
+
+# ------------------------------------------------------------------ exchange filings (best effort)
+
+BSE_ANN = "https://api.bseindia.com/BseIndiaAPI/api/AnnSubCategoryGetData/w"
+BSE_HEADERS = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36",
+               "Referer": "https://www.bseindia.com/", "Origin": "https://www.bseindia.com", "Accept": "application/json"}
+
+
+def bse_announcements(frm, to, max_pages=15):
+    """Corporate announcements on BSE's public page between two dates (YYYY-MM-DD), newest first.
+
+    [{"company", "headline", "category", "time", "url"}]. Raises net.NetError if BSE refuses.
+    """
+    out = []
+    for page in range(1, max_pages + 1):
+        params = {"pageno": page, "strCat": "-1", "strPrevDate": frm.replace("-", ""), "strScrip": "",
+                  "strSearch": "P", "strToDate": to.replace("-", ""), "strType": "C", "subcategory": "-1"}
+        js = net.get_json(BSE_ANN + "?" + urlencode(params), headers=BSE_HEADERS, timeout=20)
+        rows = (js or {}).get("Table") or [] if isinstance(js, dict) else []
+        for r in rows:
+            att = r.get("ATTACHMENTNAME")
+            out.append({"company": r.get("SLONGNAME") or "", "headline": (r.get("HEADLINE") or r.get("NEWSSUB") or "").strip()[:400],
+                        "category": " / ".join(x for x in (r.get("CATEGORYNAME"), r.get("SUBCATNAME")) if x),
+                        "time": r.get("DissemDT") or r.get("NEWS_DT"),
+                        "url": ("https://www.bseindia.com/xml-data/corpfiling/AttachLive/" + att) if att else None})
+        if len(rows) < 50:
+            break
+        time.sleep(1.0)
+    return out

@@ -2,9 +2,10 @@
 
 data     08:10  numbers for every F&O stock -> momentum/latest.json and momentum/brief/<date>.md
 preopen  09:07  indicative opening prices -> Telegram: the real gaps, and each pick against its gap
-check5   09:20  stocks trading at twice their usual volume, and where each pick stands
+check5   09:20  in-play stocks (3x usual volume) through the five trade gates -> TRADE alerts
 check30  09:47  the same after 30 minutes
-watch    every minute 09:16-15:16: alerts the moment a pick or its option hits a level
+watch    every minute 09:16-15:16: alerts on engine trades (entry 09:20-10:15, half at 2R,
+         VWAP trail, out by 15:00, daily stop at -3R) and on swing picks
 eod      16:05  scores the day's picks, updates the scorecard, saves futures open interest
 
 Advisory and read-only. It places no orders and does not touch the EMA bot or the forecast rules.
@@ -81,7 +82,10 @@ def load_picks(today):
                     "tier": str(p.get("tier") or "list").lower(), "conviction": str(p.get("conviction") or "unknown").lower(),
                     "evidence": [str(e).lower() for e in (ev if isinstance(ev, list) else [ev])],
                     "confirm": p.get("confirm"), "cancel": p.get("cancel"), "target": p.get("target"),
-                    "surprise_pct": p.get("surprise_pct")})
+                    "surprise_pct": p.get("surprise_pct"),
+                    # rules v3 watchlist fields: news freshness and size, theme for one-trade-per-theme
+                    "fresh": bool(p.get("fresh")), "materiality": p.get("materiality"),
+                    "theme": p.get("theme"), "news": str(p.get("news") or "")[:300]})
     return out
 
 
@@ -333,6 +337,12 @@ def cmd_data(args):
     except Exception as e:
         notes.append("opening-volume baseline failed: %s" % redact(str(e))[:60])
 
+    try:
+        n = capture_filings(universe, session, now)
+        checks.append({"name": "filings", "ok": True, "detail": "%d F&O filings since the last close" % n})
+    except Exception as e:
+        notes.append("BSE filings not read (%s); the report's web search is the fallback" % redact(str(e))[:80])
+
     out = {"date": today, "session": session, "generated": now.isoformat(timespec="seconds"), "code": git_sha(),
            "rules_version": calc.RULES_VERSION, "failed": failed, "notes": notes, "market": market,
            "gap_table": calc.gap_table(events), "oi_source": oi_source, "lists": lists, "stocks": stocks}
@@ -345,6 +355,25 @@ def cmd_data(args):
     if args.dry_run:
         print(text[:3000])
     return 0 if ok else 1
+
+
+def capture_filings(universe, session, now):
+    """Exchange filings for F&O stocks since the last session's close -> momentum/news/<date>.json.
+
+    Fresh = published after 15:30 on the last session, so the market has not traded it yet.
+    The morning report reads this file first, before any web search.
+    """
+    today = now.date().isoformat()
+    items = api.bse_announcements(session, today)
+    cutoff = session + "T15:30"
+    rows = []
+    for it in calc.match_filings(items, universe):
+        t = str(it.get("time") or "")
+        rows.append(dict(it, fresh=t[:16].replace(" ", "T") >= cutoff if t else None))
+    rows.sort(key=lambda r: str(r.get("time") or ""), reverse=True)
+    write_compact(D + "news/%s.json" % today, {"date": today, "since": cutoff, "source": "BSE announcements",
+                                              "seen": len(items), "fo": len(rows), "items": rows})
+    return len(rows)
 
 
 # ------------------------------------------------------------------ pre-open
@@ -378,6 +407,11 @@ def cmd_preopen(args):
         if attempt < 3:
             time.sleep(25)
     price = {k: r["iep"] for k, r in iep.items()}
+    imbalance = {}
+    for k, r in q.items():
+        b, s_ = r.get("buy_qty"), r.get("sell_qty")
+        if by_key.get(k) and b is not None and s_ is not None and b + s_ > 0:
+            imbalance[by_key[k]] = calc.r2((b - s_) / (b + s_))
     if len(price) < 0.5 * len(by_key):
         # no indicative prices in the quote: wait for the auction to match and read the opening trade
         time.sleep(50)
@@ -419,11 +453,52 @@ def cmd_preopen(args):
            "index_gap": index_gap, "coverage": "%d of %d" % (len(gaps), len(by_key)),
            "up": [r for r in reversed(rows) if r["gap"] >= 0.5][:8], "down": [r for r in rows if r["gap"] <= -0.5][:8],
            "picks": picks, "picks_note": None if picks else "WARNING: no picks file arrived from the morning report, so today's picks will not be checked or scored."}
+    try:
+        out["auction"] = auction_read(by_key, keys, today, now, imbalance, gaps, args)
+    except Exception as e:
+        out["auction"] = {"error": redact(str(e))[:120]}
     write_compact(D + "gaps/%s.json" % today, dict(out, all=gaps))
     telegram.send(brief.preopen_message(out), args.dry_run)
     store.set_status("momentum_preopen", True, [{"name": "prices", "ok": True, "detail": "%s, %s" % (source, out["coverage"])}])
     store.log("momentum preopen: %s, %s, %d picks" % (source, out["coverage"], len(picks)))
     return 0
+
+
+AUCTION_RELVOL = 3.0
+
+
+def auction_read(by_key, keys, today, now, imbalance, gaps, args):
+    """Opening-auction volume against its usual level, read after the 09:08 match.
+
+    A stock with several times its usual auction volume is in play before 09:15.
+    Imbalance is (buy - sell) / (buy + sell) of the unmatched orders seen earlier.
+    """
+    wait = (datetime.combine(now.date(), dtime(9, 8, 30), now.tzinfo) - now_ist()).total_seconds()
+    if 0 < wait < 180:
+        time.sleep(wait)
+    q = api.quotes(keys)
+    vol = {by_key[k]: r["volume"] for k, r in q.items() if by_key.get(k) and r.get("volume") and r.get("traded_on") == today}
+    hist = store.read_json(OPENVOL, {}) or {}
+    h = hist.setdefault("pre", {})
+    rel = {}
+    for sym, v in vol.items():
+        prior = [h[d].get(sym) for d in h if d < today]
+        base = calc.median(prior)
+        if base and sum(1 for x in prior if x) >= 5:
+            rel[sym] = v / base
+    if vol and not args.force:
+        h[today] = vol
+        for day in sorted(h)[:-20]:
+            del h[day]
+        write_compact(OPENVOL, hist)
+    top_ = []
+    for sym, rv in sorted(rel.items(), key=lambda x: -x[1]):
+        if rv < AUCTION_RELVOL or len(top_) >= 10:
+            break
+        top_.append({"symbol": sym, "relvol": calc.r2(rv, 1), "gap": (gaps.get(sym) or {}).get("gap"),
+                     "imbalance": imbalance.get(sym)})
+    return {"stocks_with_volume": len(vol), "with_baseline": len(rel), "in_play": top_,
+            "imbalance": imbalance, "note": None if rel else "Usual auction volume is still being measured (needs 5 sessions)."}
 
 
 # ------------------------------------------------------------------ opening checks
@@ -476,7 +551,8 @@ def cmd_check(args, label):
     uni = api.load_universe()
     universe = uni["stocks"]
     by_key = {s["eq"]: sym for sym, s in universe.items()}
-    q = api.quotes(list(by_key))
+    q = api.quotes(list(by_key) + [api.NIFTY])
+    nifty_q = q.get(api.NIFTY) or {}
     rows = {}
     for k, r in q.items():
         sym = by_key.get(k)
@@ -530,6 +606,12 @@ def cmd_check(args, label):
         picks.append(row)
     out = {"date": today, "label": label, "time": now.strftime("%d %b %H:%M"), "in_play": in_play, "picks": picks,
            "in_play_note": None if relvol else "Usual opening volume is still being measured; the in-play list starts once it is."}
+    if label == "5":
+        try:
+            out["engine"] = run_engine(today, now, in_play, relvol, rows, nifty_q, universe, feats, args)
+        except Exception as e:
+            out["engine"] = {"error": redact(str(e))[:160]}
+            store.log("momentum engine failed: %s\n%s" % (e, traceback.format_exc()[-800:]))
     write_compact(D + "checks/%s_%s.json" % (today, label), out)
     if label == "5" and in_play:
         feats = (store.read_json(D + "latest.json") or {}).get("stocks") or {}
@@ -550,10 +632,50 @@ def cmd_check(args, label):
     return 0
 
 
+def run_engine(today, now, in_play, relvol, rows, nifty_q, universe, feats, args):
+    """Rules v3, 09:20: every in-play stock through the five gates; passes become TRADE alerts."""
+    watch = {p["symbol"]: p for p in load_picks(today) if p["horizon"] in ("intraday", "both") and p["symbol"] in universe}
+    evaluated = []
+    for rank, r in enumerate(in_play, 1):
+        sym = r["symbol"]
+        f = feats.get(sym) or {}
+        q = rows[sym]
+        news = watch.get(sym)
+        pre = calc.trade_gates(sym, q, f.get("atr_pct"), r["relvol"], rank, nifty_q, news, option={"grade": "ok"})
+        opt = None
+        if pre["direction"] and all(g["ok"] for g in pre["gates"][:4]) and pre.get("risk"):
+            try:
+                opt = plan_option({"symbol": sym, "direction": pre["direction"], "confirm": pre["entry"],
+                                   "cancel": pre["stop"]}, universe, feats)
+                time.sleep(api.PACE_S)
+            except Exception as e:
+                opt = None
+                store.log("momentum engine: option for %s failed: %s" % (sym, e))
+        res = calc.trade_gates(sym, q, f.get("atr_pct"), r["relvol"], rank, nifty_q, news, option=opt)
+        res.update(option=opt, industry=f.get("industry"), theme=(news or {}).get("theme") or f.get("industry"),
+                   news_text=(news or {}).get("news"), rules_version=calc.RULES_VERSION)
+        evaluated.append(res)
+    passed = calc.rank_trades([e for e in evaluated if e["pass"]])
+    trades, same_theme = calc.one_per_theme(passed, lambda s: next((e["theme"] for e in evaluated if e["symbol"] == s), None))
+    for d in same_theme:
+        d["pass"] = False
+        d["gates"].append({"gate": "theme", "ok": False, "why": "same theme as a higher-ranked trade"})
+    watch_only = [p for s, p in watch.items() if s not in {e["symbol"] for e in evaluated}]
+    eng = {"date": today, "time": now.strftime("%H:%M"), "rules_version": calc.RULES_VERSION,
+           "nifty_from_open": calc.r2(calc.pct(nifty_q["last"], nifty_q["open"])) if nifty_q.get("open") and nifty_q.get("last") else None,
+           "trades": trades, "rejected": [e for e in evaluated if not e["pass"]],
+           "watchlist_not_in_play": [{"symbol": p["symbol"], "direction": p["direction"],
+                                      "relvol": calc.r2(relvol.get(p["symbol"]), 1)} for p in watch_only]}
+    write_compact(D + "trades/%s.json" % today, eng)
+    telegram.send(brief.engine_message(eng), args.dry_run)
+    return {"trades": len(trades), "rejected": len(eng["rejected"])}
+
+
 # ------------------------------------------------------------------ live watch
 
 WATCH_FROM, WATCH_TO = dtime(9, 16), dtime(15, 16)
-ENTRY_UNTIL = dtime(9, 50)
+ENTRY_FROM = dtime(9, 20)    # rules v3: never before the five-minute opening range is complete
+ENTRY_UNTIL = dtime(10, 15)
 EXIT_BY = dtime(15, 0)
 
 
@@ -588,6 +710,8 @@ def watch_events(p, last, state, now):
                        % (p["symbol"], p["direction"], last, confirm, cancel))
         return out
     if st == "waiting":
+        if now.time() < ENTRY_FROM:
+            return out
         if before(cancel):
             state["stage"] = "done"
             out.append("CANCELLED %s %s: %.2f hit the cancel level %.2f before confirming. No trade."
@@ -599,7 +723,7 @@ def watch_events(p, last, state, now):
                            % (p["symbol"], p["direction"], last, confirm, cancel,
                               (", target %.2f" % float(target)) if target not in (None, "") else ""))
             else:
-                out.append("LATE %s %s: confirmed at %.2f after 09:50, outside the entry window. Skip by the rules."
+                out.append("LATE %s %s: confirmed at %.2f after 10:15, outside the entry window. Skip by the rules."
                            % (p["symbol"], p["direction"], last))
     elif st == "entered":
         if before(cancel):
@@ -639,8 +763,9 @@ def cmd_watch(args):
     if not ok:
         return 0
     today = now.date().isoformat()
-    picks = load_picks(today)
-    if not picks:
+    picks = [p for p in load_picks(today) if p.get("confirm") not in (None, "") or p["horizon"] == "swing"]
+    trades = (store.read_json(D + "trades/%s.json" % today) or {}).get("trades") or []
+    if not picks and not trades:
         return 0
     uni = api.load_universe()["stocks"]
     plans = {(x["symbol"], x["horizon"]): x.get("option") for x in
@@ -654,6 +779,7 @@ def cmd_watch(args):
             now = now_ist()
         keys = [uni[p["symbol"]]["eq"] for p in picks if p["symbol"] in uni]
         keys += [o["key"] for o in plans.values() if o and o.get("key")]
+        keys += [uni[t["symbol"]]["eq"] for t in trades if t["symbol"] in uni]
         try:
             q = api.quotes(keys)
         except Exception as e:
@@ -670,6 +796,18 @@ def cmd_watch(args):
             opt = plans.get((p["symbol"], p["horizon"]))
             if opt and opt.get("key") and st.get("stage") == "entered":
                 alerts += option_events(dict(opt, symbol=p["symbol"]), (q.get(opt["key"]) or {}).get("last"), st)
+        eng = state.setdefault("engine", {})
+        for t in trades:
+            if t["symbol"] not in uni:
+                continue
+            st = eng.setdefault(t["symbol"], {})
+            if calc.day_r(eng) <= calc.DAILY_STOP_R and st.get("stage", "waiting") == "waiting":
+                st["blocked"] = True
+            r = q.get(uni[t["symbol"]]["eq"]) or {}
+            alerts += calc.trade_step(t, r.get("last"), r.get("vwap"), now.time(), st)
+        if trades and calc.day_r(eng) <= calc.DAILY_STOP_R and not state.get("daily_stop_sent"):
+            state["daily_stop_sent"] = True
+            alerts.append("DAILY STOP: today's trades are at %+.1fR. No new entries today." % calc.day_r(eng))
     write_compact(path, state)
     if alerts:
         telegram.send("<b>Pick alert</b> %s\n%s\n<i>Advisory only.</i>" % (now.strftime("%H:%M"),
@@ -809,6 +947,23 @@ def cmd_eod(args):
     store.rewrite(inplay, D + "inplay.jsonl")
     ip_tally = calc.tally([dict(r, right=False) for r in inplay if r.get("trade")]) if inplay else None
 
+    # 4. the 09:20 engine's trades as the watcher managed them (proper re-scoring comes with step 2)
+    try:
+        eng = store.read_json(D + "trades/%s.json" % today) or {}
+        wst = ((store.read_json(D + "watch/%s.json" % today) or {}).get("engine")) or {}
+        tl = store.load(D + "trades.jsonl")
+        done = {(r["date"], r["symbol"]) for r in tl}
+        new = [{"date": today, "symbol": t["symbol"], "direction": t["direction"], "entry": t["entry"], "stop": t["stop"],
+                "risk": t["risk"], "relvol": t["relvol"], "news": t.get("news"), "fresh": t.get("fresh"),
+                "theme": t.get("theme"), "rules_version": t.get("rules_version"),
+                "result": (wst.get(t["symbol"]) or {}).get("result") or (wst.get(t["symbol"]) or {}).get("stage", "not watched"),
+                "r": (wst.get(t["symbol"]) or {}).get("r")}
+               for t in eng.get("trades") or [] if (today, t["symbol"]) not in done]
+        store.append(new, D + "trades.jsonl")
+        checks.append({"name": "engine_trades", "ok": True, "detail": "%d logged, day %+.1fR" % (len(new), calc.day_r(wst))})
+    except Exception as e:
+        checks.append({"name": "engine_trades", "ok": False, "detail": redact(str(e))[:120]})
+
     sc = calc.scorecard(rows)
     learned = calc.learn(rows)
     n_days = len({r["date"] for r in rows})
@@ -885,6 +1040,15 @@ def cmd_selftest(args):
         check("candles_with_volume", candles)
         check("stock_option_chain", options, required=False)
     check("fii_dii", flows, required=False)
+
+    def filings():
+        d = now.date()
+        items = api.bse_announcements((d - timedelta(days=3)).isoformat(), d.isoformat(), max_pages=1)
+        m = calc.match_filings(items, state["uni"]["stocks"]) if state.get("uni") else []
+        return "%d announcements on page 1, %d matched to F&O stocks, e.g. %s" % (
+            len(items), len(m), (m[0]["symbol"] + ": " + m[0]["headline"][:60]) if m else "-")
+
+    check("bse_filings", filings, required=False)
     check("data_dir", data_dir)
     lines = ["%s %s: %s" % ("PASS" if c["ok"] else ("FAIL" if c["required"] else "WARN"), c["name"], c["detail"]) for c in checks]
     if not args.no_telegram:

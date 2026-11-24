@@ -75,13 +75,15 @@ def quote_row(key, now):
            "indicative_equilibrium_price": 0}
     if today in fake_net.BY_DATE and dtime(9, 0) <= now.time() < dtime(9, 15):
         row["indicative_equilibrium_price"] = fake_net.BY_DATE[today]["o"] * s
+        row.update(total_buy_quantity=6000 if sym == "STOCK07" else 1000, total_sell_quantity=2000 if sym == "STOCK07" else 1000)
     if today in fake_net.BY_DATE and now.time() >= dtime(9, 15):
         bars = [b for b in fake_net.minute_bars(today) if datetime.fromisoformat(b[0]) < now.replace(second=0, microsecond=0)] \
             or fake_net.minute_bars(today)[:1]
         row.update(last_price=bars[-1][4] * s, volume=sum(1000 + (i % 7) * 100 for i in range(len(bars))) * (5 if sym == "STOCK07" else 1),
                    last_trade_time=str(int(now.timestamp() * 1000)),
                    ohlc={"open": bars[0][1] * s, "high": max(b[2] for b in bars) * s, "low": min(b[3] for b in bars) * s,
-                         "close": bars[-1][4] * s, "ts": int(now.replace(hour=0, minute=0).timestamp() * 1000)})
+                         "close": bars[-1][4] * s, "ts": int(now.replace(hour=0, minute=0).timestamp() * 1000)},
+                   average_price=sum(b[4] for b in bars) / len(bars) * s)
     if key.startswith("NSE_FO|"):
         i = SYMS.index(sym) if sym else 0
         row.update(oi=100000 + i * 900, previous_oi=100000)
@@ -97,6 +99,14 @@ def request(url, method="GET", headers=None, data=None, timeout=12, retries=1):
     def ok(payload):
         return 200, json.dumps({"status": "success", "data": payload}).encode()
 
+    if "api.bseindia.com" in url:
+        assert method == "GET"
+        page = int(u.split("pageno=")[1].split("&")[0])
+        rows = [] if page > 1 else [
+            {"SLONGNAME": "Stock07 Limited", "HEADLINE": "Order win worth Rs 900 crore", "CATEGORYNAME": "Company Update",
+             "SUBCATNAME": "Award of Order", "DissemDT": today + "T07:45:00", "ATTACHMENTNAME": "x.pdf"},
+            {"SLONGNAME": "Unlisted Widgets Ltd", "HEADLINE": "Board meeting", "DissemDT": today + "T07:50:00"}]
+        return 200, json.dumps({"Table": rows}).encode()
     if url.endswith("/NSE.json.gz"):
         return 200, instruments_file()
     if "ind_nifty500list.csv" in url:
@@ -377,7 +387,8 @@ class Calculations(unittest.TestCase):
         st = {}
         self.assertTrue(run.watch_events(p, 97.9, st, t)[0].startswith("CANCELLED"))
         st = {}
-        late = dt(2026, 11, 23, 10, 5, tzinfo=IST)
+        self.assertEqual(run.watch_events(p, 100.5, {}, dt(2026, 11, 23, 9, 17, tzinfo=IST)), [])   # opening range not done
+        late = dt(2026, 11, 23, 10, 20, tzinfo=IST)
         self.assertTrue(run.watch_events(p, 100.5, st, late)[0].startswith("LATE"))
         st = {"stage": "entered"}
         self.assertTrue(run.watch_events(p, 101, st, dt(2026, 11, 23, 15, 1, tzinfo=IST))[0].startswith("15:00 EXIT"))
@@ -395,6 +406,46 @@ class Calculations(unittest.TestCase):
         self.assertEqual(run.option_events(o, 5, ost), [])
         self.assertTrue(run.option_events(o, 9.5, ost)[0].startswith("OPTION TARGET"))
         self.assertEqual(run.option_events(o, 3, ost), [])
+
+    def test_trade_gates_and_steps(self):
+        from datetime import time as t_
+        q = {"open": 100, "high": 101, "low": 99.8, "last": 100.9, "prev": 99}
+        nifty = {"open": 20000, "last": 20020}
+        ok = {"grade": "ok", "flags": []}
+        g = calc.trade_gates("ABC", q, 2.0, 4.2, 1, nifty, {"direction": "UP", "fresh": True}, ok)
+        self.assertTrue(g["pass"], g["gates"])
+        self.assertEqual((g["direction"], g["entry"], g["stop"], g["half"]), ("UP", 101, 99.8, 103.4))
+        self.assertFalse(calc.trade_gates("ABC", q, 2.0, 4.2, 1, nifty, {"direction": "DOWN"}, ok)["pass"])   # news disagrees
+        self.assertFalse(calc.trade_gates("ABC", q, 2.0, 4.2, 1, {"open": 20000, "last": 19950}, None, ok)["pass"])  # market against
+        self.assertFalse(calc.trade_gates("ABC", dict(q, high=104), 2.0, 4.2, 1, nifty, None, ok)["pass"])   # range too wide
+        self.assertFalse(calc.trade_gates("ABC", dict(q, prev=95), 2.0, 4.2, 1, nifty, None, ok)["pass"])    # gap used the move
+        self.assertFalse(calc.trade_gates("ABC", q, 2.0, 4.2, 1, nifty, None, {"grade": "caution", "flags": ["wide spread"]})["pass"])
+        self.assertFalse(calc.trade_gates("ABC", dict(q, prev=101.5), 2.0, 4.2, 1, nifty, None, ok)["pass"])  # gap down, moving up
+        t = dict(g, symbol="ABC")
+        st = {}
+        self.assertEqual(calc.trade_step(t, 101.2, None, t_(9, 18), st), [])            # before 09:20: nothing
+        self.assertTrue(calc.trade_step(t, 101.2, None, t_(9, 21), st)[0].startswith("ENTRY"))
+        self.assertTrue(calc.trade_step(t, 103.5, 102, t_(9, 40), st)[0].startswith("BOOK HALF"))
+        self.assertEqual(calc.trade_step(t, 103.0, 102.5, t_(10, 0), st), [])
+        self.assertTrue(calc.trade_step(t, 102.4, 102.5, t_(11, 0), st)[0].startswith("TRAIL EXIT"))
+        self.assertAlmostEqual(st["r"], 0.5 * 2 + 0.5 * (102.4 - 101) / 1.2, places=2)
+        st = {}
+        calc.trade_step(t, 101.1, None, t_(9, 25), st)
+        self.assertIn("-1R", calc.trade_step(t, 99.7, None, t_(9, 30), st)[0])
+        self.assertEqual(st["r"], -1.0)
+        st = {}
+        self.assertTrue(calc.trade_step(t, 99.7, None, t_(9, 25), st)[0].startswith("CANCELLED"))
+        st = {}
+        self.assertTrue(calc.trade_step(t, 100.5, None, t_(10, 16), st)[0].startswith("EXPIRED"))
+        self.assertEqual(calc.day_r({"a": {"r": -1.0}, "b": {"r": -1.0}, "c": {}}), -2.0)
+        rows = calc.rank_trades([{"symbol": "A", "relvol": 9, "direction": "UP"}, {"symbol": "B", "relvol": 4, "fresh": True, "news": True, "direction": "UP"},
+                                 {"symbol": "C", "relvol": 5, "direction": "UP"}])
+        self.assertEqual([r["symbol"] for r in rows], ["B", "A", "C"])
+        keep, drop = calc.one_per_theme(rows, {"A": "Banks", "B": "Pharma", "C": "Banks"}.get)
+        self.assertEqual(([r["symbol"] for r in keep], [r["symbol"] for r in drop]), (["B", "A"], ["C"]))
+        m = calc.match_filings([{"company": "Tata Steel Ltd."}, {"company": "Unknown Co"}],
+                               {"TATASTEEL": {"name": "TATA STEEL LIMITED"}})
+        self.assertEqual([x["symbol"] for x in m], ["TATASTEEL"])
 
     def test_scorecard(self):
         rows = [{"tier": "best", "conviction": "high", "horizon": "intraday", "direction": "UP", "evidence": ["catalyst", "volume"],
@@ -447,6 +498,9 @@ class Pipeline(unittest.TestCase):
         self.assertIn("swing_up", d["lists"])
         self.assertIn("panic", d["market"])
         self.assertIn("Swing candidates", text)
+        nw = self.read("news/%s.json" % day)
+        self.assertEqual([x["symbol"] for x in nw["items"]], ["STOCK07"])
+        self.assertTrue(nw["items"][0]["fresh"])
         self.assertEqual(d["market"]["industries"]["source"], "NSE Nifty 500 list")
         self.assertEqual(d["market"]["industries"]["count"], 4)
         self.assertIn("Industry strength among F&O stocks", text)
@@ -478,6 +532,9 @@ class Pipeline(unittest.TestCase):
         self.assertAlmostEqual(g["all"]["STOCK07"]["gap"], want, places=1)
         self.assertAlmostEqual(g["index_gap"], want, places=1)
 
+        self.assertIn("imbalance", g["auction"])
+        self.assertEqual(g["auction"]["imbalance"]["STOCK07"], 0.5)
+
         for label, clock in (("5", "09:20:15"), ("30", "09:47:00")):
             at(day + "T%s+05:30" % clock)
             self.assertEqual(run.main(["check" + label]), 0)
@@ -496,6 +553,12 @@ class Pipeline(unittest.TestCase):
             if label == "30":
                 self.assertIn("now", o)
             self.assertIn("Options for intraday picks", sent[-1])
+            if label == "5":
+                self.assertIn("09:20 TRADE CALLS", sent[-2])
+                e = self.read("trades/%s.json" % day)
+                self.assertEqual(len(e["trades"]) + len(e["rejected"]), len(c["in_play"]))
+                for t in e["trades"] + e["rejected"]:
+                    self.assertEqual([x["gate"] for x in t["gates"][:5]], ["in play", "direction", "market", "room", "tradeable"])
 
         for clock in ("09:55:05", "15:06:05"):
             at(day + "T%s+05:30" % clock)
