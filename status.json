@@ -57,11 +57,16 @@
   "ts": "2026-11-24T16:05:01+05:30"
  },
  "momentum_preopen": {
-  "checks": [],
-  "code": "161f57d6a3",
+  "checks": [
+   {
+    "detail": "indicative, 218 of 218",
+    "name": "prices",
+    "ok": true
+   }
+  ],
+  "code": "0e9bd7faae",
   "ok": true,
-  "skipped": "NSE holiday (Upstox)",
-  "ts": "2026-11-24T09:07:21+05:30"
+  "ts": "2026-11-25T09:08:40+05:30"
  },
  "momentum_selftest": {
   "checks": [
