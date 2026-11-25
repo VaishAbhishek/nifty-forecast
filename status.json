@@ -60,11 +60,31 @@
   "ts": "2026-11-25T08:11:30+05:30"
  },
  "momentum_eod": {
-  "checks": [],
-  "code": "161f57d6a3",
+  "checks": [
+   {
+    "detail": "216 of 218 futures",
+    "name": "open_interest",
+    "ok": true
+   },
+   {
+    "detail": "19 scored, 0 failed",
+    "name": "picks",
+    "ok": true
+   },
+   {
+    "detail": "0 filled",
+    "name": "swing_followup",
+    "ok": true
+   },
+   {
+    "detail": "1 logged, day +1.6R",
+    "name": "engine_trades",
+    "ok": true
+   }
+  ],
+  "code": "0e9bd7faae",
   "ok": true,
-  "skipped": "NSE holiday (Upstox)",
-  "ts": "2026-11-24T16:05:01+05:30"
+  "ts": "2026-11-25T16:05:18+05:30"
  },
  "momentum_preopen": {
   "checks": [

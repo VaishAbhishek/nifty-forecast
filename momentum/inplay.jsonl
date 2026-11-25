@@ -40,12 +40,12 @@
 {"atr": 43.03, "date": "2026-11-23", "direction": "DOWN", "or_high": 1524.5, "or_low": 1499.3, "relvol": 4.7, "rules_version": 2, "symbol": "ADANIENSOL", "trade": {"entry": 1499.3, "entry_i": 0, "exit_i": 369, "r": 1.16, "status": "closed"}}
 {"atr": 84.69, "date": "2026-11-23", "direction": "DOWN", "or_high": 2268.6, "or_low": 2234.9, "relvol": 4.6, "rules_version": 2, "symbol": "TIINDIA", "trade": {"entry": 2234.9, "entry_i": 82, "exit_i": 369, "r": 0.74, "status": "closed"}}
 {"atr": 10.07, "date": "2026-11-23", "direction": "DOWN", "or_high": 405.0, "or_low": 397.2, "relvol": 4.5, "rules_version": 2, "symbol": "AMBUJACEM", "trade": {"entry": 397.2, "entry_i": 2, "exit_i": 369, "r": 0.67, "status": "closed"}}
-{"atr": 52.06, "date": "2026-11-25", "direction": "DOWN", "or_high": 1176.4, "or_low": 1139.6, "relvol": 15.8, "rules_version": 3, "symbol": "POLICYBZR", "trade": null}
-{"atr": 9.53, "date": "2026-11-25", "direction": "UP", "or_high": 292.4, "or_low": 278.54, "relvol": 11.9, "rules_version": 3, "symbol": "LTF", "trade": null}
-{"atr": 50.06, "date": "2026-11-25", "direction": "UP", "or_high": 1526.9, "or_low": 1455.1, "relvol": 9.7, "rules_version": 3, "symbol": "MFSL", "trade": null}
-{"atr": 28.57, "date": "2026-11-25", "direction": "DOWN", "or_high": 1099.65, "or_low": 1069.15, "relvol": 9.4, "rules_version": 3, "symbol": "MAXHEALTH", "trade": null}
-{"atr": 6.05, "date": "2026-11-25", "direction": "DOWN", "or_high": 163.17, "or_low": 159.8, "relvol": 6.8, "rules_version": 3, "symbol": "TATASTEEL", "trade": null}
-{"atr": 41.66, "date": "2026-11-25", "direction": "DOWN", "or_high": 2024.7, "or_low": 2000.0, "relvol": 6.3, "rules_version": 3, "symbol": "LUPIN", "trade": null}
-{"atr": 49.87, "date": "2026-11-25", "direction": "UP", "or_high": 1911.6, "or_low": 1879.1, "relvol": 6.2, "rules_version": 3, "symbol": "BAJAJFINSV", "trade": null}
-{"atr": 55.22, "date": "2026-11-25", "direction": "DOWN", "or_high": 3509.8, "or_low": 3430.2, "relvol": 5.8, "rules_version": 3, "symbol": "DMART", "trade": null}
-{"atr": 51.94, "date": "2026-11-25", "direction": "DOWN", "or_high": 1902.5, "or_low": 1869.6, "relvol": 5.2, "rules_version": 3, "symbol": "CHOLAFIN", "trade": null}
+{"atr": 52.06, "date": "2026-11-25", "direction": "DOWN", "or_high": 1176.4, "or_low": 1139.6, "relvol": 15.8, "rules_version": 3, "symbol": "POLICYBZR", "trade": {"entry": 1139.6, "entry_i": 1, "exit_i": 369, "r": 0.43, "status": "closed"}}
+{"atr": 9.53, "date": "2026-11-25", "direction": "UP", "or_high": 292.4, "or_low": 278.54, "relvol": 11.9, "rules_version": 3, "symbol": "LTF", "trade": {"entry": 292.4, "entry_i": 5, "exit_i": 369, "r": -0.61, "status": "closed"}}
+{"atr": 50.06, "date": "2026-11-25", "direction": "UP", "or_high": 1526.9, "or_low": 1455.1, "relvol": 9.7, "rules_version": 3, "symbol": "MFSL", "trade": {"entry": 1526.9, "entry_i": 2, "exit_i": 310, "r": -1.0, "status": "stopped"}}
+{"atr": 28.57, "date": "2026-11-25", "direction": "DOWN", "or_high": 1099.65, "or_low": 1069.15, "relvol": 9.4, "rules_version": 3, "symbol": "MAXHEALTH", "trade": {"entry": 1069.15, "entry_i": 0, "exit_i": 369, "r": -0.23, "status": "closed"}}
+{"atr": 6.05, "date": "2026-11-25", "direction": "DOWN", "or_high": 163.17, "or_low": 159.8, "relvol": 6.8, "rules_version": 3, "symbol": "TATASTEEL", "trade": {"status": "cancelled"}}
+{"atr": 41.66, "date": "2026-11-25", "direction": "DOWN", "or_high": 2024.7, "or_low": 2000.0, "relvol": 6.3, "rules_version": 3, "symbol": "LUPIN", "trade": {"entry": 2000.0, "entry_i": 0, "exit_i": 369, "r": -0.15, "status": "closed"}}
+{"atr": 49.87, "date": "2026-11-25", "direction": "UP", "or_high": 1911.6, "or_low": 1879.1, "relvol": 6.2, "rules_version": 3, "symbol": "BAJAJFINSV", "trade": {"entry": 1911.6, "entry_i": 7, "exit_i": 369, "r": 0.41, "status": "closed"}}
+{"atr": 55.22, "date": "2026-11-25", "direction": "DOWN", "or_high": 3509.8, "or_low": 3430.2, "relvol": 5.8, "rules_version": 3, "symbol": "DMART", "trade": {"entry": 3430.2, "entry_i": 27, "exit_i": 131, "r": -1.0, "status": "stopped"}}
+{"atr": 51.94, "date": "2026-11-25", "direction": "DOWN", "or_high": 1902.5, "or_low": 1869.6, "relvol": 5.2, "rules_version": 3, "symbol": "CHOLAFIN", "trade": {"entry": 1869.6, "entry_i": 1, "exit_i": 369, "r": 0.05, "status": "closed"}}
