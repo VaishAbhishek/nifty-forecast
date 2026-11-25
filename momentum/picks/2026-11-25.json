@@ -1,0 +1,397 @@
+{
+ "date": "2026-11-25",
+ "generated": "08:44",
+ "no_trade": false,
+ "picks": [
+  {
+   "symbol": "APLAPOLLO",
+   "direction": "DOWN",
+   "horizon": "intraday",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "analyst",
+    "volume",
+    "price"
+   ],
+   "confirm": null,
+   "cancel": null,
+   "target": null,
+   "fresh": true,
+   "materiality": "medium",
+   "theme": "APL-Tata deal",
+   "news": "BusinessToday 25 Nov 08:01: ICICI, Axis, Centrum cut to Sell (targets 1,345-1,500); Nuvama to Hold",
+   "surprise_pct": null,
+   "reason": "Fresh broker downgrades after -21% day; open offer ~2,301 supports"
+  },
+  {
+   "symbol": "SONACOMS",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "best",
+   "conviction": "high",
+   "evidence": [
+    "setup",
+    "momentum",
+    "sector"
+   ],
+   "confirm": 937.1,
+   "cancel": 879.9,
+   "target": 1051.8,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "swing momentum",
+   "news": "No fresh news; brief swing table setup",
+   "surprise_pct": null,
+   "reason": "Mom 98, tight base, volume drying, auto rank 5, no event found"
+  },
+  {
+   "symbol": "ATHERENERG",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "best",
+   "conviction": "medium",
+   "evidence": [
+    "setup",
+    "momentum",
+    "sector"
+   ],
+   "confirm": 2028.1,
+   "cancel": 1808.6,
+   "target": 2467.1,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "swing momentum",
+   "news": "No fresh news; brief swing table setup",
+   "surprise_pct": null,
+   "reason": "Mom 100, 2% off high; lock-up supply overhang unconfirmed"
+  },
+  {
+   "symbol": "SUZLON",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "best",
+   "conviction": "medium",
+   "evidence": [
+    "setup",
+    "momentum",
+    "sector",
+    "strength"
+   ],
+   "confirm": 35.7,
+   "cancel": 39.6,
+   "target": 27.9,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "swing momentum",
+   "news": "No fresh news; brief swing table setup",
+   "surprise_pct": null,
+   "reason": "Mom 2, capital goods last, tight base below; needs futures"
+  },
+  {
+   "symbol": "INDHOTEL",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "setup",
+    "momentum"
+   ],
+   "confirm": 920.2,
+   "cancel": 865.4,
+   "target": 1029.7,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "swing momentum",
+   "news": "No fresh news; brief swing table setup",
+   "surprise_pct": null,
+   "reason": "Mom 96, 1% off high; industry rank 11"
+  },
+  {
+   "symbol": "BOSCHLTD",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "setup",
+    "momentum",
+    "sector"
+   ],
+   "confirm": 51161.7,
+   "cancel": 48370.0,
+   "target": 56745.1,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "swing momentum",
+   "news": "No fresh news; brief swing table setup",
+   "surprise_pct": null,
+   "reason": "Mom 92, 7% off high"
+  },
+  {
+   "symbol": "TVSMOTOR",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "setup",
+    "momentum",
+    "sector"
+   ],
+   "confirm": 4647.1,
+   "cancel": 4360.0,
+   "target": 5221.4,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "swing momentum",
+   "news": "No fresh news; brief swing table setup",
+   "surprise_pct": null,
+   "reason": "Mom 93, volume not drying"
+  },
+  {
+   "symbol": "NYKAA",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "setup",
+    "momentum"
+   ],
+   "confirm": 369.3,
+   "cancel": 346.1,
+   "target": 415.7,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "swing momentum",
+   "news": "No fresh news; brief swing table setup",
+   "surprise_pct": null,
+   "reason": "Mom 94, industry rank 11"
+  },
+  {
+   "symbol": "ANANDRATHI",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "setup",
+    "momentum",
+    "sector"
+   ],
+   "confirm": 2413.3,
+   "cancel": 2344.3,
+   "target": 2551.2,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "swing momentum",
+   "news": "No fresh news; brief swing table setup",
+   "surprise_pct": null,
+   "reason": "Mom 99; RBI policy 4 Dec inside window"
+  },
+  {
+   "symbol": "SWIGGY",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "setup",
+    "momentum"
+   ],
+   "confirm": 175.7,
+   "cancel": 201.3,
+   "target": 124.5,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "swing momentum",
+   "news": "No fresh news; brief swing table setup",
+   "surprise_pct": null,
+   "reason": "Mom 2; supply overhang; industry rank 11"
+  },
+  {
+   "symbol": "VMM",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "setup",
+    "momentum"
+   ],
+   "confirm": 89.0,
+   "cancel": 97.8,
+   "target": 71.5,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "swing momentum",
+   "news": "No fresh news; brief swing table setup",
+   "surprise_pct": null,
+   "reason": "Mom 6; up 2.7% last day"
+  },
+  {
+   "symbol": "DIVISLAB",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "setup",
+    "momentum"
+   ],
+   "confirm": 11859.6,
+   "cancel": 10954.0,
+   "target": 13670.8,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "swing momentum",
+   "news": "No fresh news; brief swing table setup",
+   "surprise_pct": null,
+   "reason": "Healthcare rank 9, volume not drying"
+  },
+  {
+   "symbol": "AUROPHARMA",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "setup",
+    "momentum"
+   ],
+   "confirm": 1864.0,
+   "cancel": 1778.0,
+   "target": 2036.1,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "swing momentum",
+   "news": "No fresh news; brief swing table setup",
+   "surprise_pct": null,
+   "reason": "Healthcare rank 9, volume not drying"
+  },
+  {
+   "symbol": "ACUTAAS",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "setup",
+    "momentum"
+   ],
+   "confirm": 4145.0,
+   "cancel": 3720.2,
+   "target": 4994.6,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "swing momentum",
+   "news": "No fresh news; brief swing table setup",
+   "surprise_pct": null,
+   "reason": "6% off high, healthcare rank 9"
+  },
+  {
+   "symbol": "KARURVYSYA",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "setup",
+    "momentum"
+   ],
+   "confirm": 399.1,
+   "cancel": 364.3,
+   "target": 468.9,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "swing momentum",
+   "news": "No fresh news; brief swing table setup",
+   "surprise_pct": null,
+   "reason": "Bank; RBI 4 Dec; volume not drying"
+  },
+  {
+   "symbol": "ETERNAL",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "setup",
+    "momentum"
+   ],
+   "confirm": 378.9,
+   "cancel": 356.5,
+   "target": 423.7,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "swing momentum",
+   "news": "No fresh news; brief swing table setup",
+   "surprise_pct": null,
+   "reason": "Industry rank 11, volume not drying"
+  },
+  {
+   "symbol": "MAZDOCK",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "setup",
+    "momentum",
+    "sector"
+   ],
+   "confirm": 1796.0,
+   "cancel": 1927.3,
+   "target": 1533.4,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "swing momentum",
+   "news": "No fresh news; brief swing table setup",
+   "surprise_pct": null,
+   "reason": "Defence DAC approvals = squeeze risk"
+  },
+  {
+   "symbol": "BDL",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "setup",
+    "momentum",
+    "sector"
+   ],
+   "confirm": 1001.3,
+   "cancel": 1132.7,
+   "target": 738.6,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "swing momentum",
+   "news": "No fresh news; brief swing table setup",
+   "surprise_pct": null,
+   "reason": "Defence DAC approvals = squeeze risk"
+  },
+  {
+   "symbol": "TIINDIA",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "setup",
+    "momentum"
+   ],
+   "confirm": 2112.4,
+   "cancel": 2349.0,
+   "target": 1639.3,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "swing momentum",
+   "news": "No fresh news; brief swing table setup",
+   "surprise_pct": null,
+   "reason": "Auto industry rank 5 against short"
+  }
+ ]
+}
