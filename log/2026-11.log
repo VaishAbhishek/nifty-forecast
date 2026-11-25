@@ -69,3 +69,6 @@
 2026-11-25T09:28:35+05:30 momentum watch: ENTRY BAJAJFINSV UP: 1913.30 broke the opening range 1911.60. Stop 1879.10, book half at 1976.60 (2R).
 2026-11-25T09:46:35+05:30 recheck: STILL NO TRADE (the morning call was to stand aside; this update is information only)
 2026-11-25T09:47:02+05:30 momentum check30: 10 in play, 19 picks
+2026-11-25T12:06:35+05:30 momentum watch: BOOK HALF BAJAJFINSV UP: 1976.80 reached 2R (1976.60). Sell half; trail the rest along VWAP, never below entry 1911.60.
+2026-11-25T14:01:35+05:30 momentum watch: TRAIL EXIT BAJAJFINSV UP: rest out at 1953.80 (crossed VWAP/entry 1954.41). Trade +1.6R.
+2026-11-25T15:45:01+05:30 score: filled 2026-11-25, 9 sessions in total
