@@ -463,6 +463,14 @@ class Calculations(unittest.TestCase):
         self.assertEqual(sc["horizon"]["swing"]["n_5d"], 1)
         self.assertIn("By evidence", brief.render_scorecard(sc, None, 1))
 
+    def test_render_engine(self):
+        self.assertIn("No engine trades yet", brief.render_engine([]))
+        md = brief.render_engine([{"date": "2026-11-25", "symbol": "BAJAJFINSV", "direction": "UP", "entry": 1911.6,
+                                   "stop": 1879.1, "result": "trail", "r": 1.65},
+                                  {"date": "2026-11-26", "symbol": "X", "direction": "DOWN", "result": "not watched", "r": None}])
+        self.assertIn("2 trades, 1 with a result, 1 won, total +1.6 R", md)
+        self.assertIn("| BAJAJFINSV | UP |", md)
+
 
 class Pipeline(unittest.TestCase):
     @classmethod

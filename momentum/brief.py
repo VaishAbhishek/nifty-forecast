@@ -300,6 +300,23 @@ def render_scorecard(sc, inplay, n_days):
     return "\n".join(out)
 
 
+def render_engine(trades):
+    """The 09:20 engine's trades (rules v3) as the watcher managed them, from trades.jsonl."""
+    out = ["", "## 09:20 engine trades (rules v3)", ""]
+    done = [t for t in trades or [] if t.get("r") is not None]
+    if not trades:
+        return "\n".join(out + ["No engine trades yet."]) + "\n"
+    wins = sum(1 for t in done if t["r"] > 0)
+    total = sum(t["r"] for t in done)
+    out.append("%d trades, %d with a result, %d won, total %+.1f R, average %s R. Do not read much into fewer than about 30 trades."
+               % (len(trades), len(done), wins, total, num(total / len(done) if done else None, "%+.2f")))
+    out += ["", "| Date | Stock | Dir | Entry | Stop | Result | R |", "|---|---|---|---|---|---|---|"]
+    for t in trades[-15:]:
+        out.append("| %s | %s | %s | %s | %s | %s | %s |" % (t.get("date"), t.get("symbol"), t.get("direction"), t.get("entry"),
+                                                       t.get("stop"), t.get("result"), num(t.get("r"), "%+.2f")))
+    return "\n".join(out) + "\n"
+
+
 def render_learned(L):
     out = ["", "## What the record says about each kind of evidence", "",
            "Finished picks: %d. Worked = intraday closed beyond the open in the pick's direction; swing = up (or down) after 10 sessions." % L["n"],

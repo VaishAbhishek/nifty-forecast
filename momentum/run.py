@@ -480,6 +480,13 @@ def auction_read(by_key, keys, today, now, imbalance, gaps, args):
         time.sleep(wait)
     q = api.quotes(keys)
     vol = {by_key[k]: r["volume"] for k, r in q.items() if by_key.get(k) and r.get("volume") and r.get("traded_on") == today}
+    # diagnostics for when no auction volume is seen: is the field empty, or is the trade date not today?
+    seen = [r for k, r in q.items() if by_key.get(k)]
+    with_vol = [r for r in seen if r.get("volume")]
+    dates = {}
+    for r in with_vol:
+        d = str(r.get("traded_on"))
+        dates[d] = dates.get(d, 0) + 1
     hist = store.read_json(OPENVOL, {}) or {}
     h = hist.setdefault("pre", {})
     rel = {}
@@ -500,7 +507,11 @@ def auction_read(by_key, keys, today, now, imbalance, gaps, args):
         top_.append({"symbol": sym, "relvol": calc.r2(rv, 1), "gap": (gaps.get(sym) or {}).get("gap"),
                      "imbalance": imbalance.get(sym)})
     return {"stocks_with_volume": len(vol), "with_baseline": len(rel), "in_play": top_,
-            "imbalance": imbalance, "note": None if rel else "Usual auction volume is still being measured (needs 5 sessions)."}
+            "imbalance": imbalance, "quotes_read": len(seen), "quotes_with_volume": len(with_vol), "volume_trade_dates": dates,
+            "read_at": now_ist().strftime("%H:%M:%S"),
+            "note": None if rel else ("No auction volume for today in the quotes at %s (%d of %d quotes carry a volume; trade dates %s)."
+                                      % (now_ist().strftime("%H:%M:%S"), len(with_vol), len(seen), dates or "none")
+                                      if not vol else "Usual auction volume is still being measured (needs 5 sessions).")}
 
 
 # ------------------------------------------------------------------ opening checks
@@ -648,7 +659,9 @@ def run_engine(today, now, in_play, relvol, rows, nifty_q, universe, feats, args
         news = watch.get(sym)
         pre = calc.trade_gates(sym, q, f.get("atr_pct"), r["relvol"], rank, nifty_q, news, option={"grade": "ok"})
         opt = None
+        tried = False
         if pre["direction"] and all(g["ok"] for g in pre["gates"][:4]) and pre.get("risk"):
+            tried = True
             try:
                 opt = plan_option({"symbol": sym, "direction": pre["direction"], "confirm": pre["entry"],
                                    "cancel": pre["stop"]}, universe, feats)
@@ -657,6 +670,11 @@ def run_engine(today, now, in_play, relvol, rows, nifty_q, universe, feats, args
                 opt = None
                 store.log("momentum engine: option for %s failed: %s" % (sym, e))
         res = calc.trade_gates(sym, q, f.get("atr_pct"), r["relvol"], rank, nifty_q, news, option=opt)
+        if not tried:
+            # the option is only looked up once the first four gates pass; say so instead of "no option contract found"
+            for g in res["gates"]:
+                if g["gate"] == "tradeable" and not g["ok"]:
+                    g["why"] = "not checked (an earlier gate failed)"
         res.update(option=opt, industry=f.get("industry"), theme=(news or {}).get("theme") or f.get("industry"),
                    news_text=(news or {}).get("news"), rules_version=calc.RULES_VERSION)
         evaluated.append(res)
@@ -975,7 +993,8 @@ def cmd_eod(args):
     store.write_json(D + "scorecard.json", {"updated": now.isoformat(timespec="seconds"), "sessions": n_days,
                                             "rules_version": calc.RULES_VERSION, "picks": sc, "in_play": ip_tally,
                                             "learned": learned})
-    write_text(D + "scorecard.md", brief.render_scorecard(sc, ip_tally, n_days) + brief.render_learned(learned))
+    write_text(D + "scorecard.md", brief.render_scorecard(sc, ip_tally, n_days) + brief.render_engine(store.load(D + "trades.jsonl"))
+               + brief.render_learned(learned))
     msg = {"date": now.strftime("%d %b"), "today": todays, "scorecard": sc, "inplay": ip_tally if ip_tally and ip_tally["n"] else None,
            "note": None if todays else ("Today's picks were already scored." if load_picks(today) else "No picks file was logged today.")}
     telegram.send(brief.eod_message(msg), args.dry_run)
