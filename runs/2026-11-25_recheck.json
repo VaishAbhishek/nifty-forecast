@@ -1,0 +1,257 @@
+{
+ "f30_high": 25795.9,
+ "f30_low": 25619.0,
+ "f30_range": 176.90000000000146,
+ "last": 25739.2,
+ "levels": {
+  "dist20_pct": 2.63,
+  "hi20": 25992.6,
+  "hi5": 25992.6,
+  "lo20": 22497.7,
+  "lo5": 25104.8,
+  "pdc": 25349.65,
+  "pdh": 25992.6,
+  "pdl": 25343.85,
+  "pivot": 25562.03,
+  "r1": 25780.22,
+  "r2": 26210.78,
+  "s1": 25131.47,
+  "s2": 24913.28
+ },
+ "move_pct": 0.31510210126528865,
+ "move_pts": 80.85000000000218,
+ "new_headlines": [
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty Drops 451 Points Amid Profit-Booking and F&O Expiry Pressure - ICICI Direct"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Sensex zooms 1,500 pts in opening trade, Nifty gains over 400 pts to reclaim 25,750 level; benchmarks inch closer to record highs"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Mint Markets",
+   "title": "Big boom in stock market today; \u20b92.2 lakh cr wealth for investors! Sensex up 1,400 points, Nifty 600 | 3 main reasons"
+  },
+  {
+   "label": {
+    "catalyst": "earnings",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Business Standard Markets",
+   "title": "High MTF revenue exposure brokerages face earnings impact: Prakash Kacholia"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Sensex gains 1,500 pts, Nifty near 25,800: Lower crude prices among key factors behind market rise"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Business Standard Markets",
+   "title": "Bulls return to D-St! Sensex zooms 1,500 points intraday; key factors here"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Bank Nifty jumps nearly 1,300 pts as HDFC Bank, ICICI Bank rally over 3% each; private lenders lead gains"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "\u3010TMGM Financial Recap\u3011Oil Prices May Be Approaching a Bottom"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: FII DII",
+   "title": "Daily Market Update - 25th November 2026 by Ventura Securities Ltd"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "ET Markets",
+   "title": "APL Apollo Tubes among 4 Nifty500 stocks closing below VWAP"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Rupee strengthens to 92.74 against dollar: How does it affect your overseas payments"
+  }
+ ],
+ "news_high_impact": 0,
+ "news_score": 0.333,
+ "open": 25658.35,
+ "or_high": 25775.5,
+ "or_low": 25619.0,
+ "orb": 1,
+ "p_n": 231,
+ "p_range_morning": 0.422,
+ "p_range_new": 0.641,
+ "range_so_far": 176.90000000000146,
+ "reason": "the morning call was to stand aside; this update is information only",
+ "sectors": {
+  "heavy": [
+   {
+    "last": 844.3,
+    "name": "HDFC Bank",
+    "pct": 3.24
+   },
+   {
+    "last": 1376.4,
+    "name": "Reliance",
+    "pct": 1.88
+   },
+   {
+    "last": 1637.2,
+    "name": "ICICI Bank",
+    "pct": 3.26
+   },
+   {
+    "last": 1145.0,
+    "name": "Infosys",
+    "pct": 3.77
+   },
+   {
+    "last": 2128.3,
+    "name": "Bharti Airtel",
+    "pct": -0.01
+   },
+   {
+    "last": 2501.2,
+    "name": "TCS",
+    "pct": 1.67
+   },
+   {
+    "last": 4141.6,
+    "name": "L&T",
+    "pct": 1.02
+   },
+   {
+    "last": 304.7,
+    "name": "ITC",
+    "pct": 1.23
+   },
+   {
+    "last": 1135.6,
+    "name": "SBI",
+    "pct": 0.26
+   }
+  ],
+  "missing": [],
+  "sectors": [
+   {
+    "last": 63574.9,
+    "name": "Bank",
+    "pct": 1.58
+   },
+   {
+    "last": 28788.85,
+    "name": "Financials",
+    "pct": 2.26
+   },
+   {
+    "last": 32420.6,
+    "name": "IT",
+    "pct": 1.79
+   },
+   {
+    "last": 28498.6,
+    "name": "Auto",
+    "pct": 0.03
+   },
+   {
+    "last": 28440.3,
+    "name": "Pharma",
+    "pct": 0.54
+   },
+   {
+    "last": 11686.05,
+    "name": "Metal",
+    "pct": -1.13
+   },
+   {
+    "last": 48928.8,
+    "name": "FMCG",
+    "pct": 1.28
+   },
+   {
+    "last": 36746.5,
+    "name": "Energy",
+    "pct": 0.25
+   },
+   {
+    "last": 942.85,
+    "name": "Realty",
+    "pct": 0.11
+   }
+  ]
+ },
+ "status": "STILL NO TRADE",
+ "vix_morning": 17.04,
+ "vix_now": 17.15
+}

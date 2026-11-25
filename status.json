@@ -1,17 +1,27 @@
 {
  "momentum_check30": {
-  "checks": [],
-  "code": "161f57d6a3",
+  "checks": [
+   {
+    "detail": "218 stocks, 218 with a volume baseline, 10 in play",
+    "name": "quotes",
+    "ok": true
+   }
+  ],
+  "code": "0e9bd7faae",
   "ok": true,
-  "skipped": "NSE holiday (Upstox)",
-  "ts": "2026-11-24T09:47:01+05:30"
+  "ts": "2026-11-25T09:47:02+05:30"
  },
  "momentum_check5": {
-  "checks": [],
-  "code": "161f57d6a3",
+  "checks": [
+   {
+    "detail": "218 stocks, 218 with a volume baseline, 10 in play",
+    "name": "quotes",
+    "ok": true
+   }
+  ],
+  "code": "0e9bd7faae",
   "ok": true,
-  "skipped": "NSE holiday (Upstox)",
-  "ts": "2026-11-24T09:20:16+05:30"
+  "ts": "2026-11-25T09:20:18+05:30"
  },
  "momentum_data": {
   "checks": [
@@ -237,7 +247,7 @@
     "ok": true
    },
    {
-    "detail": "{'p_range': 1.0, 'n': 0, 'note': 'range already reached'}",
+    "detail": "{'p_range': 0.641, 'n': 231}",
     "name": "first30_model",
     "ok": true
    },
@@ -247,10 +257,10 @@
     "ok": true
    }
   ],
-  "code": "07ec3b2e61",
+  "code": "0e9bd7faae",
   "ok": true,
   "status": "STILL NO TRADE",
-  "ts": "2026-11-23T09:46:30+05:30"
+  "ts": "2026-11-25T09:46:35+05:30"
  },
  "score": {
   "checks": [
