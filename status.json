@@ -31,22 +31,22 @@
     "ok": true
    },
    {
-    "detail": "218 ok, 0 failed, session 2026-11-23",
+    "detail": "218 ok, 0 failed, session 2026-11-25",
     "name": "daily_candles",
     "ok": true
    },
    {
-    "detail": "193 stocks with peers",
+    "detail": "197 stocks with peers",
     "name": "peers",
     "ok": true
    },
    {
-    "detail": "31 of 32 focus and swing stocks",
+    "detail": "37 of 37 focus and swing stocks",
     "name": "options",
     "ok": true
    },
    {
-    "detail": "backfilled 2 of 2",
+    "detail": "backfilled 0 of 0",
     "name": "opening_volume_baseline",
     "ok": true
    }
@@ -57,7 +57,7 @@
    "BSE filings not read (HTTP 403 for https://api.bseindia.com/BseIndiaAPI/api/AnnSubCategoryGetData/w: <); the report's web search is the fallback"
   ],
   "ok": true,
-  "ts": "2026-11-25T08:11:30+05:30"
+  "ts": "2026-11-26T08:11:31+05:30"
  },
  "momentum_eod": {
   "checks": [
