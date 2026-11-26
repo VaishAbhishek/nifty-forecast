@@ -1,0 +1,372 @@
+{
+ "date": "2026-11-26",
+ "generated": "08:45 IST",
+ "no_trade": false,
+ "picks": [
+  {
+   "symbol": "ENRIN",
+   "direction": "UP",
+   "horizon": "intraday",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "catalyst",
+    "earnings"
+   ],
+   "confirm": null,
+   "cancel": null,
+   "target": null,
+   "fresh": true,
+   "materiality": "high",
+   "theme": "power T&D results",
+   "news": "Q4 FY26 (Jul-Sep) PAT Rs653cr +81.5% YoY, rev +30%, margin 23.8%, orders ~2x; filed 25 Nov, time unverified",
+   "surprise_pct": null,
+   "reason": "Big YoY beat, stock untraded on it; no consensus found"
+  },
+  {
+   "symbol": "LUPIN",
+   "direction": "UP",
+   "horizon": "intraday",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "catalyst"
+   ],
+   "confirm": null,
+   "cancel": null,
+   "target": null,
+   "fresh": true,
+   "materiality": "low",
+   "theme": "USFDA approvals",
+   "news": "USFDA nods: generic Janumet (US mkt $439m) 21:13 IST, dalbavancin 21:58 IST, 25 Nov",
+   "surprise_pct": null,
+   "reason": "Small approvals, ~1-2% of revenue at best"
+  },
+  {
+   "symbol": "ANANDRATHI",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "best",
+   "conviction": "high",
+   "evidence": [
+    "momentum",
+    "setup",
+    "sector"
+   ],
+   "confirm": 2413.3,
+   "cancel": 2344.3,
+   "target": 2551.4,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "wealth mgmt momentum",
+   "news": "No fresh news; setup from swing table.",
+   "surprise_pct": null,
+   "reason": "Mom 99, 1% off high, tight base, volume drying"
+  },
+  {
+   "symbol": "TVSMOTOR",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "best",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup",
+    "sector"
+   ],
+   "confirm": 4647.7,
+   "cancel": 4360.0,
+   "target": 5223.1,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "two-wheeler demand",
+   "news": "No fresh news; setup from swing table.",
+   "surprise_pct": null,
+   "reason": "Mom 94, 0.6% off high, 2W retail +19% Nov"
+  },
+  {
+   "symbol": "MAZDOCK",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "best",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup",
+    "sector",
+    "strength"
+   ],
+   "confirm": 1786.9,
+   "cancel": 1927.3,
+   "target": 1506.1,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "defence capital goods weakness",
+   "news": "No fresh news; setup from swing table.",
+   "surprise_pct": null,
+   "reason": "Mom 3, worst industry, tight base, volume drying"
+  },
+  {
+   "symbol": "DIVISLAB",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup",
+    "strength"
+   ],
+   "confirm": 11838.9,
+   "cancel": 10954.0,
+   "target": 13608.7,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "pharma momentum",
+   "news": "No fresh news; setup from swing table.",
+   "surprise_pct": null,
+   "reason": "Mom 100, 1% off high, no volume dry-up"
+  },
+  {
+   "symbol": "ATHERENERG",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 2028.5,
+   "cancel": 1847.0,
+   "target": 2391.4,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "two-wheeler demand",
+   "news": "No fresh news; setup from swing table.",
+   "surprise_pct": null,
+   "reason": "Mom 99, 7% off high"
+  },
+  {
+   "symbol": "SONACOMS",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 937.1,
+   "cancel": 879.9,
+   "target": 1051.5,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "auto components",
+   "news": "No fresh news; setup from swing table.",
+   "surprise_pct": null,
+   "reason": "Mom 98, 6% off high"
+  },
+  {
+   "symbol": "ACUTAAS",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 4144.9,
+   "cancel": 3720.2,
+   "target": 4994.4,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "pharma momentum",
+   "news": "No fresh news; setup from swing table.",
+   "surprise_pct": null,
+   "reason": "Mom 98, new F&O entrant"
+  },
+  {
+   "symbol": "INDHOTEL",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 928.1,
+   "cancel": 865.4,
+   "target": 1053.5,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "hotels",
+   "news": "No fresh news; setup from swing table.",
+   "surprise_pct": null,
+   "reason": "Mom 96, industry rank 11"
+  },
+  {
+   "symbol": "NYKAA",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 369.3,
+   "cancel": 351.6,
+   "target": 404.6,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "consumer internet",
+   "news": "No fresh news; setup from swing table.",
+   "surprise_pct": null,
+   "reason": "Mom 95, industry rank 11"
+  },
+  {
+   "symbol": "WAAREEENER",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup",
+    "sector"
+   ],
+   "confirm": 2356.5,
+   "cancel": 2629.9,
+   "target": 1809.6,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "solar capital goods",
+   "news": "No fresh news; setup from swing table.",
+   "surprise_pct": null,
+   "reason": "Mom 12, worst industry, 10% above low"
+  },
+  {
+   "symbol": "AUROPHARMA",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 1864.1,
+   "cancel": 1778.0,
+   "target": 2036.4,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "pharma momentum",
+   "news": "No fresh news; setup from swing table.",
+   "surprise_pct": null,
+   "reason": "No dry-up, mid-table industry"
+  },
+  {
+   "symbol": "BOSCHLTD",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 51085.9,
+   "cancel": 48370.0,
+   "target": 56517.7,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "auto components",
+   "news": "No fresh news; setup from swing table.",
+   "surprise_pct": null,
+   "reason": "6% off high, no dry-up"
+  },
+  {
+   "symbol": "TIINDIA",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 2173.5,
+   "cancel": 2349.0,
+   "target": 1822.4,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "auto components",
+   "news": "No fresh news; setup from swing table.",
+   "surprise_pct": null,
+   "reason": "Industry mid-table"
+  },
+  {
+   "symbol": "NBCC",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 75.3,
+   "cancel": 82.8,
+   "target": 60.3,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "construction PSU",
+   "news": "No fresh news; setup from swing table.",
+   "surprise_pct": null,
+   "reason": "No dry-up, 13% above low"
+  },
+  {
+   "symbol": "GODFRYPHLP",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 1729.8,
+   "cancel": 1890.4,
+   "target": 1408.5,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "tobacco",
+   "news": "No fresh news; setup from swing table.",
+   "surprise_pct": null,
+   "reason": "FMCG strong; IV/RV 1.53"
+  },
+  {
+   "symbol": "VMM",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 89.0,
+   "cancel": 97.8,
+   "target": 71.5,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "retail",
+   "news": "No fresh news; setup from swing table.",
+   "surprise_pct": null,
+   "reason": "Bullish broker call 23 Nov"
+  }
+ ]
+}
