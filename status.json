@@ -62,12 +62,12 @@
  "momentum_eod": {
   "checks": [
    {
-    "detail": "216 of 218 futures",
+    "detail": "218 of 218 futures",
     "name": "open_interest",
     "ok": true
    },
    {
-    "detail": "19 scored, 0 failed",
+    "detail": "18 scored, 0 failed",
     "name": "picks",
     "ok": true
    },
@@ -77,14 +77,14 @@
     "ok": true
    },
    {
-    "detail": "1 logged, day +1.6R",
+    "detail": "0 logged, day +0.0R",
     "name": "engine_trades",
     "ok": true
    }
   ],
-  "code": "0e9bd7faae",
+  "code": "76aba1b119",
   "ok": true,
-  "ts": "2026-11-25T16:05:18+05:30"
+  "ts": "2026-11-26T16:05:24+05:30"
  },
  "momentum_preopen": {
   "checks": [

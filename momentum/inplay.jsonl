@@ -49,13 +49,13 @@
 {"atr": 49.87, "date": "2026-11-25", "direction": "UP", "or_high": 1911.6, "or_low": 1879.1, "relvol": 6.2, "rules_version": 3, "symbol": "BAJAJFINSV", "trade": {"entry": 1911.6, "entry_i": 7, "exit_i": 369, "r": 0.41, "status": "closed"}}
 {"atr": 55.22, "date": "2026-11-25", "direction": "DOWN", "or_high": 3509.8, "or_low": 3430.2, "relvol": 5.8, "rules_version": 3, "symbol": "DMART", "trade": {"entry": 3430.2, "entry_i": 27, "exit_i": 131, "r": -1.0, "status": "stopped"}}
 {"atr": 51.94, "date": "2026-11-25", "direction": "DOWN", "or_high": 1902.5, "or_low": 1869.6, "relvol": 5.2, "rules_version": 3, "symbol": "CHOLAFIN", "trade": {"entry": 1869.6, "entry_i": 1, "exit_i": 369, "r": 0.05, "status": "closed"}}
-{"atr": 103.32, "date": "2026-11-26", "direction": "DOWN", "or_high": 1506.8, "or_low": 1465.2, "relvol": 23.5, "rules_version": 3, "symbol": "APLAPOLLO", "trade": null}
-{"atr": 111.84, "date": "2026-11-26", "direction": "DOWN", "or_high": 3241.0, "or_low": 3126.8, "relvol": 20.6, "rules_version": 3, "symbol": "ENRIN", "trade": null}
-{"atr": 90.69, "date": "2026-11-26", "direction": "UP", "or_high": 4950.0, "or_low": 4911.9, "relvol": 5.6, "rules_version": 3, "symbol": "TORNTPHARM", "trade": null}
-{"atr": 126.29, "date": "2026-11-26", "direction": "UP", "or_high": 3670.0, "or_low": 3600.0, "relvol": 4.3, "rules_version": 3, "symbol": "SIEMENS", "trade": null}
-{"atr": 72.15, "date": "2026-11-26", "direction": "DOWN", "or_high": 2307.2, "or_low": 2265.9, "relvol": 4.3, "rules_version": 3, "symbol": "PHOENIXLTD", "trade": null}
-{"atr": 38.91, "date": "2026-11-26", "direction": "DOWN", "or_high": 1445.0, "or_low": 1425.6, "relvol": 4.1, "rules_version": 3, "symbol": "AXISBANK", "trade": null}
-{"atr": 45.21, "date": "2026-11-26", "direction": "DOWN", "or_high": 2150.8, "or_low": 2126.9, "relvol": 4.0, "rules_version": 3, "symbol": "HINDUNILVR", "trade": null}
-{"atr": 143.57, "date": "2026-11-26", "direction": "UP", "or_high": 3785.1, "or_low": 3670.2, "relvol": 3.9, "rules_version": 3, "symbol": "KEI", "trade": null}
-{"atr": 4.71, "date": "2026-11-26", "direction": "UP", "or_high": 197.0, "or_low": 190.6, "relvol": 3.8, "rules_version": 3, "symbol": "WIPRO", "trade": null}
-{"atr": 6.36, "date": "2026-11-26", "direction": "UP", "or_high": 161.2, "or_low": 160.26, "relvol": 3.4, "rules_version": 3, "symbol": "TATASTEEL", "trade": null}
+{"atr": 103.32, "date": "2026-11-26", "direction": "DOWN", "or_high": 1506.8, "or_low": 1465.2, "relvol": 23.5, "rules_version": 3, "symbol": "APLAPOLLO", "trade": {"entry": 1465.2, "entry_i": 0, "exit_i": 369, "r": -0.39, "status": "closed"}}
+{"atr": 111.84, "date": "2026-11-26", "direction": "DOWN", "or_high": 3241.0, "or_low": 3126.8, "relvol": 20.6, "rules_version": 3, "symbol": "ENRIN", "trade": {"entry": 3126.8, "entry_i": 2, "exit_i": 369, "r": 0.6, "status": "closed"}}
+{"atr": 90.69, "date": "2026-11-26", "direction": "UP", "or_high": 4950.0, "or_low": 4911.9, "relvol": 5.6, "rules_version": 3, "symbol": "TORNTPHARM", "trade": {"entry": 4950.0, "entry_i": 2, "exit_i": 369, "r": 1.81, "status": "closed"}}
+{"atr": 126.29, "date": "2026-11-26", "direction": "UP", "or_high": 3670.0, "or_low": 3600.0, "relvol": 4.3, "rules_version": 3, "symbol": "SIEMENS", "trade": {"entry": 3670.0, "entry_i": 1, "exit_i": 191, "r": -1.0, "status": "stopped"}}
+{"atr": 72.15, "date": "2026-11-26", "direction": "DOWN", "or_high": 2307.2, "or_low": 2265.9, "relvol": 4.3, "rules_version": 3, "symbol": "PHOENIXLTD", "trade": {"status": "cancelled"}}
+{"atr": 38.91, "date": "2026-11-26", "direction": "DOWN", "or_high": 1445.0, "or_low": 1425.6, "relvol": 4.1, "rules_version": 3, "symbol": "AXISBANK", "trade": {"entry": 1425.6, "entry_i": 15, "exit_i": 369, "r": 0.91, "status": "closed"}}
+{"atr": 45.21, "date": "2026-11-26", "direction": "DOWN", "or_high": 2150.8, "or_low": 2126.9, "relvol": 4.0, "rules_version": 3, "symbol": "HINDUNILVR", "trade": {"entry": 2126.9, "entry_i": 4, "exit_i": 73, "r": -1.0, "status": "stopped"}}
+{"atr": 143.57, "date": "2026-11-26", "direction": "UP", "or_high": 3785.1, "or_low": 3670.2, "relvol": 3.9, "rules_version": 3, "symbol": "KEI", "trade": {"entry": 3785.1, "entry_i": 1, "exit_i": 187, "r": -1.0, "status": "stopped"}}
+{"atr": 4.71, "date": "2026-11-26", "direction": "UP", "or_high": 197.0, "or_low": 190.6, "relvol": 3.8, "rules_version": 3, "symbol": "WIPRO", "trade": {"entry": 197.0, "entry_i": 42, "exit_i": 369, "r": -0.07, "status": "closed"}}
+{"atr": 6.36, "date": "2026-11-26", "direction": "UP", "or_high": 161.2, "or_low": 160.26, "relvol": 3.4, "rules_version": 3, "symbol": "TATASTEEL", "trade": {"entry": 161.2, "entry_i": 0, "exit_i": 14, "r": -1.0, "status": "stopped"}}
