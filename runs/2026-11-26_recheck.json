@@ -1,0 +1,257 @@
+{
+ "f30_high": 25880.0,
+ "f30_low": 25734.6,
+ "f30_range": 145.40000000000146,
+ "last": 25752.45,
+ "levels": {
+  "dist20_pct": 4.09,
+  "hi20": 25992.6,
+  "hi5": 25992.6,
+  "lo20": 22497.7,
+  "lo5": 25104.8,
+  "pdc": 25819.25,
+  "pdh": 25951.65,
+  "pdl": 25619.0,
+  "pivot": 25796.63,
+  "r1": 25974.27,
+  "r2": 26129.28,
+  "s1": 25641.62,
+  "s2": 25463.98
+ },
+ "move_pct": -0.4666991326932888,
+ "move_pts": -120.75,
+ "new_headlines": [
+  {
+   "label": {
+    "catalyst": "fed",
+    "direction": 0,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Mint Markets",
+   "title": "Gold, Silver rates today LIVE 26 November 2026: Why prices rising on MCX? US Fed rate meeting in focus; outlook, targets"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": -1,
+    "kind": "driver",
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Crude oil prices extend gains as Houthi claims strike on Saudi refinery, tankers hit mines in Hormuz;..."
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty Rebounds Nearly 2% After Monday's Sell-Off - Religare Broking Ltd"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "SEBI Retains BSE 200 and Nifty CPSE in Half-Yearly Significant Indices Review"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty, Sensex open higher as FII buying extends; IT stocks lead, NBFCs slip"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": -1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Rupee weakens 32 paise to 92.55 against dollar: Key global factors in focus"
+  },
+  {
+   "label": {
+    "catalyst": "global_riskoff",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "NIFTY50, SENSEX open with modest gains; US tariff threat looms over Indian market rally"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty Outlook - AI linked stocks face pressure by Geojit Investments Ltd"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "ET Stocks",
+   "title": "Jupiter Wagons among 8 stocks showing White Marubozu pattern"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "F&O Quote - Live FNO BSE/NSE Quote, Nifty Quotes, Indian Stock Market BSE/NSE Price Increase, Chart, Open Interest Analysis"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Oil eases, Dalal Street seizes the moment"
+  }
+ ],
+ "news_high_impact": 0,
+ "news_score": -0.222,
+ "open": 25873.2,
+ "or_high": 25880.0,
+ "or_low": 25768.15,
+ "orb": -1,
+ "p_n": 231,
+ "p_range_morning": 0.466,
+ "p_range_new": 0.416,
+ "range_so_far": 145.40000000000146,
+ "reason": "the morning call was to stand aside; this update is information only",
+ "sectors": {
+  "heavy": [
+   {
+    "last": 853.6,
+    "name": "HDFC Bank",
+    "pct": 0.87
+   },
+   {
+    "last": 1366.2,
+    "name": "Reliance",
+    "pct": -0.56
+   },
+   {
+    "last": 1626.0,
+    "name": "ICICI Bank",
+    "pct": -0.85
+   },
+   {
+    "last": 1155.7,
+    "name": "Infosys",
+    "pct": 2.27
+   },
+   {
+    "last": 2101.1,
+    "name": "Bharti Airtel",
+    "pct": -0.77
+   },
+   {
+    "last": 2555.7,
+    "name": "TCS",
+    "pct": 1.53
+   },
+   {
+    "last": 4109.0,
+    "name": "L&T",
+    "pct": -1.13
+   },
+   {
+    "last": 308.5,
+    "name": "ITC",
+    "pct": -0.24
+   },
+   {
+    "last": 1131.8,
+    "name": "SBI",
+    "pct": -0.56
+   }
+  ],
+  "missing": [],
+  "sectors": [
+   {
+    "last": 63593.9,
+    "name": "Bank",
+    "pct": -0.17
+   },
+   {
+    "last": 28699.15,
+    "name": "Financials",
+    "pct": -0.23
+   },
+   {
+    "last": 32732.05,
+    "name": "IT",
+    "pct": 1.63
+   },
+   {
+    "last": 28632.0,
+    "name": "Auto",
+    "pct": -0.66
+   },
+   {
+    "last": 29055.15,
+    "name": "Pharma",
+    "pct": 0.32
+   },
+   {
+    "last": 11690.05,
+    "name": "Metal",
+    "pct": 0.96
+   },
+   {
+    "last": 49575.85,
+    "name": "FMCG",
+    "pct": -1.13
+   },
+   {
+    "last": 36796.25,
+    "name": "Energy",
+    "pct": 0.35
+   },
+   {
+    "last": 950.5,
+    "name": "Realty",
+    "pct": 0.9
+   }
+  ]
+ },
+ "status": "STILL NO TRADE",
+ "vix_morning": 17.67,
+ "vix_now": 17.55
+}
