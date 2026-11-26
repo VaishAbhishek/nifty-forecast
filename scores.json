@@ -1,40 +1,40 @@
 {
  "direction": {
   "S0_coin": {
-   "calls": 9,
+   "calls": 10,
    "ci95": [
-    0.267,
-    0.811
+    0.313,
+    0.832
    ],
    "coverage": 1.0,
-   "days": 9,
-   "hit_rate": 0.556,
-   "hits": 5,
-   "p_vs_coin": 0.5
+   "days": 10,
+   "hit_rate": 0.6,
+   "hits": 6,
+   "p_vs_coin": 0.377
   },
   "S3_gap": {
-   "calls": 5,
+   "calls": 6,
    "ci95": [
-    0.231,
-    0.882
+    0.188,
+    0.812
    ],
-   "coverage": 0.556,
-   "days": 9,
-   "hit_rate": 0.6,
+   "coverage": 0.6,
+   "days": 10,
+   "hit_rate": 0.5,
    "hits": 3,
-   "p_vs_coin": 0.5
+   "p_vs_coin": 0.6562
   },
   "S4_trend": {
-   "calls": 9,
+   "calls": 10,
    "ci95": [
-    0.354,
-    0.879
+    0.397,
+    0.892
    ],
    "coverage": 1.0,
-   "days": 9,
-   "hit_rate": 0.667,
-   "hits": 6,
-   "p_vs_coin": 0.2539
+   "days": 10,
+   "hit_rate": 0.7,
+   "hits": 7,
+   "p_vs_coin": 0.1719
   },
   "S5_meanrev": {
    "calls": 3,
@@ -42,23 +42,23 @@
     0.208,
     0.939
    ],
-   "coverage": 0.333,
-   "days": 9,
+   "coverage": 0.3,
+   "days": 10,
    "hit_rate": 0.667,
    "hits": 2,
    "p_vs_coin": 0.5
   },
   "S6_orb": {
-   "calls": 4,
+   "calls": 5,
    "ci95": [
-    0.301,
-    0.954
+    0.231,
+    0.882
    ],
-   "coverage": 0.444,
-   "days": 9,
-   "hit_rate": 0.75,
+   "coverage": 0.5,
+   "days": 10,
+   "hit_rate": 0.6,
    "hits": 3,
-   "p_vs_coin": 0.3125
+   "p_vs_coin": 0.5
   },
   "S8_news": {
    "calls": 2,
@@ -66,8 +66,8 @@
     0.095,
     0.905
    ],
-   "coverage": 0.222,
-   "days": 9,
+   "coverage": 0.2,
+   "days": 10,
    "hit_rate": 0.5,
    "hits": 1,
    "p_vs_coin": 0.75
@@ -78,8 +78,8 @@
     0.208,
     0.939
    ],
-   "coverage": 0.333,
-   "days": 9,
+   "coverage": 0.3,
+   "days": 10,
    "hit_rate": 0.667,
    "hits": 2,
    "p_vs_coin": 0.5
@@ -87,39 +87,39 @@
  },
  "ensemble": {
   "big_days": 4,
-  "days": 9,
-  "no_trade": 6,
+  "days": 10,
+  "no_trade": 7,
   "quiet_calls": 0,
   "quiet_hits": 0
  },
  "first": "2026-11-12",
- "last": "2026-11-25",
+ "last": "2026-11-26",
  "probability": {
   "R1_first30": {
-   "baseline_brier": 0.2685,
-   "brier": 0.2031,
-   "n": 9,
-   "skill": 0.243
+   "baseline_brier": 0.2517,
+   "brier": 0.2001,
+   "n": 10,
+   "skill": 0.205
   },
   "S0_clim": {
-   "baseline_brier": 0.2685,
-   "brier": 0.2685,
-   "n": 9,
+   "baseline_brier": 0.2517,
+   "brier": 0.2517,
+   "n": 10,
    "skill": 0.0
   },
   "S1_vol": {
-   "baseline_brier": 0.2685,
-   "brier": 0.2674,
-   "n": 9,
-   "skill": 0.004
+   "baseline_brier": 0.2517,
+   "brier": 0.2624,
+   "n": 10,
+   "skill": -0.043
   },
   "S2_compress": {
-   "baseline_brier": 0.2685,
-   "brier": 0.2743,
-   "n": 9,
-   "skill": -0.022
+   "baseline_brier": 0.2517,
+   "brier": 0.2696,
+   "n": 10,
+   "skill": -0.071
   }
  },
  "rule_version": "v2",
- "sessions": 9
+ "sessions": 10
 }
