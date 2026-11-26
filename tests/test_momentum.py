@@ -684,5 +684,31 @@ class Flows(unittest.TestCase):
         self.assertEqual(len(calls), 6)
 
 
+class AuctionReread(unittest.TestCase):
+    def test_rereads_until_most_quotes_carry_todays_auction_trade(self):
+        import types
+        tmp = tempfile.mkdtemp(prefix="nf_auc_")
+        saved = (api.quotes, run.time.sleep, store.DATA_DIR)
+        store.DATA_DIR = Path(tmp)
+        by_key = {"K%d" % i: "S%d" % i for i in range(10)}
+        reads = []
+
+        def quotes(keys):
+            n = 4 if not reads else 10      # first read: only 4 of 10 updated
+            reads.append(n)
+            return {k: {"volume": 100.0, "traded_on": "2026-11-26" if i < n else "2026-11-25"}
+                    for i, k in enumerate(sorted(by_key))}
+        api.quotes, run.time.sleep = quotes, lambda s: None
+        try:
+            now = datetime(2026, 11, 26, 9, 10, tzinfo=run.now_ist().tzinfo)
+            out = run.auction_read(by_key, list(by_key), "2026-11-26", now, {}, {},
+                                   types.SimpleNamespace(dry_run=False, force=False))
+        finally:
+            api.quotes, run.time.sleep, store.DATA_DIR = saved
+            shutil.rmtree(tmp, ignore_errors=True)
+        self.assertEqual(reads, [4, 10])
+        self.assertEqual(out["stocks_with_volume"], 10)
+
+
 if __name__ == "__main__":
     unittest.main()

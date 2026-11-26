@@ -467,6 +467,8 @@ def cmd_preopen(args):
 
 
 AUCTION_RELVOL = 3.0
+AUCTION_REREADS = 2        # plumbing: extra quote reads after the match (not a rule threshold)
+AUCTION_REREAD_WAIT = 20   # seconds between them
 
 
 def auction_read(by_key, keys, today, now, imbalance, gaps, args):
@@ -479,6 +481,20 @@ def auction_read(by_key, keys, today, now, imbalance, gaps, args):
     if 0 < wait < 180:
         time.sleep(wait)
     q = api.quotes(keys)
+    # Upstox updates the auction trade a few seconds to a minute after the 09:08 match, and not for every
+    # stock at once (26 Nov: 114 of 218 dated today at 09:08:40). Re-read while under 90% have today's trade.
+    for _ in range(AUCTION_REREADS):
+        today_n = sum(1 for k, r in q.items() if by_key.get(k) and r.get("traded_on") == today)
+        if today_n >= 0.9 * len(by_key) or args.dry_run:
+            break
+        time.sleep(AUCTION_REREAD_WAIT)
+        try:
+            q2 = api.quotes(keys)
+        except Exception as e:
+            store.log("momentum preopen: auction re-read failed: %s" % e)
+            break
+        if sum(1 for k, r in q2.items() if by_key.get(k) and r.get("traded_on") == today) >= today_n:
+            q = q2
     vol = {by_key[k]: r["volume"] for k, r in q.items() if by_key.get(k) and r.get("volume") and r.get("traded_on") == today}
     # diagnostics for when no auction volume is seen: is the field empty, or is the trade date not today?
     seen = [r for k, r in q.items() if by_key.get(k)]
