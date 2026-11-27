@@ -89,3 +89,7 @@
 2026-11-27T09:21:35+05:30 momentum watch: ENTRY KEI UP: 3782.50 broke the opening range 3777.00. Stop 3686.00, book half at 3959.00 (2R). | ENTRY TITAN UP: 4779.50 broke the opening range 4766.60. Stop 4664.90, book half at 4970.00 (2R).
 2026-11-27T09:46:28+05:30 recheck: STILL VALID (price is moving with the call (+0.10% from the open))
 2026-11-27T09:47:02+05:30 momentum check30: 10 in play, 14 picks
+2026-11-27T10:16:35+05:30 momentum watch: EXPIRED HINDZINC UP: no break of 548.00 by 10:15. No trade.
+2026-11-27T15:00:35+05:30 momentum watch: 15:00 EXIT KEI UP: out at 3753.40 (-0.3R). | 15:00 EXIT TITAN UP: out at 4707.30 (-0.6R).
+2026-11-27T15:05:35+05:30 momentum watch: SWING MCX UP: at 3901.30, beyond its trigger 3879.10. Enters only if it CLOSES there; stop 3455.00. | SWING NAVINFLUOR UP: at 10465.00, beyond its trigger 10393.70. Enters only if it CLOSES there; stop 9712.50.
+2026-11-27T15:45:02+05:30 score: filled 2026-11-27, 11 sessions in total
