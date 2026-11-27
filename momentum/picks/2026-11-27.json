@@ -1,0 +1,297 @@
+{
+ "date": "2026-11-27",
+ "generated": "08:44 IST",
+ "no_trade": false,
+ "picks": [
+  {
+   "symbol": "ANANDRATHI",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "best",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup",
+    "sector",
+    "volume",
+    "oi"
+   ],
+   "confirm": 2431.6,
+   "cancel": 2344.3,
+   "target": 2606.2,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "momentum swing",
+   "news": "No fresh news; swing setup from VM table",
+   "surprise_pct": null,
+   "reason": "Mom 99, at 52w high, FS rank 2; pledge and RPT vote risk"
+  },
+  {
+   "symbol": "DIVISLAB",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "best",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 11821.4,
+   "cancel": 10954.0,
+   "target": 13556.0,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "momentum swing",
+   "news": "No fresh news; swing setup from VM table",
+   "surprise_pct": null,
+   "reason": "Mom 100, tight base 2% under 52w high, no event found"
+  },
+  {
+   "symbol": "ACUTAAS",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup",
+    "oi"
+   ],
+   "confirm": 4145.1,
+   "cancel": 3720.2,
+   "target": 4995.0,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "momentum swing",
+   "news": "No fresh news; swing setup from VM table",
+   "surprise_pct": null,
+   "reason": "Mom 98, near high; new F&O entrant, OI jump unreliable"
+  },
+  {
+   "symbol": "MCX",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup",
+    "price",
+    "volume",
+    "oi",
+    "sector",
+    "strength"
+   ],
+   "confirm": 3879.1,
+   "cancel": 3455.0,
+   "target": 4727.4,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "momentum swing",
+   "news": "No fresh news; swing setup from VM table",
+   "surprise_pct": null,
+   "reason": "Mom 95, 20d breakout; extended after +7.6% day"
+  },
+  {
+   "symbol": "INDHOTEL",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 928.0,
+   "cancel": 869.4,
+   "target": 1045.3,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "momentum swing",
+   "news": "No fresh news; swing setup from VM table",
+   "surprise_pct": null,
+   "reason": "Mom 95, tight base, volume drying, 4% under high"
+  },
+  {
+   "symbol": "NYKAA",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 369.2,
+   "cancel": 351.8,
+   "target": 404.0,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "momentum swing",
+   "news": "No fresh news; swing setup from VM table",
+   "surprise_pct": null,
+   "reason": "Mom 94, tight base, volume drying, 4% under high"
+  },
+  {
+   "symbol": "WAAREEENER",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "medium",
+   "evidence": [
+    "momentum",
+    "setup",
+    "sector"
+   ],
+   "confirm": 2356.6,
+   "cancel": 2629.9,
+   "target": 1810.1,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "momentum swing",
+   "news": "No fresh news; swing setup from VM table",
+   "surprise_pct": null,
+   "reason": "Mom 12, weakest industry, base with volume drying"
+  },
+  {
+   "symbol": "NAVINFLUOR",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 10393.7,
+   "cancel": 9712.5,
+   "target": 11756.0,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "momentum swing",
+   "news": "No fresh news; swing setup from VM table",
+   "surprise_pct": null,
+   "reason": "Mom 97 but chemicals rank 12, no volume dry-up"
+  },
+  {
+   "symbol": "ATHERENERG",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 2028.0,
+   "cancel": 1861.0,
+   "target": 2362.0,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "momentum swing",
+   "news": "No fresh news; swing setup from VM table",
+   "surprise_pct": null,
+   "reason": "Mom 99, 6% under high, lock-in supply overhang"
+  },
+  {
+   "symbol": "PAYTM",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 1815.8,
+   "cancel": 1664.3,
+   "target": 2118.9,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "momentum swing",
+   "news": "No fresh news; swing setup from VM table",
+   "surprise_pct": null,
+   "reason": "Pullback 10% under high"
+  },
+  {
+   "symbol": "BOSCHLTD",
+   "direction": "UP",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 51078.2,
+   "cancel": 48370.0,
+   "target": 56494.8,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "momentum swing",
+   "news": "No fresh news; swing setup from VM table",
+   "surprise_pct": null,
+   "reason": "7% under high, auto rank 11"
+  },
+  {
+   "symbol": "SWIGGY",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 175.5,
+   "cancel": 195.3,
+   "target": 135.8,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "momentum swing",
+   "news": "No fresh news; swing setup from VM table",
+   "surprise_pct": null,
+   "reason": "Weak momentum, no volume dry-up"
+  },
+  {
+   "symbol": "TIINDIA",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 2173.6,
+   "cancel": 2349.0,
+   "target": 1822.8,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "momentum swing",
+   "news": "No fresh news; swing setup from VM table",
+   "surprise_pct": null,
+   "reason": "Weak momentum, auto mid-ranked"
+  },
+  {
+   "symbol": "GODFRYPHLP",
+   "direction": "DOWN",
+   "horizon": "swing",
+   "tier": "list",
+   "conviction": "low",
+   "evidence": [
+    "momentum",
+    "setup"
+   ],
+   "confirm": 1729.9,
+   "cancel": 1890.4,
+   "target": 1408.9,
+   "fresh": false,
+   "materiality": "low",
+   "theme": "momentum swing",
+   "news": "No fresh news; swing setup from VM table",
+   "surprise_pct": null,
+   "reason": "Weak momentum but FMCG industry strong"
+  }
+ ]
+}
