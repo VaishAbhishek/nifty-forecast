@@ -1,6 +1,6 @@
 # Momentum picks scorecard
 
-60 picks over 3 sessions. Hit = closed beyond the open in the pick's direction. Alpha = that move minus the index's.
+74 picks over 4 sessions. Hit = closed beyond the open in the pick's direction. Alpha = that move minus the index's.
 R = result of the confirm/cancel trade in multiples of the risk taken. Costs are not included.
 Do not read much into any row with fewer than about 30 picks.
 
@@ -8,43 +8,43 @@ Do not read much into any row with fewer than about 30 picks.
 
 | Group | Picks | Hit | Needed for 95% | Avg open-to-close | Avg alpha | Trades | Avg R | Total R | Option trades | Option wins | Avg option return | 5-day picks | Avg 5-day | 10-day picks | 10-day hit | Avg 10-day | Avg 10-day alpha |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| all | 60 | 45% | 37 | -0.28% | +0.07% | 3 | -0.32 | -1.0 | 2 | 0% | -17.4% | 0 | - | 0 | - | - | - |
+| all | 74 | 43% | 45 | -0.26% | +0.09% | 3 | -0.32 | -1.0 | 2 | 0% | -17.4% | 0 | - | 0 | - | - | - |
 
 ## By tier
 
 | Group | Picks | Hit | Needed for 95% | Avg open-to-close | Avg alpha | Trades | Avg R | Total R | Option trades | Option wins | Avg option return | 5-day picks | Avg 5-day | 10-day picks | 10-day hit | Avg 10-day | Avg 10-day alpha |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| best | 8 | 25% | 7 | -1.07% | -0.61% | 1 | -0.27 | -0.3 | 1 | 0% | -8.0% | 0 | - | 0 | - | - | - |
-| list | 52 | 48% | 33 | -0.15% | +0.17% | 2 | -0.35 | -0.7 | 1 | 0% | -26.7% | 0 | - | 0 | - | - | - |
+| best | 10 | 20% | 9 | -0.97% | -0.42% | 1 | -0.27 | -0.3 | 1 | 0% | -8.0% | 0 | - | 0 | - | - | - |
+| list | 64 | 47% | 40 | -0.15% | +0.17% | 2 | -0.35 | -0.7 | 1 | 0% | -26.7% | 0 | - | 0 | - | - | - |
 
 ## By conviction
 
 | Group | Picks | Hit | Needed for 95% | Avg open-to-close | Avg alpha | Trades | Avg R | Total R | Option trades | Option wins | Avg option return | 5-day picks | Avg 5-day | 10-day picks | 10-day hit | Avg 10-day | Avg 10-day alpha |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | high | 3 | 33% | - | -0.31% | +0.19% | 0 | - | - | 0 | - | - | 0 | - | 0 | - | - | - |
-| low | 30 | 50% | 20 | -0.15% | +0.26% | 1 | -0.60 | -0.6 | 1 | 0% | -26.7% | 0 | - | 0 | - | - | - |
-| medium | 27 | 41% | 19 | -0.41% | -0.16% | 2 | -0.18 | -0.4 | 1 | 0% | -8.0% | 0 | - | 0 | - | - | - |
+| low | 37 | 49% | 24 | -0.16% | +0.20% | 1 | -0.60 | -0.6 | 1 | 0% | -26.7% | 0 | - | 0 | - | - | - |
+| medium | 34 | 38% | 23 | -0.38% | -0.05% | 2 | -0.18 | -0.4 | 1 | 0% | -8.0% | 0 | - | 0 | - | - | - |
 
 ## By horizon
 
 | Group | Picks | Hit | Needed for 95% | Avg open-to-close | Avg alpha | Trades | Avg R | Total R | Option trades | Option wins | Avg option return | 5-day picks | Avg 5-day | 10-day picks | 10-day hit | Avg 10-day | Avg 10-day alpha |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | intraday | 8 | 25% | 7 | -1.84% | -0.42% | 3 | -0.32 | -1.0 | 2 | 0% | -17.4% | 0 | - | 0 | - | - | - |
-| swing | 52 | 48% | 33 | -0.03% | +0.14% | 0 | - | - | 0 | - | - | 0 | - | 0 | - | - | - |
+| swing | 66 | 45% | 41 | -0.07% | +0.15% | 0 | - | - | 0 | - | - | 0 | - | 0 | - | - | - |
 
 ## By direction
 
 | Group | Picks | Hit | Needed for 95% | Avg open-to-close | Avg alpha | Trades | Avg R | Total R | Option trades | Option wins | Avg option return | 5-day picks | Avg 5-day | 10-day picks | 10-day hit | Avg 10-day | Avg 10-day alpha |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| down | 19 | 74% | 14 | +0.67% | +0.23% | 0 | - | - | 0 | - | - | 0 | - | 0 | - | - | - |
-| up | 41 | 32% | 27 | -0.71% | -0.01% | 3 | -0.32 | -1.0 | 2 | 0% | -17.4% | 0 | - | 0 | - | - | - |
+| down | 23 | 70% | 16 | +0.53% | +0.01% | 0 | - | - | 0 | - | - | 0 | - | 0 | - | - | - |
+| up | 51 | 31% | 32 | -0.62% | +0.12% | 3 | -0.32 | -1.0 | 2 | 0% | -17.4% | 0 | - | 0 | - | - | - |
 
 ## By regime
 
 | Group | Picks | Hit | Needed for 95% | Avg open-to-close | Avg alpha | Trades | Avg R | Total R | Option trades | Option wins | Avg option return | 5-day picks | Avg 5-day | 10-day picks | 10-day hit | Avg 10-day | Avg 10-day alpha |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | chop | 19 | 68% | 14 | +0.25% | +0.08% | 0 | - | - | 0 | - | - | 0 | - | 0 | - | - | - |
-| drift | 18 | 33% | 13 | -0.64% | -0.65% | 0 | - | - | 0 | - | - | 0 | - | 0 | - | - | - |
+| drift | 32 | 34% | 22 | -0.45% | -0.29% | 0 | - | - | 0 | - | - | 0 | - | 0 | - | - | - |
 | trend_up | 23 | 35% | 16 | -0.42% | +0.61% | 3 | -0.32 | -1.0 | 2 | 0% | -17.4% | 0 | - | 0 | - | - | - |
 
 ## By gap verdict
@@ -53,14 +53,14 @@ Do not read much into any row with fewer than about 30 picks.
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | gapping against | 3 | 67% | - | -1.52% | -0.37% | 0 | - | - | 0 | - | - | 0 | - | 0 | - | - | - |
 | mostly priced in | 2 | 50% | - | -1.79% | -1.49% | 0 | - | - | 0 | - | - | 0 | - | 0 | - | - | - |
-| partly priced in | 11 | 27% | 9 | -0.47% | +0.48% | 2 | -0.43 | -0.9 | 2 | 0% | -17.4% | 0 | - | 0 | - | - | - |
-| valid | 44 | 48% | 28 | -0.07% | +0.06% | 1 | -0.10 | -0.1 | 0 | - | - | 0 | - | 0 | - | - | - |
+| partly priced in | 12 | 25% | 10 | -0.46% | +0.48% | 2 | -0.43 | -0.9 | 2 | 0% | -17.4% | 0 | - | 0 | - | - | - |
+| valid | 57 | 46% | 36 | -0.10% | +0.08% | 1 | -0.10 | -0.1 | 0 | - | - | 0 | - | 0 | - | - | - |
 
 ## By surprise
 
 | Group | Picks | Hit | Needed for 95% | Avg open-to-close | Avg alpha | Trades | Avg R | Total R | Option trades | Option wins | Avg option return | 5-day picks | Avg 5-day | 10-day picks | 10-day hit | Avg 10-day | Avg 10-day alpha |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| unknown | 60 | 45% | 37 | -0.28% | +0.07% | 3 | -0.32 | -1.0 | 2 | 0% | -17.4% | 0 | - | 0 | - | - | - |
+| unknown | 74 | 43% | 45 | -0.26% | +0.09% | 3 | -0.32 | -1.0 | 2 | 0% | -17.4% | 0 | - | 0 | - | - | - |
 
 ## By evidence
 
@@ -69,13 +69,13 @@ Do not read much into any row with fewer than about 30 picks.
 | analyst | 3 | 67% | - | +0.63% | +2.28% | 2 | -0.18 | -0.4 | 1 | 0% | -8.0% | 0 | - | 0 | - | - | - |
 | catalyst | 7 | 14% | 7 | -2.36% | -0.82% | 3 | -0.32 | -1.0 | 2 | 0% | -17.4% | 0 | - | 0 | - | - | - |
 | earnings | 1 | 0% | - | -5.37% | -5.41% | 0 | - | - | 0 | - | - | 0 | - | 0 | - | - | - |
-| momentum | 52 | 48% | 33 | -0.03% | +0.14% | 0 | - | - | 0 | - | - | 0 | - | 0 | - | - | - |
-| oi | 4 | 25% | - | -1.02% | +1.15% | 3 | -0.32 | -1.0 | 2 | 0% | -17.4% | 0 | - | 0 | - | - | - |
-| price | 4 | 50% | - | +0.09% | +1.88% | 3 | -0.32 | -1.0 | 2 | 0% | -17.4% | 0 | - | 0 | - | - | - |
-| sector | 16 | 50% | 12 | -0.02% | -0.10% | 0 | - | - | 0 | - | - | 0 | - | 0 | - | - | - |
-| setup | 52 | 48% | 33 | -0.03% | +0.14% | 0 | - | - | 0 | - | - | 0 | - | 0 | - | - | - |
-| strength | 3 | 33% | - | -0.39% | -0.18% | 0 | - | - | 0 | - | - | 0 | - | 0 | - | - | - |
-| volume | 4 | 50% | - | +0.09% | +1.88% | 3 | -0.32 | -1.0 | 2 | 0% | -17.4% | 0 | - | 0 | - | - | - |
+| momentum | 66 | 45% | 41 | -0.07% | +0.15% | 0 | - | - | 0 | - | - | 0 | - | 0 | - | - | - |
+| oi | 7 | 29% | 7 | -0.59% | +1.04% | 3 | -0.32 | -1.0 | 2 | 0% | -17.4% | 0 | - | 0 | - | - | - |
+| price | 5 | 60% | 5 | +0.23% | +1.84% | 3 | -0.32 | -1.0 | 2 | 0% | -17.4% | 0 | - | 0 | - | - | - |
+| sector | 19 | 53% | 14 | +0.05% | +0.03% | 0 | - | - | 0 | - | - | 0 | - | 0 | - | - | - |
+| setup | 66 | 45% | 41 | -0.07% | +0.15% | 0 | - | - | 0 | - | - | 0 | - | 0 | - | - | - |
+| strength | 4 | 50% | - | -0.10% | +0.29% | 0 | - | - | 0 | - | - | 0 | - | 0 | - | - | - |
+| volume | 6 | 50% | 6 | +0.16% | +1.65% | 3 | -0.32 | -1.0 | 2 | 0% | -17.4% | 0 | - | 0 | - | - | - |
 
 ## In-play opening-range breakout (forward test, logged only)
 
@@ -83,15 +83,18 @@ Rules v2 (from 23 Nov 2026): the top 10 stocks at three times their usual volume
 break of the first five minutes' range in the direction of the first move, stop at the other side of the range, exit at
 the close. Rules v1 signals (stop 10% of ATR inside the range) are kept but were mostly cancelled before entry.
 
-61 signals, 32 trades, average -0.04 R, total -1.3 R.
+71 signals, 41 trades, average -0.15 R, total -6.3 R.
 
 ## 09:20 engine trades (rules v3)
 
-1 trades, 1 with a result, 1 won, total +1.6 R, average +1.65 R. Do not read much into fewer than about 30 trades.
+4 trades, 3 with a result, 1 won, total +0.8 R, average +0.27 R. Do not read much into fewer than about 30 trades.
 
 | Date | Stock | Dir | Entry | Stop | Result | R |
 |---|---|---|---|---|---|---|
 | 2026-11-25 | BAJAJFINSV | UP | 1911.6 | 1879.1 | trail | +1.65 |
+| 2026-11-27 | HINDZINC | UP | 548.0 | 536.0 | expired | - |
+| 2026-11-27 | KEI | UP | 3777.0 | 3686.0 | 15:00 exit | -0.26 |
+| 2026-11-27 | TITAN | UP | 4766.6 | 4664.9 | 15:00 exit | -0.58 |
 
 ## What the record says about each kind of evidence
 

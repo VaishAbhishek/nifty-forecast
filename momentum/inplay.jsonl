@@ -59,13 +59,13 @@
 {"atr": 143.57, "date": "2026-11-26", "direction": "UP", "or_high": 3785.1, "or_low": 3670.2, "relvol": 3.9, "rules_version": 3, "symbol": "KEI", "trade": {"entry": 3785.1, "entry_i": 1, "exit_i": 187, "r": -1.0, "status": "stopped"}}
 {"atr": 4.71, "date": "2026-11-26", "direction": "UP", "or_high": 197.0, "or_low": 190.6, "relvol": 3.8, "rules_version": 3, "symbol": "WIPRO", "trade": {"entry": 197.0, "entry_i": 42, "exit_i": 369, "r": -0.07, "status": "closed"}}
 {"atr": 6.36, "date": "2026-11-26", "direction": "UP", "or_high": 161.2, "or_low": 160.26, "relvol": 3.4, "rules_version": 3, "symbol": "TATASTEEL", "trade": {"entry": 161.2, "entry_i": 0, "exit_i": 14, "r": -1.0, "status": "stopped"}}
-{"atr": 107.48, "date": "2026-11-27", "direction": "UP", "or_high": 1532.0, "or_low": 1504.8, "relvol": 38.9, "rules_version": 3, "symbol": "APLAPOLLO", "trade": null}
-{"atr": 25.48, "date": "2026-11-27", "direction": "UP", "or_high": 1189.9, "or_low": 1156.5, "relvol": 10.8, "rules_version": 3, "symbol": "ZYDUSLIFE", "trade": null}
-{"atr": 16.04, "date": "2026-11-27", "direction": "UP", "or_high": 548.0, "or_low": 536.0, "relvol": 5.8, "rules_version": 3, "symbol": "HINDZINC", "trade": null}
-{"atr": 60.93, "date": "2026-11-27", "direction": "UP", "or_high": 1840.0, "or_low": 1805.3, "relvol": 4.1, "rules_version": 3, "symbol": "PRESTIGE", "trade": null}
-{"atr": 146.91, "date": "2026-11-27", "direction": "UP", "or_high": 3777.0, "or_low": 3686.0, "relvol": 3.7, "rules_version": 3, "symbol": "KEI", "trade": null}
-{"atr": 6.37, "date": "2026-11-27", "direction": "UP", "or_high": 166.6, "or_low": 164.2, "relvol": 3.7, "rules_version": 3, "symbol": "TATASTEEL", "trade": null}
-{"atr": 44.1, "date": "2026-11-27", "direction": "DOWN", "or_high": 1211.8, "or_low": 1176.9, "relvol": 3.6, "rules_version": 3, "symbol": "VOLTAS", "trade": null}
-{"atr": 131.01, "date": "2026-11-27", "direction": "UP", "or_high": 4766.6, "or_low": 4664.9, "relvol": 3.4, "rules_version": 3, "symbol": "TITAN", "trade": null}
-{"atr": 30.43, "date": "2026-11-27", "direction": "UP", "or_high": 2440.0, "or_low": 2417.0, "relvol": 3.2, "rules_version": 3, "symbol": "ANANDRATHI", "trade": null}
-{"atr": 26.68, "date": "2026-11-27", "direction": "DOWN", "or_high": 963.0, "or_low": 939.15, "relvol": 3.2, "rules_version": 3, "symbol": "SHRIRAMFIN", "trade": null}
+{"atr": 107.48, "date": "2026-11-27", "direction": "UP", "or_high": 1532.0, "or_low": 1504.8, "relvol": 38.9, "rules_version": 3, "symbol": "APLAPOLLO", "trade": {"entry": 1532.0, "entry_i": 1, "exit_i": 344, "r": -1.0, "status": "stopped"}}
+{"atr": 25.48, "date": "2026-11-27", "direction": "UP", "or_high": 1189.9, "or_low": 1156.5, "relvol": 10.8, "rules_version": 3, "symbol": "ZYDUSLIFE", "trade": {"entry": 1189.9, "entry_i": 4, "exit_i": 182, "r": -1.0, "status": "stopped"}}
+{"atr": 16.04, "date": "2026-11-27", "direction": "UP", "or_high": 548.0, "or_low": 536.0, "relvol": 5.8, "rules_version": 3, "symbol": "HINDZINC", "trade": {"entry": 548.0, "entry_i": 104, "exit_i": 369, "r": -0.25, "status": "closed"}}
+{"atr": 60.93, "date": "2026-11-27", "direction": "UP", "or_high": 1840.0, "or_low": 1805.3, "relvol": 4.1, "rules_version": 3, "symbol": "PRESTIGE", "trade": {"entry": 1840.0, "entry_i": 7, "exit_i": 113, "r": -1.0, "status": "stopped"}}
+{"atr": 146.91, "date": "2026-11-27", "direction": "UP", "or_high": 3777.0, "or_low": 3686.0, "relvol": 3.7, "rules_version": 3, "symbol": "KEI", "trade": {"entry": 3777.0, "entry_i": 0, "exit_i": 369, "r": -0.25, "status": "closed"}}
+{"atr": 6.37, "date": "2026-11-27", "direction": "UP", "or_high": 166.6, "or_low": 164.2, "relvol": 3.7, "rules_version": 3, "symbol": "TATASTEEL", "trade": {"status": "cancelled"}}
+{"atr": 44.1, "date": "2026-11-27", "direction": "DOWN", "or_high": 1211.8, "or_low": 1176.9, "relvol": 3.6, "rules_version": 3, "symbol": "VOLTAS", "trade": {"entry": 1176.9, "entry_i": 26, "exit_i": 369, "r": -0.28, "status": "closed"}}
+{"atr": 131.01, "date": "2026-11-27", "direction": "UP", "or_high": 4766.6, "or_low": 4664.9, "relvol": 3.4, "rules_version": 3, "symbol": "TITAN", "trade": {"entry": 4766.6, "entry_i": 0, "exit_i": 369, "r": -0.9, "status": "closed"}}
+{"atr": 30.43, "date": "2026-11-27", "direction": "UP", "or_high": 2440.0, "or_low": 2417.0, "relvol": 3.2, "rules_version": 3, "symbol": "ANANDRATHI", "trade": {"entry": 2440.0, "entry_i": 0, "exit_i": 145, "r": -1.0, "status": "stopped"}}
+{"atr": 26.68, "date": "2026-11-27", "direction": "DOWN", "or_high": 963.0, "or_low": 939.15, "relvol": 3.2, "rules_version": 3, "symbol": "SHRIRAMFIN", "trade": {"entry": 939.15, "entry_i": 0, "exit_i": 369, "r": 0.66, "status": "closed"}}
