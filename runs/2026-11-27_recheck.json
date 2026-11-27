@@ -1,0 +1,246 @@
+{
+ "f30_high": 25909.15,
+ "f30_low": 25803.6,
+ "f30_range": 105.55000000000291,
+ "last": 25865.15,
+ "levels": {
+  "dist20_pct": 3.92,
+  "hi20": 25992.6,
+  "hi5": 25992.6,
+  "lo20": 22656.75,
+  "lo5": 25104.8,
+  "pdc": 25884.5,
+  "pdh": 25974.95,
+  "pdl": 25733.5,
+  "pivot": 25864.32,
+  "r1": 25995.13,
+  "r2": 26105.77,
+  "s1": 25753.68,
+  "s2": 25622.87
+ },
+ "move_pct": 0.10023510744313963,
+ "move_pts": 25.900000000001455,
+ "new_headlines": [
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": -1,
+    "kind": "driver",
+    "magnitude": 2,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "WTI Price Forecast: Bullish Breakout Opens Path Toward $93"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Google News: Nifty",
+   "title": "Zydus Life shares dip 3% on USFDA's CRL to new drug; MOFSL stays 'neutral'"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "Sensex falls 200 pts, Nifty near 25,800: Profit booking among key factors behind market decline"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: FII DII",
+   "title": "Sensex Today, 27 November 2026: Nifty Slips Below 25,850, Sensex Falls 360 Points as Crude Oil Nears $96"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty Trades Sideways After Sharp Rebound - Religare Broking Ltd"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "market_report",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Sensex slips, Nifty flat as IT stocks fall; metals, Titan gain"
+  },
+  {
+   "label": {
+    "catalyst": "global_riskoff",
+    "direction": 1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Asian Stocks Rise for Second Day, Treasuries Slip: Markets Wrap"
+  },
+  {
+   "label": {
+    "catalyst": "oil_geo",
+    "direction": 0,
+    "kind": "view",
+    "magnitude": 0,
+    "relevant": true
+   },
+   "source": "Google News: Nifty",
+   "title": "Nifty Outlook - Oil pushes higher ahead of OPEC+ meet by Geojit Investments Ltd"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": -1,
+    "kind": "driver",
+    "magnitude": 1,
+    "relevant": true
+   },
+   "source": "Google News: global cues",
+   "title": "Rupee opens lower at 92.52 against dollar: Key factors driving the currency today"
+  },
+  {
+   "label": {
+    "catalyst": "other",
+    "direction": 0,
+    "kind": "irrelevant",
+    "magnitude": 0,
+    "relevant": false
+   },
+   "source": "Moneycontrol (via Google News)",
+   "title": "F&O Quote - Live FNO BSE/NSE Quote, Nifty Quotes, Indian Stock Market BSE/NSE Price Increase, Chart, Open Interest Analysis"
+  }
+ ],
+ "news_high_impact": 0,
+ "news_score": -0.286,
+ "open": 25839.25,
+ "or_high": 25909.15,
+ "or_low": 25803.6,
+ "orb": 0,
+ "p_n": 231,
+ "p_range_morning": 0.43,
+ "p_range_new": 0.195,
+ "range_so_far": 105.55000000000291,
+ "reason": "price is moving with the call (+0.10% from the open)",
+ "sectors": {
+  "heavy": [
+   {
+    "last": 861.1,
+    "name": "HDFC Bank",
+    "pct": -0.1
+   },
+   {
+    "last": 1387.1,
+    "name": "Reliance",
+    "pct": -0.65
+   },
+   {
+    "last": 1611.9,
+    "name": "ICICI Bank",
+    "pct": 0.06
+   },
+   {
+    "last": 1162.7,
+    "name": "Infosys",
+    "pct": -1.72
+   },
+   {
+    "last": 2092.4,
+    "name": "Bharti Airtel",
+    "pct": -0.48
+   },
+   {
+    "last": 2586.5,
+    "name": "TCS",
+    "pct": -2.04
+   },
+   {
+    "last": 4127.0,
+    "name": "L&T",
+    "pct": -0.12
+   },
+   {
+    "last": 305.6,
+    "name": "ITC",
+    "pct": -0.46
+   },
+   {
+    "last": 1143.1,
+    "name": "SBI",
+    "pct": 0.57
+   }
+  ],
+  "missing": [],
+  "sectors": [
+   {
+    "last": 63809.25,
+    "name": "Bank",
+    "pct": 0.43
+   },
+   {
+    "last": 28716.15,
+    "name": "Financials",
+    "pct": -0.01
+   },
+   {
+    "last": 33027.95,
+    "name": "IT",
+    "pct": -1.08
+   },
+   {
+    "last": 28576.55,
+    "name": "Auto",
+    "pct": -0.16
+   },
+   {
+    "last": 29145.75,
+    "name": "Pharma",
+    "pct": 0.19
+   },
+   {
+    "last": 11887.8,
+    "name": "Metal",
+    "pct": 1.49
+   },
+   {
+    "last": 49399.4,
+    "name": "FMCG",
+    "pct": -0.55
+   },
+   {
+    "last": 37065.95,
+    "name": "Energy",
+    "pct": 0.5
+   },
+   {
+    "last": 979.05,
+    "name": "Realty",
+    "pct": 0.64
+   }
+  ]
+ },
+ "status": "STILL VALID",
+ "vix_morning": 16.83,
+ "vix_now": 16.69
+}

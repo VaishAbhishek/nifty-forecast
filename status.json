@@ -7,9 +7,9 @@
     "ok": true
    }
   ],
-  "code": "76aba1b119",
+  "code": "9e3fcabf65",
   "ok": true,
-  "ts": "2026-11-26T09:47:02+05:30"
+  "ts": "2026-11-27T09:47:02+05:30"
  },
  "momentum_check5": {
   "checks": [
@@ -19,9 +19,9 @@
     "ok": true
    }
   ],
-  "code": "76aba1b119",
+  "code": "9e3fcabf65",
   "ok": true,
-  "ts": "2026-11-26T09:20:19+05:30"
+  "ts": "2026-11-27T09:20:20+05:30"
  },
  "momentum_data": {
   "checks": [
@@ -267,7 +267,7 @@
     "ok": true
    },
    {
-    "detail": "{'p_range': 0.416, 'n': 231}",
+    "detail": "{'p_range': 0.195, 'n': 231}",
     "name": "first30_model",
     "ok": true
    },
@@ -277,10 +277,10 @@
     "ok": true
    }
   ],
-  "code": "76aba1b119",
+  "code": "9e3fcabf65",
   "ok": true,
-  "status": "STILL NO TRADE",
-  "ts": "2026-11-26T09:46:28+05:30"
+  "status": "STILL VALID",
+  "ts": "2026-11-27T09:46:28+05:30"
  },
  "score": {
   "checks": [
